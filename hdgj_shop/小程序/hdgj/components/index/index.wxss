@@ -1,24 +1,67 @@
 /* components/index/index.wxss */
 .carousel{
-  margin: 0 auto;
-  width: 95%;
-  padding: 1rem 0 1rem 0;
   background-color: white;
+  position: relative;
 }
 
 .carousel image{
   border-radius: 1rem;
-  width: 100%;
+  width: 95%;
+  margin:2.5% 2.5% 2.5% 2.5%;
   height: 13rem;
 }
 
-.carousel view {
-  display: flex;
+.carousel view{
+  position: absolute;
+  bottom: 0.75rem;
+  width: 100%;  
 }
 
-.carousel view span {
+.carousel view view{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+}
+
+.carousel view view span {
   border-radius: 100%;
-  width: 5rem;
-  height: 5rem;
-  background-color: rgba(191, 191, 191,0.1);
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: rgba(216, 30, 6,0.7);
+  margin-right: 0.3rem;
+}
+
+.menu{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.menu view{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 0.75rem;
+  margin: 0rem 1rem 0.5rem 1rem;
+}
+
+.menu view image{
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+}
+
+.hot_block{
+  margin: 0 atuo;
+  width: 95%;
+  margin-top: 1rem;
+  border-top: 1px solid #F1F1F1;
+}
+.hot_block image{
+  width: 100%;
+  height: 16rem;
 }

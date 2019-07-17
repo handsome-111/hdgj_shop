@@ -3,6 +3,48 @@
 <view class="carousel">
   <image src="/images/index/1.jpg" mode="aspectFill"></image> 
   <view>
-    <span></span>
+    <view> 
+      <span></span>
+      <span></span>
+      <span></span>
+    </view>
   </view>
+</view>
+<view class="menu">
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+  <view>
+    <image src="/images/index/1.jpg"></image>
+    <span>问题定制</span>  
+  </view>
+</view>
+
+<view class="hot_block">
+  <image src="/images/index/5.jpg"></image>
 </view>

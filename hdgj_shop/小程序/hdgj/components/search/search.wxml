@@ -1,6 +1,9 @@
 <!--components/search/search.wxml-->
 <view class="top">
-  <span class="iconfont icon-sousuo"></span>
-  <input type='text' placeholder="搜素商品" placeholder-class="background-font"></input>
-  <span></span>
+  <view class="top_block">
+    <span class="iconfont icon-sousuo"></span>
+    <input type='text' placeholder="搜素商品" placeholder-class="background-font"></input>
+    <span></span>
+  </view>
 </view>
+

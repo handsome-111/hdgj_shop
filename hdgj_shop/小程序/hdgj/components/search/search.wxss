@@ -1,12 +1,17 @@
 /* components/search/search.wxss */
 @import "search-font-icon/iconfont.wxss";
 
-.top{
+.top {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.4rem 0 0.4rem 0;
+  background-color: #F1F1F1;
+}
+
+.top_block{
   margin: 0 auto;
-  margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
   width: 95%;
-  background-color: pink;
+  background-color: white;
   display: flex;
   font-size: 0.75rem;
   padding: 0.4rem;

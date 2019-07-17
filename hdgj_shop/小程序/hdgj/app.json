@@ -11,7 +11,7 @@
     "navigationBarBackgroundColor": "#DB3E3E",
     "navigationBarTitleText": "华典国际绿色商城",
     "navigationBarTextStyle": "white",
-    "backgroundColor":"#bfbfbf"
+    "backgroundColor":"#F8F9F9"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
