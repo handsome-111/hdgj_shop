@@ -1,0 +1,12 @@
+<!--components/nav-bottom.wxml-->
+<view class="nav-bottom">
+  <view>
+    <block wx:for="{{list}}" wx:key="switchUrl" wx:for-index="idx">
+      <view class="{{selected === idx ? 'focus' : ''}}" data-url="{{item.switchUrl}}" data-index="{{idx}}" bindtap="switchTab">
+        <span class="iconfont {{ item.iconStyle }}"></span> 
+        <span>{{ item.title }}</span> 
+      </view>
+    </block>
+  </view>
+</view> 
+ 

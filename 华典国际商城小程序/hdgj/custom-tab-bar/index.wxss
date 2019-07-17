@@ -1,0 +1,66 @@
+/* components/nav-bottom.wxss */
+@import "nav-bottom-font/iconfont.wxss";
+
+.nav-bottom{
+  width: 100%; 
+  position: fixed;
+  bottom: 0px;
+  box-shadow: 0 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+.nav-bottom view{
+  display: flex; 
+}
+
+.nav-bottom view view{
+  flex: 1;
+  color: #999;
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+}
+
+.iconfont{
+  font-size: 1.5rem;
+}
+
+.focusa{
+  color:#ff6700;
+}
+
+.focus{
+    animation-name:focus;					/*指定要绑定到选择器的关键帧的名称*/
+    animation-duration:0.5s;					/*动画指定需要多少秒或毫秒完成*/
+    animation-timing-function:ease; 		/*设置动画将如何完成一个周期*/
+    animation-delay:0s;						/*设置动画在启动前的延迟间隔。*/
+    animation-iteration-count:1;				/*定义动画的播放次数。*/
+    animation-direction	:normal;			/*指定是否应该轮流反向播放动画。*/
+    animation-fill-mode	:forwards;		/*规定当动画不播放时（当动画完成时，或当动画有一个延迟未开始播放时），要应用到元素的样式。*/
+    animation-play-state:running;		/*指定动画是否正在运行或已暂停。*/	
+}
+
+/**	 
+  * focus : 导航被选中
+  */
+@keyframes focus {
+  0% {
+   color: #999;
+   transform:rotateY(0deg);
+  }
+  50%{
+    color: #999;
+    transform:rotateY(90deg);
+  }
+
+  51%{
+    color:#ff6700;
+    transform:rotateY(270deg);
+  }
+
+  100%{
+    transform:rotateY(360deg);
+    color:#ff6700;
+  }
+}

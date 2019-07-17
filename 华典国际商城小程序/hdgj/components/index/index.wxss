@@ -1,0 +1,24 @@
+/* components/index/index.wxss */
+.carousel{
+  margin: 0 auto;
+  width: 95%;
+  padding: 1rem 0 1rem 0;
+  background-color: white;
+}
+
+.carousel image{
+  border-radius: 1rem;
+  width: 100%;
+  height: 13rem;
+}
+
+.carousel view {
+  display: flex;
+}
+
+.carousel view span {
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+  background-color: rgba(191, 191, 191,0.1);
+}

@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "components/index/index",
+    "pages/logs/logs",
+    "components/category/category",
+    "components/cart/cart",
+    "components/user/user"
+  ], 
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#DB3E3E",
+    "navigationBarTitleText": "华典国际绿色商城",
+    "navigationBarTextStyle": "white",
+    "backgroundColor":"#bfbfbf"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {"pagePath": "components/index/index","text":"首页"},
+      {"pagePath": "components/category/category","text": "分类"},
+      {"pagePath": "components/cart/cart","text": "购物车"},
+      {"pagePath": "components/user/user","text": "我的"}
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+<!--components/index/index.wxml-->
+<search></search>
+<view class="carousel">
+  <image src="/images/index/1.jpg" mode="aspectFill"></image> 
+  <view>
+    <span></span>
+  </view>
+</view>
