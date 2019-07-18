@@ -10,41 +10,44 @@
     </view>
   </view>
 </view>
+<!-- 菜单  -->
 <view class="menu">
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
-  <view>
-    <image src="/images/index/1.jpg"></image>
-    <span>问题定制</span>  
-  </view>
+  <block wx:for="{{menu}}">
+    <view>
+      <image src="{{item.src}}"></image>
+      <span>{{item.title}}</span>  
+    </view>
+  </block>
+  
 </view>
 
 <view class="hot_block">
   <image src="/images/index/5.jpg"></image>
+  <view>
+    <p>广西北海红树林三洋烤海鸭蛋60g*20g非常好吃的那种哦</p>
+    <p class="font-little color-gray line-height-little">黑龙江文体频道主持人探访生产基地 见证工艺厂价直购！</p>
+    <p class="font-little color-gray line-height-little">仅剩9152件</p>
+    <p>
+      <span class="font-little color-red" >￥</span>
+      <span class="font-standard color-red">44.90  </span>
+      <span class="font-little color-gray "style="text-decoration:line-through;">￥70.00</span> 
+    </p>
+  </view>
+</view>
+ 
+<view class="template_title " wx:for="{{template_block}}">
+  <span class="icon-taobaolianmengziti">{{item.title}}</span>
+  <view wx:for="{{item.goods}}" wx:for-item="good">
+    <navigator>
+      <image src="{{good.url}}"></image>
+      <p>{{good.title}}</p>
+      <p>{{good.explain}}</p>  
+      <span>{{good.price}}</span>
+      <span>{{good.originPrice}}</span> 
+    </navigator>
+  </view>
+  
+</view>
+
+<view class="shop_info">
 </view>

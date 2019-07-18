@@ -1,15 +1,16 @@
 /* components/index/index.wxss */
+
 .carousel{
   background-color: white;
   position: relative;
 }
 
 .carousel image{
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 95%;
   margin:2.5% 2.5% 2.5% 2.5%;
   height: 13rem;
-}
+} 
 
 .carousel view{
   position: absolute;
@@ -56,12 +57,49 @@
 }
 
 .hot_block{
-  margin: 0 atuo;
   width: 95%;
-  margin-top: 1rem;
+  margin:0 auto;
   border-top: 1px solid #F1F1F1;
 }
 .hot_block image{
   width: 100%;
   height: 16rem;
+}
+
+.hot_block view{
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin:0 auto; 
+  margin-top: 0.5rem;
+} 
+
+.hot_block view p{
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+	white-space:nowrap; 
+  line-height: 1.5rem;
+}
+
+/*店铺信息*/
+.shop_info {
+  height: 12rem;
+  background-color: gray;
+}
+
+/*模板*/
+.template_title > span{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 4rem;
+  display: block;
+}
+.template_title view navigator p{
+
+}
+
+.template_title view navigator span{
+
 }

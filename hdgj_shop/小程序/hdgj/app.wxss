@@ -14,3 +14,21 @@
 .background-font{
   color: #bfbfbf;
 }
+.font-standard{
+  font-size: 1rem;
+}
+.font-little{
+  font-size: 0.8rem;
+}
+.color-red{
+  color: red;
+}
+.color-gray{
+  color:#bfbfbf;
+}
+.line-height-standard{
+  line-height: 1.5rem;
+}
+.line-height-little{
+  line-height: 1rem;
+}

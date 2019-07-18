@@ -6,6 +6,7 @@
   position: fixed;
   bottom: 0px;
   box-shadow: white; 
+  background-color: white;
 }
 
 .nav-bottom view{
