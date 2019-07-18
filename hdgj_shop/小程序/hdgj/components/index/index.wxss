@@ -97,9 +97,10 @@
   display: block;
 }
 .template_title view navigator p{
-
+  display:block;
+  text-align: center;
 }
 
 .template_title view navigator span{
-
+  
 }

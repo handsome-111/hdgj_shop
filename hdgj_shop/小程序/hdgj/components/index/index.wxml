@@ -42,8 +42,9 @@
       <image src="{{good.url}}"></image>
       <p>{{good.title}}</p>
       <p>{{good.explain}}</p>  
-      <span>{{good.price}}</span>
-      <span>{{good.originPrice}}</span> 
+      <span class="font-little color-red">￥</span>
+      <span class="font-standard color-red">{{good.price}}  </span>
+      <span class="font-little color-gray" style="text-decoration:line-through;">￥{{good.originPrice}}</span> 
     </navigator>
   </view>
   
