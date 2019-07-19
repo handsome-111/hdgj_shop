@@ -41,10 +41,51 @@ Component({
         goods:[
           {
             url: '/images/index/1.jpg',
-            title:'美国UASA保健品',
+            title:'美国UASA保健品d大撒大撒敖德萨阿德撒旦阿德撒旦啊是大啊是大请问企鹅请问我去饿撒旦啊是大',
             explain:'好吃的好喝的好玩的',
             price:90.5,
-            originPrice:170.10
+            sellNum:54
+          },
+          {
+            url: '/images/index/1.jpg',
+            title: '美国UASA保健品',
+            explain: '好吃的好喝的好玩的',
+            price: 90.5,
+            sellNum: 54
+          },
+          {
+            url: '/images/index/1.jpg',
+            title: '美国UASA保健品',
+            explain: '好吃的好喝的好玩的',
+            price: 90.5,
+            sellNum: 54
+          }
+        ]
+      },
+      
+       {
+        title: '每日精选',
+        goods: [
+          {
+            url: '/images/index/1.jpg',
+            title: '美国UASA保健品d大撒大撒敖德萨阿德撒旦阿德撒旦啊是大啊是大请问企鹅请问我去饿撒旦啊是大',
+            explain: '好吃的好喝的好玩的',
+            price: 90.5,
+            sellNum: 54
+          },
+          {
+            url: '/images/index/1.jpg',
+            title: '美国UASA保健品',
+            explain: '好吃的好喝的好玩的',
+            price: 90.5,
+            sellNum: 54
+          },
+          {
+            url: '/images/index/1.jpg',
+            title: '美国UASA保健品',
+            explain: '好吃的好喝的好玩的',
+            price: 90.5,
+            sellNum: 54
           }
         ]
       }

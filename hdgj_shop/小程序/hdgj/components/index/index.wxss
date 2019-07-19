@@ -1,18 +1,23 @@
 /* components/index/index.wxss */
 
 .carousel{
+  width: 100%;
   background-color: white;
-  position: relative;
+  margin-bottom: 1rem;
+ }
+
+.carousel swiper-item{
+  width: 100%;
 }
 
-.carousel image{
+.carousel swiper-item navigator image{
   border-radius: 0.5rem;
   width: 95%;
+  height: 20rem;
   margin:2.5% 2.5% 2.5% 2.5%;
-  height: 13rem;
 } 
 
-.carousel view{
+/* .carousel view{
   position: absolute;
   bottom: 0.75rem;
   width: 100%;  
@@ -30,7 +35,7 @@
   height: 0.5rem;
   background-color: rgba(216, 30, 6,0.7);
   margin-right: 0.3rem;
-}
+} */
 
 .menu{
   width: 100%;
@@ -84,8 +89,11 @@
 
 /*店铺信息*/
 .shop_info {
-  height: 12rem;
-  background-color: gray;
+  height: 3rem;
+}
+
+.template_title{
+  width: 100%;
 }
 
 /*模板*/
@@ -96,11 +104,48 @@
   line-height: 4rem;
   display: block;
 }
-.template_title view navigator p{
-  display:block;
-  text-align: center;
+
+.template_title view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
 }
 
-.template_title view navigator span{
-  
+.template_title view navigator{
+  width: 49.5%;
+}
+
+.template_title view navigator image {
+  width: 100%;
+}
+
+.template_title view navigator p{
+  height: 2.6rem;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.template_title view navigator p:nth-child(2){
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+.template_title view navigator p:nth-child(3){
+  display: block;
+}
+
+
+
+.template_title view navigator p span{
+  display: block;
+  float: left;
+}
+
+
+.template_title view navigator p span:nth-child(3){
+  float: right;
 }

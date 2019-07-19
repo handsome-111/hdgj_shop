@@ -27,8 +27,26 @@
   color:#bfbfbf;
 }
 .line-height-standard{
-  line-height: 1.5rem;
+  line-height: 1.3rem;
 }
 .line-height-little{
   line-height: 1rem;
+}
+
+.driver_line{
+  display: block;
+  height: 0px; 
+  border-bottom: 1px solid rgb(206, 206, 206);
+  background-color: rgb(206, 206, 206);
+}
+
+.clearfix:before,.clearfix:after {
+  content : "";
+  display : table;		/* 这句话可以触发BFC */
+}
+.clearfix:after {
+  clear:both;
+}
+.clearfix{
+  zoom: 1;
 }
