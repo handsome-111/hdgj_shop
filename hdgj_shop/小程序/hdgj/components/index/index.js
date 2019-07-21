@@ -2,13 +2,26 @@
 Component({
   pageLifetimes: {
     show() {
-      console.log("awqqeq");
+      var that = this;
+
       if (typeof this.getTabBar === 'function' &&
         this.getTabBar()) {
         this.getTabBar().setData({
           selected: 0
         })
       }
+
+      wx.createSelectorQuery().selectAll('.swiper_image').boundingClientRect(function(rects){
+        rects.forEach(function (rect) {
+          that.setData({
+            swiperHeight:rect.height
+          });
+        });
+      }).exec();
+
+      //*console.log(that.data.swiperHeight)*/
+
+
     }
   },
   /**
@@ -22,6 +35,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    swiperHeight: 0,
     images: {
       url: 'http://img1.imgtn.bdimg.com/it/u=735014917,976731480&fm=26&gp=0.jpg',
     },
@@ -34,6 +48,10 @@ Component({
       { src: '/images/index/1.jpg', title: '港视港饮' },
       { src: '/images/index/1.jpg', title: '港视港饮' },
       { src: '/images/index/1.jpg', title: '港视港饮' }
+    ],
+    swiper_block:[
+      { imageSrc:'/images/index/1.jpg' , url:''},
+      { imageSrc: '/images/index/1.jpg', url: '' }
     ],
     template_block:[
       {
@@ -96,7 +114,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    /*获取轮播图片高度*/ 
+    getSwiperHeight: function (){
+      const query = wx.createSelectorQuery();
+      var element = query.select('#the-id');
+      element.fields({
+        size: true
+      },function (res){
+        return res.height;
+      });
+    }
   }
   
 })

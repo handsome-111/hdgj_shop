@@ -68,7 +68,6 @@
 }
 .hot_block image{
   width: 100%;
-  height: 16rem;
 }
 
 .hot_block view{
