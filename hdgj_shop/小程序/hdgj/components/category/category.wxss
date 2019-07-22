@@ -1,1 +1,95 @@
 /* components/category/category.wxss */
+
+.selected {
+  font-size: 1.2rem !important;
+  color: #fb7d34;
+}
+
+.main{
+  display: flex;
+}
+
+.main view:nth-child(2){
+  flex: 1;
+}
+
+.list-navbar{
+  width: 25vw;
+  height: 100vh;
+  background-color: white;
+  border-right: 1px solid #efefef;
+}
+
+.list-navbar > p {
+  display: block;
+  font-size: 1rem;
+  line-height: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+  width: 100%;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.second-category{
+  width: 100%;
+}
+
+.second-category > p {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  margin-top: 1rem;
+}
+
+.second-category > p::before{
+  display: inline-block;
+  content: '';
+  height: 2px;
+  width: 3rem;
+  position: relative;
+  top: -0.35rem;
+  margin: 0 1rem 0 1rem;
+  background-color: #e0e0e0;
+}
+
+.second-category > p::after{
+  display: inline-block;
+  content: '';
+  height: 2px;
+  width: 3rem;
+  position: relative;
+  top: -0.35rem;
+  margin: 0 1rem 0 1rem;
+  background-color: #e0e0e0;
+}
+
+.third-category{
+  width: 100%;
+}
+
+.third-category view{
+  float: left;
+  width: 33.333%;
+  text-align: center;
+  margin:0.7rem 0 0.7rem 0;
+}
+
+.third-category view image{
+  width: 60%;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.third-category view p{
+  margin: 0 auto;
+  color: rgba(0,0,0,0.54);
+  width: 90%;
+  text-align: center;
+  display: block;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

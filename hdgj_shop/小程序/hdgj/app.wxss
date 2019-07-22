@@ -40,6 +40,13 @@
   background-color: rgb(206, 206, 206);
 }
 
+.driver_line_vertical{
+  display: block;
+  width: 0px;
+  border-right: 1px solid rgb(206, 206, 206);
+  background-color: rgb(206, 206, 206);
+}
+
 .clearfix:before,.clearfix:after {
   content : "";
   display : table;		/* 这句话可以触发BFC */

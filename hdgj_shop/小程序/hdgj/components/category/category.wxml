@@ -1,2 +1,28 @@
 <!--components/category/category.wxml-->
-
+<view class="main">
+    <!-- 一级分类 -->
+    <view class="list-navbar">
+        <block wx:for="{{topCategory}}">
+          <p class="{{ index == selected ? 'selected' : '' }}" bindtap="changeCategory" data-index="{{index}}">{{item.title}}</p>
+        </block>
+    </view> 
+    <!-- 二级分类 -->
+    <view>
+      <view class="main-sec" wx:for="{{ topCategory }}" wx:for-index="topIdx">
+        <block wx:for="{{item.secondCategory}}" wx:for-item="sec" >
+          <view class="second-category" hidden="{{ index != selected }}">
+            <p class="font-standard">{{sec.title}}</p>
+            <!-- 三级分类 -->
+            <view class="third-category">
+              <block wx:for="{{sec.thirdCategory}}" wx:for-item="third">
+                <view>
+                  <image src='/images/index/1.jpg' mode="widthFix" />
+                  <p class="font-little  line-height-little">{{third.name}}</p>
+                </view> 
+              </block>        
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+</view>

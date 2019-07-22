@@ -1,15 +1,5 @@
 <!--components/index/index.wxml-->
 <search></search>
-<!-- <view class="carousel">
-  <view>
-    <view> 
-      <span></span> 
-      <span></span>
-      <span></span>
-    </view>
-  </view>
-</view> -->
-
 <!-- 轮播图  -->
 <swiper class="carousel" indicator-dots="true"
   autoplay="true" interval="5000" duration="500" circular="true" style="height:{{swiperHeight}}rpx;">
