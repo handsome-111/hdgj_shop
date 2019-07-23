@@ -1,3 +1,36 @@
 <!--components/cart/cart.wxml-->
-购物车
+<template is="empty"></template>
+<view>
+
+</view>
+<template name="cart">
+  <view class="cart">
+  </view>
+</template>
+<template name="empty">
+  <view class="empty">
+    <view>
+      <span class="iconfont icon-gouwuche"></span>
+      <span>购物车还是空的</span>
+      <span>去逛逛</span>
+    </view>
+    <view class="guess">
+      <p><span>猜你喜欢</span></p>
+      <view>
+        <view>
+          <image src="/images/index/1.jpg" mode='widthFix'></image>
+          <p>小米CC9 6GB+64GB</p>
+          <p><span>￥</span>1799</p>
+        </view>
+
+        <view>
+          <image src="/images/index/1.jpg" mode='widthFix'></image>
+          <p>小米CC9 6GB+64GB</p>
+          <p><span>￥</span>1799</p>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</template>
 

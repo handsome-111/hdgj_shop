@@ -1,9 +1,9 @@
 {
   "pages": [
+    "components/cart/cart",
     "components/category/category",
     "components/index/index",
     "pages/logs/logs",
-    "components/cart/cart",
     "components/user/user"
   ], 
   "window": {
