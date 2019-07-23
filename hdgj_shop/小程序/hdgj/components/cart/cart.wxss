@@ -1,5 +1,15 @@
 /* components/cart/cart.wxss */
 @import '/custom-tab-bar/nav-bottom-font/iconfont.wxss';
+@import 'font-icon/iconfont.wxss';
+
+input {
+  display: inline-block;
+}
+
+p{
+  display: block;
+}
+
 /*模板*/
 .cart{
   width: 100vw;
@@ -7,6 +17,53 @@
   background-color: green;
 }
 
+
+#list {
+  display: flex;
+}
+/*复选框*/
+#list checkbox{
+  border-radius: 100% !important;
+}
+/*图片*/
+#list image{
+  width: 40%;
+}
+
+
+#list view p{
+
+  display: -webkit-box;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+.number{
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.number span:nth-child(1),span:nth-child(3){
+  display: inline-block;
+  background-color: gray;
+  border: 1px solid;
+  border-radius: 0.2rem;
+  padding: 0 0.3rem 0 0.3rem;
+}
+
+.number span:nth-child(2){
+  width: 1.2rem;
+  display: inline-block;
+  margin:0 0.3rem 0 0.3rem;
+  text-align: center;
+}
+
+
+
+/*购物车为空*/
 .empty{
   background-color: rgb(235, 235, 235);
   width: 100vw;
@@ -29,11 +86,12 @@
   border-radius: 1rem;
 }
 
-.guess p {
+/*猜你喜欢*/
+.guess >  p {
   text-align: center;
   font-size: 1rem !important;
-  height: 3rem;
-  line-height: 3rem;
+  height: 2rem;
+  line-height: 2rem;
 } 
 
 .guess > p::after{
@@ -61,10 +119,11 @@
 .guess view{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .guess view view{
-  width: 47%;
-  margin: 0.2rem 1% 0.2rem 2%;
+  width: 49.5%;
+  margin: 0.2rem 0 0.2rem 0;
 }
 .guess view view image {
   width: 100%;
@@ -72,5 +131,16 @@
 
 .guess view view p{
   display: block;
-  
+  padding: 0 0.5rem 0 0.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+.guess view view p:nth-child(3){
+  color:#ff6700;
+}
+
+.guess view view p:nth-child(3) span{
+  font-size: 0.85rem;
 }
