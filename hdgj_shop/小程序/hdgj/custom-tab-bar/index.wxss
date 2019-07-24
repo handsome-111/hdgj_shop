@@ -3,13 +3,17 @@
 
 .nav-bottom{
   width: 100%; 
+  height: 10vh;
   position: fixed;
   bottom: 0px;
   box-shadow: white; 
-  background-color: white;
+  background-color: rgb(250, 250, 250);
+  display: flex;
+  align-items: center;
 }
 
-.nav-bottom view{
+.nav-bottom > view{
+  flex:1;
   display: flex; 
 }
 
@@ -20,6 +24,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 0.2rem 0.2rem 0.2rem 0.2rem;
 }
 

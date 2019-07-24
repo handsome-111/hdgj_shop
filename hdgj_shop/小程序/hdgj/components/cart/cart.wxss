@@ -11,27 +11,81 @@ p{
 }
 
 /*模板*/
-.cart{
+#cart{
   width: 100vw;
+  padding:1rem; 
+  box-sizing: border-box;
   height: 10rem;
-  background-color: green;
+}
+
+#cart > p {
+  display: block;
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 
-#list {
-  display: flex;
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
+
+
 /*复选框*/
-#list checkbox{
+/* 未选中的 背景样式 */
+checkbox .wx-checkbox-input{
   border-radius: 100% !important;
 }
-/*图片*/
-#list image{
-  width: 40%;
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+  border: 1rpx solid rgb(231, 24, 102);
+  background: rgb(231, 24, 102);
 }
 
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+  text-align: center;
+  font-size:30rpx; /* 对勾大小 30rpx */
+  color:#fff; /* 对勾颜色 白色 */
+  background: transparent;
+}
 
-#list view p{
+.goods {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 7rem;
+  border: 0.1px solid #F7F7F7;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 13px 0px gray(0,0,0,0.9);
+  margin-bottom: 0.5rem;
+}
+
+/*图片*/
+.goods image{
+  width: 15rem;
+  border-radius: 0.55rem;
+  box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.54);
+}
+
+.goods > view:nth-child(3){
+  padding: 0 1rem 0 1rem;
+}
+
+.goods view checkbox{
+  display: block;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.goods view p:nth-child(1){
+  color:#666;
+  height: 2.6rem;
+  line-height: 1.3rem;
 
   display: -webkit-box;
   overflow:hidden;
@@ -41,26 +95,83 @@ p{
   -webkit-line-clamp:2;
 }
 
+.goods view p:nth-child(2){
+  color: #999;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+
 .number{
   height: 1.5rem;
   line-height: 1.5rem;
 }
 
-.number span:nth-child(1),span:nth-child(3){
-  display: inline-block;
-  background-color: gray;
-  border: 1px solid;
-  border-radius: 0.2rem;
-  padding: 0 0.3rem 0 0.3rem;
+.number view:nth-child(1){
+  float: left;
 }
 
-.number span:nth-child(2){
-  width: 1.2rem;
+.number view:nth-child(2){
+  float: right;
+}
+
+.number > view:nth-child(1) span:nth-child(1),.number > view:nth-child(1) span:nth-child(3){
+  height: 1.5rem;
   display: inline-block;
-  margin:0 0.3rem 0 0.3rem;
+  padding: 0 0.2rem 0 0.2rem;
+  background-color: rgb(244, 244, 244);
+  border: 1px solid rgb(244, 244, 244);
+}
+
+.number > view span:nth-child(2){
+  height: 1.5rem;
+  display: inline-block;
+  padding: 0 0.5rem 0 0.5rem;
+  border: 1px solid rgb(244, 244, 244);
   text-align: center;
 }
 
+/*提交&结算*/
+.submit{
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 10vh;
+  height: 8vh;
+  width: 100%;
+}
+
+/* .submit_parent{
+  display: inline-block;
+} */
+
+.submit checkbox{
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.submit span:nth-child(2){
+  font-size: 0.75rem;
+}
+
+.submit span:nth-child(3),span:nth-child(4){
+  color: rgb(231, 24, 102);
+  margin-left: 0.5rem;
+}
+
+.submit span:nth-child(4){
+  margin-left: 3rem;
+}
+
+.submit navigator{
+  color: white;
+  background-color: rgb(231, 24, 102);
+  height: 5vh;
+  line-height: 5vh;
+  align-content: center;
+  padding:0 2rem 0 2rem;
+  border-radius: 1rem;
+  margin: 0 auto;
+}
 
 
 /*购物车为空*/

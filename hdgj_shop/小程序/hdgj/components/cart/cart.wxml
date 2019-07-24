@@ -9,21 +9,45 @@
     <view>
       <form>
         <checkbox-group bindchange="checkboxChange" >
-          <view id="list">
-            <checkbox value="111" checked="22"/>
-            <image src="/images/index/1.jpg" mode='widthFix'></image>
-            <view>
-              <p>小米CC9 6GB +64GB 白色恋人（白色）</p>
-              <view class="number">
-                <span class="cart-iconfont icon-jianhao"></span>
-                <span>1</span>
-                <span class="cart-iconfont icon-jiahao"></span>
+          <view id="list" >
+            <!-- 一个商品 -->
+            <view class="goods">
+              <view>
+                <checkbox value="" checked=""/>
+              </view>
+
+              <image src="/images/index/1.jpg" mode='widthFix'></image>
+
+              <view>
+                <p>小米CC9 6GB +64GB 白色恋人（白色）大苏打萨达我去</p>
+                <p class="font-little">售价:1999元</p>
+                <view class="number">
+                  <view>
+                    <span class="cart-iconfont icon-jianhao"></span>
+                    <span>1</span>
+                    <span class="cart-iconfont icon-jiahao"></span>
+                  </view>
+
+                  <view>
+                    <span class="cart-iconfont icon-shanchu"></span>
+                  </view>
+                </view>
               </view>
             </view>
+                    
           </view>
         </checkbox-group>
       </form>
     </view>
+    <view style="height:12vh;"></view>
+  </view>
+  <!-- 下单框 -->
+  <view class="submit">
+    <checkbox class="submit_parent" value="" checked=""/>
+    <span class="submit_parent">已选</span>
+    <span class="submit_parent">删除</span>
+    <span class="submit_parent">￥0.00</span>
+    <navigator class="submit_parent">结算</navigator>
   </view>
 </template>
 
@@ -57,7 +81,6 @@
         </view>
       </view>
     </view>
-    
   </view>
 </template>
 
