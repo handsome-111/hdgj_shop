@@ -83,7 +83,12 @@
   box-shadow: 0 -2px 12px 3px rgba(229, 229, 229,1);
 }
 
+.bottom p:nth-child(2){
+  font-size: 0.9rem;
+}
+
 .bottom p:nth-child(3){
+  color: white;
   background-color: rgb(231, 24, 102);
   width: 4rem;
   height: 6vh;
@@ -91,4 +96,19 @@
   text-align: center;
   padding:0 2rem 0 2rem;
   border-radius: 2rem;
+}
+
+.back-index{
+  background-color: white;
+  border-radius: 100%;
+  border:1px solid rgb(247, 247, 247);
+  box-shadow: 0 0px 12px 3px rgba(229, 229, 229,1);
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align:center;
+  font-size: 0.5rem;
+  position: fixed;
+  bottom: 10vh;
+  right: 1rem;
 }

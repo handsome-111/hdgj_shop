@@ -37,3 +37,4 @@
   <p >加入购物车</p>
   <p class="submit-button" style="font-size:0.8rem;">立即购买</p>
 </view>
+<navigator class="back-index">去首页</navigator>

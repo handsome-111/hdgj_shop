@@ -43,9 +43,11 @@
   </view>
   <!-- 下单框 -->
   <view class="submit">
-    <checkbox  value="" checked=""/>
-    <span>已选</span>
-    <span >删除</span>
+    <view>
+      <checkbox  value="" checked=""/>
+      <span>已选(1)</span>
+    </view>
+    <span>删除</span>
     <span >￥0.00</span>
     <navigator class="submit-button">结算</navigator>
   </view>

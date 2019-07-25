@@ -139,35 +139,32 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   bottom: 10vh;
   height: 8vh;
   width: 100%;
+  justify-content: space-around;
+}
+
+.submit view{
+  display: flex;
+  align-items: center;
 }
 
 .submit-button{
-  color: white;
+  color: white; 
   background-color: rgb(231, 24, 102);
   height: 5vh;
   line-height: 5vh;
   align-content: center;
   padding:0 2rem 0 2rem;
-  border-radius: 1rem;
-  margin: 0 auto;
+  border-radius: 2rem;
 }
 
 .submit checkbox{
   margin: 0 0.5rem 0 0.5rem;
 }
 
-.submit span:nth-child(2){
-  font-size: 0.75rem;
-}
-
-.submit span:nth-child(3),span:nth-child(4){
+.submit > span:nth-child(3),.submit > span:nth-child(2){
   color: rgb(231, 24, 102);
-  margin-left: 0.5rem;
 }
 
-.submit span:nth-child(4){
-  margin-left: 3rem;
-}
 
 
 

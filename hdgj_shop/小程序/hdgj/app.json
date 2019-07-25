@@ -4,16 +4,15 @@
     "components/cart/cart",
     "components/category/category",
     "components/index/index",
-    "pages/logs/logs",
     "components/user/user"
     
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#DB3E3E",
+    "navigationBarBackgroundColor": "#E71866",
     "navigationBarTitleText": "华典国际绿色商城",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#F8F9F9"
+    "backgroundColor": "#E71866"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
