@@ -57,3 +57,8 @@
 .clearfix{
   zoom: 1;
 }
+
+p{
+  display: block;
+}
+

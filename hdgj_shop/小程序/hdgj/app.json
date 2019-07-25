@@ -1,26 +1,40 @@
 {
   "pages": [
+    "pages/goodsDetails/goodsDetails",
     "components/cart/cart",
     "components/category/category",
     "components/index/index",
     "pages/logs/logs",
     "components/user/user"
-  ], 
+    
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#DB3E3E",
     "navigationBarTitleText": "华典国际绿色商城",
     "navigationBarTextStyle": "white",
-    "backgroundColor":"#F8F9F9"
+    "backgroundColor": "#F8F9F9"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "custom": true,
     "list": [
-      {"pagePath": "components/index/index","text":"首页"},
-      {"pagePath": "components/category/category","text": "分类"},
-      {"pagePath": "components/cart/cart","text": "购物车"},
-      {"pagePath": "components/user/user","text": "我的"}
+      {
+        "pagePath": "components/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "components/category/category",
+        "text": "分类"
+      },
+      {
+        "pagePath": "components/cart/cart",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "components/user/user",
+        "text": "我的"
+      }
     ]
   }
 }

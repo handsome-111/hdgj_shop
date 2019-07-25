@@ -141,9 +141,16 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   width: 100%;
 }
 
-/* .submit_parent{
-  display: inline-block;
-} */
+.submit-button{
+  color: white;
+  background-color: rgb(231, 24, 102);
+  height: 5vh;
+  line-height: 5vh;
+  align-content: center;
+  padding:0 2rem 0 2rem;
+  border-radius: 1rem;
+  margin: 0 auto;
+}
 
 .submit checkbox{
   margin: 0 0.5rem 0 0.5rem;
@@ -162,16 +169,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   margin-left: 3rem;
 }
 
-.submit navigator{
-  color: white;
-  background-color: rgb(231, 24, 102);
-  height: 5vh;
-  line-height: 5vh;
-  align-content: center;
-  padding:0 2rem 0 2rem;
-  border-radius: 1rem;
-  margin: 0 auto;
-}
+
 
 
 /*购物车为空*/

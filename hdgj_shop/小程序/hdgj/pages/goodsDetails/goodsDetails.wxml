@@ -1,0 +1,39 @@
+<!--pages/goodsDetails/goodsDetails.wxml-->
+<view id="page">
+  <p class="title">商品详情</p>
+  <swiper class="carousel" indicator-dots="true"
+    autoplay="true" interval="5000" duration="500" circular="true">
+      <block wx:for="{{goods.images}}">
+        <swiper-item>
+          <navigator class="item" url="{{item.url}}" open-type="navigate"> 
+              <image src="{{item.src}}" mode="widthFix"></image> 
+          </navigator>
+        </swiper-item>
+      </block>
+  </swiper>
+
+  <view class="goods-title clearfix">
+    <view>3263h纪念我们的两次约会，宝贝，I LOVE YOU</view>
+    <view class="goods-price">￥135</view>
+  </view>
+
+  <view class="goods-option">
+    <navigator class="clearfix">
+      <p>数量与规格</p>
+      <p>S*7777</p>
+    </navigator>
+    <navigator class="clearfix">
+      <p>配送:</p>
+      <p>北京市北京北京</p>
+    </navigator>
+  </view>
+
+  <p class="title">商品参数</p>
+  <p class="title">商品详情</p>
+</view>
+
+<view class="bottom">
+  <p class="goods-price">￥135</p>
+  <p >加入购物车</p>
+  <p class="submit-button" style="font-size:0.8rem;">立即购买</p>
+</view>
