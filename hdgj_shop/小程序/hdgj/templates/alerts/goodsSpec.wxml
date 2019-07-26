@@ -1,0 +1,22 @@
+<!--templates/alerts/goodsSpec.wxml-->
+<template name="goodsSpec">
+  <view id="pageGoodsSpec">
+    <view class="goodsSpec">
+      <image src='/images/index/1.jpg'></image>
+      <view>
+        <span></span>
+      </view>  
+
+      <view class="specs">
+        <block wx:for="{{goodsSpec}}">
+          <p>{{item.specNname}}</p>
+          <view class="spec">
+            <view wx:for="{{item.values}}" wx:for-item="value">
+              <span class="{{selected == 1 ? 'selected': 'selected'}}">{{value}}</span>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>  

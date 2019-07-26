@@ -37,4 +37,7 @@
   <p >加入购物车</p>
   <p class="submit-button" style="font-size:0.8rem;">立即购买</p>
 </view>
-<navigator class="back-index">去首页</navigator>
+<navigator class="back-index" url='/components/index/index' open-type="switchTab">去首页</navigator>
+
+<import src="/templates/alerts/goodsSpec.wxml"/>
+<template is="goodsSpec" data="{{goodsSpec}}"></template>

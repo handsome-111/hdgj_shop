@@ -1,4 +1,5 @@
 /* pages/goodsDetails/goodsDetails.wxss */
+@import "/templates/alerts/goodsSpec.wxss";
 #page{
   padding: 0 1rem 0 1rem;
 }

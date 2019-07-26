@@ -1,41 +1,22 @@
 /* components/index/index.wxss */
 
 .carousel{
-  width: 100%;
+  width: 100vw;
   background-color: white;
   margin-bottom: 1rem;
+  height: 80vw;
  }
 
 .carousel swiper-item{
-  width: 100%;
+  width: 100vw;
 }
 
-.carousel swiper-item navigator image{
+.swiper_image image{
+  display: block;
   border-radius: 0.5rem;
-  width: 95%;
-  height: 20rem;
-  margin:2.5% 2.5% 2.5% 2.5%;
+  width: 80vw;
+  margin:0 auto;
 } 
-
-/* .carousel view{
-  position: absolute;
-  bottom: 0.75rem;
-  width: 100%;  
-}
-
-.carousel view view{
-  display: flex;
-  flex-direction: row;
-  justify-content:center;
-}
-
-.carousel view view span {
-  border-radius: 100%;
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: rgba(216, 30, 6,0.7);
-  margin-right: 0.3rem;
-} */
 
 .menu{
   width: 100%;
@@ -59,6 +40,12 @@
   border-radius: 100%;
   margin: 0 auto;
   margin-bottom: 0.2rem;
+}
+
+.menu view span{
+  display: block;
+  line-height: 1.5rem;
+  height: 1.5rem;
 }
 
 .hot_block{

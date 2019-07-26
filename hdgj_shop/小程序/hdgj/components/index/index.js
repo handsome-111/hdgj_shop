@@ -11,13 +11,13 @@ Component({
         })
       }
 
-      wx.createSelectorQuery().selectAll('.swiper_image').boundingClientRect(function(rects){
-        rects.forEach(function (rect) {
-          that.setData({
-            swiperHeight:rect.height
-          });
-        });
-      }).exec();
+      // wx.createSelectorQuery().selectAll('.swiper_image').boundingClientRect(function(rects){
+      //   rects.forEach(function (rect) {
+      //     that.setData({
+      //       swiperHeight:rect.height
+      //     });
+      //   });
+      // }).exec();
 
       //*console.log(that.data.swiperHeight)*/
 

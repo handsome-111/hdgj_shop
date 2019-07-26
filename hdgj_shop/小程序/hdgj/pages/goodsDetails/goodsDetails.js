@@ -10,7 +10,14 @@ Page({
         { src:'/images/index/1.jpg',url:'', id: 1 },
         { src: '/images/index/1.jpg', url:'', id: 2 },
       ]
-    }
+    },
+    //商品规格
+    goodsSpec:[
+      {
+        specNname:'规格',
+        values:['X','M','L','XL','XXL']
+      }
+    ]
   },
 
   /**
