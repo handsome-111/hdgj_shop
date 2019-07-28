@@ -17,7 +17,7 @@
 
 .carousel {
 
-}
+} 
 .item image{
   display: block;
   width: 80%;
@@ -53,23 +53,23 @@
   margin-top: 1rem;
 }
 
-.goods-option navigator:nth-child(1){
+.goods-option view:nth-child(1){
   border-bottom: 1px solid rgb(247, 247, 247);
 }
 
-.goods-option navigator p{
+.goods-option view p{
   line-height: 3rem;
   height: 3rem;
   padding: 0 1rem 0 1rem;
   font-size: 0.9rem;
 }
 
-.goods-option navigator p:nth-child(1){
+.goods-option view p:nth-child(1){
   float: left;
   
 }
 
-.goods-option navigator p:nth-child(2){
+.goods-option view p:nth-child(2){
   float: right;
 }
 

@@ -14,6 +14,11 @@
 .background-font{
   color: #bfbfbf;
 }
+
+.font-small{
+  font-size: 0.7rem;
+}
+
 .font-standard{
   font-size: 1rem;
 }
@@ -26,11 +31,34 @@
 .color-gray{
   color:#bfbfbf;
 }
+
+.color-important{
+  color: rgb(231, 24, 102);
+}
+
+.color-bg{
+  color: #ACACAC;
+}
+
 .line-height-standard{
   line-height: 1.3rem;
 }
 .line-height-little{
   line-height: 1rem;
+}
+.font-weight-600{
+  font-weight: 700;
+}
+
+.box-standard{
+  border: 1px solid rgba(128, 128, 128, 0.27);
+  border-radius: 0.5rem; 
+  box-shadow: 0px 1px 5px 0px rgba(128, 128, 128, 0.27);
+}
+
+.box-image{
+  border-radius: 0.5rem;
+  box-shadow: 0 0px 3px 2px rgba(229, 229, 229,1);
 }
 
 .driver_line{
@@ -45,6 +73,18 @@
   width: 0px;
   border-right: 1px solid rgb(206, 206, 206);
   background-color: rgb(206, 206, 206);
+}
+/*底部盒子阴影*/
+.bottom-box-shadow{
+  box-shadow: 0 -1px 3px 1px rgba(229, 229, 229,1);
+}
+
+/*标准按钮样式*/
+.button-standard{
+  color: white; 
+  background-color: rgb(231, 24, 102);
+  padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+  border-radius: 3rem;
 }
 
 .clearfix:before,.clearfix:after {
@@ -62,3 +102,22 @@ p{
   display: block;
 }
 
+/*复选框*/
+/* 未选中的 背景样式 */
+checkbox .wx-checkbox-input{
+  border-radius: 100% !important;
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+  border: 1rpx solid rgb(231, 24, 102);
+  background: rgb(231, 24, 102);
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+  text-align: center;
+  font-size:1rem; /* 对勾大小 30rpx */
+  color:#fff; /* 对勾颜色 白色 */
+  background: transparent;
+}

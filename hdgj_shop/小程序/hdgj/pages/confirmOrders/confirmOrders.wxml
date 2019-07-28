@@ -1,0 +1,50 @@
+<!--pages/confirmOrders/confirmOrders.wxml-->
+
+
+<view class='main'>
+  <p>确认订单</p>
+  <!-- 地址 -->
+  <navigator class="address box-standard">
+    <span class="iconfont icon-dizhi01" style="font-size:2rem;"/>
+    <view>
+      <p>
+        <span class="font-weight-600 font-little">累了吗</span>
+        <span class="color-bg font-small">13379959770</span>
+      </p>
+      <p class="font-small">山西省太原市....沙窝李村</p>
+    </view>
+    <span class="iconfont icon-icon--" style="color:black;"></span>
+  </navigator>
+  
+  <!-- 商品  -->
+  <view class='good box-standard'>
+    <image class="box-image" src='/images/index/1.jpg' mode='widthFix'></image>
+    <view>
+      <view>
+        <p class="font-weight-600 font-little">ONER万能校服套装</p>
+        <p class="color-bg font-small">S</p>
+      </view>
+
+      <view>
+        <span class="font-little font-weight-600">￥319</span>
+        <span class="font-little color-bg">×1</span>
+      </view>
+    </view> 
+  </view>
+  
+
+  <p class="message box-standard">
+    <span class="font-little">买家留言:</span>
+    <input class='font-little' type='text' placeholder="选填：填写内容已和卖家协商确认"/>
+  </p>
+  <p>共1件商品 小计<span>￥298</span></p>
+</view>
+
+<view class="submit bottom-box-shadow">
+  <p>
+    <span>运费:<span class="color-important">￥8</span></span>
+    <span>合计:<span class="color-important">￥306.00</span></span>
+    <navigator class="button-standard">结算</navigator>
+  </p>
+</view>
+

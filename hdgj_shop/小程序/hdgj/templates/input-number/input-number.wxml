@@ -1,0 +1,7 @@
+<template name="input-number">
+  <view class="number">
+    <span class="input-number-iconfont icon-jianhao"></span>
+    <span>1</span>
+    <span class="input-number-iconfont icon-jiahao"></span>
+  </view>
+</template>
