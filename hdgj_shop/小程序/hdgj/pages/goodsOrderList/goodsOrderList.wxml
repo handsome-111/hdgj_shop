@@ -8,26 +8,28 @@
   </view>
 
   <view>
-    <view class='goods'>
-      <p>待付款</p>
+    <view class='goods bottom-box-shadow'>
+      <p class='color-important'>待付款</p>
       <view>
         <image src="/images/index/1.jpg" mode='widthFix'></image>
 
         <view>
-          <p>ONER万能超级棒</p>
-          <p>万能超级棒</p>
+          <view>
+            <p class="font-little">ONER万能超级棒</p>
+            <p class='font-small color-bg'>万能超级棒</p>
+          </view>
           <p>
-            <span>￥298</span>
-            <span>×1</span>
+            <span class="font-little">￥298</span>
+            <span class='font-small color-bg'>×1</span>
           </p>
         </view>
-
-        <p>共1件商品 合计:<span>￥306</span><span>(含运费￥8)</span></p>
-        <p>
-          <span>取消订单</span>
-          <span>付款</span>
-        </p>
       </view>
+
+      <p class='font-little'>共1件商品 合计:<span class='color-important'>￥306</span><span>(含运费￥8)</span></p>
+      <p class='font-little'>
+        <span>取消订单</span>
+        <span>付款</span>
+      </p>
     </view>
   </view>
   

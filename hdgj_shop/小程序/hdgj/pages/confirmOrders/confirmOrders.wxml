@@ -4,17 +4,9 @@
 <view class='main'>
   <p>确认订单</p>
   <!-- 地址 -->
-  <navigator class="address box-standard">
-    <span class="iconfont icon-dizhi01" style="font-size:2rem;"/>
-    <view>
-      <p>
-        <span class="font-weight-600 font-little">累了吗</span>
-        <span class="color-bg font-small">13379959770</span>
-      </p>
-      <p class="font-small">山西省太原市....沙窝李村</p>
-    </view>
-    <span class="iconfont icon-icon--" style="color:black;"></span>
-  </navigator>
+  
+  <import src="/templates/address/address.wxml"/>
+	<template is="address"></template>
   
   <!-- 商品  -->
   <view class='good box-standard'>

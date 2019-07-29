@@ -1,0 +1,26 @@
+<!--pages/addressManage/addressManage.wxml-->
+<view class='page'>
+  <view class='box-address box-standard'>
+    <view>
+      <p>
+        <span class='botton-selected-bg-color buttom-small font-small'>默认</span>
+        <span class='font-little'>张三</span>
+        <span class='font-small'>13379959770</span>
+      </p>
+      <p class='font-small'>北京市北京市被设定为千岛湖</p>
+    </view>
+    <p class='font-little'>编辑</p>
+  </view>
+
+  <view class='box-address box-standard'>
+    <view>
+      <p>
+        <span class='botton-unselected-bg-color buttom-small font-small'>设为默认</span>
+        <span class='font-little'>张三</span>
+        <span class='font-small'>13379959770</span>
+      </p>
+      <p class='font-small'>北京市北京市被设定为千岛湖</p>
+    </view>
+    <p class='font-little'>编辑</p>
+  </view>
+</view>

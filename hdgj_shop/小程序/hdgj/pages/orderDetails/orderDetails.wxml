@@ -1,0 +1,53 @@
+<!--pages/orderDetails/orderDetails.wxml-->
+<view class='page page-padding'>
+  <p class='font-big'>待付款</p>
+  <import src="/templates/address/address.wxml"/>
+	<template is="address"></template>
+  <view class="goods-info page-padding box-standard">
+    <view>
+      <view class='gi-v1'>
+        <image class='box-image' src='/images/index/1.jpg' mode='widthFix'></image>
+        <view class='gi-v1-right'>
+          <view>
+            <p class='unline-overflow font-little'>ONER心跳之吻口红套装</p>
+            <p class='color-bg font-small'>默认</p>
+          </view>
+          <p>
+            <span class='font-little'>￥188</span>
+            <span class='color-bg font-small'>×1</span>
+          </p>
+        </view>
+      </view>
+
+      <view class='gi-v2'>
+        <p>
+          <span class='font-little'>运费</span>
+          <span class='font-little'>￥8</span>
+        </p>
+        <p>
+          <span class='font-little'>实付款（包含运费）</span>
+          <span class='font-little color-important'>￥196</span>
+        </p>
+      </view>
+      
+    </view>
+  </view>
+
+  <view class='orders-info'>
+    <p class='font-standard font-weight-600'>订单信息</p>
+    <p>
+      <span>订单编号:</span>
+      <span>190729000767490</span>
+      <span>复制</span>
+    </p>
+    <p>
+      <span>创建时间:</span>
+      <span>2019-07-29 00:07:16</span>
+    </p>
+  </view>
+
+  <view class='pay font-little'>
+      <span>取消订单</span>
+      <span>付款</span>
+  </view>
+</view>

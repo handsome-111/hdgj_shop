@@ -1,5 +1,5 @@
 /* pages/confirmOrders/confirmOrders.wxss */
-@import 'font-icon/iconfont.wxss';
+@import '/templates/address/address.wxss';
 
 .main{ 
   padding: 1rem;

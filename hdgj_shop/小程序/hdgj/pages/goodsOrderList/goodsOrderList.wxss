@@ -1,8 +1,7 @@
 /* pages/goodsOrderList/goodsOrderList.wxss */
-.goods{
+.page > view:nth-child(2){
   padding: 1rem;
   box-sizing: border-box;
-  
 }
 
 .top-nav{
@@ -21,6 +20,55 @@
   border-bottom:2px solid rgb(231, 24, 102)!important;
 }
 
+.goods{
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
 .goods view image{
   width: 5rem;
+}
+
+.goods > view,.goods > p{
+  margin-bottom: 0.5rem;
+}
+
+.goods > view{
+  display: flex;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #EDEDED;
+}
+
+.goods > view > view{
+  margin-left: 0.5rem;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.goods > view > view > p{
+  display: flex;
+  justify-content: space-between;
+}
+
+.goods >p:nth-of-type(2){
+  text-align: right;
+}
+
+.goods >p:nth-of-type(3){
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.goods > p:nth-of-type(3) span{
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  border-radius: 2rem;
+  border:1px solid #EDEDED;
+}
+
+.goods > p:nth-of-type(3) span:nth-child(2){
+  margin-left: 1rem;
+  border: 1px solid rgb(231, 24, 102) !important;
+  color: rgb(231, 24, 102)!important;
 }

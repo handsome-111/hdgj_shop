@@ -1,0 +1,28 @@
+/* templates/address/address.wxss */
+@import 'font-icon/iconfont.wxss';
+
+
+.address {
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.address > span {
+  color: rgb(231, 24, 102);
+  display: inline-block;
+  margin-right:0.5rem;
+}
+
+.address > view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content : space-around;
+  flex: 1;
+}
+
+.address > view p:nth-child(1) span:nth-child(1){
+  padding-right: 0.5rem;
+}

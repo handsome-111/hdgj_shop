@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/addressManage/addressManage",
+    "pages/orderDetails/orderDetails",
     "pages/goodsOrderList/goodsOrderList",
     "pages/goodsOrderList/allOrders/allOrders",
     "pages/goodsOrderList/noPay/noPay",

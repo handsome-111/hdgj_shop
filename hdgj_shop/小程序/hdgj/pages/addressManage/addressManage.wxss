@@ -1,0 +1,39 @@
+/* pages/addressManage/addressManage.wxss */
+.page{
+  padding: 1rem;
+}
+
+.box-address{
+  display: flex;
+  padding: 1rem;
+  align-items: stretch;
+  margin-bottom: 1rem;
+}
+
+.buttom-small{
+  padding: 0.2rem 0.5rem;
+  border-radius: 2rem;
+}
+
+.box-address > view{
+  flex: 1;
+  border-right: 1px solid #F3F3F3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-address > view p span{
+  margin-right: 0.5rem;
+}
+
+
+.box-address > view view{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-address > p{
+  padding: 1rem 0 1rem 1rem;
+}

@@ -22,6 +22,11 @@
 .font-standard{
   font-size: 1rem;
 }
+
+.font-big{
+  font-size: 1.5rem;
+}
+
 .font-little{
   font-size: 0.8rem;
 }
@@ -50,12 +55,13 @@
   font-weight: 700;
 }
 
+/*标准盒子及阴影*/
 .box-standard{
   border: 1px solid rgba(128, 128, 128, 0.27);
   border-radius: 0.5rem; 
   box-shadow: 0px 1px 5px 0px rgba(128, 128, 128, 0.27);
 }
-
+/* 盒子里的图片 */
 .box-image{
   border-radius: 0.5rem;
   box-shadow: 0 0px 3px 2px rgba(229, 229, 229,1);
@@ -85,6 +91,30 @@
   background-color: rgb(231, 24, 102);
   padding: 0.5rem 2.5rem 0.5rem 2.5rem;
   border-radius: 3rem;
+}
+/*已选按钮的背景和字体颜色*/
+.botton-selected-bg-color{
+  color: white;
+  background-color: rgb(231, 24, 102);
+}
+/*未选的按钮背景和字体颜色*/
+.botton-unselected-bg-color{
+  background-color: white;
+  color: rgb(231, 24, 102);
+  border:1px solid rgb(231, 24, 102);
+}
+
+.page-padding{
+  padding: 1rem;
+}
+.box-padding{
+  padding: 0.5rem;
+}
+/*单行溢出显示省略号*/
+.unline-overflow{
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .clearfix:before,.clearfix:after {
