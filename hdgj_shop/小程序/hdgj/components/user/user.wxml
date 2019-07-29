@@ -1,1 +1,18 @@
 <!--components/user/user.wxml-->
+<view class='page'>
+  <view class='userInfo'>
+    <p>god like</p>
+  </view>
+  <view class='main'>
+    <view class='list-top border-box-standard'>
+      <p >
+        <span>商品订单</span>
+        <span class='iconfont icon-icon--'></span>
+      </p>
+      <p >
+        <span>地址管理</span>
+        <span class='iconfont icon-icon--'></span>
+      </p>
+    </view>
+  </view>
+</view>

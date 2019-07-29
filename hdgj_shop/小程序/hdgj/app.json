@@ -1,5 +1,8 @@
 {
   "pages": [
+    "components/user/user",
+    "pages/userinfo/userinfo",
+    "components/index/index",
     "pages/addressManage/addressManage",
     "pages/orderDetails/orderDetails",
     "pages/goodsOrderList/goodsOrderList",
@@ -11,9 +14,7 @@
     "pages/goodsDetails/goodsDetails",
     "pages/newAddress/newAddress",
     "components/cart/cart",
-    "components/index/index",
-    "components/category/category",
-    "components/user/user"
+    "components/category/category"
   ],
   "window": {
     "backgroundTextStyle": "light",

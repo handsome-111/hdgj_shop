@@ -1,0 +1,50 @@
+/* pages/userinfo/userinfo.wxss */
+.page{
+  padding: 1rem;
+}
+
+.page view:nth-child(1){
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page image{
+  display: block;
+  width: 6rem;
+  margin: 0 auto;
+  border-radius: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+
+.page p{
+  padding: 0.8rem;
+  display: flex;
+  border-radius: 0.8rem !important; 
+  margin-bottom: 0.5rem;
+}
+
+.page p span{
+  margin-right: 1rem;
+  color: #3F3F3F;
+}
+
+.page p input{
+  flex: 1;
+}
+
+.submit{
+  left: 5%;
+  position: fixed;
+  display: block;
+  margin: 0 auto;
+  bottom: 3vh;
+  color: white;
+  width: 90%;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-radius: 2rem;
+  background-color: #E71866;
+}

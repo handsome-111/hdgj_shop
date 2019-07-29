@@ -23,6 +23,10 @@
   font-size: 1rem;
 }
 
+.font-little-big{
+  font-size: 1.3rem;
+}
+
 .font-big{
   font-size: 1.5rem;
 }
@@ -58,7 +62,7 @@
 /*标准盒子及阴影*/
 .box-standard{
   border: 1px solid rgba(128, 128, 128, 0.27);
-  border-radius: 0.5rem; 
+  border-radius: 0.6rem; 
   box-shadow: 0px 1px 5px 0px rgba(128, 128, 128, 0.27);
 }
 /* 盒子里的图片 */
@@ -102,6 +106,11 @@
   background-color: white;
   color: rgb(231, 24, 102);
   border:1px solid rgb(231, 24, 102);
+}
+
+/*标准盒子边框*/
+.border-box-standard{
+  border: 1px solid rgba(212, 207, 207, 0.77);
 }
 
 .page-padding{
