@@ -1,0 +1,16 @@
+<!--pages/newAddress/newAddress.wxml-->
+<view class='main'>
+    <input placeholder="姓名"></input>
+    <input placeholder="手机号码"></input>
+    <input placeholder="邮编"></input>
+    <input placeholder="省份、城市、区县"></input>
+    <input placeholder="详细地址，如楼道、楼盘号等"></input>
+    <p>
+      <checkbox></checkbox>设为默认地址 
+    </p>
+</view>
+
+<view class='fotter'>
+  <p>保存</p>
+  <p>删除</p>
+</view>

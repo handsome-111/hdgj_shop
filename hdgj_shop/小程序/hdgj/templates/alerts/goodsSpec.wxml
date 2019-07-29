@@ -1,22 +1,49 @@
 <!--templates/alerts/goodsSpec.wxml-->
-<template name="goodsSpec">
-  <view id="pageGoodsSpec">
-    <view class="goodsSpec">
+<!-- 商品详情弹出层 -->
+<template name="alerts">
+  <view class="outer" bindtap='closeAlters'>
+    <view class="main" catchtap='xxx'>
       <image src='/images/index/1.jpg'></image>
-      <view>
-        <span></span>
-      </view>  
-
-      <view class="specs">
-        <block wx:for="{{goodsSpec}}">
-          <p>{{item.specNname}}</p>
-          <view class="spec">
-            <view wx:for="{{item.values}}" wx:for-item="value">
-              <span class="{{selected == 1 ? 'selected': 'selected'}}">{{value}}</span>
-            </view>
-          </view>
-        </block>
-      </view>
+      <template is="{{alertsTemplateName}}" data="{{goodsSpec}}"></template>
+    
     </view>
   </view>
 </template>  
+
+<!-- 数量与规格 -->
+<template name="spec">
+  <view class="content">
+    <block wx:for="{{goodsSpec}}">
+      <p>{{item.specNname}}</p>
+      <view class="spec">
+        <view wx:for="{{item.values}}" wx:for-item="value">
+          <span class="{{selected == 1 ? 'selected': 'selected'}}">{{value}}</span>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="content"> 
+    <p>数量</p>
+    <import src="/templates/input-number/input-number.wxml"/>
+    <view >
+      <template is="input-number"></template>
+    </view>
+  </view>
+</template>
+
+<!-- 配送地址 -->
+<template name="shipping-address" bindtap='closeAlters'>
+  <view class="content">
+    <checkbox-group bindchange="checkboxChange" >
+      <block wx:for="{{goodsSpec}}">
+        <p>配送至</p>
+        <view class="address">
+          <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
+          <span>北京北京北京北京北京北京北京北京北京北</span>
+        </view>
+      </block>
+    </checkbox-group>
+
+    <navigator url='/pages/newAddress/newAddress' class="new-address">新建地址</navigator>
+  </view>
+</template>

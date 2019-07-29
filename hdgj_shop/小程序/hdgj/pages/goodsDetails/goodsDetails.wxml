@@ -18,14 +18,14 @@
   </view>
 
   <view class="goods-option">
-    <navigator class="clearfix">
+    <view class="clearfix" bindtap='switchGoodsSpec'>
       <p>数量与规格</p>
       <p>S*7777</p>
-    </navigator>
-    <navigator class="clearfix">
+    </view>
+    <view class="clearfix" bindtap='switchSkippingAddress'>
       <p>配送:</p>
       <p>北京市北京北京</p>
-    </navigator>
+    </view>
   </view>
 
   <p class="title">商品参数</p>
@@ -40,4 +40,4 @@
 <navigator class="back-index" url='/components/index/index' open-type="switchTab">去首页</navigator>
 
 <import src="/templates/alerts/goodsSpec.wxml"/>
-<template is="goodsSpec" data="{{goodsSpec}}"></template>
+<template is="{{alerts}}" data="{{goodsSpec,alertsTemplateName}}"></template>

@@ -1,0 +1,34 @@
+<!--pages/goodsOrderList/goodsOrderList.wxml-->
+<view class='page'>
+  <view class='top-nav'>
+    <navigator class="nav-selected">全部</navigator>
+    <navigator>待付款</navigator>
+    <navigator>待发货</navigator>
+    <navigator>待收货</navigator>
+  </view>
+
+  <view>
+    <view class='goods'>
+      <p>待付款</p>
+      <view>
+        <image src="/images/index/1.jpg" mode='widthFix'></image>
+
+        <view>
+          <p>ONER万能超级棒</p>
+          <p>万能超级棒</p>
+          <p>
+            <span>￥298</span>
+            <span>×1</span>
+          </p>
+        </view>
+
+        <p>共1件商品 合计:<span>￥306</span><span>(含运费￥8)</span></p>
+        <p>
+          <span>取消订单</span>
+          <span>付款</span>
+        </p>
+      </view>
+    </view>
+  </view>
+  
+</view>

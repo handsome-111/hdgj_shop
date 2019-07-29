@@ -1,11 +1,17 @@
 {
   "pages": [
+    "pages/goodsOrderList/goodsOrderList",
+    "pages/goodsOrderList/allOrders/allOrders",
+    "pages/goodsOrderList/noPay/noPay",
+    "pages/goodsOrderList/waitAccept/waitAccept",
+    "pages/goodsOrderList/waitSend/waitSend",
+    "pages/confirmOrders/confirmOrders",
     "pages/goodsDetails/goodsDetails",
-    "components/index/index",
+    "pages/newAddress/newAddress",
     "components/cart/cart",
+    "components/index/index",
     "components/category/category",
     "components/user/user"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

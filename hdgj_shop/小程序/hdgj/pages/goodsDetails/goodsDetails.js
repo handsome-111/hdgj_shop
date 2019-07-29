@@ -15,10 +15,23 @@ Page({
     goodsSpec:[
       {
         specNname:'规格',
-        values:['X','M','L','XL','XXL']
+        values: ['X', 'M', 'L', 'XL', 'XXL', 'X', 'M', 'L', 'XL', 'XXL']
+      },
+      {
+        specNname: '规格',
+        values: ['X', 'M', 'L', 'XL', 'XXL', 'X', 'M', 'L', 'XL', 'XXL']
+      },
+      {
+        specNname: '规格',
+        values: ['X', 'M', 'L', 'XL', 'XXL', 'X', 'M', 'L', 'XL', 'XXL']
       }
-    ]
+    ],
+    //是否弹窗
+    alerts:'',
+    //弹出层模板名称
+    alertsTemplateName:'',
   },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -74,5 +87,25 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /*切换商品规格选项*/ 
+  switchGoodsSpec: function () {
+    this.setData({
+      alerts: 'alerts',
+      alertsTemplateName:'spec'
+    })
+  },
+  /*切换到配送选项 */
+  switchSkippingAddress: function(){
+    this.setData({
+      alerts: 'alerts',
+      alertsTemplateName: 'shipping-address'
+    })
+  },
+  //关闭弹出层 
+  closeAlters: function(){
+    this.setData({
+      alerts: 'null'
+    })
   }
 })

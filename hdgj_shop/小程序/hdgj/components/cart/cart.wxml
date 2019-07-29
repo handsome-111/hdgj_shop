@@ -1,9 +1,12 @@
 <!--components/cart/cart.wxml-->
+
 <template is="cart"></template>
 <view>
 
 </view>
 <template name="cart">
+  <import src="/templates/input-number/input-number.wxml"/>
+
   <view id="cart">
     <p>购物车</p>
     <view>
@@ -16,20 +19,17 @@
                 <checkbox value="" checked=""/>
               </view>
 
-              <image src="/images/index/1.jpg" mode='widthFix'></image>
+              <image class="box-image" src="/images/index/1.jpg" mode='widthFix'></image>
 
               <view>
                 <p>小米CC9 6GB +64GB 白色恋人（白色）大苏打萨达我去</p>
                 <p class="font-little">售价:1999元</p>
-                <view class="number">
-                  <view>
-                    <span class="cart-iconfont icon-jianhao"></span>
-                    <span>1</span>
-                    <span class="cart-iconfont icon-jiahao"></span>
-                  </view>
 
-                  <view>
-                    <span class="cart-iconfont icon-shanchu"></span>
+                <view class="goods-right">
+					        <template is="input-number"></template>
+                  <view> 
+                    <view style='vertical-align:middle;display:inline-block;width:1px;height:100%;'></view>
+                    <span class="cart-iconfont icon-shanchu"></span>       
                   </view>
                 </view>
               </view>
@@ -42,7 +42,7 @@
     <view style="height:12vh;"></view>
   </view>
   <!-- 下单框 -->
-  <view class="submit">
+  <view class="submit bottom-box-shadow">
     <view>
       <checkbox  value="" checked=""/>
       <span>已选(1)</span>

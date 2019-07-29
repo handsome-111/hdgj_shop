@@ -1,0 +1,26 @@
+/* pages/goodsOrderList/goodsOrderList.wxss */
+.goods{
+  padding: 1rem;
+  box-sizing: border-box;
+  
+}
+
+.top-nav{
+  display: flex;
+  width: 100%;
+}
+.top-nav navigator{
+  display: inline-block;
+  flex: 1;
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 0 0.5rem 0;
+}
+.nav-selected{
+  border-bottom:2px solid rgb(231, 24, 102)!important;
+}
+
+.goods view image{
+  width: 5rem;
+}

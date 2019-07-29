@@ -1,52 +1,70 @@
 /* templates/alerts/goodsSpec.wxss */
-#pageGoodsSpec{
+@import '/templates/input-number/input-number.wxss';
+
+.outer ::-webkit-scrollbar {
+    display: none;
+}
+
+.outer{
   width: 100%;
   height: 92vh;
   top: 0;
   background-color: rgba(23, 18, 18, 0.22);
   position: fixed;
+  overflow:hidden;
 }
 
-.goodsSpec{
+.main{
   background-color: white;
   position: fixed;
   bottom: 8vh;
   width: 100%;
-  height: 60vh;
+  height: 70vh;
   border-radius: 0.5rem 0.5rem 0 0;
+  overflow-x:scroll;		
+	overflow-y:scroll; 
 }
 
-.goodsSpec image{
+.main image{
   display: block;
-  margin: 0 auto;
-  position: relative;
+  position: fixed;   
   border-radius: 0.5rem;
-  top: -10%;
+  bottom: 70vh;
+  left: 50%;
+  margin-left: -12.5vw;
   width: 25vw;
   height: 25vw;
   box-shadow: 0 0px 15px 3px rgba(219, 202, 202, 0.54);
 }
 
-.specs{
-  padding: 1rem;
+.content{
+  padding: 0 1rem 0 1rem;
+  margin-top: 10vw;
 }
-.specs p{
-  margin: 0 0.5rem 0 0.5rem;
+
+.content:nth-child(3){
+  margin-top: 0; 
+}
+
+.content p{
+  margin:0.5rem 0 0.5rem 0;
 }
 
 .spec{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .spec view{ 
   display: flex;
   margin: 0.5rem 0 0.5rem 0;
+  
 }
 .spec view span{
-  display: block;
+  display: inline-block;
   padding: 0.2rem 0.5rem 0.2rem 0.5rem;
   text-align: center;
-  margin: 0 0.5rem 0 0.5rem;
+  margin: 0 0.5rem 0 0;
   border: 1px solid rgb(236, 236, 236);
   border-radius: 0.3rem;
 }
@@ -54,3 +72,37 @@
   background-color: rgb(231, 24, 102);
   color: white
 }
+
+
+
+
+
+/*配送地址*/
+.address{
+  border:1px solid rgb(242, 242, 242);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.address span{
+  font-size: 0.85rem;
+}
+
+.new-address {
+  margin-top:3rem; 
+  width: 100%;
+  border: 1px solid rgb(231, 24, 102);
+  color: rgb(231, 24, 102);
+  text-align: center;
+  padding:0.5rem 0 0.5rem 0;
+  border-radius: 2rem;
+}
+
+
+
+
+
+
+

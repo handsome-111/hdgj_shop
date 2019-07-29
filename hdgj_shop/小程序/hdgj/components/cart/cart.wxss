@@ -1,6 +1,7 @@
 /* components/cart/cart.wxss */
 @import '/custom-tab-bar/nav-bottom-font/iconfont.wxss';
 @import 'font-icon/iconfont.wxss';
+@import '/templates/input-number/input-number.wxss';
 
 input {
   display: inline-block;
@@ -18,6 +19,7 @@ p{
   height: 10rem;
 }
 
+
 #cart > p {
   display: block;
   font-weight: 500;
@@ -32,27 +34,6 @@ p{
   width: 0;
   height: 0;
   color: transparent;
-}
-
-
-/*复选框*/
-/* 未选中的 背景样式 */
-checkbox .wx-checkbox-input{
-  border-radius: 100% !important;
-}
-
-/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
-checkbox .wx-checkbox-input.wx-checkbox-input-checked{
-  border: 1rpx solid rgb(231, 24, 102);
-  background: rgb(231, 24, 102);
-}
-
-/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
-checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
-  text-align: center;
-  font-size:30rpx; /* 对勾大小 30rpx */
-  color:#fff; /* 对勾颜色 白色 */
-  background: transparent;
 }
 
 .goods {
@@ -71,8 +52,6 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 /*图片*/
 .goods image{
   width: 12rem;
-  border-radius: 0.55rem;
-  box-shadow: 0 0px 5px 1px rgba(229, 229, 229,1);
 }
 
 .goods > view:nth-child(3){
@@ -104,33 +83,13 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 }
 
 
-.number{
-  height: 1.5rem;
-  line-height: 1.5rem;
+.goods-right{
+  display: flex;
+  justify-content: space-between; 
 }
 
-.number view:nth-child(1){
-  float: left;
-}
-
-.number view:nth-child(2){
-  float: right;
-}
-
-.number > view:nth-child(1) span:nth-child(1),.number > view:nth-child(1) span:nth-child(3){
-  height: 1.5rem;
+.goods-right > view:nth-child(2){
   display: inline-block;
-  padding: 0 0.2rem 0 0.2rem;
-  background-color: rgb(244, 244, 244);
-  border: 1px solid rgb(244, 244, 244);
-}
-
-.number > view span:nth-child(2){
-  height: 1.5rem;
-  display: inline-block;
-  padding: 0 0.5rem 0 0.5rem;
-  border: 1px solid rgb(244, 244, 244);
-  text-align: center;
 }
 
 /*提交&结算*/
@@ -142,6 +101,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   height: 8vh;
   width: 100%;
   justify-content: space-around;
+
 }
 
 .submit view{

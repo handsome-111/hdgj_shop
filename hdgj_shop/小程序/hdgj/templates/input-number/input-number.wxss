@@ -1,0 +1,29 @@
+@import "font-icon/iconfont.wxss";
+
+.number{
+  border: 1px solid rgb(244, 244, 244);
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
+.goods-right view:nth-child(2){
+  float: right;
+}
+
+.number span:nth-child(1),.number span:nth-child(3){
+  height: 1.2rem;
+  display: inline-block;
+  padding: 0 0.5rem 0 0.5rem;
+  background-color: white;
+  color: rgb(223, 223, 223);
+}
+
+.number span:nth-child(2){
+  height: 1.2rem;
+  display: inline-block;
+  margin:0.5rem 0 0.5rem 0;
+  padding: 0 1rem 0 1rem;
+  border-left: 1px solid rgb(244, 244, 244);
+  border-right: 1px solid rgb(244, 244, 244);
+  text-align: center;
+}
