@@ -1,18 +1,27 @@
 {
   "pages": [
+        "pages/newAddress/newAddress",
+        
+    "pages/goodsDetails/goodsDetails",
+    "pages/confirmOrders/confirmOrders",
+    
+        "pages/goodsOrderList/allOrders/allOrders",
+        
+        "pages/goodsOrderList/goodsOrderList",
+        
+        "pages/orderDetails/orderDetails",
+        
+        "pages/addressManage/addressManage",
+        
+        "pages/userinfo/userinfo",
+        
     "components/user/user",
-    "pages/userinfo/userinfo",
     "components/index/index",
-    "pages/addressManage/addressManage",
-    "pages/orderDetails/orderDetails",
-    "pages/goodsOrderList/goodsOrderList",
-    "pages/goodsOrderList/allOrders/allOrders",
     "pages/goodsOrderList/noPay/noPay",
     "pages/goodsOrderList/waitAccept/waitAccept",
     "pages/goodsOrderList/waitSend/waitSend",
-    "pages/confirmOrders/confirmOrders",
-    "pages/goodsDetails/goodsDetails",
-    "pages/newAddress/newAddress",
+
+    
     "components/cart/cart",
     "components/category/category"
   ],

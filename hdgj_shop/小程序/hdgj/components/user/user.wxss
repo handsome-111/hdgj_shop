@@ -1,10 +1,12 @@
 /* components/user/user.wxss */
 @import '/templates/address/font-icon/iconfont.wxss';
 
+
 .userInfo{
-  width: 100%;
+  padding: 1rem;
   height: 10vh;
-  border-radius: 0 0 50% 50%/0 0 10px 10px;
+  border-radius: 0 0 50% 50%/0 0 1rem 1rem;
+  overflow: hidden;
   background-color: green;
 }
 
