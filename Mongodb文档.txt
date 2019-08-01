@@ -1,22 +1,6 @@
-集合
-	good:
-		item_desc				String		商品描述
-		item_name				String 		商品名称
-		fx_fee_rate				String 		分销分成比例
-		seller_id				String 		卖家id
-		imgs 					ARRAY 		商品图片
-		merchant_code			String 		商品编号
-		sold 					NUMBER		商品销量
-		thumb_imgs				ARRAY		商品缩略图
-		itemid					String 		商品id
-		status					String 		商品状态（onsale ：销售中 instock：已下架 delete：已删除）
-		stock					NUMBER		库存量
-		remote_free_delivery	NUMBER 		偏远地区是否包邮：1不包邮，0包邮
-		free_delivery 			NUMBER		是否包邮：0不包邮，1包邮
-		price					String 		商品价格
-		titles					ARRAY		商品图片描述
+MongoDB:
 
-	skus:
+	skus(sku):
 		title 					String 		sku名称
  		stock					NUMBER		库存量
  		id 						String 		sku唯一id
@@ -25,12 +9,15 @@
  		price					String 		价格
 		img 					String 		sku图URL
 
-	cates:
+	cates（分类）:
 		sort_num				NUMBER		分类排序
 		cate_id					String 		商品分类id
 		cate_name				String 		分类名称
-		parent_id				NUMBER 		父类目id
+		parent_id				NUMBER 		父类目id				没有父ID,说明是顶级分类
 		status 					NUMBER(1)  	分类的状态
+		created_time			String 		添加时间
+		updated_time			String		更新时间
+		url_key 				String 		点击分类的链接
 
 	goods_detail:
 		item_id					String		item_id
@@ -43,8 +30,8 @@
 	   	updated_at		 	NumberInt(1513219018),
 	   	store 				fecshop.appfront.fancyecommerce.com/cn"  	// store的key
 
-	product_flat	产品信息表
-		_id						id
+	goods（商品表）
+		itemid 					STRING 			商品id
 		created_time			String			创建时间
 		created_user_id			用户id
 		updated_time			String			更新时间
@@ -52,21 +39,14 @@
 		item_name				STRING 			商品名称
 		fx_fee_rate				String 			分销分成比例
 		seller_id				String 			卖家id
-		imgs 					ARRAY 			商品图片
+		imgs 					ARRAY 			商品图片(展示商品的图片/视频)
+			[{url:'aaa.img'},{url:'bbb.img'}]
 		merchant_code 			STRING 			商品编号
 		sold 					NUMBER 			商品销量
 		thumb_imgs 				ARRAY 			商品缩略图
-		itemid 					STRING 			商品id
 
 		skus 					ARRAY 			商品sku，无型号的商品skus为空
-			
-			title 				STRING 			sku名称
-			stock 				NUMBER库存量
-			id 					STRING 			sku唯一id
-			sku_merchant_code 	STRING 			商品型号编码
-			attr_ids 			STRING 			多级SKU属性id(这里的id和title中的名称对应) 764651-L, 764647-蓝色
-			price 				STRING 			价格
-			img 				STRING 			sku图URL
+			[{skuid:112233},{skuid:224644}]
 
 		status 					STRING 			商品状态（onsale ：销售中 instock：已下架 delete：已删除）
 		stock 					NUMBER 			库存量
@@ -75,3 +55,69 @@
 		price 					STRING 			商品价格
 		titles 					ARRAY 			商品图片描述
 		cates 					ARRAY			商品分类
+
+	goods_detail(商品详情)
+		goods_detail_id			NUMBER
+		item_id					NUMBER 			商品ID
+		text					STRING 			type=1填写此字段，详情文本
+		type 					NUMBER 			type =1 文字模块,type =2 图片, type =3 商品模块，type=4视频模块
+		pos 					NUMBER 			记录某一个detail对象在detail中的位置
+		faceurl	 				String 			首页地址
+		video_type 				String 			1表示腾迅视频，2表示美拍视频(type=4填写此字段)
+		url 					STRING 			图片的url（type=2填写此字段）
+
+
+
+	attrs(商品模型,一个模型有多个属性)
+		attr_title		String 		属性名称
+		attr_values		Array 		属性值数组
+
+	attr(属性)
+		attr_id 			Number   	属性ID		（因为为了生成sku需要知道属性的值）
+		attr_value			String 		属性值
+
+
+Mysql:
+	customer:
+	 	'id' 						int(20) 		unsigned NOT NULL AUTO_INCREMENT,
+	  	'password_hash' 			varchar(80) 	DEFAULT NULL COMMENT '密码',
+	  	'password_reset_token' 		varchar(60) 	DEFAULT NULL COMMENT '密码token',
+	  	'email' 					varchar(60) 	DEFAULT NULL COMMENT '邮箱',
+	  	'name' 						varchar(100) 	DEFAULT NULL,
+	  	'is_subscribed' 			int(5) 			NOT NULL DEFAULT '2' COMMENT '1代表订阅，2代表不订阅邮件',
+	  	'auth_key' 					varchar(60) 	DEFAULT NULL,
+	  	'status' 					int(5) 			DEFAULT NULL COMMENT '状态',
+	  	'created_at' 				int(18) 		DEFAULT NULL COMMENT '创建时间',
+	  	'updated_at' 				int(18) 		DEFAULT NULL COMMENT '更新时间',
+	  	'password' 					varchar(50) 	DEFAULT NULL COMMENT '密码',
+	  	'access_token' 				varchar(60) 	DEFAULT NULL,
+	  	'birth_date' 				datetime 		DEFAULT NULL COMMENT '出生日期',
+	  	'favorite_product_count' 	int(15) 		NOT NULL DEFAULT '0' COMMENT '用户收藏的产品的总数',
+	  	'type' 						varchar(35) 	DEFAULT 'default' COMMENT '默认为default，如果是第三方登录，譬如google账号登录注册，那么这里的值为google',
+	  	'access_token_created_at' 	int(20) 		DEFAULT NULL COMMENT '创建token的时间',
+	  	'allowance' 				int(20) 		DEFAULT NULL COMMENT '限制次数访问',
+	  	'allowance_updated_at' 		int(20) 		DEFAULT NULL,
+	  	'phone'						varchar(20) 	COMMENT '手机号'
+	  	PRIMARY KEY ('id'),
+	  	UNIQUE KEY 'access_token' ('access_token')
+
+	 customer_address:
+	 	  'address_id' 			int(15) NOT NULL AUTO_INCREMENT,
+		  'email' 				varchar(155) DEFAULT NULL COMMENT '邮箱地址',
+		  'name' 				varchar(150) DEFAULT NULL COMMENT '姓名',
+		  'company' 			varchar(255) DEFAULT NULL COMMENT '公司',
+		  'phone' 				varchar(100) DEFAULT NULL COMMENT '电话',
+		  'fax' 				varchar(150) DEFAULT NULL COMMENT '传真',
+		  'street1' 			text COMMENT '街道地址1',
+		  'street2' 			varchar(255) DEFAULT NULL COMMENT '街道地址2',
+		  'city' 				varchar(150) DEFAULT NULL COMMENT '城市',
+		  'province' 			varchar(50)  DEFAULT NULL COMMENT '省/州',
+		  'post' 				varchar(50)  DEFAULT NULL COMMENT '邮编',
+		  'region'     			varchar(50)	 DEFAULT NULL COMMENT '收货人所在区',
+		  'country' 			varchar(50)  DEFAULT NULL COMMENT '国家',
+		  'customer_id' 		int(20) DEFAULT NULL COMMENT '用户的id',
+		  'created_at' 			int(20) DEFAULT NULL COMMENT '创建时间戳',
+		  'updated_at' 			int(20) DEFAULT NULL COMMENT '更新时间戳',
+		  'is_default' 			int(11) NOT NULL DEFAULT '2' COMMENT '1代表是默认地址，2代表不是',
+		  'idCardNo'			varchar(50) COMMENT '身份证号'
+		  PRIMARY KEY ('address_id')
