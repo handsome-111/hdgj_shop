@@ -1,0 +1,77 @@
+集合
+	good:
+		item_desc				String		商品描述
+		item_name				String 		商品名称
+		fx_fee_rate				String 		分销分成比例
+		seller_id				String 		卖家id
+		imgs 					ARRAY 		商品图片
+		merchant_code			String 		商品编号
+		sold 					NUMBER		商品销量
+		thumb_imgs				ARRAY		商品缩略图
+		itemid					String 		商品id
+		status					String 		商品状态（onsale ：销售中 instock：已下架 delete：已删除）
+		stock					NUMBER		库存量
+		remote_free_delivery	NUMBER 		偏远地区是否包邮：1不包邮，0包邮
+		free_delivery 			NUMBER		是否包邮：0不包邮，1包邮
+		price					String 		商品价格
+		titles					ARRAY		商品图片描述
+
+	skus:
+		title 					String 		sku名称
+ 		stock					NUMBER		库存量
+ 		id 						String 		sku唯一id
+ 		sku_merchant_code 		String  	商品型号编码
+ 		attr_ids				String 		多级SKU属性id(这里的id和title中的名称对应) 764651-L, 764647-蓝色
+ 		price					String 		价格
+		img 					String 		sku图URL
+
+	cates:
+		sort_num				NUMBER		分类排序
+		cate_id					String 		商品分类id
+		cate_name				String 		分类名称
+		parent_id				NUMBER 		父类目id
+		status 					NUMBER(1)  	分类的状态
+
+	goods_detail:
+		item_id					String		item_id
+
+	Favorite:		产品收藏信息表
+		_id: 				ObjectId("5a31e3cabfb7ae29c040a042"),
+	   	product_id			580835d0f656f240742f0b7c",
+	   	user_id				NumberInt(383),                   			// customer表的id
+	   	created_at			NumberInt(1513219018),
+	   	updated_at		 	NumberInt(1513219018),
+	   	store 				fecshop.appfront.fancyecommerce.com/cn"  	// store的key
+
+	product_flat	产品信息表
+		_id						id
+		created_time			String			创建时间
+		created_user_id			用户id
+		updated_time			String			更新时间
+		item_desc				String 			商品描述
+		item_name				STRING 			商品名称
+		fx_fee_rate				String 			分销分成比例
+		seller_id				String 			卖家id
+		imgs 					ARRAY 			商品图片
+		merchant_code 			STRING 			商品编号
+		sold 					NUMBER 			商品销量
+		thumb_imgs 				ARRAY 			商品缩略图
+		itemid 					STRING 			商品id
+
+		skus 					ARRAY 			商品sku，无型号的商品skus为空
+			
+			title 				STRING 			sku名称
+			stock 				NUMBER库存量
+			id 					STRING 			sku唯一id
+			sku_merchant_code 	STRING 			商品型号编码
+			attr_ids 			STRING 			多级SKU属性id(这里的id和title中的名称对应) 764651-L, 764647-蓝色
+			price 				STRING 			价格
+			img 				STRING 			sku图URL
+
+		status 					STRING 			商品状态（onsale ：销售中 instock：已下架 delete：已删除）
+		stock 					NUMBER 			库存量
+		remote_free_delivery 	NUMBER 			偏远地区是否包邮：1不包邮，0包邮
+		free_delivery 			NUMBER 			是否包邮：0不包邮，1包邮
+		price 					STRING 			商品价格
+		titles 					ARRAY 			商品图片描述
+		cates 					ARRAY			商品分类
