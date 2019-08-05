@@ -78,7 +78,7 @@ MongoDB:
 
 
 Mysql:
-	customer:
+	customer（用户信息）:
 	 	'id' 						int(20) 		unsigned NOT NULL AUTO_INCREMENT,
 	  	'password_hash' 			varchar(80) 	DEFAULT NULL COMMENT '密码',
 	  	'password_reset_token' 		varchar(60) 	DEFAULT NULL COMMENT '密码token',
@@ -101,7 +101,7 @@ Mysql:
 	  	PRIMARY KEY ('id'),
 	  	UNIQUE KEY 'access_token' ('access_token')
 
-	 customer_address:
+	 customer_address（用户地址）:
 	 	  'address_id' 			int(15) NOT NULL AUTO_INCREMENT,
 		  'email' 				varchar(155) DEFAULT NULL COMMENT '邮箱地址',
 		  'name' 				varchar(150) DEFAULT NULL COMMENT '姓名',
@@ -123,7 +123,18 @@ Mysql:
 		  PRIMARY KEY ('address_id')
 
 
-	order:
+	order:	
+		buyer_id 				STRING 			买家ID
+		name 					STRING 			买家姓名
+		phone 					STRING 			收货人电话
+		address 				STRING 			收货地址
+		province 				STRING 			收货人所在省
+		city 					STRING 			收货人所在市
+		region 					STRING 			收货人所在区
+		post 					STRING 			邮政编码
+		self_address 			STRING 			收货人的街道
+		idCardNo 				STRING 			身份证号
+
 		order_id 				String 			订单ID
  		seller_id				String 			卖家id
  		f_phone					String 			分销商手机号
@@ -131,6 +142,7 @@ Mysql:
 		return_code				String 			退货单号
 		status_ori 				STRING 			订单状态
  		add_time				String 			下单时间
+ 		updated_time 			String 			更新时间
  		express_fee_num			String 			运费，和express_fee相同
  		user_phone				String 			买家手机号
  		price 					String 			商品总价格，不包含运费
@@ -193,14 +205,18 @@ Mysql:
 		is_delivered 			NUMBER 			是否发货 1是0非
 		can_deliver 			NUMBER 			商品是否可以发货 1是0非
 		item_desc 				STRING 			商品描述
+			
 
-		can_refundSTRING标识这个sku是否可发起商品退款
-		refund_status_descSTRING状态描述
-		item_idSTRING商品id
-		refund_feeSTRING退款金额
-		refund_express_feeSTRING商品退款运费金额
-		refund_item_feeSTRING退款商品金额
-		refund_statusSTRING退款状态
+	退款信息（refund_info）：
+		item_sku_id 			STRING 			sku ID
+		refund_kind 			STRING 			退款类型，1表示退款，2表示退货退款
+	 	can_refund 				STRING 			标识这个sku是否可发起商品退款
+		refund_status_desc 		STRING 			状态描述
+		item_id 				STRING 			商品id
+		refund_fee 				STRING 			退款金额
+		refund_express_fee 		STRING 			商品退款运费金额
+		refund_item_fee 		STRING 			退款商品金额
+		refund_status 			STRING 			退款状态
 				1 申请退款或退款
 				3 拒绝退款
 				4 退货流程同意退货
@@ -208,7 +224,8 @@ Mysql:
 				6 退货流程已提交退货物流信息
 				9 退款取消
 				10 退款完成（同意退款或收到退货后同意退款，退款流程完成，资金流程开始）
-		refund_status_strSTRING状态描述
-		refund_noSTRING退款唯一标识
-		item_sku_idSTRINGsku ID
-		refund_kindSTRING退款类型，1表示退款，2表示退货退款
+		refund_status_str 		STRING 			状态描述
+		refund_no 				STRING 			退款唯一标识
+		
+
+
