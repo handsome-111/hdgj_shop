@@ -1,0 +1,6 @@
+com\weidian\open\test\TestOrderApi.class
+com\weidian\open\test\BaseTest.class
+com\weidian\open\test\TestCommonRequest.class
+com\weidian\open\test\TestOAuth.class
+com\weidian\open\test\TestProductApi.class
+com\weidian\open\test\TestCpsApi.class
