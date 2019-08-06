@@ -21,6 +21,8 @@ public class ServerConfiguration {
 	
 	@Value("${weidian.secret}")
 	private String secret;
+	
+	
 
 	
 	@Bean	

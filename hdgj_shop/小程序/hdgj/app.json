@@ -1,22 +1,15 @@
 {
   "pages": [
-        "pages/newAddress/newAddress",
-        
+    "components/index/index",
+    "pages/newAddress/newAddress",
     "pages/goodsDetails/goodsDetails",
     "pages/confirmOrders/confirmOrders",
-    
-        "pages/goodsOrderList/allOrders/allOrders",
-        
-        "pages/goodsOrderList/goodsOrderList",
-        
-        "pages/orderDetails/orderDetails",
-        
-        "pages/addressManage/addressManage",
-        
-        "pages/userinfo/userinfo",
-        
+    "pages/goodsOrderList/allOrders/allOrders",
+    "pages/goodsOrderList/goodsOrderList",
+    "pages/orderDetails/orderDetails",
+    "pages/addressManage/addressManage",  
+    "pages/userinfo/userinfo", 
     "components/user/user",
-    "components/index/index",
     "pages/goodsOrderList/noPay/noPay",
     "pages/goodsOrderList/waitAccept/waitAccept",
     "pages/goodsOrderList/waitSend/waitSend",

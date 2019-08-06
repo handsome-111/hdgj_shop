@@ -34,6 +34,7 @@ public class WeiDianService{
         map.put("version", version);
         map.put("format", format);
         map.put("lang", "java");
+        System.out.println("----:" + JsonUtils.toJson(map));
         return JsonUtils.toJson(map);
     }
 

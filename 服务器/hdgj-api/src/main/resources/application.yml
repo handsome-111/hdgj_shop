@@ -5,3 +5,8 @@ server:
 weidian: 
   appkey: 690844 
   secret: 70fcc365ada025c1a0771545e089d118 
+  
+wx: 
+  appid: wx14dab1d46206aee9   
+  secret: 8c4630c8e4bf605ea6825c215e454634
+  grant_type: authorization_code

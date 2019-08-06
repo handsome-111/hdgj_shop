@@ -1,26 +1,31 @@
 // components/index/index.js
 Component({
-  pageLifetimes: {
-    show() {
-      var that = this;
-
-      if (typeof this.getTabBar === 'function' &&
-        this.getTabBar()) {
-        this.getTabBar().setData({
-          selected: 0
+  created: function (){
+    wx.login({
+      success:function(res){
+        console.log(res.code);
+        /**
+         * 发出请求授权登陆
+         **/
+        wx.request({
+          url: 'http://127.0.0.1/wxLogin',
+          data:{
+            js_code:res.code,
+          },
+          success:function(res){
+            console.log(res)
+          }
         })
       }
-
-      // wx.createSelectorQuery().selectAll('.swiper_image').boundingClientRect(function(rects){
-      //   rects.forEach(function (rect) {
-      //     that.setData({
-      //       swiperHeight:rect.height
-      //     });
-      //   });
-      // }).exec();
-
-      //*console.log(that.data.swiperHeight)*/
-
+    })
+  },
+  pageLifetimes: {
+    show() {
+      // if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      //   this.getTabBar().setData({
+      //     selected: 0
+      //   })
+      // }
 
     }
   },

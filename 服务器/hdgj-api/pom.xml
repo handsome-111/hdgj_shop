@@ -11,7 +11,7 @@
   <name>hdgj-api</name>	
   <description>hdgj接口</description>
   
-  <dependencies>
+  <dependencies>  
   	<dependency>
         <groupId>open.weidian</groupId>
         <artifactId>open_sdk_java</artifactId>
