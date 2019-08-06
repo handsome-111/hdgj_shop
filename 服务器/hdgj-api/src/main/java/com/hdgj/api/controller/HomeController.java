@@ -1,18 +1,22 @@
 package com.hdgj.api.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.weidian.open.sdk.request.product.VdianItemGetRequest;
 
 @RestController
 public class HomeController {
 	
-	@Value("${weidian.appkey}")
-	private String appkey;
+
+	@Autowired
+	private String vdToken;
+	
 	
 	@RequestMapping("/")
 	public String index(){
-		return "首页" + appkey;
+		return "首页" + vdToken ;
 	}
 	
 	@RequestMapping("/login")
