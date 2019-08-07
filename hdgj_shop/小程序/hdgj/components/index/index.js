@@ -12,7 +12,7 @@ Component({
          **/
         wx.request({
           url: 'http://127.0.0.1/wxLogin',
-          data:{
+          data:{ 
             js_code:res.code,
           },
           success:function(res){
