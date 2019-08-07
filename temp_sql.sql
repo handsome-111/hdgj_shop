@@ -1,22 +1,23 @@
 create table customer(
  	id 						int(20) 		unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  	password_hash 			varchar(80) 	DEFAULT NULL COMMENT '密码',
+  	password_hash 			varchar(80) 		DEFAULT NULL COMMENT '密码',
   	password_reset_token 		varchar(60) 	DEFAULT NULL COMMENT '密码token',
-  	email 					varchar(60) 	DEFAULT NULL COMMENT '邮箱',
+  	email 					varchar(60) 		DEFAULT NULL COMMENT '邮箱',
   	name 						varchar(100) 	DEFAULT NULL,
-  	is_subscribed 			int(5) 			NOT NULL DEFAULT '2' COMMENT '1代表订阅，2代表不订阅邮件',
+  	is_subscribed 			int(5) 				NOT NULL DEFAULT '2' COMMENT '1代表订阅，2代表不订阅邮件',
   	auth_key 					varchar(60) 	DEFAULT NULL,
-  	status 					int(5) 			DEFAULT NULL COMMENT '状态',
-  	created_at 				int(18) 		DEFAULT NULL COMMENT '创建时间',
-  	updated_at 				int(18) 		DEFAULT NULL COMMENT '更新时间',
+  	status 					int(5) 				DEFAULT NULL COMMENT '状态',
+  	created_at 				int(18) 			DEFAULT NULL COMMENT '创建时间',
+  	updated_at 				int(18) 			DEFAULT NULL COMMENT '更新时间',
   	password 					varchar(50) 	DEFAULT NULL COMMENT '密码',
-  	birth_date 				datetime 		DEFAULT NULL COMMENT '出生日期',
-  	favorite_product_count 	int(15) 		NOT NULL DEFAULT '0' COMMENT '用户收藏的产品的总数',
+  	birth_date 				datetime 			DEFAULT NULL COMMENT '出生日期',
+  	favorite_product_count 	int(15) 			NOT NULL DEFAULT '0' COMMENT '用户收藏的产品的总数',
   	type 						varchar(35) 	DEFAULT 'default' COMMENT '默认为default，如果是第三方登录，譬如google账号登录注册，那么这里的值为google',
   	access_token_created_at 	int(20) 		DEFAULT NULL COMMENT '创建token的时间',
-  	allowance 				int(20) 		DEFAULT NULL COMMENT '限制次数访问',
+  	allowance 				int(20) 			DEFAULT NULL COMMENT '限制次数访问',
   	allowance_updated_at 		int(20) 		DEFAULT NULL,
-  	phone						varchar(20) 	COMMENT '手机号'
+  	phone						varchar(20) 	COMMENT '手机号',
+  	wxoppen_id				varchar(100) 		COMMENT '微信的oppenid'
 )COMMENT '用户表';
 
 create table customer_address (
@@ -56,12 +57,12 @@ CREATE TABLE order(
 		order_id 				varchar(200) 			订单ID
  		seller_id				varchar(100) 			卖家id
  		f_phone					varchar(20) 			分销商手机号
-		is_close				int 			订单是否可关闭	0（表示不可关闭）1（表示货到付款订单，可关闭）
+		is_close				int 				订单是否可关闭	0（表示不可关闭）1（表示货到付款订单，可关闭）
 		return_code				varchar(100)  			退货单号
 		status_ori 				varchar(20)  			订单状态
  		add_time				datetime 			下单时间
  		updated_time 			datetime 			更新时间
- 		express_fee_num			String 			运费，和express_fee相同
+ 		express_fee_num			String 				运费，和express_fee相同
  		user_phone				String 			买家手机号
  		price 					String 			商品总价格，不包含运费
  		note 					String 			买家备注

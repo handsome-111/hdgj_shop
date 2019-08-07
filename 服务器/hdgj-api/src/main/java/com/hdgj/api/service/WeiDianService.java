@@ -75,7 +75,6 @@ public class WeiDianService{
 	    map.put("update_start", update_start);
 	    removeNullValue(map);
 	    
-	    System.out.println("map:" + map);
 	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
 	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("vdian.item.list.get", "1.0")),
 	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));

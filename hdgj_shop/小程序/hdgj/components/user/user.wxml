@@ -1,7 +1,10 @@
 <!--components/user/user.wxml-->
 <view class='page'>
   <view class='userInfo'>
-    <p>god like</p>
+    <open-data type="userNickName" lang="zh_CN"></open-data>
+    <open-data type="userCity" lang="zh_CN"></open-data>
+    <open-data type="userProvince" lang="zh_CN"></open-data>
+
     <view class='vip'>
       
     </view>

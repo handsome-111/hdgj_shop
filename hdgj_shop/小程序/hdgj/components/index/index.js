@@ -1,9 +1,12 @@
 // components/index/index.js
 Component({
   created: function (){
+
+    /**
+     * 用户登录
+     */
     wx.login({
       success:function(res){
-        console.log(res.code);
         /**
          * 发出请求授权登陆
          **/
@@ -13,7 +16,7 @@ Component({
             js_code:res.code,
           },
           success:function(res){
-            console.log(res)
+            console.log(res)  
           }
         })
       }
