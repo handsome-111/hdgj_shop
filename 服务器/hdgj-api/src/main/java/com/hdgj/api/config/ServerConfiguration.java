@@ -1,12 +1,13 @@
 package com.hdgj.api.config;
-
+ 
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
+ 
 import com.alibaba.fastjson.JSONObject;
 import com.weidian.open.sdk.AbstractWeidianClient;
 import com.weidian.open.sdk.DefaultWeidianClient;
@@ -46,6 +47,7 @@ public class ServerConfiguration {
 	 * access_token有效期为24小时，重复获取将导致上次获取的access_token在5分钟后失效                
 	 * 每日获取access_token的api调用次数非常有限，建议开发者全局存储与更新access_token，避免频繁获取                
 	 * 至少要为access_token字段保留512个字符空间
+	 * @throws RestClientException 
 	 */
 	@Bean
 	public String vdAccessToken(){
@@ -67,7 +69,8 @@ public class ServerConfiguration {
 		 * 2.获取响应结果
 		 * 3.判断是否有获取token
 		 */
-		String response = restTemplate.getForObject(url, String.class);		
+		String response;
+		response = restTemplate.getForObject(url, String.class);
 		JSONObject responseObject = JSONObject.parseObject(response);
 		
 		//获取请求响应状态码
