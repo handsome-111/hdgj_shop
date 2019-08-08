@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent> 
   <groupId>com.hdgj</groupId>
-  <artifactId>api</artifactId>
+  <artifactId>api</artifactId> 
 
   <name>hdgj-api</name>	
   <description>hdgj接口</description>
@@ -23,6 +23,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
+   
     
     <dependency>
 		<groupId>org.apache.httpcomponents</groupId>
@@ -39,6 +40,21 @@
 	<dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-oauth2</artifactId>
+    </dependency>
+	<dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+    </dependency>
+    <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>3.1.2</version>
+    </dependency>
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <scope>runtime</scope>
     </dependency>
   </dependencies>
   
