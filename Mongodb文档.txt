@@ -30,11 +30,11 @@ MongoDB:
 	   	updated_at		 	NumberInt(1513219018),
 	   	store 				fecshop.appfront.fancyecommerce.com/cn"  	// store的key
 
-	goods（商品表）
+	product（商品表）
 		itemid 					STRING 			商品id
 		created_time			String			创建时间
 		created_user_id			用户id
-		updated_time			String			更新时间
+		update_time				String			更新时间
 		item_desc				String 			商品描述
 		item_name				STRING 			商品名称
 		fx_fee_rate				String 			分销分成比例
@@ -56,7 +56,7 @@ MongoDB:
 		titles 					ARRAY 			商品图片描述
 		cates 					ARRAY			商品分类
 
-	goods_detail(商品详情)
+	product_detail(商品详情)
 		goods_detail_id			NUMBER
 		item_id					NUMBER 			商品ID
 		text					STRING 			type=1填写此字段，详情文本

@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: oauth2-server
-  datasource:
+  datasource: 
     hdgj: 
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,17 +21,30 @@ spring:
         connection-timeout: 30000 
         connection-test-query: SELECT 1
         
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/hdgj
+      username: admin
+      password:
+        - 123456
+       
+      
+        
 mybatis-plus: 
   mapper-locations: classpath:mapper/*.xml
     
 weidian: 
-  appkey: 690844 
+  appkey: 690844
   secret: 70fcc365ada025c1a0771545e089d118 
   
 wx: 
   appid: wx14dab1d46206aee9   
   secret: 8c4630c8e4bf605ea6825c215e454634
   grant_type: authorization_code
+  
+jobs: 
+  initialDelay: 1000      #开始1秒后
+  fixedRate: 120000    #每两分钟执行一次
   
   
 

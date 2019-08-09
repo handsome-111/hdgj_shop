@@ -1,4 +1,4 @@
-package com.hdgj.api.test;
+package com.hdgj.test;
 
 public class Test {
 	public static void main(String[] args) {

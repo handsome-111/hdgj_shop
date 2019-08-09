@@ -1,7 +1,10 @@
-package com.hdgj.api.config;
+package com.hdgj.config;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +24,9 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
 	// 声明bean
-	@Bean(name = "test1DataSource")
+	@Bean(name = "hdgjDataSource")
 	// 指明读取的配置
-	@ConfigurationProperties(prefix = "spring.datasource.test1")
+	@ConfigurationProperties(prefix = "spring.datasource.hdgj")
 	// 设置为主数据源
 	@Primary
 	/*
@@ -33,6 +36,26 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		return DataSourceBuilder.create().build();
 	}
 
+	@Bean(name = "hdgjSqlSessionFactory")
+	@Primary
+	/**
+	 * 使用声明的数据源，创建sqlSession工厂
+	 */
+	public SqlSessionFactory testSqlSessionFactory(@Qualifier("hdgjDataSource") DataSource dataSource)
+			throws Exception {
+		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+		/*
+		 * 当mybatis采用映射配置文件的方式时，指明该数据源需要是扫描的xml文件路径
+		 */
+		bean.setDataSource(dataSource);
+		/*
+		 * bean.setMapperLocations( new
+		 * PathMatchingResourcePatternResolver().getResources(
+		 * "classpath:mybatis/mapper/test1/*.xml"));
+		 */
+		return bean.getObject();
+	}
+	
     @Bean
     public TokenStore tokenStore() {
         // 基于 JDBC 实现，令牌保存到数据

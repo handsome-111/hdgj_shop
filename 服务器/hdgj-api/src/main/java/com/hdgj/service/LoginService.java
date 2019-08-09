@@ -1,4 +1,4 @@
-package com.hdgj.api.service;
+package com.hdgj.service;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

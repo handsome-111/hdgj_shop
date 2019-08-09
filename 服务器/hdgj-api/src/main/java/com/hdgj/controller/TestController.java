@@ -1,11 +1,11 @@
-package com.hdgj.api.controller;
+package com.hdgj.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hdgj.api.entity.WxEntity;
+import com.hdgj.entity.WxEntity;
 
 @RequestMapping("/test")
 @Controller

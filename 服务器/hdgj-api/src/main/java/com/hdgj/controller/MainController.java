@@ -1,14 +1,14 @@
-package com.hdgj.api.controller;
+package com.hdgj.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hdgj.api.service.LoginService;
+import com.hdgj.service.LoginService;
 
 @RestController
-public class HomeController {
+public class MainController {
 	
 	@Autowired
 	private LoginService loginService;
@@ -22,10 +22,10 @@ public class HomeController {
 		return "首页" + vdToken ;
 	}
 	
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public String login(){
 		return "登录页面";
-	}
+	}*/
 	
 	
 	@RequestMapping("/wxLogin")

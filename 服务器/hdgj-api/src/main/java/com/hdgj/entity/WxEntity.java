@@ -1,4 +1,4 @@
-package com.hdgj.api.entity;
+package com.hdgj.entity;
 
 public class WxEntity {
 	private String id;

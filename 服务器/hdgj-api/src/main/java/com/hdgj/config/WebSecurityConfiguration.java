@@ -1,9 +1,10 @@
-package com.hdgj.api.config;
+package com.hdgj.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+    	http
+    		.authorizeRequests()
+	    		.antMatchers("/static/**").permitAll()
+	    		.antMatchers("/").permitAll()
+	    		.antMatchers("/user").hasRole("USER")
+    		.and()
+    		.formLogin().loginPage("/login").failureUrl("/login-error")
+    		.and()
+    		.exceptionHandling().accessDeniedPage("/401");		//异常处理重定向到401
+    	
+    	http.logout().logoutSuccessUrl("/");
+    		
+    	
+    }
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
