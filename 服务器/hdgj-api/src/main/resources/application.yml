@@ -23,11 +23,7 @@ spring:
         
   data:
     mongodb:
-      uri: mongodb://localhost:27017/hdgj
-      username: admin
-      password:
-        - 123456
-       
+      uri: mongodb://hdgj:123456@127.0.0.1:27017/hdgj
       
         
 mybatis-plus: 

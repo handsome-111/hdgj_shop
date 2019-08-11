@@ -3,6 +3,8 @@ package com.hdgj.other.vd.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.weidian.open.sdk.exception.OpenException;
@@ -12,6 +14,9 @@ import com.weidian.open.sdk.util.SystemConfig;
 
 @Service
 public class ProductService extends BaseService{
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
 	
 	/**
 	 * 获取全店商品
@@ -33,8 +38,35 @@ public class ProductService extends BaseService{
 	    map.put("status", status);
 	    map.put("update_start", update_start);
 	    super.removeNullValue(map);
-	    return super.vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
+	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
 	            new Param("public", buildPublicValue("vdian.item.list.get", "1.0")),
 	            new Param("param", JsonUtils.toJson(map)));
+	}
+	
+	/**
+	 * 获取型号属性列表)
+	 * @return
+	 * @throws OpenException
+	 */
+	public String vdianSkuAttrsGet() throws OpenException {
+	    Map< String, Object> map = new HashMap< String, Object>();
+	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
+	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("vdian.sku.attrs.get", "1.0")),
+	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));
+	}
+	
+	/**
+	 * 获取商品详情
+	 * @param item_id 商品ID
+	 * @return
+	 * @throws OpenException
+	 */
+	public String vdianItemGetItemDetail(Number item_id) throws OpenException {
+	    Map< String, Object> map = new HashMap< String, Object>();
+	    map.put("item_id", item_id);
+	    super.removeNullValue(map);
+	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
+	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("vdian.item.getItemDetail", "1.0")),
+	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));
 	}
 }

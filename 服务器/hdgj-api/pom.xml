@@ -64,11 +64,25 @@
         <scope>runtime</scope>
     </dependency>
     
+    <!-- spring boot mongodb -->
     <dependency>
-	    <groupId>org.springframework.data</groupId>
-	    <artifactId>spring-data-mongodb</artifactId>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
+    
+    <dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+    </dependency>
+    <!-- mongodb plugin -->
+    <dependency>
+		<groupId>com.cybermkd</groupId>
+		<artifactId>MongodbPlugin</artifactId>
+		<version>1.0.8.2</version>
+	</dependency>
   </dependencies>
+  
+  
   
   <build>
     <plugins>
