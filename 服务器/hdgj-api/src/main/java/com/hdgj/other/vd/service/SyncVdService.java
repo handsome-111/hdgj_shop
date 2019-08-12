@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -19,6 +18,7 @@ import com.hdgj.entity.ModelAttr;
 import com.hdgj.entity.repository.ModelAttrRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
+import com.mongodb.client.result.UpdateResult;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -60,21 +60,22 @@ public class SyncVdService {
 		Iterator<ModelAttr> ite = models.iterator();
 		
 		while(ite.hasNext()){
-			attrTitles.add(ite.next().getAttrTitle());
+			ModelAttr mAttr = ite.next();
+			Query query = Query.query(Criteria.where("attrTitle").is( mAttr.getAttrTitle()));
+			Update update = new Update();
+			update.set("attr_title", mAttr.getAttrTitle());
+			update.set("attr_values", mAttr.getattrValues());
+			UpdateResult r = mongoTemplate.upsert(query, update, ModelAttr.class);	
+			System.out.println(r.getModifiedCount());
 		}
 		
-		System.out.println("集合:" + attrList);
+		System.out.println("1集合:" + attrList);
 		System.out.println("是否为空:" + models);
 		System.out.println("attrTitle:" + attrTitles);
 		
-		/*Query query = new Query();
-		Update update = Update.fromDocument(object, exclude)
-		mongoTemplate.updateMulti("attrTitle", update, entityClass)*/
-		Query query = Query.query(Criteria.where("attrTitles").in(attrTitles));
-		document.
-		Update update = Update.fromDocument("attr_title", attrList);
-		mongoTemplate.upsert(query, update, ModelAttr.class);	
-		System.out.println("结束");
+		
+		List<ModelAttr> mas =  modelAttrRepository.findAll();
+		System.out.println(mas);
 	}
 	
 	public void test(){

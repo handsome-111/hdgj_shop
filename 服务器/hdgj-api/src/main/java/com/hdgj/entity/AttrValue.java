@@ -14,7 +14,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection="attr_value")
 public class AttrValue implements Serializable{
 	//属性ID
-	@Id
+	@Id()
+	@Field("attr_id")
 	private int attrId;		
 	//属性值
 	@Field("attr_value")

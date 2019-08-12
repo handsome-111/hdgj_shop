@@ -3,6 +3,7 @@ package com.hdgj.entity;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -22,24 +23,50 @@ public class ModelAttr {
 	//属性值
 	private String attrTitle;
 	
-	@DBRef
-	private List<AttrValue> attr_values;
-
+	@Field("updated_time")
+	private String updatedTime;
 	
+	@DBRef
+	@Field("attr_values")
+	private List<AttrValue> attrValues;
 
-	public ModelAttr(String attrId, String attrTitle, List<AttrValue> attr_values) {
+	public static void a(){
+		java.lang.reflect.Field fields[] = ModelAttr.class.getFields();
+		for(java.lang.reflect.Field field : fields){
+			System.out.println(1);
+			System.out.println(field.getAnnotations());
+		}
+	}
+
+	public ModelAttr(String attrId, String attrTitle, List<AttrValue> attrValues) {
 		super();
 		this.attrId = attrId;
 		this.attrTitle = attrTitle;
-		this.attr_values = attr_values;
+		this.attrValues = attrValues;
 	}
 
-	public List<AttrValue> getAttr_values() {
-		return attr_values;
+	public String getAttrId() {
+		return attrId;
 	}
 
-	public void setAttr_values(List<AttrValue> attr_values) {
-		this.attr_values = attr_values;
+	public void setAttrId(String attrId) {
+		this.attrId = attrId;
+	}
+
+	public String getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(String updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
+	public List<AttrValue> getattrValues() {
+		return attrValues;
+	}
+
+	public void setattrValues(List<AttrValue> attrValues) {
+		this.attrValues = attrValues;
 	}
 
 	public String getattrId() {
@@ -60,8 +87,11 @@ public class ModelAttr {
 
 	@Override
 	public String toString() {
-		return "ModelAttr [id=" + attrId + ", attrTitle=" + attrTitle + ", attr_values=" + attr_values + "]";
+		return "ModelAttr [attrId=" + attrId + ", attrTitle=" + attrTitle + ", updatedTime=" + updatedTime
+				+ ", attrValues=" + attrValues + "]";
 	}
+
+	
 
 	
 }
