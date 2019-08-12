@@ -1,9 +1,9 @@
  package com.hdgj.other.vd.service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,12 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hdgj.entity.AttrValue;
 import com.hdgj.entity.ModelAttr;
 import com.hdgj.entity.repository.ModelAttrRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
-import com.mongodb.client.result.UpdateResult;
+import com.mongodb.client.MongoCollection;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -49,44 +51,65 @@ public class SyncVdService {
 		JSONObject res = JSON.parseObject(response);
 		String status = res.getJSONObject("status").getString("status_code");
 		
-		String attrList = res.getJSONObject("result").getString("attr_list");
-		List<ModelAttr> models = new ArrayList<ModelAttr>();
-		models = JSON.parseArray(attrList, ModelAttr.class);
-		
-		/**
-		 * 获取属性值集合
-		 */
-		List<String> attrTitles = new ArrayList<String>();
-		Iterator<ModelAttr> ite = models.iterator();
+		JSONArray attrList = res.getJSONObject("result").getJSONArray("attr_list");
+		Iterator ite = attrList.iterator();
+		System.out.println("attr_list:" + attrList.toJSONString());
+
 		
 		while(ite.hasNext()){
-			ModelAttr mAttr = ite.next();
-			Query query = Query.query(Criteria.where("attrTitle").is( mAttr.getAttrTitle()));
+			//型号属性对象
+			JSONObject modelAttr = (JSONObject) ite.next();
+			
+			/**
+			 * 同步属性值
+			 */
+			JSONArray attrValues = modelAttr.getJSONArray("attr_values");
+			Iterator attrvIterator = attrValues.iterator();
+			while(attrvIterator.hasNext()){
+				JSONObject attvObj = (JSONObject) attrvIterator.next();
+				System.out.println("null:" + attvObj.get("attr_id"));
+				String attrValue = attvObj.getString("attr_value");
+				Update update = new Update();
+				update.set("attr_id", attvObj.get("attr_id"));
+				update.set("attr_value", attrValue);
+				mongoTemplate.upsert(
+						Query.query(Criteria.where("attr_id").is(attvObj.get("attr_id"))),
+						update,
+						AttrValue.class);
+			}		
+			
+			System.out.println("attr_values:" + attrValues.toJSONString());
+			
+			/**
+			 * 同步属性型号
+			 */
+			String attrTitle = modelAttr.getString("attr_title");
+			Query query = Query.query(Criteria.where("attr_title").is(attrTitle));
 			Update update = new Update();
-			update.set("attr_title", mAttr.getAttrTitle());
-			update.set("attr_values", mAttr.getattrValues());
-			UpdateResult r = mongoTemplate.upsert(query, update, ModelAttr.class);	
-			System.out.println(r.getModifiedCount());
+			update.set("attr_title", attrTitle);
+			update.set("attr_values", attrValues.toJavaList(AttrValue.class));
+			mongoTemplate.upsert(query, update, ModelAttr.class);	
 		}
 		
-		System.out.println("1集合:" + attrList);
-		System.out.println("是否为空:" + models);
-		System.out.println("attrTitle:" + attrTitles);
 		
-		
-		List<ModelAttr> mas =  modelAttrRepository.findAll();
-		System.out.println(mas);
+		List<ModelAttr> mas =  mongoTemplate.findAll(ModelAttr.class);
+		List<AttrValue> avs = mongoTemplate.findAll(AttrValue.class);
+		System.out.println("mas:" + mas);
+		System.out.println("avs:" + avs);
 	}
 	
 	public void test(){
-		String res = "";
+		MongoCollection collection = mongoTemplate.getCollection("aa");
+		/*String res = "";
 		try {
 			res = productService.vdianItemGetItemDetail(2761295251L);
 		} catch (OpenException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(res);
+		System.out.println(res);*/
+        MongoCollection<Document> collection = mongoDatabase.getCollection("test");
+
 	}
 
 	

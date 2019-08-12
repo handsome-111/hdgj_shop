@@ -30,13 +30,7 @@ public class ModelAttr {
 	@Field("attr_values")
 	private List<AttrValue> attrValues;
 
-	public static void a(){
-		java.lang.reflect.Field fields[] = ModelAttr.class.getFields();
-		for(java.lang.reflect.Field field : fields){
-			System.out.println(1);
-			System.out.println(field.getAnnotations());
-		}
-	}
+
 
 	public ModelAttr(String attrId, String attrTitle, List<AttrValue> attrValues) {
 		super();

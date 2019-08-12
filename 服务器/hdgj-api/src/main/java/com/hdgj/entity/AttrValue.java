@@ -3,6 +3,7 @@ package com.hdgj.entity;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -14,9 +15,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection="attr_value")
 public class AttrValue implements Serializable{
 	//属性ID
-	@Id()
+	@Id
+	private String id;
 	@Field("attr_id")
-	private int attrId;		
+	@Indexed(unique=true)
+	private Number attrId;		
 	//属性值
 	@Field("attr_value")
 	private String attrValue;
@@ -29,24 +32,40 @@ public class AttrValue implements Serializable{
 	}
 	
 	public AttrValue(){}
-	
-	public int getAttrId() {
+
+	public Number getAttrId() {
 		return attrId;
 	}
-	public void setAttrId(int attrId) {
+
+	public void setAttrId(Number attrId) {
 		this.attrId = attrId;
 	}
+
 	public String getAttrValue() {
 		return attrValue;
 	}
+
 	public void setAttrValue(String attrValue) {
 		this.attrValue = attrValue;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "AttrValue [attrId=" + attrId + ", attrValue=" + attrValue + "]";
-	}		
+		return "AttrValue [id=" + id + ", attrId=" + attrId + ", attrValue=" + attrValue + "]";
+	}
+
+	
+	
+	
+		
 	
 		
 }
