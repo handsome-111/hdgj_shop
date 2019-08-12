@@ -3,7 +3,7 @@
 import java.util.Iterator;
 import java.util.List;
 
-import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -100,6 +100,8 @@ public class SyncVdService {
 	
 	public void test(){
 		MongoCollection collection = mongoTemplate.getCollection("aa");
+		 collection.find(Filters.eq("address.city", "Wimborne")).first();
+		collection.updateMany()
 		/*String res = "";
 		try {
 			res = productService.vdianItemGetItemDetail(2761295251L);
@@ -108,7 +110,6 @@ public class SyncVdService {
 			e.printStackTrace();
 		}
 		System.out.println(res);*/
-        MongoCollection<Document> collection = mongoDatabase.getCollection("test");
 
 	}
 
