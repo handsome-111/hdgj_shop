@@ -26,7 +26,6 @@ public class ModelAttr {
 	@Field("updated_time")
 	private String updatedTime;
 	
-	@DBRef
 	@Field("attr_values")
 	private List<AttrValue> attrValues;
 

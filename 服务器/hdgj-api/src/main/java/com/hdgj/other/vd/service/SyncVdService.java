@@ -1,9 +1,11 @@
  package com.hdgj.other.vd.service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.bson.conversions.Bson;
+import org.bson.BSON;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -21,6 +23,7 @@ import com.hdgj.entity.repository.ModelAttrRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -67,7 +70,6 @@ public class SyncVdService {
 			Iterator attrvIterator = attrValues.iterator();
 			while(attrvIterator.hasNext()){
 				JSONObject attvObj = (JSONObject) attrvIterator.next();
-				System.out.println("null:" + attvObj.get("attr_id"));
 				String attrValue = attvObj.getString("attr_value");
 				Update update = new Update();
 				update.set("attr_id", attvObj.get("attr_id"));
@@ -96,22 +98,6 @@ public class SyncVdService {
 		List<AttrValue> avs = mongoTemplate.findAll(AttrValue.class);
 		System.out.println("mas:" + mas);
 		System.out.println("avs:" + avs);
-	}
-	
-	public void test(){
-		MongoCollection collection = mongoTemplate.getCollection("aa");
-		 collection.find(Filters.eq("address.city", "Wimborne")).first();
-		collection.updateMany()
-		/*String res = "";
-		try {
-			res = productService.vdianItemGetItemDetail(2761295251L);
-		} catch (OpenException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(res);*/
-
-	}
-
+	}	
 	
 }
