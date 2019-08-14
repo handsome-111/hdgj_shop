@@ -1,10 +1,8 @@
 package com.hdgj.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -22,13 +20,13 @@ public class AttrValue implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Field("attr_id")
 	@Indexed(unique=true)
-	private Number attrId;		
+	private BigInteger attrId;		
 	//属性值
 	@Field("attr_value")
 	private String attrValue;
 	
 	
-	public AttrValue(int attrId, String attrValue) {
+	public AttrValue(BigInteger attrId, String attrValue) {
 		super();
 		this.attrId = attrId;
 		this.attrValue = attrValue;
@@ -52,7 +50,7 @@ public class AttrValue implements Serializable{
 		return attrId;
 	}
 
-	public void setAttrId(Number attrId) {
+	public void setAttrId(BigInteger attrId) {
 		this.attrId = attrId;
 	}
 

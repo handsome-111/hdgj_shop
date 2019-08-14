@@ -2,10 +2,10 @@
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -108,5 +108,32 @@ public class SyncVdService {
 		System.out.println(ma + "," +  ma.getattrValues());
 		AttrValue av = attrValueRepository.findByAttrId(609394672);
 		System.out.println(av + "," + attrValueRepository.countByAttrId(609394672));
+	}
+	
+	public void test2(){
+		String response = "";
+		try {
+			response = productService.vdianSkuAttrsGet();
+		} catch (OpenException e) {
+			e.printStackTrace();
+		}
+		JSONObject res = JSON.parseObject(response);
+		String status = res.getJSONObject("status").getString("status_code");
+		
+		List<ModelAttr> mas= res.getJSONObject("result").getJSONArray("attr_list").toJavaList(ModelAttr.class);
+		
+		Criteria c = new Criteria();
+		c.where("username").is("1040978586").and("password").is("13379959770");
+		mongoTemplate.find(Query.query(c),ModelAttr.class);
+		
+	}
+	
+	public void test3(){
+		ModelAttr m = new ModelAttr();
+		m.setAttrTitle("120克/瓶");
+		
+		Example<ModelAttr> am = Example.of(m);
+		Optional ms = modelAttrRepository.findOne(am);
+		System.out.println(ms);
 	}
 }
