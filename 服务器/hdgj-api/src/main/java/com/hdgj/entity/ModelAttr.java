@@ -2,11 +2,12 @@ package com.hdgj.entity;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 型号属性，一个型号属性有多个属性值,存储于Mongodb
@@ -15,37 +16,33 @@ import org.springframework.data.mongodb.core.mapping.Field;
  */
 @Document("model_attr")
 public class ModelAttr {
-	@Id
-	@Field("attr_id")
-	private String attrId;
+
 	
 	@Field("attr_title")
+	@Indexed(unique=true)
 	//属性值
 	private String attrTitle;
 	
 	@Field("updated_time")
 	private String updatedTime;
 	
-	@Field("attr_values")
-	@Id
+	@DBRef
 	private List<AttrValue> attrValues;
 
-
-
-	public ModelAttr(String attrId, String attrTitle, List<AttrValue> attrValues) {
-		super();
-		this.attrId = attrId;
-		this.attrTitle = attrTitle;
-		this.attrValues = attrValues;
+	@Override
+	public boolean equals(Object modelAttr) {
+		String ma= JSONObject.toJSONString(modelAttr);
+		String th = JSONObject.toJSONString(this);
+		if(ma.equals(th)){
+			return true;
+		}
+		return false;
 	}
 
-	public String getAttrId() {
-		return attrId;
-	}
 
-	public void setAttrId(String attrId) {
-		this.attrId = attrId;
-	}
+	public ModelAttr(){}
+
+
 
 	public String getUpdatedTime() {
 		return updatedTime;
@@ -62,15 +59,6 @@ public class ModelAttr {
 	public void setattrValues(List<AttrValue> attrValues) {
 		this.attrValues = attrValues;
 	}
-
-	public String getattrId() {
-		return attrId;
-	}
-
-	public void setattrId(String attrId) {
-		this.attrId = attrId;
-	}
-
 	public String getAttrTitle() {
 		return attrTitle;
 	}
@@ -81,7 +69,7 @@ public class ModelAttr {
 
 	@Override
 	public String toString() {
-		return "ModelAttr [attrId=" + attrId + ", attrTitle=" + attrTitle + ", updatedTime=" + updatedTime
+		return "ModelAttr [ attrTitle=" + attrTitle + ", updatedTime=" + updatedTime
 				+ ", attrValues=" + attrValues + "]";
 	}
 

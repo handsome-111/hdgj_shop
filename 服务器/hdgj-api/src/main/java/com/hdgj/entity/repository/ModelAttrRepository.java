@@ -1,12 +1,9 @@
 package com.hdgj.entity.repository;
 
-import org.apache.ibatis.annotations.Update;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.Repository;
 
 import com.hdgj.entity.ModelAttr;
 
-public interface ModelAttrRepository extends MongoRepository<ModelAttr, String>{
-	
-	
-
+public interface ModelAttrRepository extends Repository<ModelAttr, String>{
+	ModelAttr findByAttrTitle(String attrTitle);
 }

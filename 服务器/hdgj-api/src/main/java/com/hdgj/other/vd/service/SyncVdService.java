@@ -1,12 +1,11 @@
  package com.hdgj.other.vd.service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.bson.BSON;
-import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -19,11 +18,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.AttrValue;
 import com.hdgj.entity.ModelAttr;
+import com.hdgj.entity.repository.AttrValueRepository;
 import com.hdgj.entity.repository.ModelAttrRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -43,6 +41,9 @@ public class SyncVdService {
 	
 	@Autowired
 	private ModelAttrRepository modelAttrRepository;
+	
+	@Autowired
+	private AttrValueRepository attrValueRepository;
 	
 	public void syncSkuAttr(){
 		String response = "";
@@ -69,13 +70,15 @@ public class SyncVdService {
 			JSONArray attrValues = modelAttr.getJSONArray("attr_values");
 			Iterator attrvIterator = attrValues.iterator();
 			while(attrvIterator.hasNext()){
-				JSONObject attvObj = (JSONObject) attrvIterator.next();
-				String attrValue = attvObj.getString("attr_value");
+				AttrValue attvObj = ((JSONObject) attrvIterator.next()).toJavaObject(AttrValue.class);
+				Example<AttrValue> ex = Example.of(attvObj);
+
+				String attrValue = attvObj.getAttrValue();
 				Update update = new Update();
-				update.set("attr_id", attvObj.get("attr_id"));
+				update.set("attr_id", attvObj.getAttrId());
 				update.set("attr_value", attrValue);
 				mongoTemplate.upsert(
-						Query.query(Criteria.where("attr_id").is(attvObj.get("attr_id"))),
+						Query.query(Criteria.where("attr_id").is(attvObj.getAttrId())),
 						update,
 						AttrValue.class);
 			}		
@@ -100,4 +103,10 @@ public class SyncVdService {
 		System.out.println("avs:" + avs);
 	}	
 	
+	public void test(){
+		ModelAttr ma = modelAttrRepository.findByAttrTitle("120克/瓶");
+		System.out.println(ma + "," +  ma.getattrValues());
+		AttrValue av = attrValueRepository.findByAttrId(609394672);
+		System.out.println(av + "," + attrValueRepository.countByAttrId(609394672));
+	}
 }
