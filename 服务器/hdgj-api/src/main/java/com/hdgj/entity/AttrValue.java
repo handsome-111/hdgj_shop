@@ -3,7 +3,7 @@ package com.hdgj.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,8 +18,7 @@ public class AttrValue implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Field("attr_id")
-	@Indexed(unique=true)
+	@Id
 	private BigInteger attrId;		
 	//属性值
 	@Field("attr_value")

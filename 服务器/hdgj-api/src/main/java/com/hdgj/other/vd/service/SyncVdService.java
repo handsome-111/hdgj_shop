@@ -1,5 +1,6 @@
  package com.hdgj.other.vd.service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -89,7 +90,7 @@ public class SyncVdService {
 			 * 同步属性型号
 			 */
 			String attrTitle = modelAttr.getString("attr_title");
-			Query query = Query.query(Criteria.where("attr_title").is(attrTitle));
+			Query query = Query.query(Criteria.where("attr_title").in(attrTitle));
 			Update update = new Update();
 			update.set("attr_title", attrTitle);
 			update.set("attr_values", attrValues.toJavaList(AttrValue.class));
@@ -105,7 +106,7 @@ public class SyncVdService {
 	
 	public void test(){
 		ModelAttr ma = modelAttrRepository.findByAttrTitle("120克/瓶");
-		System.out.println(ma + "," +  ma.getattrValues());
+		System.out.println(ma + "," +  ma.getAttrValues());
 		AttrValue av = attrValueRepository.findByAttrId(609394672);
 		System.out.println(av + "," + attrValueRepository.countByAttrId(609394672));
 	}
@@ -133,7 +134,38 @@ public class SyncVdService {
 		m.setAttrTitle("120克/瓶");
 		
 		Example<ModelAttr> am = Example.of(m);
-		Optional ms = modelAttrRepository.findOne(am);
-		System.out.println(ms);
+		//Optional ms = modelAttrRepository.findOne(am);
+		//System.out.println(ms);
+	}
+	
+	public void test4(){
+		String response = "";
+		try {
+			response = productService.vdianSkuAttrsGet();
+		} catch (OpenException e) {
+			e.printStackTrace();
+		}
+		JSONObject res = JSON.parseObject(response);
+		String status = res.getJSONObject("status").getString("status_code");
+		
+		JSONArray attrList = res.getJSONObject("result").getJSONArray("attr_list");
+		List<ModelAttr> mas = attrList.toJavaList(ModelAttr.class);
+		
+		/*List<String> titles = new ArrayList<String>();
+		List<List<AttrValue>> attrVs = new ArrayList<List<AttrValue>>();
+		Iterator<Object> ite = attrList.iterator();
+		
+		while(ite.hasNext()){
+			ModelAttr obj = ((JSONObject)ite.next()).toJavaObject(ModelAttr.class);
+			titles.add(obj.getAttrTitle());
+			attrVs.add(obj.getattrValues());
+		}
+		
+		Criteria crit = new Criteria().where("attr_title").in(titles);
+		Query query = Query.query(crit);
+		
+		mongoTemplate.updateMulti(query, , ModelAttr.class);*/
+		modelAttrRepository.saveAll(mas);
+		System.out.println("crcg");
 	}
 }

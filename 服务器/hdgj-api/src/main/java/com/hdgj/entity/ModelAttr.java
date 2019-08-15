@@ -2,12 +2,10 @@ package com.hdgj.entity;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.alibaba.fastjson.JSONObject;
 
 /**
  * 型号属性，一个型号属性有多个属性值,存储于Mongodb
@@ -19,7 +17,6 @@ public class ModelAttr {
 
 	
 	@Field("attr_title")
-	@Indexed(unique=true)
 	//属性值
 	private String attrTitle;
 	
@@ -29,20 +26,21 @@ public class ModelAttr {
 	@DBRef
 	private List<AttrValue> attrValues;
 
-	@Override
-	public boolean equals(Object modelAttr) {
-		String ma= JSONObject.toJSONString(modelAttr);
-		String th = JSONObject.toJSONString(this);
-		if(ma.equals(th)){
-			return true;
-		}
-		return false;
+	public List<AttrValue> getAttrValues() {
+		return attrValues;
+	}
+	public void setAttrValues(List<AttrValue> attrValues) {
+		this.attrValues = attrValues;
 	}
 
-
+	@PersistenceConstructor
+	public ModelAttr(String attrTitle, String updatedTime, List<AttrValue> attrValues) {
+		super();
+		this.attrTitle = attrTitle;
+		this.updatedTime = updatedTime;
+		this.attrValues = attrValues;
+	}
 	public ModelAttr(){}
-
-
 
 	public String getUpdatedTime() {
 		return updatedTime;
@@ -52,13 +50,6 @@ public class ModelAttr {
 		this.updatedTime = updatedTime;
 	}
 
-	public List<AttrValue> getattrValues() {
-		return attrValues;
-	}
-
-	public void setattrValues(List<AttrValue> attrValues) {
-		this.attrValues = attrValues;
-	}
 	public String getAttrTitle() {
 		return attrTitle;
 	}
