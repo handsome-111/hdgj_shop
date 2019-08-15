@@ -40,6 +40,14 @@ public class Sku implements Serializable{
 	@Field
 	private String price;
 	
+	private Integer status;
+	
+	@DBRef
+	/**
+	 * 商品ID
+	 */
+	private Product product;
+	
 	
 	public Sku(String id, String title, String stock, Integer sku_merchant_code, List<AttrValue> attr_ids,
 			String price) {

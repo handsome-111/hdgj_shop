@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.http.Param;
 import com.weidian.open.sdk.util.JsonUtils;
@@ -14,10 +15,6 @@ import com.weidian.open.sdk.util.SystemConfig;
 
 @Service
 public class ProductService extends BaseService{
-	
-	@Autowired
-	private MongoTemplate mongoTemplate;
-	
 	/**
 	 * 获取全店商品
 	 * @param page_num 页码，从1开始
@@ -41,6 +38,20 @@ public class ProductService extends BaseService{
 	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
 	            new Param("public", buildPublicValue("vdian.item.list.get", "1.0")),
 	            new Param("param", JsonUtils.toJson(map)));
+	}
+	/**
+	 * 获取全店商品列表总数
+	 * @return
+	 */
+	public int getCountByItemList()throws Exception{
+		int totalNum = 0;
+		String response = this.vdianItemListGet(1, 1, 30, null, 0, null);
+		JSONObject res = JSONObject.parseObject(response);
+		int status =  res.getJSONObject("status").getInteger("status_code");
+		if(status == 0){
+			totalNum = res.getJSONObject("result").getInteger("total_num");
+		}
+		return totalNum;    
 	}
 	
 	/**

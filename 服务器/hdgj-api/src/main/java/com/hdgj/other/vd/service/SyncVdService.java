@@ -3,8 +3,8 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
+import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -46,7 +46,7 @@ public class SyncVdService {
 	@Autowired
 	private AttrValueRepository attrValueRepository;
 	
-	public void syncSkuAttr(){
+	public void syncVdSkuAttr(){
 		String response = "";
 		try {
 			response = productService.vdianSkuAttrsGet();
@@ -104,11 +104,27 @@ public class SyncVdService {
 		System.out.println("avs:" + avs);
 	}	
 	
-	public void test(){
-		ModelAttr ma = modelAttrRepository.findByAttrTitle("120克/瓶");
-		System.out.println(ma + "," +  ma.getAttrValues());
-		AttrValue av = attrValueRepository.findByAttrId(609394672);
-		System.out.println(av + "," + attrValueRepository.countByAttrId(609394672));
+	
+	
+	
+	/**
+	 * 同步微店商品
+	 */
+	public int syncVdProduct()throws Exception{
+		int totalNum = 0;
+		try {
+			String response = productService.vdianItemListGet(1, 1, 30, null, 0, null);
+			JSONObject res = JSONObject.parseObject(response);
+			int status =  res.getJSONObject("status").getInteger("status_code");
+			if(status == 0){
+				totalNum = res.getJSONObject("result").getInteger("total_num");
+			}
+		} catch (OpenException e) {
+			e.printStackTrace();
+		}
+		return totalNum;
+
+		
 	}
 	
 	public void test2(){
@@ -148,8 +164,14 @@ public class SyncVdService {
 		JSONObject res = JSON.parseObject(response);
 		String status = res.getJSONObject("status").getString("status_code");
 		
-		JSONArray attrList = res.getJSONObject("result").getJSONArray("attr_list");
-		List<ModelAttr> mas = attrList.toJavaList(ModelAttr.class);
+		List<ModelAttr> mas = res.getJSONObject("result").getJSONArray("attr_list").toJavaList(ModelAttr.class);
+		
+		List<AttrValue> attvs = new ArrayList<AttrValue>();
+		Iterator<ModelAttr> ite = mas.iterator();
+		while(ite.hasNext()){
+			ModelAttr modelAttr = ite.next();
+			attvs.addAll(modelAttr.getAttrValues());
+		}
 		
 		/*List<String> titles = new ArrayList<String>();
 		List<List<AttrValue>> attrVs = new ArrayList<List<AttrValue>>();
@@ -166,6 +188,7 @@ public class SyncVdService {
 		
 		mongoTemplate.updateMulti(query, , ModelAttr.class);*/
 		modelAttrRepository.saveAll(mas);
-		System.out.println("crcg");
+		attrValueRepository.saveAll(attvs);
+		System.out.println(modelAttrRepository.findAll());
 	}
 }
