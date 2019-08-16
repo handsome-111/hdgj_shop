@@ -20,33 +20,33 @@ public class Product {
 	@Field
 	//商品id
 	private String itemid;
-	@Field
+	@Field("created_time")
 	//创建时间
 	private String createdTime;
 	
-	@Field
+	@Field("updated_time")
 	//更新时间
-	private String updated_time;
+	private String updatedTime;
 	
-	@Field
+	@Field("item_desc")
 	//商品描述
-	private String item_desc;
+	private String itemDesc;
 	
-	@Field
+	@Field("item_name")
 	//商品名称
-	private String item_name;
+	private String itemName;
 	
-	@Field
+	@Field("fx_fee_rate")
 	//分销分成比例
-	private String fx_fee_rate;
+	private String fxFeeRate;
 	
-	@Field
+	@Field("seller_id")
 	//卖家Id,目前没用的字段
-	private String seller_id;
+	private String sellerId;
 	
-	@Field
+	@Field("merchant_code")
 	//商品编号
-	private String merchant_code;
+	private String merchantCode;
 	
 	@Field
 	//商品销量
@@ -60,13 +60,13 @@ public class Product {
 	//库存量
 	private Number stock;
 	
-	@Field
+	@Field("remote_free_delivery")
 	//偏远地区是否包邮：1不包邮，0包邮
-	private Number remote_free_delivery;
+	private Number remotefreedelivery;
 	
-	@Field
+	@Field("free_delivery")
 	//是否包邮：0不包邮，1包邮
-	private Number free_delivery;
+	private Number freeDelivery;
 	
 	@Field
 	//商品价格,在Mongodb中可以排序
@@ -74,15 +74,15 @@ public class Product {
 	
 	@Field
 	//商品图片描述
-	private List titles;
+	private List<String> titles;
 	
-	@Field
+	@Field("thumb_imgs")
 	//图片略缩图，缩小后的
-	private List thumb_imgs;
+	private List<String> thumbImgs;
 	
 	@Field
 	//商品图片(展示商品的图片/视频)
-	private List imgs;
+	private List<String> imgs;
 	
 	@DBRef
 	//skus
@@ -91,33 +91,9 @@ public class Product {
 	@DBRef
 	//商品所属分类
 	private List<Cate> cates;
-
-	public Product(Number id, String itemid, String createdTime, String updated_time, String item_desc,
-			String item_name, String fx_fee_rate, String seller_id, String merchant_code, Number sold, String status,
-			Number stock, Number remote_free_delivery, Number free_delivery, String price, List titles, List thumb_imgs,
-			List imgs, List<Sku> skus, List<Cate> cates) {
-		super();
-		this.id = id;
-		this.itemid = itemid;
-		this.createdTime = createdTime;
-		this.updated_time = updated_time;
-		this.item_desc = item_desc;
-		this.item_name = item_name;
-		this.fx_fee_rate = fx_fee_rate;
-		this.seller_id = seller_id;
-		this.merchant_code = merchant_code;
-		this.sold = sold;
-		this.status = status;
-		this.stock = stock;
-		this.remote_free_delivery = remote_free_delivery;
-		this.free_delivery = free_delivery;
-		this.price = price;
-		this.titles = titles;
-		this.thumb_imgs = thumb_imgs;
-		this.imgs = imgs;
-		this.skus = skus;
-		this.cates = cates;
-	}
+	
+	@Field("is_top")
+	private Integer isTop;
 
 	public Number getId() {
 		return id;
@@ -125,22 +101,6 @@ public class Product {
 
 	public void setId(Number id) {
 		this.id = id;
-	}
-
-	public List<Sku> getSkus() {
-		return skus;
-	}
-
-	public void setSkus(List<Sku> skus) {
-		this.skus = skus;
-	}
-
-	public List<Cate> getCates() {
-		return cates;
-	}
-
-	public void setCates(List<Cate> cates) {
-		this.cates = cates;
 	}
 
 	public String getItemid() {
@@ -159,52 +119,52 @@ public class Product {
 		this.createdTime = createdTime;
 	}
 
-	public String getUpdated_time() {
-		return updated_time;
+	public String getUpdatedTime() {
+		return updatedTime;
 	}
 
-	public void setUpdated_time(String updated_time) {
-		this.updated_time = updated_time;
+	public void setUpdatedTime(String updatedTime) {
+		this.updatedTime = updatedTime;
 	}
 
-	public String getItem_desc() {
-		return item_desc;
+	public String getItemDesc() {
+		return itemDesc;
 	}
 
-	public void setItem_desc(String item_desc) {
-		this.item_desc = item_desc;
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
 	}
 
-	public String getItem_name() {
-		return item_name;
+	public String getItemName() {
+		return itemName;
 	}
 
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
-	public String getFx_fee_rate() {
-		return fx_fee_rate;
+	public String getFxFeeRate() {
+		return fxFeeRate;
 	}
 
-	public void setFx_fee_rate(String fx_fee_rate) {
-		this.fx_fee_rate = fx_fee_rate;
+	public void setFxFeeRate(String fxFeeRate) {
+		this.fxFeeRate = fxFeeRate;
 	}
 
-	public String getSeller_id() {
-		return seller_id;
+	public String getSellerId() {
+		return sellerId;
 	}
 
-	public void setSeller_id(String seller_id) {
-		this.seller_id = seller_id;
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
 	}
 
-	public String getMerchant_code() {
-		return merchant_code;
+	public String getMerchantCode() {
+		return merchantCode;
 	}
 
-	public void setMerchant_code(String merchant_code) {
-		this.merchant_code = merchant_code;
+	public void setMerchantCode(String merchantCode) {
+		this.merchantCode = merchantCode;
 	}
 
 	public Number getSold() {
@@ -231,20 +191,20 @@ public class Product {
 		this.stock = stock;
 	}
 
-	public Number getRemote_free_delivery() {
-		return remote_free_delivery;
+	public Number getRemotefreedelivery() {
+		return remotefreedelivery;
 	}
 
-	public void setRemote_free_delivery(Number remote_free_delivery) {
-		this.remote_free_delivery = remote_free_delivery;
+	public void setRemotefreedelivery(Number remotefreedelivery) {
+		this.remotefreedelivery = remotefreedelivery;
 	}
 
-	public Number getFree_delivery() {
-		return free_delivery;
+	public Number getFreeDelivery() {
+		return freeDelivery;
 	}
 
-	public void setFree_delivery(Number free_delivery) {
-		this.free_delivery = free_delivery;
+	public void setFreeDelivery(Number freeDelivery) {
+		this.freeDelivery = freeDelivery;
 	}
 
 	public String getPrice() {
@@ -255,41 +215,66 @@ public class Product {
 		this.price = price;
 	}
 
-	public List getTitles() {
+	public List<String> getTitles() {
 		return titles;
 	}
 
-	public void setTitles(List titles) {
+	public void setTitles(List<String> titles) {
 		this.titles = titles;
 	}
 
-	public List getThumb_imgs() {
-		return thumb_imgs;
+	public List<String> getThumbImgs() {
+		return thumbImgs;
 	}
 
-	public void setThumb_imgs(List thumb_imgs) {
-		this.thumb_imgs = thumb_imgs;
+	public void setThumbImgs(List<String> thumbImgs) {
+		this.thumbImgs = thumbImgs;
 	}
 
-	public List getImgs() {
+	public List<String> getImgs() {
 		return imgs;
 	}
 
-	public void setImgs(List imgs) {
+	public void setImgs(List<String> imgs) {
 		this.imgs = imgs;
+	}
+
+	public List<Sku> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<Sku> skus) {
+		this.skus = skus;
+	}
+
+	public List<Cate> getCates() {
+		return cates;
+	}
+
+	public void setCates(List<Cate> cates) {
+		this.cates = cates;
+	}
+
+	public Integer getIsTop() {
+		return isTop;
+	}
+
+	public void setIsTop(Integer isTop) {
+		this.isTop = isTop;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", itemid=" + itemid + ", createdTime=" + createdTime + ", updated_time="
-				+ updated_time + ", item_desc=" + item_desc + ", item_name=" + item_name + ", fx_fee_rate="
-				+ fx_fee_rate + ", seller_id=" + seller_id + ", merchant_code=" + merchant_code + ", sold=" + sold
-				+ ", status=" + status + ", stock=" + stock + ", remote_free_delivery=" + remote_free_delivery
-				+ ", free_delivery=" + free_delivery + ", price=" + price + ", titles=" + titles + ", thumb_imgs="
-				+ thumb_imgs + ", imgs=" + imgs + ", skus=" + skus + ", cates=" + cates + "]";
+		return "Product [id=" + id + ", itemid=" + itemid + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + ", itemDesc=" + itemDesc + ", itemName=" + itemName + ", fxFeeRate=" + fxFeeRate
+				+ ", sellerId=" + sellerId + ", merchantCode=" + merchantCode + ", sold=" + sold + ", status=" + status
+				+ ", stock=" + stock + ", remotefreedelivery=" + remotefreedelivery + ", freeDelivery=" + freeDelivery
+				+ ", price=" + price + ", titles=" + titles + ", thumbImgs=" + thumbImgs + ", imgs=" + imgs + ", skus="
+				+ skus + ", cates=" + cates + ", isTop=" + isTop + "]";
 	}
-	
-	
+
+
+
 }
 
 
