@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -17,10 +16,15 @@ import org.springframework.web.client.RestTemplate;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
+import com.hdgj.entity.A;
 import com.hdgj.entity.AttrValue;
 import com.hdgj.entity.ModelAttr;
+import com.hdgj.entity.Sku;
 import com.hdgj.entity.repository.AttrValueRepository;
 import com.hdgj.entity.repository.ModelAttrRepository;
+import com.hdgj.entity.repository.ProductRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
 import com.weidian.open.sdk.exception.OpenException;
@@ -45,6 +49,9 @@ public class SyncVdService {
 	
 	@Autowired
 	private AttrValueRepository attrValueRepository;
+	
+	@Autowired
+	private ProductRepository productResponsitory;
 	
 	public void syncVdSkuAttr(){
 		String response = "";
@@ -110,21 +117,61 @@ public class SyncVdService {
 	/**
 	 * 同步微店商品
 	 */
-	public int syncVdProduct()throws Exception{
-		int totalNum = 0;
-		try {
-			String response = productService.vdianItemListGet(1, 1, 30, null, 0, null);
+	public String syncVdProduct()throws Exception{
+		int countItem = productService.getCountByItemList();
+		int pageSize = 30;
+		int totalPage = this.getTotalPage(pageSize, countItem);
+				
+		
+		for(int i = 1; i <= totalPage; i++){
+			String response = productService.vdianItemListGet(i, 1, pageSize, null, 1, null);
 			JSONObject res = JSONObject.parseObject(response);
 			int status =  res.getJSONObject("status").getInteger("status_code");
-			if(status == 0){
-				totalNum = res.getJSONObject("result").getInteger("total_num");
-			}
-		} catch (OpenException e) {
-			e.printStackTrace();
-		}
-		return totalNum;
 
+			if(status != 0){
+				return res.getJSONObject("status").getString("status_reason");
+			}
+			
+			System.out.println( res);
+			/**
+			 * 获取所有的商品
+			 */
+			JSONArray items = res.getJSONObject("result").getJSONArray("items");
+			Iterator<Object> ite = items.iterator();
+			
+			while(ite.hasNext()){
+				JSONObject pro = (JSONObject) ite.next();
+				//Product p = JSONObject.toJavaObject(pro,Product.class);
+				System.out.println(pro.toJSONString());
+				A a = JSON.parseObject(pro.toJSONString(),A.class);
+				System.out.println(a);
+			}
+			
+			//productResponsitory.saveAll(items);
+		}
 		
+		return "商品同步完成";
+	}
+	
+	/**
+	 * 获取总页数
+	 * @param pageSize  页面大小
+	 * @param countItem 总的Item
+	 * @return
+	 */
+	public int getTotalPage(int pageSize,int countItem){
+		int totalPage = 1;
+		
+		if(countItem == 0){
+			return totalPage;
+		}
+		
+		if(countItem % pageSize == 0){
+			totalPage = countItem / pageSize;
+		}else {
+			totalPage = countItem / pageSize + 1;
+		}
+		return totalPage;
 	}
 	
 	public void test2(){

@@ -1,26 +1,17 @@
 package com.hdgj.entity;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-/**
- * 商品，存储于Mongodb
- * @author Administrator
- *
- */
-@Document("product")
-public class Product implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+public class A {
+	private List<String> imgs;
+	
 	@Id
 	//商品id
-	private String itemId;
+	private String itemid;
 	@Field("created_time")
 	//创建时间
 	private String createdTime;
@@ -81,29 +72,25 @@ public class Product implements Serializable{
 	//图片略缩图，缩小后的
 	private List<String> thumbImgs;
 	
-	@Field
-	//商品图片(展示商品的图片/视频)
-	private List<String> imgs;
 	
 	@DBRef
 	//skus
 	private List<Sku> skus;
-	
-	@DBRef
-	//商品所属分类
-	private List<Cate> cates;
-	
-	@Field("is_top")
-	private Integer isTop;
 
-
-
-	public String getItemId() {
-		return itemId;
+	public List<String> getImgs() {
+		return imgs;
 	}
 
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
+	public void setImgs(List<String> imgs) {
+		this.imgs = imgs;
+	}
+
+	public String getItemid() {
+		return itemid;
+	}
+
+	public void setItemid(String itemid) {
+		this.itemid = itemid;
 	}
 
 	public String getCreatedTime() {
@@ -226,14 +213,6 @@ public class Product implements Serializable{
 		this.thumbImgs = thumbImgs;
 	}
 
-	public List<String> getImgs() {
-		return imgs;
-	}
-
-	public void setImgs(List<String> imgs) {
-		this.imgs = imgs;
-	}
-
 	public List<Sku> getSkus() {
 		return skus;
 	}
@@ -242,42 +221,15 @@ public class Product implements Serializable{
 		this.skus = skus;
 	}
 
-	public List<Cate> getCates() {
-		return cates;
-	}
-
-	public void setCates(List<Cate> cates) {
-		this.cates = cates;
-	}
-
-	public Integer getIsTop() {
-		return isTop;
-	}
-
-	public void setIsTop(Integer isTop) {
-		this.isTop = isTop;
-	}
-
 	@Override
 	public String toString() {
-		return "Product [itemId=" + itemId + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", itemDesc=" + itemDesc + ", itemName=" + itemName + ", fxFeeRate=" + fxFeeRate + ", sellerId="
-				+ sellerId + ", merchantCode=" + merchantCode + ", sold=" + sold + ", status=" + status + ", stock="
-				+ stock + ", remotefreedelivery=" + remotefreedelivery + ", freeDelivery=" + freeDelivery + ", price="
-				+ price + ", titles=" + titles + ", thumbImgs=" + thumbImgs + ", imgs=" + imgs + ", skus=" + skus
-				+ ", cates=" + cates + ", isTop=" + isTop + "]";
+		return "A [imgs=" + imgs + ", itemId=" + itemid + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + ", itemDesc=" + itemDesc + ", itemName=" + itemName + ", fxFeeRate=" + fxFeeRate
+				+ ", sellerId=" + sellerId + ", merchantCode=" + merchantCode + ", sold=" + sold + ", status=" + status
+				+ ", stock=" + stock + ", remotefreedelivery=" + remotefreedelivery + ", freeDelivery=" + freeDelivery
+				+ ", price=" + price + ", titles=" + titles + ", thumbImgs=" + thumbImgs + ", skus=" + skus + "]";
 	}
 
+
 	
-
-
-
 }
-
-
-
-
-
-
-
-

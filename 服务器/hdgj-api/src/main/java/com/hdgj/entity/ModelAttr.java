@@ -1,5 +1,6 @@
 package com.hdgj.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -15,9 +16,14 @@ import com.alibaba.fastjson.JSONObject;
  *
  */
 @Document("model_attr")
-public class ModelAttr {
+public class ModelAttr implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Field("attr_title")
 	@Id
 	//属性值

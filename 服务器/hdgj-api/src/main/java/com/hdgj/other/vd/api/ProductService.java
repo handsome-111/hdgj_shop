@@ -22,7 +22,7 @@ public class ProductService extends BaseService{
 	 * @param page_size	单页条数，默认值30，最大50条
 	 * @param update_end	商品更新时间段的结束时间，如：2014-11-1216:36:08精确到秒
 	 * @param status	status=1或不传为在架商品(不包含供货商货源)，status=2为下架商品,4表示下架和在架商品,10供货商货源
-	 * @param update_start
+	 * @param update_start  商品更新时间段的开始时
 	 * @return
 	 * @throws OpenException
 	 */

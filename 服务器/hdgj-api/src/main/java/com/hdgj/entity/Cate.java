@@ -1,5 +1,7 @@
 package com.hdgj.entity;
 
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -8,13 +10,18 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @author Administrator
  *
  */
-public class Cate {
+public class Cate implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Number id;
 	
 	@Field("cate_id")
 	//分类id
-	private String cateId;
+	private Number cateId;
 	
 	@Field("cate_name")
 	//分类名称
@@ -23,6 +30,9 @@ public class Cate {
 	@Field("parent_id")
 	//父类目ID
 	private Number parentId;
+	
+	@Field("sort_num")
+	private Number sortNum;
 	
 	@Field
 	//状态
@@ -40,7 +50,7 @@ public class Cate {
 	//点击分类的链接
 	private String urlKey;
 	
-	public Cate(Number id, String cateId, String cateName, Number parentId, Number status, String createdTime,
+	public Cate(Number id, Number cateId, String cateName, Number parentId, Number status, String createdTime,
 			String updatedTime, String urlKey) {
 		super();
 		this.id = id;
@@ -61,11 +71,11 @@ public class Cate {
 		this.id = id;
 	}
 
-	public String getCateId() {
+	public Number getCateId() {
 		return cateId;
 	}
 
-	public void setCateId(String cateId) {
+	public void setCateId(Number cateId) {
 		this.cateId = cateId;
 	}
 
