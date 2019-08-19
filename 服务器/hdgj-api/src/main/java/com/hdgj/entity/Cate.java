@@ -15,11 +15,8 @@ public class Cate implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	private Number id;
 	
-	@Field("cate_id")
+	@Id
 	//分类id
 	private Number cateId;
 	
@@ -50,10 +47,9 @@ public class Cate implements Serializable{
 	//点击分类的链接
 	private String urlKey;
 	
-	public Cate(Number id, Number cateId, String cateName, Number parentId, Number status, String createdTime,
+	public Cate(Number cateId, String cateName, Number parentId, Number status, String createdTime,
 			String updatedTime, String urlKey) {
 		super();
-		this.id = id;
 		this.cateId = cateId;
 		this.cateName = cateName;
 		this.parentId = parentId;
@@ -63,13 +59,6 @@ public class Cate implements Serializable{
 		this.urlKey = urlKey;
 	}
 
-	public Number getId() {
-		return id;
-	}
-
-	public void setId(Number id) {
-		this.id = id;
-	}
 
 	public Number getCateId() {
 		return cateId;
@@ -129,7 +118,7 @@ public class Cate implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cate [id=" + id + ", cateId=" + cateId + ", cateName=" + cateName + ", parentId=" + parentId
+		return "Cate [ , cateId=" + cateId + ", cateName=" + cateName + ", parentId=" + parentId
 				+ ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", urlKey="
 				+ urlKey + "]";
 	}

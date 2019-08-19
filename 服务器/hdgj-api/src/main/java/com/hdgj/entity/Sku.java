@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * 商品型号属性，存储于Mongodb
@@ -36,8 +37,7 @@ public class Sku implements Serializable{
 	
 	//多级SKU属性id
 	@Field("attr_ids")
-	@DBRef
-	private List<AttrValue> attrIds;
+	private String attrIds;
 	
 	//价格
 	@Field
@@ -51,16 +51,14 @@ public class Sku implements Serializable{
 	
 	private String img;
 	
-	@Field("durTime")
-	private String dur_time;
+	@Field("dur_time")
+	private String durTime;
 	
 	@Field("item_id")
-	@JSONField(serialize=false)
-	@DBRef
 	/**
 	 * 商品ID
 	 */
-	private Product itemId;
+	private String itemId;
 	
 	@Field("sup_price")
 	private String supPrice;
@@ -103,11 +101,11 @@ public class Sku implements Serializable{
 		this.skuMerchantCode = skuMerchantCode;
 	}
 
-	public List<AttrValue> getAttrIds() {
+	public String getAttrIds() {
 		return attrIds;
 	}
 
-	public void setAttrIds(List<AttrValue> attrIds) {
+	public void setAttrIds(String attrIds) {
 		this.attrIds = attrIds;
 	}
 
@@ -143,19 +141,12 @@ public class Sku implements Serializable{
 		this.img = img;
 	}
 
-	public String getDur_time() {
-		return dur_time;
-	}
 
-	public void setDur_time(String dur_time) {
-		this.dur_time = dur_time;
-	}
-
-	public Product getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(Product itemId) {
+	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
 
@@ -183,14 +174,23 @@ public class Sku implements Serializable{
 		this.supId = supId;
 	}
 
+	public String getDurTime() {
+		return durTime;
+	}
+
+	public void setDurTime(String durTime) {
+		this.durTime = durTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Sku [id=" + id + ", title=" + title + ", stock=" + stock + ", skuMerchantCode=" + skuMerchantCode
 				+ ", attrIds=" + attrIds + ", price=" + price + ", status=" + status + ", cskuId=" + cskuId + ", img="
-				+ img + ", dur_time=" + dur_time + ", itemId=" + itemId + ", supPrice=" + supPrice + ", buyStock="
+				+ img + ", durTime=" + durTime + ", itemId=" + itemId + ", supPrice=" + supPrice + ", buyStock="
 				+ buyStock + ", supId=" + supId + "]";
 	}
 
+	
 	
 	
 	

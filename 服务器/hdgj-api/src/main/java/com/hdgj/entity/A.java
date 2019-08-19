@@ -71,8 +71,6 @@ public class A {
 	@Field("thumb_imgs")
 	//图片略缩图，缩小后的
 	private List<String> thumbImgs;
-	
-	
 	@DBRef
 	//skus
 	private List<Sku> skus;

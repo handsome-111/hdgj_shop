@@ -28,17 +28,13 @@ public class SyncVdScheduler {
 	 */
 	@Scheduled(initialDelayString = "${jobs.initialDelay}",fixedRateString="${jobs.fixedRate}")
 	public void synVdProducts() throws OpenException{	
-		try {
-			syncVdService.syncVdProduct();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String res = "";
+		syncVdService.syncVdProductDetail();
 		//syncVdService.test4();
 		//syncVdService.test3();
 		//syncVdService.syncSkuAttr();
 		//syncVdService.test();
-		System.out.println("ok");
+		System.out.println("ok" + res);
 	}
 
 }

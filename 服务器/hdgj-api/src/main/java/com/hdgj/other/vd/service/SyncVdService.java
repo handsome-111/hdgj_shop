@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -21,6 +22,7 @@ import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.hdgj.entity.A;
 import com.hdgj.entity.AttrValue;
 import com.hdgj.entity.ModelAttr;
+import com.hdgj.entity.Product;
 import com.hdgj.entity.Sku;
 import com.hdgj.entity.repository.AttrValueRepository;
 import com.hdgj.entity.repository.ModelAttrRepository;
@@ -53,6 +55,9 @@ public class SyncVdService {
 	@Autowired
 	private ProductRepository productResponsitory;
 	
+	/**
+	 * 同步商品的型号属性
+	 */
 	public void syncVdSkuAttr(){
 		String response = "";
 		try {
@@ -110,12 +115,17 @@ public class SyncVdService {
 		System.out.println("mas:" + mas);
 		System.out.println("avs:" + avs);
 	}	
-	
-	
+
+	/**
+	 * 同步商品详情
+	 */
+	public void syncVdProductDetail(){
+		System.out.println(productResponsitory.getItemIds(PageRequest.of(1, 10)));
+	}
 	
 	
 	/**
-	 * 同步微店商品
+	 * 同步微店商品(document:product)
 	 */
 	public String syncVdProduct()throws Exception{
 		int countItem = productService.getCountByItemList();
@@ -132,22 +142,12 @@ public class SyncVdService {
 				return res.getJSONObject("status").getString("status_reason");
 			}
 			
-			System.out.println( res);
 			/**
 			 * 获取所有的商品
 			 */
-			JSONArray items = res.getJSONObject("result").getJSONArray("items");
-			Iterator<Object> ite = items.iterator();
+			List<Product> items = res.getJSONObject("result").getJSONArray("items").toJavaList(Product.class);
 			
-			while(ite.hasNext()){
-				JSONObject pro = (JSONObject) ite.next();
-				//Product p = JSONObject.toJavaObject(pro,Product.class);
-				System.out.println(pro.toJSONString());
-				A a = JSON.parseObject(pro.toJSONString(),A.class);
-				System.out.println(a);
-			}
-			
-			//productResponsitory.saveAll(items);
+			productResponsitory.saveAll(items);
 		}
 		
 		return "商品同步完成";
@@ -173,6 +173,9 @@ public class SyncVdService {
 		}
 		return totalPage;
 	}
+	
+	
+	
 	
 	public void test2(){
 		String response = "";
