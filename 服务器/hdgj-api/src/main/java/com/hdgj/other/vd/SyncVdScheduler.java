@@ -27,8 +27,9 @@ public class SyncVdScheduler {
 	 * @throws OpenException 
 	 */
 	@Scheduled(initialDelayString = "${jobs.initialDelay}",fixedRateString="${jobs.fixedRate}")
-	public void synVdProducts() throws OpenException{	
+	public void synVdProducts() throws OpenException,Exception{	
 		String res = "";
+		syncVdService.syncVdProduct();
 		syncVdService.syncVdProductDetail();
 		//syncVdService.test4();
 		//syncVdService.test3();

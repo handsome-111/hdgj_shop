@@ -14,9 +14,9 @@ public class ProductDetail {
 	@Id
 	private String id;
 	
-	@Field
+	@Field("item_id")
 	//商品id
-	private Number item_id;
+	private String itemId;
 	
 	@Field
 	//详情文本
@@ -34,7 +34,7 @@ public class ProductDetail {
 	//首页地址
 	private String faceurl;
 	
-	@Field
+	@Field("video_type")
 	//1表示腾迅视频，2表示美拍视频(type=4填写此字段)
 	private String videoType;
 	
@@ -43,17 +43,11 @@ public class ProductDetail {
 	private String url;
 
 	
-	
-	public ProductDetail(Number item_id, String text, Number type, Number pos, String faceurl, String videoType,
-			String url) {
-		super();
-		this.item_id = item_id;
-		this.text = text;
-		this.type = type;
-		this.pos = pos;
-		this.faceurl = faceurl;
-		this.videoType = videoType;
-		this.url = url;
+	@Override
+	public boolean equals(Object obj) {
+		ProductDetail pd = (ProductDetail) obj;
+		
+		return super.equals(obj);
 	}
 
 	public String getId() {
@@ -64,13 +58,6 @@ public class ProductDetail {
 		this.id = id;
 	}
 
-	public Number getItem_id() {
-		return item_id;
-	}
-
-	public void setItem_id(Number item_id) {
-		this.item_id = item_id;
-	}
 
 	public String getText() {
 		return text;
@@ -120,10 +107,20 @@ public class ProductDetail {
 		this.url = url;
 	}
 
+	public String getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductDetail [id=" + id + ", item_id=" + item_id + ", text=" + text + ", type=" + type + ", pos=" + pos
+		return "ProductDetail [id=" + id + ", itemId=" + itemId + ", text=" + text + ", type=" + type + ", pos=" + pos
 				+ ", faceurl=" + faceurl + ", videoType=" + videoType + ", url=" + url + "]";
 	}
+
+
 	
 }

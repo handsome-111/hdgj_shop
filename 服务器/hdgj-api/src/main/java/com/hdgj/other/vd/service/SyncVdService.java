@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,15 +17,13 @@ import org.springframework.web.client.RestTemplate;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
-import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.hdgj.entity.A;
 import com.hdgj.entity.AttrValue;
 import com.hdgj.entity.ModelAttr;
 import com.hdgj.entity.Product;
-import com.hdgj.entity.Sku;
+import com.hdgj.entity.ProductDetail;
 import com.hdgj.entity.repository.AttrValueRepository;
 import com.hdgj.entity.repository.ModelAttrRepository;
+import com.hdgj.entity.repository.ProductDetailRepository;
 import com.hdgj.entity.repository.ProductRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
@@ -54,7 +51,10 @@ public class SyncVdService {
 	private AttrValueRepository attrValueRepository;
 	
 	@Autowired
-	private ProductRepository productResponsitory;
+	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductDetailRepository productDetailRepository;
 	
 	/**
 	 * 同步商品的型号属性
@@ -124,26 +124,23 @@ public class SyncVdService {
 		/**
 		 * 获取分页和总数
 		 */
-		long count = productResponsitory.count(); 
+		long count = productRepository.count(); 
 		long page = this.getTotalPage(30, count);
+		System.out.println(count);
 		
 		for(int i = 0;i < page; i++){
-			List<String> itemsJson = productResponsitory.findAllBy(PageRequest.of(i, 30));
-			JSONArray array = JSONArray.parseArray(itemsJson.toString());
-			
-			Iterator<Object> ite = array.iterator();
-			List<String> ids = new ArrayList<String>();
-			while(ite.hasNext()){
-				JSONObject obj = (JSONObject) ite.next();
-				ids.add(obj.getString("_id"));
-			}
-			
-			try {
-				String res = productService.weidianGetItems(ids.toString(), null);
-				System.out.println(res);
-			} catch (OpenException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			List<String> items = productRepository.findAllBy(PageRequest.of(i, 30));
+			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
+			for(String jsonId : items){
+				JSONObject idObject = JSONObject.parseObject(jsonId);
+				try {
+					JSONObject res = productService.vdianItemGetItemDetail(idObject.getLong("_id"));
+					ProductDetail pd = productDetailRepository.findByItemId(idObject.getLong("_id").toString());
+					System.out.println(res);
+					System.out.println(pd);
+				} catch (OpenException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -172,7 +169,7 @@ public class SyncVdService {
 			 */
 			List<Product> items = res.getJSONObject("result").getJSONArray("items").toJavaList(Product.class);
 			
-			productResponsitory.saveAll(items);
+			productRepository.saveAll(items);
 		}
 		
 		return "商品同步完成";

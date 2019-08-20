@@ -12,4 +12,6 @@ import com.hdgj.entity.Product;
 public interface ProductRepository extends PagingAndSortingRepository<Product,String>{
 	@Query(fields="{'itemId':1}")
 	List<String> findAllBy(Pageable page);	
+	
+	long countAllBy();
 }

@@ -72,13 +72,14 @@ public class ProductService extends BaseService{
 	 * @return
 	 * @throws OpenException
 	 */
-	public String vdianItemGetItemDetail(Number item_id) throws OpenException {
+	public JSONObject vdianItemGetItemDetail(Number item_id) throws OpenException {
 	    Map< String, Object> map = new HashMap< String, Object>();
 	    map.put("item_id", item_id);
 	    super.removeNullValue(map);
-	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
+	    String res = vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
 	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("vdian.item.getItemDetail", "1.0")),
 	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));
+	    return JSONObject.parseObject(res);
 	}
 	
 	
@@ -89,13 +90,14 @@ public class ProductService extends BaseService{
 	 * @return
 	 * @throws OpenException
 	 */
-	public String weidianGetItems(String ids, String need_idno) throws OpenException {
+	public JSONObject weidianGetItems(String ids, String need_idno) throws OpenException {
 	    Map< String, Object> map = new HashMap< String, Object>();
 	    map.put("ids", ids);
 	    map.put("need_idno", need_idno);
 	    super.removeNullValue(map);
-	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
+	    String res = vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
 	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("weidian.get.items", "1.1")),
 	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));
+	    return JSONObject.parseObject(res);
 	}
 }
