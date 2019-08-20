@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -120,7 +121,31 @@ public class SyncVdService {
 	 * 同步商品详情
 	 */
 	public void syncVdProductDetail(){
-		System.out.println(productResponsitory.getItemIds(PageRequest.of(1, 10)));
+		/**
+		 * 获取分页和总数
+		 */
+		long count = productResponsitory.count(); 
+		long page = this.getTotalPage(30, count);
+		
+		for(int i = 0;i < page; i++){
+			List<String> itemsJson = productResponsitory.findAllBy(PageRequest.of(i, 30));
+			JSONArray array = JSONArray.parseArray(itemsJson.toString());
+			
+			Iterator<Object> ite = array.iterator();
+			List<String> ids = new ArrayList<String>();
+			while(ite.hasNext()){
+				JSONObject obj = (JSONObject) ite.next();
+				ids.add(obj.getString("_id"));
+			}
+			
+			try {
+				String res = productService.weidianGetItems(ids.toString(), null);
+				System.out.println(res);
+			} catch (OpenException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
@@ -130,7 +155,7 @@ public class SyncVdService {
 	public String syncVdProduct()throws Exception{
 		int countItem = productService.getCountByItemList();
 		int pageSize = 30;
-		int totalPage = this.getTotalPage(pageSize, countItem);
+		long totalPage = this.getTotalPage(pageSize, countItem);
 				
 		
 		for(int i = 1; i <= totalPage; i++){
@@ -156,20 +181,20 @@ public class SyncVdService {
 	/**
 	 * 获取总页数
 	 * @param pageSize  页面大小
-	 * @param countItem 总的Item
+	 * @param count 总的Item
 	 * @return
 	 */
-	public int getTotalPage(int pageSize,int countItem){
-		int totalPage = 1;
+	public long getTotalPage(long pageSize,long count){
+		long totalPage = 1;
 		
-		if(countItem == 0){
+		if(count == 0){
 			return totalPage;
 		}
 		
-		if(countItem % pageSize == 0){
-			totalPage = countItem / pageSize;
+		if(count % pageSize == 0){
+			totalPage = count / pageSize;
 		}else {
-			totalPage = countItem / pageSize + 1;
+			totalPage = count / pageSize + 1;
 		}
 		return totalPage;
 	}

@@ -80,4 +80,22 @@ public class ProductService extends BaseService{
 	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("vdian.item.getItemDetail", "1.0")),
 	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));
 	}
+	
+	
+	/**
+	 * 获取多个商品
+	 * @param ids	商品id
+	 * @param need_idno		
+	 * @return
+	 * @throws OpenException
+	 */
+	public String weidianGetItems(String ids, String need_idno) throws OpenException {
+	    Map< String, Object> map = new HashMap< String, Object>();
+	    map.put("ids", ids);
+	    map.put("need_idno", need_idno);
+	    super.removeNullValue(map);
+	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
+	            new Param(SystemConfig.PUBLIC_PARAM, buildPublicValue("weidian.get.items", "1.1")),
+	            new Param(SystemConfig.BIZ_PARAM, JsonUtils.toJson(map)));
+	}
 }
