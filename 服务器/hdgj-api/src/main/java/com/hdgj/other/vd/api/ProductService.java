@@ -1,10 +1,9 @@
 package com.hdgj.other.vd.api;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -85,12 +84,20 @@ public class ProductService extends BaseService{
 	
 	/**
 	 * 获取多个商品
-	 * @param ids	商品id
-	 * @param need_idno		
+	 * @param  (1) ids: 商品ID，多个商品ID以逗号隔开，最多支持100个商品id
+	 * @param need_idno		是否返回清关标志，1是，0否
 	 * @return
 	 * @throws OpenException
 	 */
-	public JSONObject weidianGetItems(String ids, String need_idno) throws OpenException {
+	public JSONObject weidianGetItems(List<String> itemIds, String need_idno) throws OpenException {
+		StringBuilder ids = new StringBuilder();
+		for(String id : itemIds){
+			ids.append(id);
+			ids.append(",");
+		}
+		ids.deleteCharAt(ids.length() -1 );
+		
+		
 	    Map< String, Object> map = new HashMap< String, Object>();
 	    map.put("ids", ids);
 	    map.put("need_idno", need_idno);

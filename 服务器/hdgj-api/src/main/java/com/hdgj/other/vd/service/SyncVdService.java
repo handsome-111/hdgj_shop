@@ -126,22 +126,38 @@ public class SyncVdService {
 		 */
 		long count = productRepository.count(); 
 		long page = this.getTotalPage(30, count);
-		System.out.println(count);
 		
 		/**
 		 * 分页同步商品详情,每次存储30个商品,防止内存溢出
 		 */
 		for(int i = 0;i < page; i++){
-			List<String> items = productRepository.findAllBy(PageRequest.of(i, 30));
+			//读取所有的商品ID
+			List<JSONObject> itemIds = productRepository.findAllBy(PageRequest.of(i, 30));
 			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
-			for(String jsonId : items){
+			
+			List<String> ids = new ArrayList<String>();
+			for(JSONObject id : itemIds){
+				ids.add(id.getString("_id"));
+			}
+			
+			/**
+			 * 调用微店API获取所有的商品
+			 */
+			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
+			Iterator ite = items.iterator();
+			while(ite.hasNext()){
+				JSONObject item = (JSONObject) ite.next();
+				List<ProductDetail> details = item.getJSONArray("item_detail").toJavaList(ProductDetail.class);
+			}
+			
+			/*for(String jsonId : items){
 				JSONObject idObject = JSONObject.parseObject(jsonId);
 				Number id = idObject.getLong("_id");
 				
-				/**
-				 * 从微店读取出来的商品详情
-				 */
-				JSONObject res = productService.vdianItemGetItemDetail(id);
+				*//**
+				 * 从微店读取出来的商品详情，这个地方会调用好多次接口
+				 *//*
+				JSONObject res = productService.weidianGetItems(id);
 				System.out.println(res);
 				JSONArray details = res.getJSONObject("result").getJSONObject("result").getJSONArray("detail_content");				
 				List<ProductDetail> resDetails = details.toJavaList(ProductDetail.class);
@@ -149,9 +165,9 @@ public class SyncVdService {
 					pd.setItemId(id.toString());
 				}
 				
-				/**
+				*//**
 				 * 从数据库查询的商品详情
-				 */
+				 *//*
 				List<ProductDetail> findDetails = productDetailRepository.findByItemId(id.toString());
 				
 				if(!findDetails.equals(resDetails)){
@@ -163,12 +179,12 @@ public class SyncVdService {
 				}
 				System.out.println("长度:" + resDetails.size() + "," + findDetails.size());
 
-				/*ProductDetail pd = productDetailRepository.findByItemId(id.toString());
+				ProductDetail pd = productDetailRepository.findByItemId(id.toString());
 				System.out.println(res);
 				System.out.println(details);
 				JSONObject o = new JSONObject();
-				o.put("pd", pd);*/
-			}
+				o.put("pd", pd);
+			}*/
 		}
 	}
 	

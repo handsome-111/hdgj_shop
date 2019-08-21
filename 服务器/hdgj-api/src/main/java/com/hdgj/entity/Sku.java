@@ -21,6 +21,7 @@ public class Sku implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	//商品型号的ID
 	private String id;
 	
 	//sku名称
@@ -35,40 +36,66 @@ public class Sku implements Serializable{
 	@Field("sku_merchant_code")
 	private String skuMerchantCode;
 	
-	//多级SKU属性id
+	//多级SKU属性id(这里的id和title中的名称对应) 764651-L, 764647-蓝色
 	@Field("attr_ids")
 	private String attrIds;
 	
-	//价格
 	@Field
+	//价格
 	private String price;
-	
-	private Integer status;
-	
+		
 	@Field("csku_id")
 	private String cskuId;
 	
-	
+	//商品图URL
 	private String img;
+	
+
+	
+	@Field("item_id")
+	 //商品ID
+	private String itemId;
+	
+	
+	
+	@Field("buy_stock")
+	//可以购买的库存数
+	private Integer buyStock;
+	
+	//销量
+	private String sold;
+	
+	//商品状态 1: 正常 2: 下架 3:删除
+	private Number status;
+	
+	
+	/**
+	 * 未知属性
+	 * @return
+	 */
+	private String features;
+	
+	@Field("sup_id")
+	private Number supId;
+	
+	@Field("stock_biz")
+	private Number stockBiz;
+	
+	@Field("stock_flag")
+	private Number stockFlag;
+	
+	@Field("stock_seller_id")
+	private Number stockSellerId;
+	
+	@Field("stock_address")
+	private String stockAddress;
 	
 	@Field("dur_time")
 	private String durTime;
 	
-	@Field("item_id")
-	/**
-	 * 商品ID
-	 */
-	private String itemId;
-	
 	@Field("sup_price")
-	private String supPrice;
+	private Number supPrice;
 	
-	@Field("buy_stock")
-	private Integer buyStock;
-	
-	@Field("sup_id")
-	private String supId;
-
 	public String getId() {
 		return id;
 	}
@@ -117,13 +144,7 @@ public class Sku implements Serializable{
 		this.price = price;
 	}
 
-	public Integer getStatus() {
-		return status;
-	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 
 	public String getCskuId() {
 		return cskuId;
@@ -150,14 +171,7 @@ public class Sku implements Serializable{
 		this.itemId = itemId;
 	}
 
-	public String getSupPrice() {
-		return supPrice;
-	}
-
-	public void setSupPrice(String supPrice) {
-		this.supPrice = supPrice;
-	}
-
+	
 	public Integer getBuyStock() {
 		return buyStock;
 	}
@@ -166,14 +180,7 @@ public class Sku implements Serializable{
 		this.buyStock = buyStock;
 	}
 
-	public String getSupId() {
-		return supId;
-	}
-
-	public void setSupId(String supId) {
-		this.supId = supId;
-	}
-
+	
 	public String getDurTime() {
 		return durTime;
 	}
@@ -182,14 +189,91 @@ public class Sku implements Serializable{
 		this.durTime = durTime;
 	}
 
+	public Number getSupPrice() {
+		return supPrice;
+	}
+
+	public void setSupPrice(Number supPrice) {
+		this.supPrice = supPrice;
+	}
+
+	public Number getSupId() {
+		return supId;
+	}
+
+	public void setSupId(Number supId) {
+		this.supId = supId;
+	}
+
+	public String getSold() {
+		return sold;
+	}
+
+	public void setSold(String sold) {
+		this.sold = sold;
+	}
+
+	public Number getStockSellerId() {
+		return stockSellerId;
+	}
+
+	public void setStockSellerId(Number stockSellerId) {
+		this.stockSellerId = stockSellerId;
+	}
+
+	public String getStockAddress() {
+		return stockAddress;
+	}
+
+	public void setStockAddress(String stockAddress) {
+		this.stockAddress = stockAddress;
+	}
+
+	public Number getStatus() {
+		return status;
+	}
+
+	public void setStatus(Number status) {
+		this.status = status;
+	}
+
+	public String getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(String features) {
+		this.features = features;
+	}
+
+	public Number getStockBiz() {
+		return stockBiz;
+	}
+
+	public void setStockBiz(Number stockBiz) {
+		this.stockBiz = stockBiz;
+	}
+
+	public Number getStockFlag() {
+		return stockFlag;
+	}
+
+	public void setStockFlag(Number stockFlag) {
+		this.stockFlag = stockFlag;
+	}
+
 	@Override
 	public String toString() {
 		return "Sku [id=" + id + ", title=" + title + ", stock=" + stock + ", skuMerchantCode=" + skuMerchantCode
-				+ ", attrIds=" + attrIds + ", price=" + price + ", status=" + status + ", cskuId=" + cskuId + ", img="
-				+ img + ", durTime=" + durTime + ", itemId=" + itemId + ", supPrice=" + supPrice + ", buyStock="
-				+ buyStock + ", supId=" + supId + "]";
+				+ ", attrIds=" + attrIds + ", price=" + price + ", cskuId=" + cskuId + ", img=" + img + ", itemId="
+				+ itemId + ", buyStock=" + buyStock + ", sold=" + sold + ", status=" + status + ", features=" + features
+				+ ", supId=" + supId + ", stockBiz=" + stockBiz + ", stockFlag=" + stockFlag + ", stockSellerId="
+				+ stockSellerId + ", stockAddress=" + stockAddress + ", durTime=" + durTime + ", supPrice=" + supPrice
+				+ "]";
 	}
 
+	
+	
+	
 	
 	
 	
