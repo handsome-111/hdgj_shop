@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * 商品详情
  * @author Administrator
@@ -45,9 +47,14 @@ public class ProductDetail {
 	
 	@Override
 	public boolean equals(Object obj) {
-		ProductDetail pd = (ProductDetail) obj;
-		
-		return super.equals(obj);
+		JSONObject objJson = (JSONObject) JSONObject.toJSON(obj);
+		JSONObject thisJson = (JSONObject) JSONObject.toJSON(this);
+		thisJson.remove("id");
+		objJson.remove("id");
+		System.out.println(thisJson);
+		System.out.println(objJson);
+		System.out.println("是否相等:" + objJson.equals(thisJson));
+		return objJson.equals(thisJson);
 	}
 
 	public String getId() {

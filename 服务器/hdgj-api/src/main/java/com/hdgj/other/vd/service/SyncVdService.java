@@ -120,7 +120,7 @@ public class SyncVdService {
 	/**
 	 * 同步商品详情
 	 */
-	public void syncVdProductDetail(){
+	public void syncVdProductDetail() throws Exception{
 		/**
 		 * 获取分页和总数
 		 */
@@ -128,19 +128,46 @@ public class SyncVdService {
 		long page = this.getTotalPage(30, count);
 		System.out.println(count);
 		
+		/**
+		 * 分页同步商品详情,每次存储30个商品,防止内存溢出
+		 */
 		for(int i = 0;i < page; i++){
 			List<String> items = productRepository.findAllBy(PageRequest.of(i, 30));
 			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
 			for(String jsonId : items){
 				JSONObject idObject = JSONObject.parseObject(jsonId);
-				try {
-					JSONObject res = productService.vdianItemGetItemDetail(idObject.getLong("_id"));
-					ProductDetail pd = productDetailRepository.findByItemId(idObject.getLong("_id").toString());
-					System.out.println(res);
-					System.out.println(pd);
-				} catch (OpenException e) {
-					e.printStackTrace();
+				Number id = idObject.getLong("_id");
+				
+				/**
+				 * 从微店读取出来的商品详情
+				 */
+				JSONObject res = productService.vdianItemGetItemDetail(id);
+				System.out.println(res);
+				JSONArray details = res.getJSONObject("result").getJSONObject("result").getJSONArray("detail_content");				
+				List<ProductDetail> resDetails = details.toJavaList(ProductDetail.class);
+				for(ProductDetail pd : resDetails){
+					pd.setItemId(id.toString());
 				}
+				
+				/**
+				 * 从数据库查询的商品详情
+				 */
+				List<ProductDetail> findDetails = productDetailRepository.findByItemId(id.toString());
+				
+				if(!findDetails.equals(resDetails)){
+					//ClientSession session = client.startSession(options); 
+					
+					
+					productDetailRepository.deleteAll(findDetails);
+					productDetailRepository.saveAll(resDetails);
+				}
+				System.out.println("长度:" + resDetails.size() + "," + findDetails.size());
+
+				/*ProductDetail pd = productDetailRepository.findByItemId(id.toString());
+				System.out.println(res);
+				System.out.println(details);
+				JSONObject o = new JSONObject();
+				o.put("pd", pd);*/
 			}
 		}
 	}
