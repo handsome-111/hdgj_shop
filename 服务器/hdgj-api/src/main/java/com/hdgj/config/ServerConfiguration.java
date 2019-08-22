@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
- 
+
 import com.alibaba.fastjson.JSONObject;
 import com.weidian.open.sdk.AbstractWeidianClient;
 import com.weidian.open.sdk.DefaultWeidianClient;
@@ -24,7 +26,10 @@ public class ServerConfiguration {
 	private String secret;
 	
 	
-
+	@Bean
+    MongoTransactionManager transactionManager(MongoDbFactory dbFactory) {  
+        return new MongoTransactionManager(dbFactory);
+    }
 	
 	@Bean	
     public RestTemplate restTemplate() {

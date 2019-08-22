@@ -9,4 +9,6 @@ import com.hdgj.entity.ProductDetail;
 
 public interface ProductDetailRepository extends PagingAndSortingRepository<ProductDetail,String>{
 	List<ProductDetail> findByItemId(String itemId);
+	
+	Number deleteByItemId(String itemId);
 }

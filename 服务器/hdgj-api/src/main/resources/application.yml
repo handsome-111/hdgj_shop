@@ -24,8 +24,16 @@ spring:
   data:
     mongodb:
       uri: mongodb://hdgj:123456@127.0.0.1:27017/hdgj
-      
-        
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          beans
+
+
+
 mybatis-plus: 
   mapper-locations: classpath:mapper/*.xml
     

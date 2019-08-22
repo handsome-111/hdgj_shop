@@ -51,9 +51,9 @@ public class ProductDetail {
 		JSONObject thisJson = (JSONObject) JSONObject.toJSON(this);
 		thisJson.remove("id");
 		objJson.remove("id");
-		System.out.println(thisJson);
+		/*System.out.println(thisJson);
 		System.out.println(objJson);
-		System.out.println("是否相等:" + objJson.equals(thisJson));
+		System.out.println("是否相等:" + objJson.equals(thisJson));*/
 		return objJson.equals(thisJson);
 	}
 
@@ -124,7 +124,7 @@ public class ProductDetail {
 
 	@Override
 	public String toString() {
-		return "ProductDetail [id=" + id + ", itemId=" + itemId + ", text=" + text + ", type=" + type + ", pos=" + pos
+		return "ProductDetail [itemId=" + itemId + ", text=" + text + ", type=" + type + ", pos=" + pos
 				+ ", faceurl=" + faceurl + ", videoType=" + videoType + ", url=" + url + "]";
 	}
 

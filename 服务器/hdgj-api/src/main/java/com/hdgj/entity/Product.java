@@ -128,7 +128,6 @@ public class Product implements Serializable{
 	private Number buyStock;
 	
 	@Field("item_detail")
-	@DBRef
 	private List<ProductDetail> itemDetail;
 
 	/**

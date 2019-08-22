@@ -1,18 +1,15 @@
 package com.hdgj.other.vd;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.hdgj.entity.ProductDetail;
 import com.hdgj.other.vd.api.ProductService;
 import com.hdgj.other.vd.service.SyncVdService;
+import com.mongodb.ClientSessionOptions;
+import com.mongodb.MongoClient;
+import com.mongodb.session.ClientSession;
 import com.weidian.open.sdk.exception.OpenException;
 
 /**
@@ -29,14 +26,24 @@ public class SyncVdScheduler {
 	@Autowired
 	private SyncVdService syncVdService;
 	
+	@Autowired
+	private MongoClient client;
+	
+	private MongoTemplate template;
+	
 	/**
 	 * 同步微店商品
 	 * @throws OpenException 
 	 */
 	@Scheduled(initialDelayString = "${jobs.initialDelay}",fixedRateString="${jobs.fixedRate}")
 	public void synVdProducts() throws OpenException,Exception{	
+		ClientSessionOptions sessionOptions = ClientSessionOptions.builder()
+			    .causallyConsistent(true)
+			    .build();
+
+			ClientSession session = client.startSession(sessionOptions);
 		//syncVdService.syncVdProduct();
-		syncVdService.syncVdProductDetail();
+		//syncVdService.syncVdProductDetail();
 		//syncVdService.test4();
 		//syncVdService.test3();
 		//syncVdService.syncSkuAttr();

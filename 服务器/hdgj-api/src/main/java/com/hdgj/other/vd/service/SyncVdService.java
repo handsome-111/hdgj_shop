@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
@@ -27,6 +28,9 @@ import com.hdgj.entity.repository.ProductDetailRepository;
 import com.hdgj.entity.repository.ProductRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductService;
+import com.mongodb.ClientSessionOptions;
+import com.mongodb.MongoClient;
+import com.mongodb.session.ClientSession;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -55,6 +59,9 @@ public class SyncVdService {
 	
 	@Autowired
 	private ProductDetailRepository productDetailRepository;
+	
+	@Autowired
+	private MongoClient mongoClient;
 	
 	/**
 	 * 同步商品的型号属性
@@ -120,6 +127,7 @@ public class SyncVdService {
 	/**
 	 * 同步商品详情
 	 */
+	@Transactional
 	public void syncVdProductDetail() throws Exception{
 		/**
 		 * 获取分页和总数
@@ -133,7 +141,6 @@ public class SyncVdService {
 		for(int i = 0;i < page; i++){
 			//读取所有的商品ID
 			List<JSONObject> itemIds = productRepository.findAllBy(PageRequest.of(i, 30));
-			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
 			
 			List<String> ids = new ArrayList<String>();
 			for(JSONObject id : itemIds){
@@ -145,46 +152,33 @@ public class SyncVdService {
 			 */
 			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
 			Iterator ite = items.iterator();
+			
+			/**
+			 * 迭代获取所有的商品详情
+			 */
 			while(ite.hasNext()){
 				JSONObject item = (JSONObject) ite.next();
-				List<ProductDetail> details = item.getJSONArray("item_detail").toJavaList(ProductDetail.class);
-			}
-			
-			/*for(String jsonId : items){
-				JSONObject idObject = JSONObject.parseObject(jsonId);
-				Number id = idObject.getLong("_id");
+				//调用api获取的的商品详情
+				List<ProductDetail> resDetails = item.getJSONArray("item_detail").toJavaList(ProductDetail.class);
+				//从本地数据库查询的商品详情
+				List<ProductDetail> findDetails = productDetailRepository.findByItemId(item.getString("id"));
 				
-				*//**
-				 * 从微店读取出来的商品详情，这个地方会调用好多次接口
-				 *//*
-				JSONObject res = productService.weidianGetItems(id);
-				System.out.println(res);
-				JSONArray details = res.getJSONObject("result").getJSONObject("result").getJSONArray("detail_content");				
-				List<ProductDetail> resDetails = details.toJavaList(ProductDetail.class);
 				for(ProductDetail pd : resDetails){
-					pd.setItemId(id.toString());
+					pd.setItemId(item.getString("id"));
 				}
 				
-				*//**
-				 * 从数据库查询的商品详情
-				 *//*
-				List<ProductDetail> findDetails = productDetailRepository.findByItemId(id.toString());
-				
-				if(!findDetails.equals(resDetails)){
-					//ClientSession session = client.startSession(options); 
+				if(!resDetails.equals(findDetails)){
+					//ClientSession session = mongoClient.startSession(options); 
 					
-					
-					productDetailRepository.deleteAll(findDetails);
+					System.out.println(1);
+					productDetailRepository.deleteByItemId(item.getString("id"));
+					//int a = 1 / 0;
 					productDetailRepository.saveAll(resDetails);
 				}
-				System.out.println("长度:" + resDetails.size() + "," + findDetails.size());
-
-				ProductDetail pd = productDetailRepository.findByItemId(id.toString());
-				System.out.println(res);
-				System.out.println(details);
-				JSONObject o = new JSONObject();
-				o.put("pd", pd);
-			}*/
+				System.out.println(resDetails);
+				System.out.println(findDetails);
+				System.out.println(resDetails.equals(findDetails));
+			}
 		}
 	}
 	

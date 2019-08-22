@@ -97,8 +97,9 @@ public class ProductService extends BaseService{
 		}
 		ids.deleteCharAt(ids.length() -1 );
 		
+		System.out.println(ids);
 		
-	    Map< String, Object> map = new HashMap< String, Object>();
+	    Map<String, Object> map = new HashMap< String, Object>();
 	    map.put("ids", ids);
 	    map.put("need_idno", need_idno);
 	    super.removeNullValue(map);
