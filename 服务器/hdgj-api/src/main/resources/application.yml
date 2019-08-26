@@ -23,7 +23,7 @@ spring:
         
   data:
     mongodb:
-      uri: mongodb://hdgj:123456@127.0.0.1:27017/hdgj?replicaSet=rs,mongodb://hdgj:123456@127.0.0.1:27018/hdgj
+      uri: mongodb://127.0.0.1:27017/hdgj?replSet=rs0,mongodb://127.0.0.1:27018/hdgj
 
 management:
   endpoints:

@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
@@ -27,10 +26,8 @@ import com.hdgj.entity.repository.ModelAttrRepository;
 import com.hdgj.entity.repository.ProductDetailRepository;
 import com.hdgj.entity.repository.ProductRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
+import com.hdgj.other.vd.api.ProductDetailService;
 import com.hdgj.other.vd.api.ProductService;
-import com.mongodb.ClientSessionOptions;
-import com.mongodb.MongoClient;
-import com.mongodb.session.ClientSession;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -61,7 +58,7 @@ public class SyncVdService {
 	private ProductDetailRepository productDetailRepository;
 
 	@Autowired
-	private MongoClient mongoClient;
+	private ProductDetailService productDetailService;
 
 	/**
 	 * 同步商品的型号属性
@@ -123,7 +120,6 @@ public class SyncVdService {
 	/**
 	 * 同步商品详情
 	 */
-	@Transactional
 	public void syncVdProductDetail() throws Exception {
 		/**
 		 * 获取分页和总数
@@ -165,18 +161,12 @@ public class SyncVdService {
 					pd.setItemId(item.getString("id"));
 				}
 
+				/**
+				 * 如果不相等，则同步，先删除再保存
+				 */
 				if (!resDetails.equals(findDetails)) {
-					// ClientSession session =
-					// mongoClient.startSession(options);
-
-					System.out.println(1);
-					productDetailRepository.deleteByItemId(item.getString("id"));
-					// int a = 1 / 0;
-					productDetailRepository.saveAll(resDetails);
+					productDetailService.delAndSave(item.getString("id"), resDetails);
 				}
-				System.out.println(resDetails);
-				System.out.println(findDetails);
-				System.out.println(resDetails.equals(findDetails));
 			}
 		}
 	}
