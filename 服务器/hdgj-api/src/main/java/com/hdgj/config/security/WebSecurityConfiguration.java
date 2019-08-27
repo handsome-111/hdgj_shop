@@ -1,4 +1,4 @@
-package com.hdgj.config;
+package com.hdgj.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,15 +20,24 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http
-    		.authorizeRequests()
+    		/**
+    		 * 配置授权
+    		 */
+    		.authorizeRequests()	
 	    		.antMatchers("/static/**").permitAll()
 	    		.antMatchers("/").permitAll()
 	    		.antMatchers("/user").hasRole("USER")
     		.and()
-    		.formLogin().loginPage("/login").failureUrl("/login-error")
+    		/**
+    		 * 配置表单
+    		 */
+    		.formLogin()
+    			.loginPage("/login")//.failureUrl("/login-error")		//登录页面
+    			.loginProcessingUrl("/authentication/form")				//处理登录的请求，要用usernamepassword过滤器来处理这个请求
     		.and()
     		.exceptionHandling().accessDeniedPage("/401");		//异常处理重定向到401
     	

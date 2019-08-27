@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hdgj.service.LoginService;
 
@@ -22,10 +23,11 @@ public class MainController {
 		return "首页" + vdToken ;
 	}
 	
-	/*@RequestMapping("/login")
-	public String login(){
-		return "登录页面";
-	}*/
+	@RequestMapping("/login")
+	public ModelAndView login(){
+		ModelAndView mav = new ModelAndView("/login.html");
+		return mav;
+	}
 	
 	
 	@RequestMapping("/wxLogin")
