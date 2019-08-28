@@ -53,10 +53,10 @@
        	<version>3.0.1</version>
   		</dependency>
 	<!-- mybatais plus-->
-       <dependency>
-  			<groupId>com.baomidou</groupId>
-   		<artifactId>mybatis-plus</artifactId>
-   		<version>3.0.3</version>
+    <dependency>
+		<groupId>com.baomidou</groupId>
+		<artifactId>mybatis-plus</artifactId>
+		<version>3.0.3</version>
 	</dependency> 
     <dependency>
         <groupId>com.h2database</groupId>
@@ -104,6 +104,21 @@
   
   
   <build>
+  	<!-- 扫描到mybatis的配置文件和yml文件-->
+  	<resources>
+  		<resource>
+		  	<directory>src/main/java</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes> 
+		</resource>
+		<resource>
+		  	<directory>src/main/resources</directory>
+			<includes>
+				<include>**/**</include>
+			</includes>
+		</resource>
+  	</resources> 
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

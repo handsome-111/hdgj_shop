@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdgj.mapper.CustomerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hdgj.entity.Customer">
+        <id column="id" property="id" />
+        <result column="password_reset_token" property="passwordResetToken" />
+        <result column="email" property="email" />
+        <result column="username" property="username" />
+        <result column="is_subscribed" property="isSubscribed" />
+        <result column="auth_key" property="authKey" />
+        <result column="status" property="status" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="password" property="password" />
+        <result column="birth_date" property="birthDate" />
+        <result column="favorite_product_count" property="favoriteProductCount" />
+        <result column="type" property="type" />
+        <result column="access_token_created_at" property="accessTokenCreatedAt" />
+        <result column="allowance" property="allowance" />
+        <result column="allowance_updated_at" property="allowanceUpdatedAt" />
+        <result column="phone" property="phone" />
+    </resultMap>
+	
+	<!-- 获取流量包 -->
+	<select id="getCustomerAll" resultType="com.hdgj.entity.Customer">
+		SELECT * FROM customer 
+	</select>
+</mapper>

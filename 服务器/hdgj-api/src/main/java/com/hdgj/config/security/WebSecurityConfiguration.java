@@ -38,7 +38,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     		.formLogin()
     			.loginPage("/login")//.failureUrl("/login-error")		//登录页面
     			.loginProcessingUrl("/authentication/form")				//处理登录的请求，要用usernamepassword过滤器来处理这个请求
-    		.and()
+    			.successForwardUrl("/loginSuccess")
+    			.and()
     		.exceptionHandling().accessDeniedPage("/401");		//异常处理重定向到401
     	
     	http.logout().logoutSuccessUrl("/");
