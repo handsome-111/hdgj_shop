@@ -23,7 +23,7 @@
         <result column="phone" property="phone" />
     </resultMap>
 	
-	<!-- 获取流量包 -->
+	
 	<select id="getCustomerAll" resultType="com.hdgj.entity.Customer">
 		SELECT * FROM customer 
 	</select>

@@ -24,13 +24,16 @@ public class CustomerController {
 	@Autowired
 	private CustomerMapper customerMapper;
 	
+	@Autowired
+	
 	@RequestMapping("/c")
 	public String t(){
-		/*QueryWrapper query = new QueryWrapper();
+		QueryWrapper query = new QueryWrapper();
 		query.eq("username", "123465");
-		Customer customer = customerMapper.selectOne(query);*/
-		customerMapper.getCustomerAll();
+		Customer customer = customerMapper.selectOne(query);
+		customerMapper.getCustomerAll();	
 		return "goood";
+
 	}
 }
 
