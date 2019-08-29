@@ -1,6 +1,5 @@
 create table customer(
  	id 						int(20) 		unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  	password_hash 			varchar(80) 		DEFAULT NULL COMMENT '密码',
   	password_reset_token 		varchar(60) 	DEFAULT NULL COMMENT '密码token',
   	email 					varchar(60) 		DEFAULT NULL COMMENT '邮箱',
   	name 						varchar(100) 	DEFAULT NULL,
@@ -19,6 +18,10 @@ create table customer(
   	phone						varchar(20) 	COMMENT '手机号',
   	wxoppen_id				varchar(100) 		COMMENT '微信的oppenid'
 )COMMENT '用户表';
+
+customer删除的字段:
+	  	password_hash 			varchar(80) 		DEFAULT NULL COMMENT '密码',
+
 
 create table customer_address (
  	  address_id 			int(15) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -41,6 +44,10 @@ create table customer_address (
 	  idCardNo			varchar(50) COMMENT '身份证号'
 )comment '用户地址表';
 
+create table role(
+	id 						int 	not null AUTO_INCREMENT PRIMARY KEY,
+	rolename  			varchar(30)   NOT NULL COMMENT '权限名称'
+) comment '权限表';
 
 CREATE TABLE order(	
 		buyer_id 				varchar(100) 			买家ID
