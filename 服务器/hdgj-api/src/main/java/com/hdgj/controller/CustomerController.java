@@ -2,8 +2,8 @@ package com.hdgj.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hdgj.entity.Customer;
@@ -17,21 +17,20 @@ import com.hdgj.mapper.CustomerMapper;
  * @author Mr.hj
  * @since 2019-08-28
  */
-@Controller
+@RestController
 @RequestMapping("/customer")
 public class CustomerController {
 	
 	@Autowired
 	private CustomerMapper customerMapper;
-	
-	@Autowired
-	
+		
 	@RequestMapping("/c")
 	public String t(){
 		QueryWrapper query = new QueryWrapper();
-		query.eq("username", "123465");
+		query.eq("username", "aaa");
 		Customer customer = customerMapper.selectOne(query);
-		customerMapper.getCustomerAll();	
+		Customer cus = customerMapper.selectOne(query);	
+		System.out.println(cus);
 		return "goood";
 
 	}

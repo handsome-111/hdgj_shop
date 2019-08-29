@@ -18,5 +18,4 @@ import com.hdgj.entity.Customer;
 @Mapper
 public interface CustomerMapper extends BaseMapper<Customer> {
 	
-	List<Customer> getCustomerAll();
 }

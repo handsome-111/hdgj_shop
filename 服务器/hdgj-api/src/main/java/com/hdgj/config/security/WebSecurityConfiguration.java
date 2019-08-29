@@ -30,14 +30,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     		.authorizeRequests()	
 	    		.antMatchers("/static/**").permitAll()
 	    		.antMatchers("/").permitAll()
-	    		.antMatchers("/user").hasRole("USER")
+	    		.antMatchers("/user/*").hasRole("USER")
+	    		.antMatchers("/customer/*").hasRole("USER")
     		.and()
     		/**
-    		 * 配置表单
+    		 * 配置表单,如果调用以上需要权限的接口,则
     		 */
-    		.formLogin()
-    			.loginPage("/login")//.failureUrl("/login-error")		//登录页面
-    			.loginProcessingUrl("/authentication/form")				//处理登录的请求，要用usernamepassword过滤器来处理这个请求
+    		.formLogin() 
+    			.loginPage("/login")		//登录页面
+    			.failureUrl("/login-error")		
+    			.loginProcessingUrl("/authentication/form2")				//自定义处理登录的请求,这时就不需要successForwardUrl了
     			.successForwardUrl("/loginSuccess")
     			.and()
     		.exceptionHandling().accessDeniedPage("/401");		//异常处理重定向到401

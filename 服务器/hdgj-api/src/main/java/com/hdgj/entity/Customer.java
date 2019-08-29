@@ -2,7 +2,9 @@ package com.hdgj.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -98,6 +100,7 @@ public class Customer implements UserDetails,Serializable{
      */
     private String phone;
 
+    private String roles;
 
     public Integer getId() {
         return id;
@@ -245,10 +248,19 @@ public class Customer implements UserDetails,Serializable{
 				+ ", allowanceUpdatedAt=" + allowanceUpdatedAt + ", phone=" + phone + "]";
 	}
 
+	/**
+	 * 返回用户拥有的权限
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Role> authorities = new ArrayList<Role>();
+		String[] rls = roles.split(",");
+		for(String str : rls){
+			Role role = new Role(str);
+			authorities.add(role);
+
+		}
+		return authorities;
 	}
 
 	@Override

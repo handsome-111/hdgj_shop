@@ -22,9 +22,4 @@
         <result column="allowance_updated_at" property="allowanceUpdatedAt" />
         <result column="phone" property="phone" />
     </resultMap>
-	
-	
-	<select id="getCustomerAll" resultType="com.hdgj.entity.Customer">
-		SELECT * FROM customer 
-	</select>
 </mapper>
