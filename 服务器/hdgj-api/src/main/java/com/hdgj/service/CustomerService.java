@@ -23,4 +23,8 @@ public class CustomerService {
 		query.eq("username", username);
 		return customerMapper.selectOne(query);
 	}
+	
+	public int registerCustomer(Customer customer){
+		return customerMapper.insert(customer);
+	}
 }

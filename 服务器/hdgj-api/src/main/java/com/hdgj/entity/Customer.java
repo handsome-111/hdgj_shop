@@ -100,7 +100,7 @@ public class Customer implements UserDetails,Serializable{
      */
     private String phone;
 
-    private List<Role> roles;
+    private String roles;
 
     public Integer getId() {
         return id;
@@ -253,7 +253,23 @@ public class Customer implements UserDetails,Serializable{
 	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<Role> rls = new ArrayList<Role>();
+		String[] s = roles.split(",");
+		for(String str : s){
+			Role role = new Role(str);
+			rls.add(role);
+		}
+		return rls;
+	}
+	
+	
+
+	public String getRoles() {
 		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
 	}
 
 	@Override

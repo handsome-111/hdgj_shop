@@ -23,7 +23,7 @@ public class CodeGenerator {
      * @Description: 生成
      * @param args
      */
-    public static void main(String[] args) {
+    public static void str(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置

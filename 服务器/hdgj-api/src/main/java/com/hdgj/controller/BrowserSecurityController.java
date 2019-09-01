@@ -53,11 +53,6 @@ public class BrowserSecurityController{
 		
 	}
 	
-	@GetMapping("/authentication/form2")
-	public String loginProcessing(){
-		System.out.println("处理登录请求1");
-		return "处理登陆请求1";
-	}
 	
 	@RequestMapping("/loginSuccess")
 	public String success(){

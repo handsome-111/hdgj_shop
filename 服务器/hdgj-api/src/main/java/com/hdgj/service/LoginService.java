@@ -3,8 +3,13 @@ package com.hdgj.service;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+
+import com.hdgj.entity.Customer;
 
 @Service
 public class LoginService {
@@ -20,6 +25,8 @@ public class LoginService {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	
 	/**
 	 * 微信登陆
 	 * @return
@@ -39,6 +46,9 @@ public class LoginService {
 		String response = restTemplate.getForObject(uri.toString(), String.class);
 		return response;
 	}
+	
+	
+	
 }
 
 

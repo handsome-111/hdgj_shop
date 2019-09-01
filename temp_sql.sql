@@ -8,7 +8,7 @@ create table customer(
   	status 					int(5) 				DEFAULT NULL COMMENT '状态',
   	created_at 				int(18) 			DEFAULT NULL COMMENT '创建时间',
   	updated_at 				int(18) 			DEFAULT NULL COMMENT '更新时间',
-  	password 					varchar(50) 	DEFAULT NULL COMMENT '密码',
+  	password 					varchar(256) 	DEFAULT NULL COMMENT '密码',
   	birth_date 				datetime 			DEFAULT NULL COMMENT '出生日期',
   	favorite_product_count 	int(15) 			NOT NULL DEFAULT '0' COMMENT '用户收藏的产品的总数',
   	type 						varchar(35) 	DEFAULT 'default' COMMENT '默认为default，如果是第三方登录，譬如google账号登录注册，那么这里的值为google',
@@ -16,7 +16,8 @@ create table customer(
   	allowance 				int(20) 			DEFAULT NULL COMMENT '限制次数访问',
   	allowance_updated_at 		int(20) 		DEFAULT NULL,
   	phone						varchar(20) 	COMMENT '手机号',
-  	wxoppen_id				varchar(100) 		COMMENT '微信的oppenid'
+  	wxoppen_id				varchar(100) 		COMMENT '微信的oppenid',
+  	roles	 				varchar(50)			COMMENT '角色权限'
 )COMMENT '用户表';
 
 customer删除的字段:

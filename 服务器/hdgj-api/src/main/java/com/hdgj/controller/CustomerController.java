@@ -31,6 +31,7 @@ public class CustomerController {
 		Customer customer = customerMapper.selectOne(query);
 		Customer cus = customerMapper.selectOne(query);	
 		System.out.println(cus);
+		System.out.println(cus.getAuthorities());
 		return "goood";
 
 	}
