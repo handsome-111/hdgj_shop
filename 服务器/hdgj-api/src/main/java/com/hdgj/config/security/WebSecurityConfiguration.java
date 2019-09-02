@@ -11,9 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration
+/*@Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)*/
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -35,6 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    		.antMatchers("/").permitAll()
 	    		.antMatchers("/user/*").hasRole("USER")
 	    		.antMatchers("/customer/*").hasRole("USER")
+	    		.antMatchers("/test/*").authenticated()
     		.and()
     		/**
     		 * 配置表单,如果调用以上需要权限的接口,则
@@ -53,11 +54,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     
     /**
-     * 配置
+     * 认证管理器配置
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	System.out.println("执行？");
     	auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
     }
     
