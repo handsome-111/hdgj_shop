@@ -37,11 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/test/**").permitAll();
-	}
+	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

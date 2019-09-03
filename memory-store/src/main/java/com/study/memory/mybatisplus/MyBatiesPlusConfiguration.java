@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 
-@Configuration
-@MapperScan("com.seawaterbt.ssm.mapper*")
+/*@Configuration
+@MapperScan("com.seawaterbt.ssm.mapper*")*/
 public class MyBatiesPlusConfiguration {
 	
 	
