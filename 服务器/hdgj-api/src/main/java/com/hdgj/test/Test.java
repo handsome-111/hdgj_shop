@@ -1,14 +1,11 @@
 package com.hdgj.test;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.alibaba.fastjson.JSONObject;
 
 public class Test {
 	public static void main(String[] args) {
-		String str = "ADMIN,USER,ABB,CCC";
-		String[] s = str.split(",");
-		for(String st : s){
-			System.out.println(st);
-		}
+		String str = "{\"a\":\"b\",\"openid\":\"oFyDr4m6n1FwFUZJBwNztItuERfE\"}";
+		JSONObject js = (JSONObject) JSONObject.parseObject(str);
+		System.out.println(js.get("aaa"));
 	}
 }

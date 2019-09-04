@@ -1,4 +1,4 @@
-package com.hdgj.config.security;
+/*package com.hdgj.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 @Configuration
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-	/*// 声明bean
+	// 声明bean
 	@Bean(name = "hdgjDataSource")
 	// 指明读取的配置
 	@ConfigurationProperties(prefix = "spring.datasource.hdgj")
@@ -61,5 +61,5 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 读取客户端配置
         clients.withClientDetails(jdbcClientDetails());
-    }*/
-}
+    }
+}*/

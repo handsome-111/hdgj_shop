@@ -15,10 +15,10 @@
 <!-- 菜单  -->
 <view class="menu">
   <block wx:for="{{menu}}" wx:key="{{item.src}}">
-    <view>
+    <navigator url="">
       <image src="{{item.src}}"></image>
       <span>{{item.title}}</span>  
-    </view>
+    </navigator >
   </block>
   
 </view>

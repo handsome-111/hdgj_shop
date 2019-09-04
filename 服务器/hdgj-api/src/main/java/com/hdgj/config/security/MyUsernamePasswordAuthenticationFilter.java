@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+/*public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     
     public MyUsernamePasswordAuthenticationFilter() {
          //拦截url为 "/login" 的POST请求
@@ -49,4 +49,4 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
-}
+}*/

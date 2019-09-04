@@ -35,5 +35,40 @@ App({
   },
   globalData: {
     userInfo: null
+  },
+  /**
+   * 用户登陆
+   */
+  login: function(){
+    wx.login({
+      success: function (res) {
+        /**
+         * 发出请求授权登陆
+         **/
+        wx.request({
+          url: 'http://127.0.0.1/wxLogin',
+          data: {
+            //用户登录凭证（有效期五分钟）。开发者需要在开发者服务器后台调用 auth.code2Session，使用 code 换取 openid 和 session_key 等信息
+            js_code: res.code,  
+          },
+          success: function (res) {
+            console.log(res)
+          }
+        })
+      }   
+    })    
+  },
+  /** 
+   * checkSession 
+   */
+  checkSession:function(){
+    wx.checkSession({ 
+      success: () => { 
+ 
+      },  
+      fail: () => {
+        app.login();
+      }
+    })
   }
 })

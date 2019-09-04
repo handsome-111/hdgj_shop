@@ -11,9 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-/*@Configuration
+@Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)*/
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -35,16 +35,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    		.antMatchers("/").permitAll()
 	    		.antMatchers("/user/*").hasRole("USER")
 	    		.antMatchers("/customer/*").hasRole("USER")
-	    		.antMatchers("/test/*").authenticated()
+	    		.anyRequest().permitAll()		//其他请求都不需要认证
     		.and()
     		/**
     		 * 配置表单,如果调用以上需要权限的接口,则
     		 */
     		.formLogin() 
     			//.loginPage("/login")		//登录页面
-    			.failureUrl("/login-error")		
+    			//.failureUrl("/login-error")		
     			//.loginProcessingUrl("/authentication/form")				//自定义处理登录的请求,这时就不需要successForwardUrl了
-    			.successForwardUrl("/loginSuccess")
+    			//.successForwardUrl("/loginSuccess")
     			.and()
     		.exceptionHandling().accessDeniedPage("/401");		//异常处理重定向到401
     	
@@ -61,12 +61,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     	auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
     }
     
-    /**
-     * 认证管理器
-     */
-    @Override
-    @Bean
-    protected AuthenticationManager authenticationManager() throws Exception {
-    	return super.authenticationManager();
-    }
+
 } 

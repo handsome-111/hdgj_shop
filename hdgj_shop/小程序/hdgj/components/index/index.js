@@ -1,34 +1,17 @@
 // components/index/index.js
+const app = getApp();
+
 Component({
   created: function (){
-
-    /**
-     * 用户登录
-     */
-    wx.login({
-      success:function(res){
-        /**
-         * 发出请求授权登陆
-         **/
-        wx.request({
-          url: 'http://127.0.0.1/wxLogin',
-          data:{ 
-            js_code:res.code,
-          },
-          success:function(res){
-            console.log(res)  
-          }
-        })
-      }
-    })
+    app.login();
   },
   pageLifetimes: {
     show() {
       // if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       //   this.getTabBar().setData({
       //     selected: 0
-      //   })
-      // }
+      //   }) 
+      // } 
 
     }
   },

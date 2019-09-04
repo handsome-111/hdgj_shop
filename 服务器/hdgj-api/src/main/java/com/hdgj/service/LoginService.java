@@ -1,15 +1,23 @@
 package com.hdgj.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.StringRedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import com.hdgj.entity.Customer;
+import com.alibaba.fastjson.JSONObject;
+import com.hdgj.entity.User;
 
 @Service
 public class LoginService {
@@ -25,6 +33,12 @@ public class LoginService {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private StringRedisTemplate redis;
+	
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	
 	/**
@@ -43,8 +57,48 @@ public class LoginService {
 		uri.setScheme("https");		
 		
 		System.out.println(uri.toString());
-		String response = restTemplate.getForObject(uri.toString(), String.class);
-		return response;
+		System.out.println("redis:" + redis + "redisTemplate:" + redisTemplate);
+		/**
+		 * 获取响应信息,并转换成JSON对象
+		 * response:{"openid":"oFyDr4m6n1FwFUZJBwNztItuERfE","session_key":"1gBBoh1y9V4iUDZEoSKh0g=="}
+		 */
+		String res = restTemplate.getForObject(uri.toString(), String.class);
+		JSONObject resObject = JSONObject.parseObject(res);
+		
+		String sessionKey = resObject.getString("session_key");
+		String openid = resObject.getString("openid");
+		
+		/**
+		 * 请求失败,直接返回
+		 */
+		if(sessionKey == null){
+			return null;
+		}
+		
+		/**
+		 * 向数据库查询用户信息,并缓存
+		 * 成功响应,直接缓存会话信息
+		 */
+		User user = new User();
+		user.setPassword("123456");
+		user.setUsername("amazingJ");
+		user.setPhone("123465789");
+		user.setOpenid(openid);
+		
+		/**
+		 * 缓存用户的会话
+		 */
+		Map<String,Object> userSession = new HashMap<String,Object>();
+		userSession.put("user",user);
+		userSession.put("sessionKey",sessionKey);		//存储sessionKey
+		
+		/**
+		 * 缓存微信会话,如果二次登陆会直接覆盖掉原来的会话的
+		 */
+		redisTemplate.opsForHash().put("wx_session_key", openid , userSession);					
+		
+		System.out.println("response:" + resObject);
+		return "登陆成功";
 	}
 	
 	

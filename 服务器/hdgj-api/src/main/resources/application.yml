@@ -1,5 +1,5 @@
 server: 
-  port : 8080
+  port : 80
 
 spring:
   application:
@@ -7,9 +7,9 @@ spring:
   datasource: 
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3308/hdgj?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/hdgj?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
-    password: root
+    password: 123456
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
@@ -23,6 +23,12 @@ spring:
   data:
     mongodb:
       uri: mongodb://127.0.0.1:27017/hdgj?replSet=rs0,mongodb://127.0.0.1:27018/hdgj
+  
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+         
 
 management:
   endpoints:
@@ -30,18 +36,6 @@ management:
       exposure:
         include:
           beans
-
-security:
-  oauth2:
-    client:
-      clientId: bd1c0a783ccdd1c9b9e4
-      clientSecret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
-      accessTokenUri: https://github.com/login/oauth/access_token
-      userAuthorizationUri: https://github.com/login/oauth/authorize
-      clientAuthenticationScheme: form
-    resource:
-      userInfoUri: https://api.github.com/user
-      preferTokenInfo: false
 
 mybatis-plus: 
   mapper-locations: classpath:mapper/*Mapper.xml
