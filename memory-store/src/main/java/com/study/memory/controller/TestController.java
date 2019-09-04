@@ -5,7 +5,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/test")
 @RestController
 public class TestController {
 	
@@ -18,5 +17,10 @@ public class TestController {
 		String password = "123456";
 		
 		return passwordEncoder.encode(secret) + "," + passwordEncoder.encode(password) ;
+	}
+	
+	@RequestMapping("/t2")
+	public String t2(){
+		return "tt2";
 	}
 }

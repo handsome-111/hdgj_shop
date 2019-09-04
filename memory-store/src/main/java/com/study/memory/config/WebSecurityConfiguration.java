@@ -22,30 +22,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder(){
-		/*
-		 * 可以自定义加密方式
-		 * 具体可参考:PasswordEncoderFactories.createDelegatingPasswordEncoder()
-		  	encoders.put("ldap", new org.springframework.security.crypto.password.LdapShaPasswordEncoder());
-			encoders.put("MD4", new org.springframework.security.crypto.password.Md4PasswordEncoder());
-			encoders.put("MD5", new org.springframework.security.crypto.password.MessageDigestPasswordEncoder("MD5"));
-			encoders.put("noop", org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance());
-			encoders.put("pbkdf2", new Pbkdf2PasswordEncoder());
-			encoders.put("scrypt", new SCryptPasswordEncoder());
-			encoders.put("SHA-1", new org.springframework.security.crypto.password.MessageDigestPasswordEncoder("SHA-1"));
-			encoders.put("SHA-256", new org.springframework.security.crypto.password.MessageDigestPasswordEncoder("SHA-256"));
-			encoders.put("sha256", new org.springframework.security.crypto.password.StandardPasswordEncoder());
-		*/
 		return new BCryptPasswordEncoder();
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/").hasAuthority("SystemContent")
-	        .antMatchers("/view/**").hasAuthority("SystemContentView")
-	        .antMatchers("/insert/**").hasAuthority("SystemContentInsert")
-	        .antMatchers("/update/**").hasAuthority("SystemContentUpdate")
-	        .antMatchers("/delete/**").hasAuthority("SystemContentDelete");
 	}
 	
 	@Override
