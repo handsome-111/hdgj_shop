@@ -3,7 +3,6 @@ const app = getApp();
 
 Component({
   created: function (){
-    app.login();
   },
   pageLifetimes: {
     show() {

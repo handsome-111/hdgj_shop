@@ -1,8 +1,9 @@
 <!--components/index/index.wxml-->
 <search></search>
 <!-- 轮播图  -->
+
 <swiper class="carousel" indicator-dots="true"
-  autoplay="true" interval="5000" duration="500" circular="true">
+  autoplay="true" interval="5000" duration="500" circular="true"> 
     <block wx:for="{{swiper_block}}">
       <swiper-item>
         <navigator class="swiper_image" url="{{item.url}}" open-type="navigate"> 
@@ -11,7 +12,6 @@
       </swiper-item>
     </block>
 </swiper>
-
 <!-- 菜单  -->
 <view class="menu">
   <block wx:for="{{menu}}" wx:key="{{item.src}}">

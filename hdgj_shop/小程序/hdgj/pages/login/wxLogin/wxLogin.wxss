@@ -1,0 +1,48 @@
+/* pages/login/wxLogin/wxLogin.wxss */
+.main{
+  width: 100%;
+}
+.main open-data,button,navigator{
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+  
+}
+
+.main open-data:nth-of-type(1){
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  border: 5px solid rgba(175, 164, 164, 0.329);
+}
+
+.main open-data:nth-of-type(2){
+  margin-bottom:3rem
+}
+
+.main navigator:nth-of-type(1){
+  border-radius: 3rem;
+  width: 90vw;
+  height: 3rem;
+  background-color: green;
+  color: white;
+  line-height: 3rem;
+  font-size: 1rem;
+}
+
+.main navigator{
+  border-radius: 3rem;
+  width: 90vw;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1rem;
+}
+
+image{
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+}

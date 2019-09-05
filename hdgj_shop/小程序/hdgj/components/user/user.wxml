@@ -1,17 +1,18 @@
 <!--components/user/user.wxml-->
 <view class='page'>
   <view class='userInfo'>
+      <navigator url='/pages/login/wxLogin/wxLogin'>登录/注册</navigator>
+
     <open-data type="userNickName" lang="zh_CN"></open-data>
     <open-data type="userCity" lang="zh_CN"></open-data>
     <open-data type="userProvince" lang="zh_CN"></open-data>
-
+    <open-data type="userAvatarUrl" lang="zh_CN"></open-data>
     <view class='vip'>
-      
-    </view>
+    </view> 
   </view>
-  <view class='main'>
+  <view class='main'> 
     <view class='list-top border-box-standard'>
-      <p >
+      <p>
         <span>商品订单</span>
         <span class='iconfont icon-icon--'></span>
       </p>

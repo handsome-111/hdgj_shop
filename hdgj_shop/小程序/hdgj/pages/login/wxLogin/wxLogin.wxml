@@ -1,0 +1,7 @@
+<!--pages/login/wxLogin/wxLogin.wxml-->
+<view class='main'>
+  <open-data class="a" type="userAvatarUrl" default-avatar/>
+  <open-data type="userNickName"></open-data>
+  <navigator bindtap='authorization'>微信快捷登陆</navigator>
+  <navigator>其他方式登录</navigator>
+</view>
