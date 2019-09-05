@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weidian.open.sdk.AbstractWeidianClient;
@@ -36,6 +37,7 @@ public class ServerConfiguration {
     public RestTemplate restTemplate() {
 		return new RestTemplate();
     }
+	
 		
 	/**
 	 * 获取微店客户端

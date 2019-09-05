@@ -23,7 +23,7 @@ public class CodeGenerator {
      * @Description: 生成
      * @param args
      */
-    public static void str(String[] args) {
+    public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
@@ -39,7 +39,7 @@ public class CodeGenerator {
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setControllerName("%sController");
         gc.setServiceName("%sService");
-        //gc.setServiceImplName("%sServiceImpl");
+        gc.setServiceImplName("%sServiceImpl");
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
         mpg.setGlobalConfig(gc);
@@ -57,7 +57,7 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[] { "" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "role" }); // 需要生成的表
+        strategy.setInclude(new String[] { "user" }); // 需要生成的表
 
         strategy.setSuperServiceClass(null);
         strategy.setSuperServiceImplClass(null);
@@ -69,9 +69,9 @@ public class CodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("Test");
-        pc.setController("controller");
-        //pc.setService("service");
-       // pc.setServiceImpl("serviceImpl");
+        //pc.setController("controller");
+        pc.setService("service");
+        pc.setServiceImpl("serviceImpl");
         pc.setMapper("mapper");
         pc.setEntity("entity");
         pc.setXml("xml");

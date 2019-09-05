@@ -11,6 +11,7 @@ Component({
       //     selected: 0
       //   }) 
       // } 
+      console.log("userinfo:" + app.globalData.userInfo)
 
     }
   },

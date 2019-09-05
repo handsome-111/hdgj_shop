@@ -23,7 +23,7 @@
   margin-bottom:3rem
 }
 
-.main navigator:nth-of-type(1){
+.main button{
   border-radius: 3rem;
   width: 90vw;
   height: 3rem;

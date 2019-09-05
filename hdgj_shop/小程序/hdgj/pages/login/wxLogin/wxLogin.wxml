@@ -2,6 +2,6 @@
 <view class='main'>
   <open-data class="a" type="userAvatarUrl" default-avatar/>
   <open-data type="userNickName"></open-data>
-  <navigator bindtap='authorization'>微信快捷登陆</navigator>
+  <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">微信快捷登陆</button>
   <navigator>其他方式登录</navigator>
 </view>

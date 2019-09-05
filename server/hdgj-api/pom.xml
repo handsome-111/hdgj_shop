@@ -83,6 +83,11 @@
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/libs/opslabJutil-2.0.2.jar</systemPath>
 	</dependency>
+	<!-- WebClient -->
+	<dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
   </dependencies>
    
   

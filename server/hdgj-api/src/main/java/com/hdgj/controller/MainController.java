@@ -2,12 +2,15 @@ package com.hdgj.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.Customer;
+import com.hdgj.entity.User;
 import com.hdgj.service.CustomerService;
 import com.hdgj.service.LoginService;
 
@@ -59,7 +62,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/wxLogin")
-	public String wxLogin(@RequestParam String js_code){
-		return loginService.wxLogin(js_code);
+	public String wxLogin(@RequestParam String js_code,@RequestParam("userinfo") String userInfo){
+		System.out.println("jsonObject:" + userInfo);
+		return loginService.wxLogin(js_code,userInfo);
 	}
 }
