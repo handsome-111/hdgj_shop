@@ -66,6 +66,11 @@ public class User implements Serializable,UserDetails {
      * 更新时间
      */
     private LocalDateTime updateTime;
+    
+    /**
+     * 头像url
+     */
+    private String icon;
 
 
     public Integer getId() {
@@ -139,8 +144,17 @@ public class User implements Serializable,UserDetails {
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
+    
 
-    @Override
+    public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	@Override
     public String toString() {
         return "User{" +
         "id=" + id +

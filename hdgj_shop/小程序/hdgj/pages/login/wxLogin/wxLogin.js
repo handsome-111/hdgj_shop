@@ -65,13 +65,12 @@ Page({
 
   },
   onGotUserInfo: function(e){
-    app.login(e.detail.userInfo);
     app.globalData.userInfo = e.detail.userInfo;
     console.log(app.globalData.userInfo);
     // 获取用户信息
-    console.log(e.detail.errMsg  + "1")
-    console.log(e.detail.userInfo + '2')
-    console.log(e.detail.rawData + '3')
+    // console.log(e.detail.errMsg  + "1")
+    // console.log(e.detail.userInfo + '2')
+    // console.log(e.detail.rawData + '3')
     wx.switchTab({
       url: '/components/user/user'
     })

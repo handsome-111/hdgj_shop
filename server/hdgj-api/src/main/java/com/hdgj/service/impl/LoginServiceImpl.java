@@ -92,78 +92,33 @@ public class LoginServiceImpl implements LoginService{
 		if(user == null && userInfo != null && !"null".equals(userInfo) && !"".equals(userInfo)){
 			JSONObject jsonUser = new JSONObject().parseObject(userInfo);
 			
-			user = new User();
-			user.setOpenid(openid);
-			user.setNickname(jsonUser.getString("nickName"));
-			
 			String path = null;
 			try {
 				path = ResourceUtils.getURL("classpath:").getPath();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String dir = path + "/static/user/icons/";
-			String fileName = openid + ".jpg";
-			
-			File dirFile = new File(dir);
-			dirFile.mkdirs();
-			
-			System.out.println("路径：" + dir + fileName);
-
+			String relativePath =  "/static/user/icons/" + openid + ".jpg";
+			String filePath = path + relativePath;
+						
+			/**
+			 * 下载头像并保存至本地
+			 */
 			File file = restTemplate.execute(jsonUser.getString("avatarUrl"), HttpMethod.GET, null, clientHttpResponse -> {	
 				
-				
-			    File ret = new File(dir + fileName);
-			    //File.createTempFile(prefix, suffix);	
+			    File ret = new File(filePath);
 			    StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(ret));	
 			    return ret;	
 			});	
 			
-			System.out.println("file:" + file);
-
 			/**
-			 * 获取头像
-			 *//*
-			CloseableHttpClient  httpClient = HttpClientBuilder.create().build();
-			HttpGet httpGet = new HttpGet(jsonUser.getString("avatarUrl"));
-			
-			CloseableHttpResponse response = null;
-			try {
-				response = httpClient.execute(httpGet);
-				// 从响应模型中获取响应实体
-				HttpEntity responseEntity = response.getEntity();
-				InputStream iuput = responseEntity.getContent();
-				String path = ResourceUtils.getURL("classpath:").getPath();
-				String iconPath = path + "/static/user/icons/";
-				File icon = new File(iconPath + openid + ".jpg");
-				
-				
-				System.out.println("classpath路径：" + path);
-				File file = new File();
-				OutputStream out = new FileOutputStream();
-				
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					// 释放资源
-					if (httpClient != null) {
-						httpClient.close();
-					}
-					if (response != null) {
-						response.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}*/
-
-			
-			/*boolean register = userService.registerUser(user);
-			System.out.println("注册成功:" + register);*/
+			 * 注册用户
+			 */
+			user = new User();
+			user.setOpenid(openid);
+			user.setNickname(jsonUser.getString("nickName"));
+			user.setIcon(relativePath);
+			userService.registerUser(user);
 		}  
 		
 		
