@@ -7,8 +7,9 @@ App({
     wx.setStorageSync('logs', logs) 
      
   }, 
-  globalData: { 
-    userInfo: null
+  globalData: {  
+    userInfo: null,
+    serverHost:'localhost'
   },
   /**
    * 用户登陆
@@ -26,8 +27,8 @@ App({
             js_code: res.code,  
             userinfo:userInfo
           },  
-          success: function (response) { 
-             console.log(response) 
+          success: function (response) {
+             console.log(response)  
           }   
         })   
       }   

@@ -94,11 +94,12 @@ public class LoginServiceImpl implements LoginService{
 			
 			String path = null;
 			try {
-				path = ResourceUtils.getURL("classpath:").getPath();
+				//C://xxxxx/classes/static
+				path = ResourceUtils.getURL("classpath:").getPath() + "/static";
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			String relativePath =  "/static/user/icons/" + openid + ".jpg";
+			String relativePath =  "/user/icons/" + openid + ".jpg";
 			String filePath = path + relativePath;
 						
 			/**

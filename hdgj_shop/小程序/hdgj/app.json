@@ -1,6 +1,11 @@
 {
   "pages": [
-        "pages/login/wxLogin/wxLogin",
+        "components/user/user",
+        
+    "pages/login/wxLogin/wxLogin",
+    "pages/userRegister/userRegister",
+    "pages/login/phoneLogin/phoneLogin",
+    "pages/login/otherLogin/otherLogin",
     "components/index/index",
     "pages/newAddress/newAddress",
     "pages/goodsDetails/goodsDetails",
@@ -10,11 +15,10 @@
     "pages/orderDetails/orderDetails",
     "pages/addressManage/addressManage",
     "pages/userinfo/userinfo",
-    "components/user/user",
     "pages/goodsOrderList/noPay/noPay",
     "pages/goodsOrderList/waitAccept/waitAccept",
     "pages/goodsOrderList/waitSend/waitSend",
-    "components/cart/cart",
+    "components/cart/cart", 
     "components/category/category"
   ],
   "window": {

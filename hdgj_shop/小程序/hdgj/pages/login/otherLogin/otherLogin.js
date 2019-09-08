@@ -1,5 +1,4 @@
-// pages/login/wxLogin/wxLogin.js
-const app = getApp();
+// pages/login/otherLogin/otherLogin.js
 Page({
 
   /**
@@ -63,16 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  onGotUserInfo: function(e){
-    console.log(e.detail.userInfo);
-    // 获取用户信息
-    // console.log(e.detail.errMsg  + "1")
-    // console.log(e.detail.userInfo + '2')
-    // console.log(e.detail.rawData + '3')
-    app.login(e.detail.userInfo)
-    wx.switchTab({
-      url: '/components/user/user'
-    })
-  }  
+  }
 })

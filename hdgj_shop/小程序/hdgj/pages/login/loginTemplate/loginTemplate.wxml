@@ -1,0 +1,40 @@
+<!--pages/login/otherLogin/otherLogin.wxml-->
+<template name='loginTemplate'>
+<view class='main'>
+  <view class='page_top'>
+    <image src='/images/index/2.jpg'></image>
+    <view>
+      <input type='text'></input>
+    </view>
+    <view>
+      <input type='password' placeholder='请输入密码'></input>
+      <span>忘记密码</span>
+    </view>
+    <button>登陆</button>
+    <view>
+      <span>短信验证码登陆</span>
+      <span>新用户注册</span>
+    </view>
+  </view>
+
+  <view class='page_bottom'>
+    <view>
+      <span class='line'></span>
+      <span class="title">其他登录方式</span>
+      <span class='line'></span>
+    </view>
+    <view class='other_login'>
+      <button>
+        <image src='/images/index/2.jpg'></image>
+        <span>微信登陆</span>
+      </button>
+      <button>
+        <image src='/images/index/2.jpg'></image>
+        <span>QQ登陆</span>
+      </button>
+    </view>
+  </view>
+</view>
+</template>
+
+ 

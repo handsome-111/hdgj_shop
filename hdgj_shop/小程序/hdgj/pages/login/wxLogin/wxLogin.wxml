@@ -3,6 +3,6 @@
   <open-data class="a" type="userAvatarUrl" default-avatar/>
   <open-data type="userNickName"></open-data>
   <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">微信快捷登陆</button>
-  <navigator>其他方式登录</navigator>
+  <navigator url='/pages/login/otherLogin/otherLogin'>其他方式登录</navigator>
 </view>
  

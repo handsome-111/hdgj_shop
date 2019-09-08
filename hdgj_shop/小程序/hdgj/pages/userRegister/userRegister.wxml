@@ -1,0 +1,5 @@
+<!--pages/userRegister/userRegister.wxml-->
+<view class='main'>
+  <input type='number' placeholder='手机号'></input>
+  <button>下一步</button>
+</view>

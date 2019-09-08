@@ -160,3 +160,8 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
   color:#fff; /* 对勾颜色 白色 */
   background: transparent;
 }
+
+/*
+*去除按钮原样式
+*/
+button::after { border: none; }

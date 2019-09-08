@@ -1,14 +1,11 @@
 <!--components/user/user.wxml-->
 <view class='page'>
   <view class='userInfo'>
-      <navigator url='/pages/login/wxLogin/wxLogin'>登录/注册</navigator>
+      <image src="/images/index/2.jpg"></image>
+      <view>
+        <navigator url='/pages/login/wxLogin/wxLogin'>登录/注册</navigator>
+      </view>
 
-    <open-data type="userNickName" lang="zh_CN"></open-data>
-    <open-data type="userCity" lang="zh_CN"></open-data>
-    <open-data type="userProvince" lang="zh_CN"></open-data>
-    <open-data type="userAvatarUrl" lang="zh_CN"></open-data>
-    <view class='vip'>
-    </view> 
   </view>
   <view class='main'> 
     <view class='list-top border-box-standard'>

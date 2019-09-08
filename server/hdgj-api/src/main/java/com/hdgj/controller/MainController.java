@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.Customer;
 import com.hdgj.entity.User;
-import com.hdgj.service.CustomerService;
 import com.hdgj.service.LoginService;
 
 @RestController
@@ -35,8 +34,8 @@ public class MainController {
 		return mav;
 	}
 	
-	@Autowired 
-	private CustomerService customerService;
+	/*@Autowired 
+	private CustomerService customerService;*/
 	
 	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -47,7 +46,7 @@ public class MainController {
 	 * @param password
 	 * @return
 	 */
-	@RequestMapping("/userPasswordRegister")
+	/*@RequestMapping("/userPasswordRegister")
 	public String userPasswordRegister(@RequestParam("username") String username,@RequestParam("password")String password){
 		Customer customer = customerService.getCustomerByUsername(username);
 		if(customer != null){
@@ -59,7 +58,7 @@ public class MainController {
 		customer.setRoles("USER");
 		customerService.registerCustomer(customer);
 		return "注册成功";
-	}
+	}*/
 	
 	@RequestMapping("/wxLogin")
 	public String wxLogin(@RequestParam String js_code,@RequestParam("userinfo") String userInfo){

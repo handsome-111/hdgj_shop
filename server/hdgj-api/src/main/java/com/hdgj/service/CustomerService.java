@@ -7,17 +7,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hdgj.entity.Customer;
 import com.hdgj.mapper.CustomerMapper;
 
-@Service
+/*@Service
 public class CustomerService {
 	
 	@Autowired
 	private CustomerMapper customerMapper;
 	
-	/**
+	*//**
 	 * 根据用户名查找用户
 	 * @param username
 	 * @return
-	 */
+	 *//*
 	public Customer getCustomerByUsername(String username){
 		QueryWrapper<Customer> query = new QueryWrapper<Customer>();
 		query.eq("username", username);
@@ -28,3 +28,4 @@ public class CustomerService {
 		return customerMapper.insert(customer);
 	}
 }
+*/

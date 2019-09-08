@@ -4,23 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.hdgj.entity.Customer;
-import com.hdgj.service.CustomerService;
+import com.hdgj.entity.User;
+import com.hdgj.service.UserService;
 
 @Component
 public class MyUserDetailsService implements UserDetailsService {
 	
 	
 	@Autowired
-	private CustomerService customerService;	
+	private UserService  userService;	
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Customer customer = customerService.getCustomerByUsername(username);
-		return customer;
+		User user = userService.findByOpenid(username);
+		return user;
 	}
 	
 

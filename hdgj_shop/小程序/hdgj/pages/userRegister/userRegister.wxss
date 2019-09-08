@@ -1,0 +1,23 @@
+/* pages/userRegister/userRegister.wxss */
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.main input{
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  width: 100%;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+
+.main button{
+  margin-top: 3rem;
+  width: 100%;
+  background-color: rgb(251, 194, 182);
+  height:3rem;
+  line-height: 3rem;
+  border-radius: 1.5rem;
+  color: white;
+}
