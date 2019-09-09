@@ -1,12 +1,14 @@
 {
   "pages": [
-        "components/user/user",
+            "components/user/user",
+            
+        "components/index/index",
+        
         
     "pages/login/wxLogin/wxLogin",
     "pages/userRegister/userRegister",
     "pages/login/phoneLogin/phoneLogin",
     "pages/login/otherLogin/otherLogin",
-    "components/index/index",
     "pages/newAddress/newAddress",
     "pages/goodsDetails/goodsDetails",
     "pages/confirmOrders/confirmOrders",

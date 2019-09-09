@@ -5,16 +5,28 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs) 
-     
+    console.log('出发lauch')
+    this.login(this.globalData.userInfo)
+
   }, 
+  onShow:function(){
+    console.log('触发登录')
+  },
   globalData: {  
-    userInfo: null,
-    serverHost:'localhost'
+    userInfo: null,             //用户信息
+    serverHost:'localhost',     //服务器地址
+    isLogin:false       //是否登陆
   },
   /**
    * 用户登陆
    */
   login: function(userInfo){ 
+    var app = this
+
+    // var promise = new Promise((resolve, reject) =>{
+      
+    // })
+
     wx.login({
       success: function (res) {  
         /** 
@@ -28,11 +40,19 @@ App({
             userinfo:userInfo
           },  
           success: function (response) {
-             console.log(response)  
-          }   
-        })   
+            var resUser = response.data.userInfo
+            /**
+             * 将用户信息存储在客户端内存中
+             */
+            if(resUser != null){
+              app.globalData.isLogin = true
+              app.globalData.userInfo = resUser
+            }
+            console.log(app.globalData.userInfo) 
+          }  
+        })    
       }   
-    })    
+    })     
   },
   /** 
    * checkSession 
@@ -48,5 +68,8 @@ App({
     })
   },
 
-  
+  wxPromisify:function(fn){
+    return new Promise((resolve, reject) => {
+    })
+  }
 })

@@ -16,6 +16,12 @@
   border-radius: 100%;
 }
 
+/*
+*已登录的样式
+*/
+.loginUserInfo{
+  
+}
 .list-top{
   border-radius: 0.5rem;
 }
