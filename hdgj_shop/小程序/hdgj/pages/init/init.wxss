@@ -1,0 +1,9 @@
+/* pages/init/init.wxss */
+image{
+  border-radius: 100%;
+  width: 7rem;
+  height: 7rem;
+  margin: 0 auto;
+  display: block;
+  margin-top: 3rem;
+}

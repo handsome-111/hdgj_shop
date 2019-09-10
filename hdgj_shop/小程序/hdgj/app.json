@@ -1,10 +1,8 @@
 {
   "pages": [
-            "components/user/user",
-            
-        "components/index/index",
-        
-        
+        "pages/init/init",
+    "components/user/user",
+    "components/index/index",
     "pages/login/wxLogin/wxLogin",
     "pages/userRegister/userRegister",
     "pages/login/phoneLogin/phoneLogin",
@@ -20,7 +18,7 @@
     "pages/goodsOrderList/noPay/noPay",
     "pages/goodsOrderList/waitAccept/waitAccept",
     "pages/goodsOrderList/waitSend/waitSend",
-    "components/cart/cart", 
+    "components/cart/cart",
     "components/category/category"
   ],
   "window": {
