@@ -1,18 +1,18 @@
 package com.hdgj.entity;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * <p>
@@ -78,21 +78,18 @@ public class User implements Serializable,UserDetails {
     /**
      * 生日
      */
-    private Date birthday;
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime birthday;
 
 
-    public Date getBirthday() {
-    	System.out.println("birthday:" + birthday);
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    	try {
-			birthday = sdf.parse(sdf.format(birthday));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return birthday;
+    public LocalDateTime getBirthday() {
+//    	StringBuffer sbf = new StringBuffer(birthday.format(DateTimeFormatter.ISO_DATE));
+//    	return LocalDateTime.parse(sbf);
+    	return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDateTime birthday) {
 		this.birthday = birthday;
 	}
 

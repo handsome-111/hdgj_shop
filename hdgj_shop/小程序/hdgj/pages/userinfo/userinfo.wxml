@@ -19,7 +19,7 @@
 
   <p class='box-standard'> 
     <span>手机</span> 
-    <input type='text' value="13379959770"/> 
+    <input type='text' value="{{userInfo.phone}}"/> 
   </p>
 </view>
 <p class='submit'>保存</p>

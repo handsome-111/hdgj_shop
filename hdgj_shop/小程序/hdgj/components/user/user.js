@@ -16,7 +16,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    userInfo:null
+    userInfo:null,
+    template:'unLoginUserInfo'      //是否登录模板
   },
 
   /**
@@ -27,28 +28,28 @@ Component({
       // 页面创建时执行
     },
     onReady:function(){
-      // 页面创建时执行
-      var userInfo = app.globalData.userInfo;
-      this.setData({
-        userInfo: userInfo
-      })    
+      
     }
   },
   pageLifetimes: {
     show:function() {   
       // 页面创建时执行
-      // var userInfo = app.globalData.userInfo;
-      // this.setData({
-      //   userInfo: userInfo
-      // })       
+      var userInfo = app.globalData.userInfo;
+      console.log("是否为空:" + userInfo)
+      if (userInfo != null) {
+        this.setData({
+          userInfo: userInfo,
+          template: 'loginUserInfo'
+        })
+      }     
 
       if (typeof this.getTabBar === 'function' &&
         this.getTabBar()) {
         this.getTabBar().setData({
           selected: 3
-        })
+        })  
       }
     }
-  },
-
+  },  
+ 
 })

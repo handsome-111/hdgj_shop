@@ -139,7 +139,7 @@ Mysql:
 		username 	varchar(100) 	DEFAULT NULL COMMENT '昵称',
 		roles 		varchar(200)    DEFAULT NULL COMMENT '权限',
 		icon		varchar(200) 	DEFAULT NULL COMMENT '头像路径',
-		birthday  	datetime 		DEFAULT NULL COMMENT '生日',
+		birthday  	timestamp 		DEFAULT NULL COMMENT '生日',
 		create_time timestamp 		NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     	update_time timestamp 		NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     	PRIMARY KEY(id),

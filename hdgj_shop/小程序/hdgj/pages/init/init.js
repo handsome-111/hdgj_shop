@@ -23,8 +23,8 @@ Page({
         wx.hideLoading() 
         wx.switchTab({
           url: '/components/user/user',
-        })
-      }
+        }) 
+      } 
     }, 1000)
     // var promise = new Promise((resolve,reject) => {
     //   setTimeout(() => {

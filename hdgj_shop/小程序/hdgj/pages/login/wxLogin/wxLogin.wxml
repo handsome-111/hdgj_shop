@@ -5,4 +5,4 @@
   <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">微信快捷登陆</button>
   <navigator url='/pages/login/otherLogin/otherLogin'>其他方式登录</navigator>
 </view>
- 
+     

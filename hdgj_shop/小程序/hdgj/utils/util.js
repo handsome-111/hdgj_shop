@@ -14,6 +14,19 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const moment = require('moment.min.js');
+function timestampToString(timestamp,str) {
+  moment.locale('en', {
+    longDateFormat: {
+      l: "YYYY-MM-DD",
+      L: "YYYY-MM-DD HH:mm:ss"
+    }
+  });
+  return moment(timestamp).format(str);
+}
+
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  timestampToString: timestampToString
 }

@@ -1,6 +1,6 @@
 <!--components/user/user.wxml-->
 <view class='page'>
-  <template is='loginUserInfo' data='{{userInfo}}'></template>
+  <template is='{{template}}' data='{{userInfo}}'></template>
 
   <view class='main'> 
     <view class='list-top border-box-standard'>
@@ -18,13 +18,13 @@
 <template name='loginUserInfo'>
     <view class='userInfo'>
       <navigator url='/pages/userinfo/userinfo'>{{userInfo.nickname}}></navigator>
-      <image src="/images/index/2.jpg" bindtap='aa'></image>
+      <image src="/images/index/default.jpg" bindtap='aa'></image>
     </view>
 </template>
 
 <template name='unLoginUserInfo'>
   <view class='userInfo'>
-      <image src="/images/index/2.jpg"></image>
       <navigator url='/pages/login/wxLogin/wxLogin'>登录/注册</navigator>
+      <image src="/images/index/default.jpg"></image>
     </view>
 </template>

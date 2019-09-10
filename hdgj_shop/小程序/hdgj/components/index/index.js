@@ -11,14 +11,12 @@ Component({
       //     selected: 0
       //   }) 
       // } 
-      console.log("userinfo:" + app.globalData.userInfo)
-
     }
   },
   /**
    * 组件的属性列表
    */
-  properties: {
+  properties: { 
 
   },
 

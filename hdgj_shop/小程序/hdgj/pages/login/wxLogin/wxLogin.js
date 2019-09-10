@@ -65,14 +65,20 @@ Page({
 
   },
   onGotUserInfo: function(e){
-    console.log(e.detail.userInfo);
+    var userInfo = e.detail.userInfo
     // 获取用户信息
     // console.log(e.detail.errMsg  + "1")
     // console.log(e.detail.userInfo + '2')
     // console.log(e.detail.rawData + '3')
-    app.login(e.detail.userInfo)
-    wx.switchTab({
-      url: '/components/user/user'
+    var promise = app.login(userInfo)
+
+    promise.then(() => {
+      console.log('他们登陆完了')
+      wx.switchTab({
+        url: '/components/user/user'
+      })
     })
+  
+    
   }  
-})
+})   
