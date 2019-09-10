@@ -13,6 +13,8 @@
         <result column="roles" property="roles" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="birthday" property="birthday" />
+        <result column="icon" property="icon" />
     </resultMap>
 
 </mapper>

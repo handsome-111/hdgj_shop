@@ -1,11 +1,20 @@
 // pages/userinfo/userinfo.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo:null,
+    serverHost:'/images/index/default.jpg'
+  },
 
+  bindDateChange:function (e){    
+    this.data.userInfo.birthday = e.detail.value
+    this.setData({
+      userInfo: this.data.userInfo
+    })
   },
 
   /**
@@ -26,7 +35,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      serverHost: app.globalData.serverHost
+    })
   },
 
   /**

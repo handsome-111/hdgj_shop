@@ -4,23 +4,21 @@
 
   <view class='main'> 
     <view class='list-top border-box-standard'>
-      <p>
+      <navigator>
         <span>商品订单</span>
         <span class='iconfont icon-icon--'></span>
-      </p>
-      <p>
+      </navigator>
+      <navigator>
         <span>地址管理</span>
         <span class='iconfont icon-icon--'></span>
-      </p>
+      </navigator>
     </view>
   </view>
 </view>
 <template name='loginUserInfo'>
     <view class='userInfo'>
+      <navigator url='/pages/userinfo/userinfo'>{{userInfo.nickname}}></navigator>
       <image src="/images/index/2.jpg" bindtap='aa'></image>
-      <view class='loginUserInfo'>
-        {{userInfo.nickname}}
-      </view>
     </view>
 </template>
 
@@ -28,8 +26,5 @@
   <view class='userInfo'>
       <image src="/images/index/2.jpg"></image>
       <navigator url='/pages/login/wxLogin/wxLogin'>登录/注册</navigator>
-      <view class='unLoginUserInfo'>
-      
-      </view>
     </view>
 </template>

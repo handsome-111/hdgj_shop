@@ -32,7 +32,6 @@ Component({
       this.setData({
         userInfo: userInfo
       })    
-      console.log('准备好了' + userInfo)
     }
   },
   pageLifetimes: {

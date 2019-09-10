@@ -4,20 +4,22 @@
     <span class='font-little-big font-weight-600'>我的信息</span>
     <span class='font-little' >切换账号</span>
   </view>
-  <image src='/images/index/2.jpg' mode='widthFix'></image>
+  <image src='{{serverHost}}{{userInfo.icon}}' mode='widthFix'></image>
   <p class='box-standard'>
     <span>昵称</span>
-    <input type='text' value="god like"/>
+    <input type='text' value="{{userInfo.nickname}}"/>
   </p>
 
   <p class='box-standard'>
     <span>生日</span>
-    <input type='text' value="2019-07-29"/>
+    <picker mode='date' value='{{userInfo.birthday}}'   bindchange='bindDateChange'>
+      <span class='picker'>{{userInfo.birthday}}</span>
+    </picker>
   </p>
 
-  <p class='box-standard'>
-    <span>手机</span>
-    <input type='text' value="13379959770"/>
+  <p class='box-standard'> 
+    <span>手机</span> 
+    <input type='text' value="13379959770"/> 
   </p>
 </view>
 <p class='submit'>保存</p>

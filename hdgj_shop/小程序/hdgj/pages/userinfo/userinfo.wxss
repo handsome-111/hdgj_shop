@@ -35,6 +35,10 @@
   flex: 1;
 }
 
+.picker{
+  color: black !important;
+}
+
 .submit{
   left: 5%;
   position: fixed;

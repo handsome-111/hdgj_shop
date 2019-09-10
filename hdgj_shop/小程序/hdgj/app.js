@@ -5,12 +5,15 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs) 
+    wx.showLoading({
+      title: '加载中',
+    })
     this.login(this.userInfo)
     console.log('APP准备完毕')
   }, 
   globalData: {  
     userInfo: null,             //用户信息
-    serverHost:'localhost',     //服务器地址
+    serverHost:'http://localhost',     //服务器地址
     isLogin:false,              //是否登陆
     appLoading:true           //App是否还在加载
   },
@@ -40,11 +43,13 @@ App({
             if (resUser != null) {
               app.globalData.isLogin = true
               app.globalData.userInfo = resUser
+              console.log(resUser)
             }
           },
           complete:function(){
             app.globalData.appLoading = false
-            console.log('加载完成')
+            wx.hideLoading() 
+
           }
         })
       }

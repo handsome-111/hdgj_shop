@@ -18,8 +18,9 @@ Page({
       title: '加载中',
     })
     setTimeout(function () {
-      if(loading == true){
-        wx.hideLoading()
+      console.log('进入' + loading)
+      if(loading){
+        wx.hideLoading() 
         wx.switchTab({
           url: '/components/user/user',
         })

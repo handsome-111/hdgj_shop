@@ -1,8 +1,9 @@
 {
   "pages": [
+        "components/index/index",
+        
         "pages/init/init",
     "components/user/user",
-    "components/index/index",
     "pages/login/wxLogin/wxLogin",
     "pages/userRegister/userRegister",
     "pages/login/phoneLogin/phoneLogin",

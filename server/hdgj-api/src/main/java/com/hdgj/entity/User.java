@@ -1,15 +1,18 @@
 package com.hdgj.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * <p>
@@ -71,9 +74,29 @@ public class User implements Serializable,UserDetails {
      * 头像url
      */
     private String icon;
+    
+    /**
+     * 生日
+     */
+    private Date birthday;
 
 
-    public Integer getId() {
+    public Date getBirthday() {
+    	System.out.println("birthday:" + birthday);
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	try {
+			birthday = sdf.parse(sdf.format(birthday));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -154,20 +177,14 @@ public class User implements Serializable,UserDetails {
 		this.icon = icon;
 	}
 
+	
+
 	@Override
-    public String toString() {
-        return "User{" +
-        "id=" + id +
-        ", nickname=" + nickname +
-        ", password=" + password +
-        ", openid=" + openid +
-        ", phone=" + phone +
-        ", username=" + username +
-        ", roles=" + roles +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
-    }
+	public String toString() {
+		return "User [id=" + id + ", nickname=" + nickname + ", password=" + password + ", openid=" + openid
+				+ ", phone=" + phone + ", username=" + username + ", roles=" + roles + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", icon=" + icon + ", birthday=" + birthday + "]";
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
