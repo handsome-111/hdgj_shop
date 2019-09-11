@@ -47,7 +47,6 @@ App({
 
                 var util = require("/utils/util.js")
                 var birthday = util.timestampToString(app.globalData.userInfo.birthday, 'l')
-                console.log(birthday)
                 app.globalData.userInfo.birthday = birthday
                 console.log("登陆响应的user:" + app.globalData.userInfo)
               }
@@ -80,5 +79,23 @@ App({
     })
   },
 
+  /**
+   * 登录过滤
+   */
+  loginFilter:function(){ 
+    var userInfo = this.globalData.userInfo
+    if(userInfo == null){
+      wx.navigateTo({
+        url: '/pages/login/wxLogin/wxLogin',
+      })
+    }
+  },
 
+  /**
+   * 全局过滤器
+   */
+  setFilter:function(){
+    //1.登录过滤
+    this.loginFilter()
+  }
 })
