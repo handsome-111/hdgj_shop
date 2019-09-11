@@ -73,7 +73,6 @@ Page({
     var promise = app.login(userInfo)
 
     promise.then(() => {
-      console.log('他们登陆完了')
       wx.switchTab({
         url: '/components/user/user'
       })

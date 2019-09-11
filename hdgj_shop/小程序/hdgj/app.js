@@ -48,30 +48,39 @@ App({
                 var util = require("/utils/util.js")
                 var birthday = util.timestampToString(app.globalData.userInfo.birthday, 'l')
                 app.globalData.userInfo.birthday = birthday
-                console.log("登陆响应的user:" + app.globalData.userInfo)
               }
             },
             complete: function () {
               app.globalData.appLoading = false
               wx.hideLoading()
-              resolve()
+              resolve() 
             }
           })
         }
       }) 
-    })
-
-     
-
-       
+    })   
   },
+
+  /**
+   * 注销
+   */
+  logout:function(){
+    var app = this;
+
+    return new Promise((resolve,reject) => {
+      wx.request({
+        url: '',
+      })
+    })
+  },
+
   /** 
    * checkSession 
    */
   checkSession:function(){
     wx.checkSession({ 
       success: () => { 
- 
+        
       },  
       fail: () => {
         app.login(app.globalData.userInfo);

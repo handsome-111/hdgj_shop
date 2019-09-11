@@ -10,10 +10,34 @@ Page({
     serverHost:'/images/index/default.jpg'
   },
 
+  /**
+   * 日期更换
+   */
   bindDateChange:function (e){    
     this.data.userInfo.birthday = e.detail.value
     this.setData({
       userInfo: this.data.userInfo
+    })
+  },
+
+  /**
+   * 注销
+   */
+  logout:function (){
+    wx.showModal({
+      title: '切换账号',
+      content: '确定退出登陆么？如果该账号已绑定此微信下次进去默认登陆该账号',
+      confirmText:'退出登陆',
+      confirmColor:'#DC143C',
+      success:function(res){
+        if (res.confirm) {
+          console.log('用户点击确定')
+        }
+        
+        if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
   },
 

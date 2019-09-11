@@ -2,7 +2,7 @@
 <view class='page'>
   <view>
     <span class='font-little-big font-weight-600'>我的信息</span>
-    <span class='font-little' >切换账号</span>
+    <span class='font-little' bindtap="logout">切换账号</span>
   </view>
   <image src='{{serverHost}}{{userInfo.icon}}' mode='widthFix'></image>
   <p class='box-standard'>

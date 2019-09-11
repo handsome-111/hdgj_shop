@@ -35,7 +35,6 @@ Component({
     show:function() {   
       // 页面创建时执行
       var userInfo = app.globalData.userInfo;
-      console.log("是否为空:" + userInfo)
       if (userInfo != null) {
         this.setData({
           userInfo: userInfo,

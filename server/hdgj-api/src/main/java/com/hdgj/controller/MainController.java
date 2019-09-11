@@ -2,16 +2,13 @@ package com.hdgj.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
-import com.hdgj.entity.Customer;
-import com.hdgj.entity.User;
 import com.hdgj.service.LoginService;
+import com.hdgj.utils.ResponseData;
 
 @RestController
 public class MainController {
@@ -60,9 +57,25 @@ public class MainController {
 		return "注册成功";
 	}*/
 	
+	/**
+	 * 微信登陆
+	 * @param js_code
+	 * @param userInfo	User
+	 * @return
+	 */
 	@RequestMapping("/wxLogin")
 	public String wxLogin(@RequestParam String js_code,@RequestParam("userinfo") String userInfo){
 		System.out.println("jsonObject:" + userInfo);
 		return loginService.wxLogin(js_code,userInfo);
+	}
+	
+	/**
+	 * 微信注销
+	 * @return
+	 */
+	@RequestMapping("/wxLogout")
+	public ResponseData wxLogout(@RequestParam String session_key){
+		System.out.println(session_key);
+		return loginService.wxLogout(session_key);
 	}
 }
