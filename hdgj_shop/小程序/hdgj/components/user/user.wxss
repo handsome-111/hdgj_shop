@@ -29,12 +29,12 @@
   padding: 1rem
 }
 
-.list-top navigator{
+.list-top view{
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
   border-bottom: 1px solid rgba(212, 207, 207, 0.77);
 }
-.list-top navigator:nth-last-child(1){
+.list-top view:nth-last-child(1){
   border-bottom: 0 !important;
 }

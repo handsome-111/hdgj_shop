@@ -31,7 +31,14 @@ Page({
       confirmColor:'#DC143C',
       success:function(res){
         if (res.confirm) {
-          console.log('用户点击确定')
+          app.logout().then(() => {
+            /**
+             * 跳转到用户页面
+             */
+            wx.switchTab({
+              url: '/components/user/user',
+            })
+          }) 
         }
         
         if (res.cancel) {
@@ -59,8 +66,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var route = this.route
     //设置过滤器
-    app.setFilter()
+    app.filter({
+      url: this.route
+    })
     
     this.setData({
       userInfo: app.globalData.userInfo,

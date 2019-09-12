@@ -4,14 +4,14 @@
 
   <view class='main'> 
     <view class='list-top border-box-standard'>
-      <navigator>
+      <view bindtap='forwardGoodsOrderList'>
         <span>商品订单</span>
         <span class='iconfont icon-icon--'></span>
-      </navigator>
-      <navigator>
+      </view>
+      <view url='/pages/addressManage/addressManage'>
         <span>地址管理</span>
         <span class='iconfont icon-icon--'></span>
-      </navigator>
+      </view>
     </view>
   </view>
 </view>

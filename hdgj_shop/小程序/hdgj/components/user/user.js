@@ -29,18 +29,33 @@ Component({
     },
     onReady:function(){
       
+    },
+    forwardGoodsOrderList :function(){
+      var url = '/pages/goodsOrderList/goodsOrderList';
+      app.filter({
+        url:url
+      })
     }
   },
   pageLifetimes: {
     show:function() {   
       // 页面创建时执行
       var userInfo = app.globalData.userInfo;
+      //如果已登录
       if (userInfo != null) {
         this.setData({
           userInfo: userInfo,
           template: 'loginUserInfo'
         })
-      }     
+      }
+      
+      //如果未登录
+      if(userInfo == null){
+        this.setData({
+          template:'unLoginUserInfo'
+        })
+      }
+       
 
       if (typeof this.getTabBar === 'function' &&
         this.getTabBar()) {

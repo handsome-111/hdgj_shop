@@ -15,7 +15,8 @@ App({
     userInfo: null,             //用户信息
     serverHost:'http://localhost',     //服务器地址
     isLogin:false,              //是否登陆
-    appLoading:true           //App是否还在加载
+    appLoading:true,           //App是否还在加载
+    session_key:null           //session_key
   },
   /**
    * 用户登陆
@@ -30,7 +31,7 @@ App({
            * 发出请求授权登陆    
            **/
           wx.request({
-            url: 'http://127.0.0.1/wxLogin',
+            url: app.globalData.serverHost + '/wxLogin',
             data: {
               //用户登录凭证（有效期五分钟）。开发者需要在开发者服务器后台调用 auth.code2Session，使用 code 换取 openid 和 session_key 等信息
               js_code: res.code,
@@ -38,6 +39,7 @@ App({
             },
             success: function (response) {
               var resUser = response.data.userInfo
+              var session_key = response.data.session_key
               /**
                * 将用户信息存储在客户端内存中
                */
@@ -49,6 +51,8 @@ App({
                 var birthday = util.timestampToString(app.globalData.userInfo.birthday, 'l')
                 app.globalData.userInfo.birthday = birthday
               }
+              
+              app.globalData.session_key = session_key
             },
             complete: function () {
               app.globalData.appLoading = false
@@ -69,7 +73,15 @@ App({
 
     return new Promise((resolve,reject) => {
       wx.request({
-        url: '',
+        url: app.globalData.serverHost + '/wxLogout',
+        data: {
+          session_key:app.globalData.session_key
+        },
+        complete:function(){
+          app.globalData.userInfo = null
+          app.globalData.session_key = null
+          resolve()
+        }
       })
     })
   },
@@ -91,20 +103,63 @@ App({
   /**
    * 登录过滤
    */
-  loginFilter:function(){ 
+  loginFilter:function(res){ 
     var userInfo = this.globalData.userInfo
+    var app = this
     if(userInfo == null){
-      wx.navigateTo({
-        url: '/pages/login/wxLogin/wxLogin',
+      wx.showModal({  
+        title: '登录状态',
+        content: '用户未登录,是否前往登录',
+        confirmText:'登陆',
+        success: function(response){
+          if (response.confirm) {
+            app.login().then(() => {
+              /**
+               * 跳转到用户页面
+               */
+              wx.navigateTo({
+                url: '/pages/login/wxLogin/wxLogin',
+                //events:
+              })
+            })
+          }
+
+          if (response.cancel) {
+            /**
+             * 跳转到原页面
+             */
+            //wx.navigateBack()
+          }
+        }
       })
+      
+    }
+
+    if(userInfo != null){
+      var url = res.url
+      console.log('用户部位空')
+      console.log(url.indexOf('/components/') == 0)
+      console.log(url.indexOf('/pages/') == 0)  
+      if (url.indexOf('/components/') == 0){
+        wx.switchTab({
+          url: url
+        })
+      }
+
+      if(url.indexOf('/pages/') == 0){
+        wx.navigateTo({
+          url: url
+        })
+      }
+
     }
   },
 
   /**
    * 全局过滤器
    */
-  setFilter:function(){
+  filter:function(res){
     //1.登录过滤
-    this.loginFilter()
+    this.loginFilter(res)
   }
 })

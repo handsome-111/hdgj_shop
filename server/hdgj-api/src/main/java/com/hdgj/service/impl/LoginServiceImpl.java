@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StreamUtils;
@@ -49,6 +50,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Autowired
 	private UserService userService;
+	
 	
 	
 	/**
@@ -133,13 +135,13 @@ public class LoginServiceImpl implements LoginService{
 		userSession.put("user",user);
 		userSession.put("sessionKey",sessionKey);		//存储sessionKey
 		
-		String wx_session_key = "wx_session_key:" + openid;
+		//String wx_session_key = "wx_session_key:" + openid;
 		
 		/**
 		 * 缓存微信会话,如果二次登陆会直接覆盖掉原来的会话的,缓存的key为openid,key的寿命是15分钟
 		 */
 		//redisTemplate.opsForHash().put("wx_session_key:", openid , userSession);		
-		redisTemplate.opsForValue().set(wx_session_key, userSession, 900000);
+		redisTemplate.opsForValue().set(sessionKey, userSession, 900000);
 		
 		System.out.println("response:" + resObject);
 		/**
@@ -148,24 +150,18 @@ public class LoginServiceImpl implements LoginService{
 		JSONObject response = new JSONObject();
 		response.put("openid", openid);
 		response.put("userInfo", user);
-		response.put("session_key", wx_session_key);
+		response.put("session_key", sessionKey);
 		
 		return response.toJSONString();
 	}
 
 
-	@Override
+	@Override 
 	public ResponseData wxLogout(String session_key) {
 		boolean isLogout = redisTemplate.delete(session_key);
-		if(isLogout){
-			return ResponseDataUtil.buildSuccess();
-		}
-		User user = new User();
-		user.setId(12456);
-		return ResponseDataUtil.buildSuccess(new User());
+		System.out.println("注销成功:" + isLogout + ",sessionkey:" + session_key);
+		return ResponseDataUtil.buildSuccess();
 	}
-	
-	
 	
 }
 
