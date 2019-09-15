@@ -35,7 +35,7 @@ public class ProductService extends BaseService{
 	    map.put("update_start", update_start);
 	    super.removeNullValue(map);
 	    return vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,
-	            new Param("public", buildPublicValue("vdian.item.list.get", "1.0")),
+	            new Param("public", buildPublicValue("vdian.item.list.get", "1.1")),
 	            new Param("param", JsonUtils.toJson(map)));
 	}
 	/**
@@ -96,9 +96,7 @@ public class ProductService extends BaseService{
 			ids.append(",");
 		}
 		ids.deleteCharAt(ids.length() -1 );
-		
-		System.out.println(ids);
-		
+				
 	    Map<String, Object> map = new HashMap< String, Object>();
 	    map.put("ids", ids);
 	    map.put("need_idno", need_idno);

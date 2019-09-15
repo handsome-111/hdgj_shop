@@ -36,26 +36,23 @@
     </p>
   </view>
 </view>
-
-<view class='list'>
-  <view class='title'>绿色土特产品</view>
-  <navigator class='goods_info' url="/pages/goodsDetails/goodsDetails">
-    <image src='/images/index/1.jpg' mode="widthFix"></image>
-    <view class='goods_info_content'>
-      <p>收尾，露地大连大樱桃【车厘子】甜酸多汁，3斤顺丰包邮【沙蜜豆品种】孕妇水果</p>
-      <view>
-        <p class='color-red'>
-          <span class='font-little'>￥</span>
-          <span>170</span>
-        </p>
-        <p style='line-height:1.5rem'>
-          <span class='font-little' style='color:rgb(136, 136, 136)'>销量90</span>
-          <!-- <image src='/images/index/2.png' mode="widthFix" style='width:1.5rem'></image> -->
-        </p>
-      </view>
-      
-    </view>
-  </navigator>
+ 
+<view class="template_title " wx:for="{{template_block}}" wx:key="{{item.title}}">
+  <p class="driver_line"></p>
+  <span class="icon-taobaolianmengziti">{{item.title}}</span>
+  <view>
+    <navigator wx:for="{{item.goods}}" wx:for-item="good" wx:key="{{item.url}}">
+      <image src="{{good.url}}" mode="widthFix"></image>
+      <p class="font-standard line-height-standard">{{good.title}}</p>
+      <p>
+        <span class="font-little color-red line-height-standard">￥</span>
+        <span class="font-standard color-red line-height-standard">{{good.price}}</span>
+        <span class="font-little color-gray line-height-standard">已售: {{good.sellNum}}</span> 
+      </p>
+    </navigator>
+  </view>
+  
 </view>
 
-<view style="height:10vh;"></view>
+<view class="shop_info">
+</view>

@@ -19,11 +19,11 @@ App({
     session_key:null           //session_key
   },
   /**
-   * 用户登陆
+   * 用户登陆  
    */
   login: function(userInfo){ 
-    var app = this
-
+    var app = this 
+ 
     return new Promise((resolve,reject) => {
       wx.login({
         success: function (res) {

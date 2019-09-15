@@ -1,7 +1,10 @@
+/* components/index/index.wxss */
+
 .carousel{
   width: 100vw;
   background-color: white;
   margin-bottom: 1rem;
+  height: 80vw;
  }
 
 .carousel swiper-item{
@@ -79,52 +82,36 @@
   width: 100%;
 }
 
-.list{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(206, 29, 23);
-}
-
-/*商品列表*/
-.title{
-  height: 2.5rem;
-  line-height: 2.5rem;
-  background-color:rgb(206, 29, 23);
-  width: 15rem;
-  border-radius: 1.25rem;
+/*模板*/
+.template_title > span{
   text-align: center;
-  color: white;
-  box-shadow: 0px 5px 10px -1px rgb(177, 5, 3);
-  margin: 1rem 0 1rem 0;
-} 
-
-.goods_info {
-  background-color: white;
-  width: 95%;
-  padding: 0.5rem;
-  box-sizing:  border-box;
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-.goods_info > image {
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 4rem;
   display: block;
-  width: 6rem;
 }
 
-.goods_info > view {
-  flex: 1;
-}
-
-.goods_info_content{
+.template_title view {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content:space-between;
 }
 
-.goods_info_content > p:nth-child(1){
+.template_title view navigator{
+  width: 49.5%;
+}
+
+.template_title view navigator image {
+  width: 100%;
+}
+
+.template_title view navigator p{
+  height: 2.6rem;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.template_title view navigator p:nth-child(2){
+  margin-bottom: 1rem;
   display: -webkit-box;
   overflow:hidden;
   text-overflow: ellipsis;
@@ -133,13 +120,18 @@
   -webkit-line-clamp:2;
 }
 
-.goods_info_content > view{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.template_title view navigator p:nth-child(3){
+  display: block;
 }
 
-.goods_info_content > view > p:nth-last-child(1){
-  display: flex;
-  justify-content: space-between;
+
+
+.template_title view navigator p span{
+  display: block;
+  float: left;
+}
+
+
+.template_title view navigator p span:nth-child(3){
+  float: right;
 }

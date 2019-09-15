@@ -37,6 +37,7 @@ public class SyncVdScheduler {
 	 */
 	@Scheduled(initialDelayString = "${jobs.initialDelay}",fixedRateString="${jobs.fixedRate}")
 	public void synVdProducts() throws OpenException,Exception{	
+		System.out.println("开始任务");
 		/*System.out.println("1aaaaaaaaaaaaa");
 		ClientSessionOptions sessionOptions = ClientSessionOptions.builder()
 			    .causallyConsistent(true)

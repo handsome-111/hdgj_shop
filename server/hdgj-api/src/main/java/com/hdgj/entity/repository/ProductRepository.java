@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hdgj.entity.Product;
+import com.hdgj.entity.Product22;
 
-public interface ProductRepository extends PagingAndSortingRepository<Product,String>{
+public interface ProductRepository extends PagingAndSortingRepository<Product22,String>{
 	@Query(fields="{'itemId':1}")
 	List<JSONObject> findAllBy(Pageable page);	
-	}
+}
