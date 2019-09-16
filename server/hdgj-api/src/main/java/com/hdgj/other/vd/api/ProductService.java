@@ -95,7 +95,10 @@ public class ProductService extends BaseService{
 			ids.append(id);
 			ids.append(",");
 		}
-		ids.deleteCharAt(ids.length() -1 );
+		
+		if(ids.length() > 0){
+			ids.deleteCharAt(ids.length() -1 );
+		}
 				
 	    Map<String, Object> map = new HashMap< String, Object>();
 	    map.put("ids", ids);

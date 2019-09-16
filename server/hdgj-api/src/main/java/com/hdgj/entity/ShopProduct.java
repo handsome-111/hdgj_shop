@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -22,6 +23,7 @@ public class ShopProduct {
 	private int status;
 	private String item_desc;
 	private String merchant_code;
+	@DBRef
 	private List<Cate> cates;
 	private int stock;
 	private String price;
@@ -30,7 +32,8 @@ public class ShopProduct {
 	private String fx_fee_rate;
 	private List<String> thumb_imgs;
 	private String seller_id;
-	private List<String> skus;
+	@DBRef
+	private List<Sku> skus;
 	private Date add_time;
 	private int sold;
 	public String getItemid() {
@@ -117,10 +120,10 @@ public class ShopProduct {
 	public void setSeller_id(String seller_id) {
 		this.seller_id = seller_id;
 	}
-	public List<String> getSkus() {
+	public List<Sku> getSkus() {
 		return skus;
 	}
-	public void setSkus(List<String> skus) {
+	public void setSkus(List<Sku> skus) {
 		this.skus = skus;
 	}
 	public Date getAdd_time() {
