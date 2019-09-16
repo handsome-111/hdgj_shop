@@ -132,10 +132,12 @@ public class SyncVdService {
 		long count = productRepository.count();
 		long page = this.getTotalPage(30, count);
 
+		System.out.println("全部商品:" + count + ", 总页数 :" + page);
+		
 		/**
 		 * 分页同步商品详情,每次存储30个商品,防止内存溢出
 		 */
-		for (int i = 0; i < page; i++) {
+		for (int i = 0; i <= page; i++) {
 			// 读取所有的商品ID
 			List<JSONObject> itemIds = shopProductRepository.findAllBy(PageRequest.of(i, 30));
 
@@ -148,11 +150,13 @@ public class SyncVdService {
 			 * 调用微店API获取所有的商品
 			 */
 			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
-			System.out.println("items:" + items);
-
-			List<Product> resProducts = items.toJavaList(Product.class);
 			
-			productRepository.saveAll(resProducts);
+			if(items == null){
+				break;
+			}
+			
+			System.out.println("items:" + items);
+			
 			
 			Iterator ite = items.iterator();
 
@@ -161,7 +165,6 @@ public class SyncVdService {
 			 */
 			while (ite.hasNext()) {
 				JSONObject item = (JSONObject) ite.next();
-				System.out.println("item:" + item);
 				// 调用api获取的的商品详情
 				List<ProductDetail> resDetails = item.getJSONArray("item_detail").toJavaList(ProductDetail.class);
 
@@ -181,7 +184,11 @@ public class SyncVdService {
 					productDetailService.delAndSave(item.getString("id"), resDetails);
 					//productDetailService.delAndSave(item.getId(), resDetails);
 				}
+				item.remove("item_detail");
 			}
+			
+			List<Product> resProducts = items.toJavaList(Product.class);
+			productRepository.saveAll(resProducts);
 		}
 	}
 
