@@ -11,7 +11,7 @@
         </navigator>
       </swiper-item>
     </block>
-</swiper>
+</swiper> 
 <!-- 菜单  -->
 <view class="menu">
   <block wx:for="{{menu}}" wx:key="{{item.src}}">
@@ -39,7 +39,7 @@
 
 <view class='list'>
   <view class='title'>绿色土特产品</view>
-  <navigator class='goods_info' url="/pages/goodsDetails/goodsDetails">
+  <navigator class='goods_info' url="/pages/goodsDetails/goodsDetails?itemId=2949101993">
     <image src='/images/index/1.jpg' mode="widthFix"></image>
     <view class='goods_info_content'>
       <p>收尾，露地大连大樱桃【车厘子】甜酸多汁，3斤顺丰包邮【沙蜜豆品种】孕妇水果</p>

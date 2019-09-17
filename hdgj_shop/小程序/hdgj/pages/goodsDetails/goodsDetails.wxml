@@ -3,18 +3,18 @@
   <p class="title">商品详情</p>
   <swiper class="carousel" indicator-dots="true"
     autoplay="true" interval="5000" duration="500" circular="true">
-      <block wx:for="{{goods.images}}">
+      <block wx:for="{{goods.fullImgs}}" wx:key="item"> 
         <swiper-item>
           <navigator class="item" url="{{item.url}}" open-type="navigate"> 
-              <image src="{{item.src}}" mode="widthFix"></image> 
+              <image src="{{item}}" mode="widthFix"></image> 
           </navigator>
         </swiper-item>
       </block>
   </swiper>
 
   <view class="goods-title clearfix">
-    <view>3263h纪念我们的两次约会，宝贝，I LOVE YOU</view>
-    <view class="goods-price">￥135</view>
+    <view>{{goods.itemName}}</view>
+    <view class="goods-price">￥{{goods.price}}</view>
   </view>
 
   <view class="goods-option">

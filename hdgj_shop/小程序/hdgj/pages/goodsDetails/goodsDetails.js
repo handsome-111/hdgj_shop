@@ -1,16 +1,18 @@
 // pages/goodsDetails/goodsDetails.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    goods:{
-      images:[
-        { src:'/images/index/1.jpg',url:'', id: 1 },
-        { src: '/images/index/1.jpg', url:'', id: 2 },
-      ]
-    },
+    goods:'',
+    // goods:{
+    //   images:[
+    //     { src:'/images/index/1.jpg',url:'', id: 1 },
+    //     { src: '/images/index/1.jpg', url:'', id: 2 },
+    //   ]
+    // },
     //商品规格
     goodsSpec:[
       {
@@ -35,9 +37,22 @@ Page({
 
   /**
    * 生命周期函数--监听页面加载
+   * 传递的参数:/pages/goodsDetails?itemid=1234679
    */
   onLoad: function (options) {
-
+    var that = this
+    wx.request({
+      url: app.globalData.serverHost + '/product/' + options.itemId,
+      success: function (res) {
+        var goods = res.data.data
+        console.log(that)
+        that.setData({
+          goods:goods
+        })
+       // that.data.goods = goods
+        console.log(that.data)
+      }
+    })
   },
 
   /**
@@ -50,8 +65,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function (option,itemId) {
+    
   },
 
   /**

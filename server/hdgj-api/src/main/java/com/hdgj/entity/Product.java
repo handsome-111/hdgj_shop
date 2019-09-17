@@ -102,7 +102,7 @@ public class Product implements Serializable{
 	
 	@DBRef
 	//skus
-	private List<Sku> skus;
+	private List<Sku> sku;
 	
 	@DBRef
 	//商品所属分类
@@ -127,7 +127,7 @@ public class Product implements Serializable{
 	//可以购买的库存数
 	private Number buyStock;
 	
-	@Field("item_detail")
+	@DBRef/*("item_detail")*/
 	private List<ProductDetail> itemDetail;
 
 	/**
@@ -265,12 +265,12 @@ public class Product implements Serializable{
 		this.imgs = imgs;
 	}
 
-	public List<Sku> getSkus() {
-		return skus;
+	public List<Sku> getSku() {
+		return sku;
 	}
 
-	public void setSkus(List<Sku> skus) {
-		this.skus = skus;
+	public void setSku(List<Sku> sku) {
+		this.sku= sku;
 	}
 
 	public List<Cate> getCates() {
@@ -512,7 +512,7 @@ public class Product implements Serializable{
 				+ highPrice + ", fxFeeRate=" + fxFeeRate + ", sellerId=" + sellerId + ", merchantCode=" + merchantCode
 				+ ", sold=" + sold + ", status=" + status + ", stock=" + stock + ", remotefreedelivery="
 				+ remotefreedelivery + ", freeDelivery=" + freeDelivery + ", price=" + price + ", titles=" + titles
-				+ ", thumbImgs=" + thumbImgs + ", imgs=" + imgs + ", skus=" + skus + ", cates=" + cates + ", isTop="
+				+ ", thumbImgs=" + thumbImgs + ", imgs=" + imgs + ", sku=" + sku + ", cates=" + cates + ", isTop="
 				+ isTop + ", itemComment=" + itemComment + ", isNeedIdno=" + isNeedIdno + ", imgHead=" + imgHead
 				+ ", buyStock=" + buyStock + ", itemDetail=" + itemDetail + ", isPointPrice=" + isPointPrice + ", flag="
 				+ flag + ", flagBin=" + flagBin + ", isTaxRate=" + isTaxRate + ", supPrice=" + supPrice + ", fullImgs="

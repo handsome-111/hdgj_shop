@@ -49,12 +49,27 @@ public class ProductDetail {
 	public boolean equals(Object obj) {
 		JSONObject objJson = (JSONObject) JSONObject.toJSON(obj);
 		JSONObject thisJson = (JSONObject) JSONObject.toJSON(this);
+		
+		Object id = null;
+		
+		Object id1 = objJson.get("id");
+		Object id2 = thisJson.get("id");
+		
+		if(id1 != null ){
+			id = id1;
+		}
+
+		if(id2 != null){
+			id = id2;
+		}
+		
 		thisJson.remove("id");
 		objJson.remove("id");
-		/*System.out.println(thisJson);
-		System.out.println(objJson);
-		System.out.println("是否相等:" + objJson.equals(thisJson));*/
-		return objJson.equals(thisJson);
+		
+		boolean boo = objJson.equals(thisJson);
+		this.setId((String) id);
+
+		return boo;
 	}
 
 	public String getId() {

@@ -1,15 +1,25 @@
 package com.hdgj.test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
+import com.alibaba.fastjson.JSONObject;
+import com.hdgj.entity.Product;
 
 public class Test {
 	public static void main(String[] args) {
-		LocalDateTime a = LocalDateTime.of(LocalDate.parse("2019-09-11"), "0:0:0");
-		System.out.println(a);
+		Product p = new Product();
+		p.setId("23134465");
 
+		aa(p);
+		System.out.println(p);
+		bb(p);
+		System.out.println(p);
+	}
+	public static void aa(Object obj){
+		JSONObject j = (JSONObject) JSONObject.toJSON(obj);
+		j.remove("id");
+	}
+	
+	public static void bb(Object p){
+		Product pp = (Product) p;
+		pp.setId("1");
 	}
 }

@@ -147,12 +147,16 @@ public class SyncVdService {
 			 * 调用微店API获取所有的商品
 			 */
 			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
-			
+			System.out.println("真返回值:" + items);
+
 			if(items == null){
 				break;
 			}
 						
 			Iterator ite = items.iterator();
+			
+			List<Product> resProducts = new ArrayList<Product>();
+
 
 			/**
 			 * 迭代获取所有的商品详情
@@ -178,10 +182,16 @@ public class SyncVdService {
 					productDetailService.delAndSave(item.getString("id"), resDetails);
 					//productDetailService.delAndSave(item.getId(), resDetails);
 				}
+				
+				
 				item.remove("item_detail");
+				Product product = item.toJavaObject(Product.class);
+				product.setItemDetail(resDetails);
+				resProducts.add(product);
 			}
 			
-			List<Product> resProducts = items.toJavaList(Product.class);
+			
+			//List<Product> resProducts = items.toJavaList(Product.class);
 			productRepository.saveAll(resProducts);
 		}
 	}
@@ -208,6 +218,7 @@ public class SyncVdService {
 			 */ 
 			//List<Product> items = res.getJSONObject("result").getJSONArray("items").toJavaList(Product.class);
 			List<ShopProduct> items = res.getJSONObject("result").getJSONArray("items").toJavaList(ShopProduct.class);
+			System.out.println("微点商品shopProduct:" + res.getJSONObject("result").getJSONArray("items"));
 			shopProductRepository.saveAll(items);
 			//productRepository.saveAll(items);
 		}
