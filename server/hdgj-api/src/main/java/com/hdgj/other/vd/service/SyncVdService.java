@@ -80,7 +80,6 @@ public class SyncVdService {
 
 		JSONArray attrList = res.getJSONObject("result").getJSONArray("attr_list");
 		Iterator ite = attrList.iterator();
-		System.out.println("attr_list:" + attrList.toJSONString());
 
 		while (ite.hasNext()) {
 			// 型号属性对象
@@ -103,7 +102,7 @@ public class SyncVdService {
 						AttrValue.class);
 			}
 
-			System.out.println("attr_values:" + attrValues.toJSONString());
+			//System.out.println("attr_values:" + attrValues.toJSONString());
 
 			/**
 			 * 同步属性型号
@@ -116,14 +115,14 @@ public class SyncVdService {
 			mongoTemplate.upsert(query, update, ModelAttr.class);
 		}
 
-		List<ModelAttr> mas = mongoTemplate.findAll(ModelAttr.class);
-		List<AttrValue> avs = mongoTemplate.findAll(AttrValue.class);
-		System.out.println("mas:" + mas);
-		System.out.println("avs:" + avs);
+		//List<ModelAttr> mas = mongoTemplate.findAll(ModelAttr.class);
+		//List<AttrValue> avs = mongoTemplate.findAll(AttrValue.class);
+		//System.out.println("mas:" + mas);
+		//System.out.println("avs:" + avs);
 	}
 
 	/**
-	 * 同步商品详情
+	 * 同步商品详情和商品(product_detail,product)
 	 */
 	public void syncVdProductDetail() throws Exception {
 		/**
@@ -131,8 +130,6 @@ public class SyncVdService {
 		 */
 		long count = productRepository.count();
 		long page = this.getTotalPage(30, count);
-
-		System.out.println("全部商品:" + count + ", 总页数 :" + page);
 		
 		/**
 		 * 分页同步商品详情,每次存储30个商品,防止内存溢出
@@ -154,10 +151,7 @@ public class SyncVdService {
 			if(items == null){
 				break;
 			}
-			
-			System.out.println("items:" + items);
-			
-			
+						
 			Iterator ite = items.iterator();
 
 			/**
@@ -193,7 +187,7 @@ public class SyncVdService {
 	}
 
 	/**
-	 * 同步微店商品(document:product)
+	 * 同步微店商品(document:shopProduct)
 	 */
 	public String syncVdProduct() throws Exception {
 		int countItem = productService.getCountByItemList();
@@ -202,7 +196,6 @@ public class SyncVdService {
 
 		for (int i = 1; i <= totalPage; i++) {
 			String response = productService.vdianItemListGet(i, 1, pageSize, null, 1, null);
-			System.out.println("商品总数是:" + countItem + "," + response);
 			JSONObject res = JSONObject.parseObject(response);
 			int status = res.getJSONObject("status").getInteger("status_code");
 
@@ -215,7 +208,6 @@ public class SyncVdService {
 			 */ 
 			//List<Product> items = res.getJSONObject("result").getJSONArray("items").toJavaList(Product.class);
 			List<ShopProduct> items = res.getJSONObject("result").getJSONArray("items").toJavaList(ShopProduct.class);
-			System.out.println(items);
 			shopProductRepository.saveAll(items);
 			//productRepository.saveAll(items);
 		}

@@ -47,9 +47,10 @@ public class SyncVdScheduler {
 			System.out.println(session);*/
 		syncVdService.syncVdProduct();
 		syncVdService.syncVdProductDetail();
+		syncVdService.syncVdSkuAttr();
+
 		//syncVdService.test4();
 		//syncVdService.test3();
-		//syncVdService.syncSkuAttr();
 		//syncVdService.test();
 	}
 
