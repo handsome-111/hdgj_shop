@@ -22,6 +22,7 @@ import com.hdgj.entity.ModelAttr;
 import com.hdgj.entity.Product;
 import com.hdgj.entity.ProductDetail;
 import com.hdgj.entity.ShopProduct;
+import com.hdgj.entity.Sku;
 import com.hdgj.entity.repository.AttrValueRepository;
 import com.hdgj.entity.repository.ModelAttrRepository;
 import com.hdgj.entity.repository.ProductDetailRepository;
@@ -45,7 +46,7 @@ public class SyncVdService {
 	private ProductService productService;
 
 	@Autowired
-	private SkuAttrRepository SkuAttrResponse;
+	private SkuAttrRepository skuAttrResponse;
 
 	@Autowired
 	private ModelAttrRepository modelAttrRepository;
@@ -122,7 +123,7 @@ public class SyncVdService {
 	}
 
 	/**
-	 * 同步商品详情和商品(product_detail,product)
+	 * 同步商品详情和商品(product_detail,product,SKU)
 	 */
 	public void syncVdProductDetail() throws Exception {
 		/**
@@ -147,8 +148,8 @@ public class SyncVdService {
 			 * 调用微店API获取所有的商品
 			 */
 			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
-			System.out.println("真返回值:" + items);
-
+			System.out.println("items:" + items);
+			
 			if(items == null){
 				break;
 			}
@@ -166,6 +167,10 @@ public class SyncVdService {
 				// 调用api获取的的商品详情
 				List<ProductDetail> resDetails = item.getJSONArray("item_detail").toJavaList(ProductDetail.class);
 
+				List<Sku> resSkus = item.getJSONArray("sku").toJavaList(Sku.class);
+				skuAttrResponse.saveAll(resSkus);
+				
+				
 				//List<ProductDetail> resDetails = item.getItem_detail();
 				
 				// 从本地数据库查询的商品详情

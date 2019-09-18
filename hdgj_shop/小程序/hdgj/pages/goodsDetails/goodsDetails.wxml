@@ -20,7 +20,7 @@
   <view class="goods-option">
     <view class="clearfix" bindtap='switchGoodsSpec'>
       <p>数量与规格</p>
-      <p>S*7777</p>
+      <p>{{goods.sku[0].title}} * 1</p>
     </view>
     <view class="clearfix" bindtap='switchSkippingAddress'>
       <p>配送:</p>
@@ -39,5 +39,63 @@
 </view>
 <navigator class="back-index" url='/components/index/index' open-type="switchTab">去首页</navigator>
 
-<import src="/templates/alerts/goodsSpec.wxml"/>
-<template is="{{alerts}}" data="{{goodsSpec,alertsTemplateName}}"></template>
+<template>
+  <view class='bottom'>
+    <p class="goods-price">￥135</p>
+    <p class="submit-button" style="font-size:0.8rem;">登录购买</p>
+  </view>
+</template>
+
+<!-- <import src="/templates/alerts/goodsSpec.wxml"/> -->
+<template is="{{alerts}}" data="{{goods,goodsSpec,alertsTemplateName}}"></template>
+
+
+<!-- 商品详情弹出层 -->
+<template name="alerts">
+  <view class="outer" bindtap='closeAlters'>
+    <view class="main" catchtap='xxx'>
+      <image src='/images/index/1.jpg'></image>
+      <template is="{{alertsTemplateName}}" data="{{goodsSpec,goods}}"></template>
+    
+    </view>
+  </view>
+</template>  
+
+<!-- 数量与规格 -->
+<template name="spec">
+  <view class="content">
+    <!-- <block wx:for="{{goods.sku}}"> -->
+      <p>规格</p>
+      <view class="spec">
+        <view wx:for="{{goods.sku}}" wx:key='{{item.title}}'>
+          <span class="{{selectedTitle == index ?  'selected' : 'unSelected'}}" catchtap='selectedTitle({{index}})'>{{item.title}}</span>
+        </view>
+      </view>
+    <!-- </block> -->
+  </view>
+  <view class="content"> 
+    <p>数量</p>
+    <import src="/templates/input-number/input-number.wxml"/>
+    <view >
+      <template is="input-number"></template>
+      <span class='background-font font-small'>库存{{goods.sku.price}}{{goods.sku==null?goods.lowPrice:goods.sku.price}}件</span>
+    </view>
+  </view>
+</template>
+
+<!-- 配送地址 -->
+<template name="shipping-address" bindtap='closeAlters'>
+  <view class="content">
+    <checkbox-group bindchange="checkboxChange" >
+      <block wx:for="{{goodsSpec}}">
+        <p>配送至</p>
+        <view class="address">
+          <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
+          <span>北京北京北京北京北京北京北京北京北京北</span>
+        </view>
+      </block>
+    </checkbox-group>
+
+    <navigator url='/pages/newAddress/newAddress' class="new-address">新建地址</navigator>
+  </view>
+</template>

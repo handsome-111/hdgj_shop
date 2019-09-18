@@ -32,6 +32,7 @@ Page({
     alerts:'',
     //弹出层模板名称
     alertsTemplateName:'',
+    selectedTitle:10
   },
 
 
@@ -121,6 +122,15 @@ Page({
   closeAlters: function(){
     this.setData({
       alerts: 'null'
+    })
+  },
+  /**
+   * 选择指定规格
+   */
+  selectedTitle:function(index){
+    console.log("当前选择的是第" + index)
+    this.setData({
+      selectedTitle:index
     })
   }
 })
