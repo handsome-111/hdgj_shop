@@ -13,26 +13,14 @@ Page({
     //     { src: '/images/index/1.jpg', url:'', id: 2 },
     //   ]
     // },
-    //商品规格
-    goodsSpec:[
-      {
-        specNname:'规格',
-        values: ['X', 'M', 'L', 'XL', 'XXL', 'X', 'M', 'L', 'XL', 'XXL']
-      },
-      {
-        specNname: '规格',
-        values: ['X', 'M', 'L', 'XL', 'XXL', 'X', 'M', 'L', 'XL', 'XXL']
-      },
-      {
-        specNname: '规格',
-        values: ['X', 'M', 'L', 'XL', 'XXL', 'X', 'M', 'L', 'XL', 'XXL']
-      }
-    ],
     //是否弹窗
     alerts:'',
     //弹出层模板名称
     alertsTemplateName:'',
-    selectedTitle:10
+    selectedTitle:1,
+    selected:100,
+    number:1,    //购买的商品数量
+    stock:10    //商品库存
   },
 
 
@@ -46,12 +34,12 @@ Page({
       url: app.globalData.serverHost + '/product/' + options.itemId,
       success: function (res) {
         var goods = res.data.data
-        console.log(that)
         that.setData({
-          goods:goods
+          goods:goods,
+          stock: goods.stock
         })
        // that.data.goods = goods
-        console.log(that.data)
+        console.log(that.data.goods)
       }
     })
   },
@@ -107,14 +95,14 @@ Page({
   /*切换商品规格选项*/ 
   switchGoodsSpec: function () {
     this.setData({
-      alerts: 'alerts',
+      alerts: 'spec',
       alertsTemplateName:'spec'
     })
   },
   /*切换到配送选项 */
   switchSkippingAddress: function(){
     this.setData({
-      alerts: 'alerts',
+      alerts: 'shipping-address',
       alertsTemplateName: 'shipping-address'
     })
   },
@@ -127,10 +115,38 @@ Page({
   /**
    * 选择指定规格
    */
-  selectedTitle:function(index){
-    console.log("当前选择的是第" + index)
+  selectedTitle:function(event){
     this.setData({
-      selectedTitle:index
+      selectedTitle:event.target.dataset.index,
+      selected: event.target.dataset.index
+    })
+
+    console.log("selectedTitle:" + this.data.selectedTitle)
+  },
+
+  decrement:function(){
+    console.log("自减")
+    var number = this.data.number;
+    if(number <= 1){
+      return ;
+    }
+    this.setData({
+      number:--number
+    })
+  },
+
+  increment:function(){
+    console.log("自增")
+    var number = this.data.number
+    var stock = this.data.stock
+    if (number >= stock) {
+      this.setData({
+        number:stock
+      })
+      return;
+    }
+    this.setData({
+      number: ++number
     })
   }
 })

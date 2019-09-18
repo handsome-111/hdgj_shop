@@ -30,6 +30,12 @@
 
   <p class="title">商品参数</p>
   <p class="title">商品详情</p>
+  <view class='goodsDetails'>
+    <block wx:for='{{goods.itemDetail}}' wx:key='{{item.id}}'>
+      <template is="{{item.type}}" data='{{item}}'></template>
+    </block>
+
+  </view>
 </view>
 
 <view class="bottom">
@@ -47,11 +53,11 @@
 </template>
 
 <!-- <import src="/templates/alerts/goodsSpec.wxml"/> -->
-<template is="{{alerts}}" data="{{goods,goodsSpec,alertsTemplateName}}"></template>
+<template is="{{alerts}}" data="{{goods,goodsSpec,stock,number}}"></template>
 
 
 <!-- 商品详情弹出层 -->
-<template name="alerts">
+<!-- <template name="alerts">
   <view class="outer" bindtap='closeAlters'>
     <view class="main" catchtap='xxx'>
       <image src='/images/index/1.jpg'></image>
@@ -59,10 +65,74 @@
     
     </view>
   </view>
+</template>   -->
+
+<!-- 商品详情模板 -->
+<template name='1'>
+  <p>{{item.text}}</p>
+</template>
+
+<template name='2'>
+  <image src="{{item.url}}" mode="widthFix"></image>
+</template>
+
+<!-- 商品详情弹出层 -->
+<template name="spec">
+  <view class="outer" bindtap='closeAlters'>
+    <view class="main" catchtap='xxx'>
+      <image src='{{goods.imgHead}}'></image>
+      <view class="content">
+      <!-- <block wx:for="{{goods.sku}}"> -->
+        <p>规格</p>
+        <view class="spec">
+          <view wx:for="{{goods.sku}}" wx:key='{{item.title}}'>
+            <span class="{{selectedTitle == selected ?  'selected' : 'unSelected'}}" catchtap='selectedTitle' data-index="{{index}}">{{item.title}}</span>
+          </view>
+        </view>
+        <!-- </block> -->
+        </view>
+        <view class="content"> 
+          <p>数量</p>
+          <import src="/templates/input-number/input-number.wxml"/>
+          <view >
+            <template is="input-number" data='{{number}}'></template>
+            <span class='background-font font-small'>库存{{stock}}件</span>
+          </view>
+      </view>
+    
+    </view>
+  </view>
 </template>  
 
+
+
+<!-- 商品详情弹出层 -->
+<template name="shipping-address">
+  <view class="outer" bindtap='closeAlters'>
+    <view class="main" catchtap='xxx'>
+      <image src='/images/index/1.jpg'></image>
+      <view class="content">
+        <checkbox-group bindchange="checkboxChange" >
+          <block wx:for="{{goodsSpec}}">
+            <p>配送至</p>
+            <view class="address">
+              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
+              <span>北京北京北京北京北京北京北京北京北京北</span>
+            </view>
+          </block>
+        </checkbox-group>
+
+        <navigator url='/pages/newAddress/newAddress' class="new-address">新建地址</navigator>
+      </view>
+    
+    </view>
+  </view>
+</template>
+
+
+
 <!-- 数量与规格 -->
-<template name="spec">
+<template name="spec111">
   <view class="content">
     <!-- <block wx:for="{{goods.sku}}"> -->
       <p>规格</p>
@@ -84,7 +154,7 @@
 </template>
 
 <!-- 配送地址 -->
-<template name="shipping-address" bindtap='closeAlters'>
+<template name="shipping-address222" bindtap='closeAlters'>
   <view class="content">
     <checkbox-group bindchange="checkboxChange" >
       <block wx:for="{{goodsSpec}}">

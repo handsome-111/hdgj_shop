@@ -73,6 +73,22 @@
   float: right;
 }
 
+
+/**
+*商品详情
+*/
+
+.goodsDetails{
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+/*
+*底部
+*/
 .bottom{
   position: fixed;
   bottom: 0px;
