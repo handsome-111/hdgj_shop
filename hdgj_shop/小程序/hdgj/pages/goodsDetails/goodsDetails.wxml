@@ -14,7 +14,7 @@
 
   <view class="goods-title clearfix">
     <view>{{goods.itemName}}</view>
-    <view class="goods-price">￥{{goods.price}}</view>
+    <view class="goods-price" >￥{{goods.price}}</view>
   </view>
 
   <view class="goods-option">
@@ -28,7 +28,7 @@
     </view>
   </view>
 
-  <p class="title">商品参数</p>
+  <!-- <p class="title">商品参数</p> -->
   <p class="title">商品详情</p>
   <view class='goodsDetails'>
     <block wx:for='{{goods.itemDetail}}' wx:key='{{item.id}}'>
@@ -38,17 +38,24 @@
   </view>
 </view>
 
-<view class="bottom">
-  <p class="goods-price">￥135</p>
-  <p >加入购物车</p>
-  <p class="submit-button" style="font-size:0.8rem;">立即购买</p>
-</view>
-<navigator class="back-index" url='/components/index/index' open-type="switchTab">去首页</navigator>
+<view style="height:8vh"></view>
+<template is='{{loginBuy}}' data='{{goods,currentPrice}}'></template>
 
-<template>
+<!-- 底部已登录购买模板 -->
+<template name='login'>
+  <view class="bottom">
+    <p class="goods-price">￥{{currentPrice}}</p>
+    <p >加入购物车</p>
+    <p class="submit-button" style="font-size:0.8rem;">立即购买</p>
+  </view>
+</template>
+<p class="back-index" url='/components/index/index' open-type="switchTab">去首页</p>
+
+<!-- 底部未登录购买模板 -->
+<template name='unLogin'>
   <view class='bottom'>
-    <p class="goods-price">￥135</p>
-    <p class="submit-button" style="font-size:0.8rem;">登录购买</p>
+    <p class="goods-price">￥{{currentPrice}}</p>
+    <p class="submit-button" style="font-size:0.8rem;" catchtap='goLogin'>登录购买</p>
   </view>
 </template>
 
@@ -86,7 +93,7 @@
         <p>规格</p>
         <view class="spec">
           <view wx:for="{{goods.sku}}" wx:key='{{item.title}}'>
-            <span class="{{selectedTitle == selected ?  'selected' : 'unSelected'}}" catchtap='selectedTitle' data-index="{{index}}">{{item.title}}</span>
+            <span class="{{selectedTitle == selected ?  'selected' : 'unSelected'}}" catchtap='selectedTitle' data-index="{{index}}" data-price='{{item.price}}'>{{item.title}}</span>
           </view>
         </view>
         <!-- </block> -->
@@ -117,7 +124,7 @@
             <p>配送至</p>
             <view class="address">
               <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
-              <span>北京北京北京北京北京北京北京北京北京北</span>
+              <span>{{userInfo.address}}</span>
             </view>
           </block>
         </checkbox-group>

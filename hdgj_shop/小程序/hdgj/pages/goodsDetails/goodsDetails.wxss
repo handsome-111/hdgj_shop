@@ -97,6 +97,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background-color: white;
   box-shadow: 0 -2px 12px 3px rgba(229, 229, 229,1);
 }
 

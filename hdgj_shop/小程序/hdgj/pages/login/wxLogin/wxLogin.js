@@ -6,13 +6,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    forwardUrl:null,
+    forwardType:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    this.setData({
+      forwardUrl:options.url,
+      forwardType:options.type
+    })
     
   },
 
@@ -40,8 +46,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function (options) {
   },
 
   /**
@@ -71,13 +76,34 @@ Page({
     // console.log(e.detail.userInfo + '2')
     // console.log(e.detail.rawData + '3')
     var promise = app.login(userInfo)
+    var url = this.data.forwardUrl
+    var forwardType = this.data.forwardType
 
+    url = decodeURIComponent(url)
+
+    if (forwardType == 1) {
+      promise.then(() => {
+        wx.switchTab({
+          url: url
+        })
+      })
+      return ;
+    }
+
+    if (forwardType == 2){
+      promise.then(() => {
+        wx.navigateTo({
+          url: url,
+        })
+      })
+      return ;
+    }
+    
     promise.then(() => {
       wx.switchTab({
-        url: '/components/user/user'
+        url: "/components/user/user"
       })
     })
-  
     
   }  
 })   

@@ -15,6 +15,58 @@
         <result column="update_time" property="updateTime" />
         <result column="birthday" property="birthday" />
         <result column="icon" property="icon" />
+        <association property="defaultAddress" column="userid" javaType="com.hdgj.entity.Address" select="selectAuthor"/>
+    </resultMap>
+    
+    <!-- Address返回结果 -->
+    <resultMap id="addressResult" type="com.hdgj.entity.Address">
+    	<id column="id" property="id" />
+        <result column="addr_email" property="email" />
+        <result column="addr_name" property="name" />
+        <result column="addr_company" property="company" />
+        <result column="addr_phone" property="phone" />
+        <result column="addr_fax" property="fax" />
+        <result column="addr_street1" property="street1" />
+        <result column="addr_street2" property="street2" />
+        <result column="addr_city" property="city" />
+        <result column="addr_province" property="province" />
+        <result column="addr_post" property="post" />
+        <result column="addr_region" property="region" />
+        <result column="addr_country" property="country" />
+        <result column="addr_userid" property="userid" />
+        <result column="addr_created_time" property="createdTime" />
+        <result column="addr_update_time" property="updateTime" />
+        <result column="addr_is_default" property="isDefault" />
+        <result column="addr_idCardNo" property="idCardNo" />
     </resultMap>
 
+	<!-- oFyDr4m6n1FwFUZJBwNztItuERfE -->
+	<select id="selectUserByopenid" parameterType="java.lang.String" resultType="hashmap">
+		SELECT 
+			u.id,u.nickname,u.password,u.openid,u.phone,u.username,u.roles,		
+			u.create_time,u.update_time,u.birthday,u.icon,			
+			addr.id			as 	addr_id,
+			addr.email		as 	addr_email,
+			addr.name		as 	addr_name,
+			addr.company	as 	addr_company,
+			addr.phone		as 	addr_phone,
+			addr.fax		as 	addr_fax,
+			addr.street1	as 	addr_street1,
+			addr.street2	as 	addr_street2,
+			addr.city		as 	addr_city,
+			addr.province	as 	addr_province,
+			addr.post		as 	addr_post,
+			addr.region		as 	addr_region,
+			addr.country	as 	addr_country,
+			addr.userid		as 	addr_userid,
+			addr.created_time	as 	addr_created_time,
+			addr.update_time	as 	addr_update_time,
+			addr.is_default		as 	addr_is_default,
+			addr.idCardNo  		as 	addr_idCardNo	
+		FROM user u LEFT JOIN address addr on addr.userid = u.id WHERE openid = 'oFyDr4m6n1FwFUZJBwNztItuERfE' #{openid}
+	</select>
+
+	<select id="selectDefaultAddress">
+		SELECT * FROM address WHERE userid = #{id}
+	</select>
 </mapper>

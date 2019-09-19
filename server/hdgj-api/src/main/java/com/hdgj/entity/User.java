@@ -81,12 +81,22 @@ public class User implements Serializable,UserDetails {
     @DateTimeFormat( pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime birthday;
+    
+    private Address defaultAddress;		//默认地址
 
 
     public LocalDateTime getBirthday() {
 //    	StringBuffer sbf = new StringBuffer(birthday.format(DateTimeFormatter.ISO_DATE));
 //    	return LocalDateTime.parse(sbf);
     	return birthday;
+	}
+
+	public Address getDefaultAddress() {
+		return defaultAddress;
+	}
+
+	public void setDefaultAddress(Address defaultAddress) {
+		this.defaultAddress = defaultAddress;
 	}
 
 	public void setBirthday(LocalDateTime birthday) {

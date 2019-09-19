@@ -8,8 +8,10 @@ App({
     wx.showLoading({
       title: '加载中',
     })
-    this.login(this.globalData.userInfo).then()
-    console.log('APP准备完毕')
+    this.login(this.globalData.userInfo).then(() => {
+      console.log('APP准备完毕')
+      console.log(this.globalData.userInfo)
+    })
   }, 
   globalData: {  
     userInfo: null,             //用户信息

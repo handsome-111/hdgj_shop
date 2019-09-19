@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Test.mapper.AddressMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="Test.entity.Address">
+        <id column="id" property="id" />
+        <result column="email" property="email" />
+        <result column="name" property="name" />
+        <result column="company" property="company" />
+        <result column="phone" property="phone" />
+        <result column="fax" property="fax" />
+        <result column="street1" property="street1" />
+        <result column="street2" property="street2" />
+        <result column="city" property="city" />
+        <result column="province" property="province" />
+        <result column="post" property="post" />
+        <result column="region" property="region" />
+        <result column="country" property="country" />
+        <result column="userid" property="userid" />
+        <result column="created_time" property="createdTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_default" property="isDefault" />
+        <result column="idCardNo" property="idCardNo" />
+    </resultMap>
+
+</mapper>

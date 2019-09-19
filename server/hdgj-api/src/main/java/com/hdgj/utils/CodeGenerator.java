@@ -28,7 +28,7 @@ public class CodeGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("C://Users//Administrator//Desktop//华典国际绿色商城//服务器//hdgj-api//src//main//java");
+        gc.setOutputDir("C://Users//Administrator//Desktop//hdgj-shop//server//hdgj-api//src//main//java");
         gc.setFileOverride(true);
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
@@ -49,15 +49,15 @@ public class CodeGenerator {
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/hdgj?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
+        dsc.setPassword("root");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3308/hdgj?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         mpg.setDataSource(dsc);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[] { "" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "user" }); // 需要生成的表
+        strategy.setInclude(new String[] { "address" }); // 需要生成的表
 
         strategy.setSuperServiceClass(null);
         strategy.setSuperServiceImplClass(null);

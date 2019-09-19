@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    itemId:null,
     goods:'',
     // goods:{
     //   images:[
@@ -20,7 +21,9 @@ Page({
     selectedTitle:1,
     selected:100,
     number:1,    //购买的商品数量
-    stock:10    //商品库存
+    stock:10,    //商品库存
+    loginBuy:'',
+    currentPrice:'' //当前筛选sku的价格
   },
 
 
@@ -30,13 +33,22 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var loginBuy = 'login'
+
+    if(app.globalData.userInfo == null){
+      loginBuy = 'unLogin'
+    }
+
     wx.request({
       url: app.globalData.serverHost + '/product/' + options.itemId,
       success: function (res) {
         var goods = res.data.data
         that.setData({
           goods:goods,
-          stock: goods.stock
+          stock: goods.stock,
+          loginBuy:loginBuy,
+          currentPrice: goods.lowPrice,
+          itemId: options.itemId
         })
        // that.data.goods = goods
         console.log(that.data.goods)
@@ -118,14 +130,13 @@ Page({
   selectedTitle:function(event){
     this.setData({
       selectedTitle:event.target.dataset.index,
-      selected: event.target.dataset.index
+      selected: event.target.dataset.index,
+      currentPrice: event.target.dataset.price
     })
 
-    console.log("selectedTitle:" + this.data.selectedTitle)
   },
 
   decrement:function(){
-    console.log("自减")
     var number = this.data.number;
     if(number <= 1){
       return ;
@@ -136,7 +147,6 @@ Page({
   },
 
   increment:function(){
-    console.log("自增")
     var number = this.data.number
     var stock = this.data.stock
     if (number >= stock) {
@@ -147,6 +157,20 @@ Page({
     }
     this.setData({
       number: ++number
+    })
+  },
+  /**
+   * 登录购买
+   */
+  goLogin:function(){
+    var returnPath = '/' + this.route
+    returnPath = returnPath + '?itemId=' + this.data.itemId
+    returnPath = encodeURIComponent(returnPath)
+    
+    var url = '/pages/login/wxLogin/wxLogin?url=' + returnPath + '&type=2'
+    
+    wx.navigateTo({
+      url: url
     })
   }
 })
