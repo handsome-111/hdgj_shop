@@ -15,7 +15,23 @@
         <result column="update_time" property="updateTime" />
         <result column="birthday" property="birthday" />
         <result column="icon" property="icon" />
-        <association property="defaultAddress" column="userid" javaType="com.hdgj.entity.Address" select="selectAuthor"/>
+        <association property="defaultAddress" column="userid" javaType="com.hdgj.entity.Address"/>
+    </resultMap>
+    
+    <!-- 用户和用户地址 -->
+    <resultMap id="userAndDefaultAddress" type="com.hdgj.entity.User">
+        <id column="id" property="id" />
+        <result column="nickname" property="nickname" />
+        <result column="password" property="password" />
+        <result column="openid" property="openid" />
+        <result column="phone" property="phone" />
+        <result column="username" property="username" />
+        <result column="roles" property="roles" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="birthday" property="birthday" />
+        <result column="icon" property="icon" />
+        <association property="defaultAddress" column="id" javaType="com.hdgj.entity.Address" select="selectDefaultAddress" />
     </resultMap>
     
     <!-- Address返回结果 -->
@@ -41,7 +57,7 @@
     </resultMap>
 
 	<!-- oFyDr4m6n1FwFUZJBwNztItuERfE -->
-	<select id="selectUserByopenid" parameterType="java.lang.String" resultType="hashmap">
+	<select id="selectUserByopenid" parameterType="java.lang.String">
 		SELECT 
 			u.id,u.nickname,u.password,u.openid,u.phone,u.username,u.roles,		
 			u.create_time,u.update_time,u.birthday,u.icon,			
@@ -63,10 +79,14 @@
 			addr.update_time	as 	addr_update_time,
 			addr.is_default		as 	addr_is_default,
 			addr.idCardNo  		as 	addr_idCardNo	
-		FROM user u LEFT JOIN address addr on addr.userid = u.id WHERE openid = 'oFyDr4m6n1FwFUZJBwNztItuERfE' #{openid}
+		FROM user u LEFT JOIN address addr on addr.userid = u.id WHERE openid =  #{openid} 
 	</select>
 
-	<select id="selectDefaultAddress">
-		SELECT * FROM address WHERE userid = #{id}
+	<select id ="selectByOpenid" parameterType="java.lang.String" resultMap="userAndDefaultAddress">
+		SELECT * FROM user WHERE openid = #{openid}
+	</select>
+
+	<select id="selectDefaultAddress" resultType="com.hdgj.entity.Address">
+		SELECT * FROM address WHERE userid = #{id} And is_default = 1
 	</select>
 </mapper>

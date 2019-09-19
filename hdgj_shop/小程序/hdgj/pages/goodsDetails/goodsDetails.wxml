@@ -21,12 +21,12 @@
     <view class="clearfix" bindtap='switchGoodsSpec'>
       <p>数量与规格</p>
       <p>{{goods.sku[0].title}} * 1</p>
-    </view>
+    </view> 
     <view class="clearfix" bindtap='switchSkippingAddress'>
       <p>配送:</p>
-      <p>北京市北京北京</p>
-    </view>
-  </view>
+      <p>{{userInfo.defaultAddress == null ? '添加收获地址' : userInfo.defaultAddress.province + userInfo.defaultAddress.street1}}</p> 
+    </view> 
+  </view> 
 
   <!-- <p class="title">商品参数</p> -->
   <p class="title">商品详情</p>

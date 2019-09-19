@@ -24,4 +24,6 @@ public interface UserService extends IService<User> {
 	 * @return
 	 */
 	User findByOpenid(String openid);
+	
+	User selectUserByopenid(String openid);
 }

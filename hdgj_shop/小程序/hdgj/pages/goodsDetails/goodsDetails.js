@@ -7,6 +7,7 @@ Page({
    */
   data: {
     itemId:null,
+    userInfo:null,
     goods:'',
     // goods:{
     //   images:[
@@ -48,7 +49,8 @@ Page({
           stock: goods.stock,
           loginBuy:loginBuy,
           currentPrice: goods.lowPrice,
-          itemId: options.itemId
+          itemId: options.itemId,
+          userInfo:app.globalData.userInfo
         })
        // that.data.goods = goods
         console.log(that.data.goods)

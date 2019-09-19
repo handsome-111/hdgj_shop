@@ -35,6 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    		.antMatchers("/").permitAll()
 	    		.antMatchers("/user/*").hasRole("USER")
 	    		.antMatchers("/customer/*").hasRole("USER")
+	    		.antMatchers("/test/*").permitAll()
 	    		.anyRequest().permitAll()		//其他请求都不需要认证
     		.and()
     		/**

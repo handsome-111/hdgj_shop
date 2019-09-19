@@ -148,7 +148,7 @@ public class SyncVdService {
 			 * 调用微店API获取所有的商品
 			 */
 			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
-			System.out.println("items:" + items);
+			//System.out.println("items:" + items);
 			
 			if(items == null){
 				break;
@@ -223,7 +223,7 @@ public class SyncVdService {
 			 */ 
 			//List<Product> items = res.getJSONObject("result").getJSONArray("items").toJavaList(Product.class);
 			List<ShopProduct> items = res.getJSONObject("result").getJSONArray("items").toJavaList(ShopProduct.class);
-			System.out.println("微点商品shopProduct:" + res.getJSONObject("result").getJSONArray("items"));
+			//System.out.println("微点商品shopProduct:" + res.getJSONObject("result").getJSONArray("items"));
 			shopProductRepository.saveAll(items);
 			//productRepository.saveAll(items);
 		}

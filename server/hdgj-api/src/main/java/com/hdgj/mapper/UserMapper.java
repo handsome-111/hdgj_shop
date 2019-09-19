@@ -15,5 +15,6 @@ import com.hdgj.entity.User;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-
+	User selectUserByopenid(String openid);
+	User selectByOpenid(String opendid);
 }

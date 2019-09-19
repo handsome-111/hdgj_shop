@@ -39,9 +39,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 	@Override
 	public User findByOpenid(String openid) {
-		QueryWrapper query = new QueryWrapper();
+		/*QueryWrapper query = new QueryWrapper();
 		query.eq("openid", openid);
-		return super.getOne(query);
+		return super.getOne(query);*/
+		User user = mapper.selectByOpenid(openid);
+		return user;
+	}
+
+	@Override
+	public User selectUserByopenid(String openid) {
+		User user = mapper.selectByOpenid(openid);
+		return user;
 	}
 
 }
+
+
+
+
