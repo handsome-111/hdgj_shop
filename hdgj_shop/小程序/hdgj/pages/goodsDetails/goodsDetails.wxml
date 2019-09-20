@@ -24,10 +24,10 @@
     </view> 
     <view class="clearfix" bindtap='switchSkippingAddress'>
       <p>配送:</p>
-      <p>{{userInfo.defaultAddress == null ? '添加收获地址' : userInfo.defaultAddress.province + userInfo.defaultAddress.street1}}</p> 
+      <p>{{userInfo.defaultAddress == null ? '添加收获地址' : '' + userInfo.defaultAddress.province + userInfo.defaultAddress.street1}}</p> 
     </view> 
-  </view> 
-
+  </view>  
+  
   <!-- <p class="title">商品参数</p> -->
   <p class="title">商品详情</p>
   <view class='goodsDetails'>
@@ -113,7 +113,7 @@
 
 
 
-<!-- 商品详情弹出层 -->
+<!-- 发货地址弹出层 -->
 <template name="shipping-address">
   <view class="outer" bindtap='closeAlters'>
     <view class="main" catchtap='xxx'>

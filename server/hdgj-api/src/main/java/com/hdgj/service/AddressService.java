@@ -1,5 +1,7 @@
 package com.hdgj.service;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hdgj.entity.Address;
 
@@ -12,5 +14,5 @@ import com.hdgj.entity.Address;
  * @since 2019-09-19
  */
 public interface AddressService extends IService<Address> {
-
+	List<Address> selectByUserid(String userid);
 }

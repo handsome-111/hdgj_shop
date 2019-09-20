@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,7 +59,7 @@ public class User implements Serializable,UserDetails {
     /**
      * 权限
      */
-    private String roles;
+    private List<Role> roles;
 
     /**
      * 创建时间
@@ -151,11 +152,11 @@ public class User implements Serializable,UserDetails {
         this.username = username;
     }
 
-    public String getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(String roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

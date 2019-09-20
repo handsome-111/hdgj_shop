@@ -167,3 +167,20 @@ Mysql:
     	UNIQUE KEY(phone),
     	UNIQUE KEY(openid)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+	create table role(
+		id 			int(20) 		unsigned NOT NULL AUTO_INCREMENT,
+		name	varchar(20) 	NOT NULL COMMENT '角色名称',
+		PRIMARY KEY(id)
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+	create table user_role(
+		userid 		int(20) 		NOT NULL,
+		roleid 		int(20) 		NOT NULL,
+		key userid(userid),
+		key roleid(roleid)
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+	INSERT INTO role (id, name) VALUES (1, 'ROLE_USER');
+	INSERT INTO role (id, name) VALUES (2, 'ROLE_ADMIN');
