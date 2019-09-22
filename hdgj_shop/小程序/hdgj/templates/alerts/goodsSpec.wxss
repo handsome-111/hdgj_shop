@@ -23,6 +23,11 @@
   border-radius: 0.5rem 0.5rem 0 0;
   overflow-x:scroll;		
 	overflow-y:scroll; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 1rem 0 1rem;
+  box-sizing: border-box;
 }
 
 .main image{
@@ -37,10 +42,12 @@
   box-shadow: 0 0px 15px 3px rgba(219, 202, 202, 0.54);
 }
 
+
+/*配送地址*/
 .content{
-  padding: 0 1rem 0 1rem;
-  margin-top: 10vw;
+  margin-top: 15vw;
 }
+
 
 .content:nth-child(3){
   margin-top: 0; 
@@ -84,6 +91,7 @@
   padding: 0.5rem;
   display: flex;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .address span{

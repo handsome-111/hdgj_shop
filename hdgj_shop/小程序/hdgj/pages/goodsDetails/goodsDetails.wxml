@@ -23,10 +23,10 @@
       <p>{{goods.sku[0].title}} * 1</p>
     </view> 
     <view class="clearfix" bindtap='switchSkippingAddress'>
-      <p>配送:</p>
-      <p>{{userInfo.defaultAddress == null ? '添加收获地址' : '' + userInfo.defaultAddress.province + userInfo.defaultAddress.street1}}</p> 
+      <p>配送至:</p>
+      <p>{{userInfo.defaultAddress == null ? '添加收获地址' : '' + deliveryAddress.province + deliveryAddress.street1}}</p> 
     </view> 
-  </view>  
+  </view>   
   
   <!-- <p class="title">商品参数</p> -->
   <p class="title">商品详情</p>
@@ -60,7 +60,7 @@
 </template>
 
 <!-- <import src="/templates/alerts/goodsSpec.wxml"/> -->
-<template is="{{alerts}}" data="{{goods,goodsSpec,stock,number}}"></template>
+<template is="{{alerts}}" data="{{goods,goodsSpec,stock,number,addresses,checkAddressFlag}}"></template>
 
 
 <!-- 商品详情弹出层 -->
@@ -85,7 +85,7 @@
 
 <!-- 商品详情弹出层 -->
 <template name="spec">
-  <view class="outer" bindtap='closeAlters'>
+  <view class="outer" catchtap='closeAlters'>
     <view class="main" catchtap='xxx'>
       <image src='{{goods.imgHead}}'></image>
       <view class="content">
@@ -115,23 +115,23 @@
 
 <!-- 发货地址弹出层 -->
 <template name="shipping-address">
-  <view class="outer" bindtap='closeAlters'>
+  <view class="outer" catchtap='closeAlters'>
     <view class="main" catchtap='xxx'>
       <image src='/images/index/1.jpg'></image>
       <view class="content">
-        <checkbox-group bindchange="checkboxChange" >
-          <block wx:for="{{goodsSpec}}">
-            <p>配送至</p>
-            <view class="address">
-              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
-              <span>{{userInfo.address}}</span>
+        <radio-group>
+          <p>配送至</p>
+          <block wx:for="{{addresses}}">
+            <view class="address" catchtap="selectAddress" data-index="{{index}}">
+              <radio value="{{item.id}}" color="#E71866" checked="{{checkAddressFlag == index ? true : false}}"/>
+              <span>{{item.province}}{{item.street1}}</span>
             </view>
           </block>
-        </checkbox-group>
+        </radio-group>
 
-        <navigator url='/pages/newAddress/newAddress' class="new-address">新建地址</navigator>
       </view>
-    
+      <navigator url='/pages/newAddress/newAddress' class="new-address">新建地址</navigator>
+
     </view>
   </view>
 </template>
@@ -164,8 +164,8 @@
 <template name="shipping-address222" bindtap='closeAlters'>
   <view class="content">
     <checkbox-group bindchange="checkboxChange" >
+      <p>配送至</p>
       <block wx:for="{{goodsSpec}}">
-        <p>配送至</p>
         <view class="address">
           <checkbox value="{{item.name}}" checked="{{item.checked}}"/>
           <span>北京北京北京北京北京北京北京北京北京北</span>

@@ -23,7 +23,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private BCryptPasswordEncoder passwordEncoder;
 
     
-    
+    /**
+     * 授权请求
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http
@@ -33,8 +35,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     		.authorizeRequests()	
 	    		.antMatchers("/static/**").permitAll()
 	    		.antMatchers("/").permitAll()
+	    		
 	    		.antMatchers("/user/*").hasRole("USER")
 	    		.antMatchers("/customer/*").hasRole("USER")
+	    		.antMatchers("/test/test2").hasRole("USER")
+	    		//.antMatchers("/address/*").hasRole("USER")
+	    		
 	    		.antMatchers("/test/*").permitAll()
 	    		.anyRequest().permitAll()		//其他请求都不需要认证
     		.and()
@@ -42,10 +48,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     		 * 配置表单,如果调用以上需要权限的接口,则
     		 */
     		.formLogin() 
-    			//.loginPage("/login")		//登录页面
+    			.loginPage("/login").permitAll()		//登录页面
     			//.failureUrl("/login-error")		
     			//.loginProcessingUrl("/authentication/form")				//自定义处理登录的请求,这时就不需要successForwardUrl了
     			//.successForwardUrl("/loginSuccess")
+    			.and()
+    			.logout()
+    			 .logoutUrl("/my/logout")
     			.and()
     		.exceptionHandling().accessDeniedPage("/401");		//异常处理重定向到401
     	

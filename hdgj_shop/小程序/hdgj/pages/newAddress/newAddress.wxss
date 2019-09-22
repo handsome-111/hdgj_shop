@@ -23,18 +23,19 @@ page{
   padding: 1rem;
   box-sizing: border-box;
 }
-.fotter p{
+.fotter button{
+  font-size: 1rem;
   width: 100%;
   border: 1px solid rgb(231, 24, 102);
   background: rgb(231, 24, 102);
   color: white;
+  box-sizing: border-box;
   text-align: center;
-  padding:0.5rem 0 0.5rem 0;
   border-radius: 2rem;
   margin-bottom: 0.5rem;
 }
 
-.fotter p:nth-child(2){
+.fotter button:nth-child(2){
   color: rgb(231, 24, 102);
   background: white;
 }

@@ -1,11 +1,14 @@
 // pages/newAddress/newAddress.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    address:null,
+    checked:2,
+    region: []
   },
 
   /**
@@ -20,7 +23,7 @@ Page({
    */
   onReady: function () {
 
-  },
+  }, 
 
   /**
    * 生命周期函数--监听页面显示
@@ -62,5 +65,24 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /**
+   * 删除
+   */
+  deleteAddress:function(){
+    wx.request({
+      url: '',
+    })
+  },
+
+  bindRegionChange:function(e){
+    var region = e.detail.value
+    this.setData({
+      region:region
+    })
+  },
+
+  formSubmit:function(e){
+    console.log(this.data.address)
   }
 })

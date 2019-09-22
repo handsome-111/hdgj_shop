@@ -13,7 +13,7 @@
   <p class='box-standard'>
     <span>生日</span>
     <picker mode='date' value='{{userInfo.birthday}}'   bindchange='bindDateChange'>
-      <span class='picker'>{{userInfo.birthday}}</span>
+      <input class='picker' disabled="true" value='{{userInfo.birthday}}' />
     </picker>
   </p>
 

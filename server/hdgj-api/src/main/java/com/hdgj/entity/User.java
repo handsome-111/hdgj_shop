@@ -196,8 +196,7 @@ public class User implements Serializable,UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return roles;
 	}
 
 	@Override

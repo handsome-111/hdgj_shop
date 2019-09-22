@@ -24,7 +24,10 @@ Page({
     number:1,    //购买的商品数量
     stock:10,    //商品库存
     loginBuy:'',
-    currentPrice:'' //当前筛选sku的价格
+    currentPrice:'', //当前筛选sku的价格
+    addresses:null,
+    deliveryAddress:null,  //配送地址
+    checkAddressFlag:0
   },
 
 
@@ -40,6 +43,8 @@ Page({
       loginBuy = 'unLogin'
     }
 
+    console.log(app.globalData.userInfo)
+
     wx.request({
       url: app.globalData.serverHost + '/product/' + options.itemId,
       success: function (res) {
@@ -47,10 +52,11 @@ Page({
         that.setData({
           goods:goods,
           stock: goods.stock,
-          loginBuy:loginBuy,
+          loginBuy:loginBuy, 
           currentPrice: goods.lowPrice,
           itemId: options.itemId,
-          userInfo:app.globalData.userInfo
+          userInfo:app.globalData.userInfo,
+          deliveryAddress:app.globalData.userInfo.defaultAddress
         })
        // that.data.goods = goods
         console.log(that.data.goods)
@@ -115,11 +121,39 @@ Page({
   },
   /*切换到配送选项 */
   switchSkippingAddress: function(){
-    this.setData({
-      alerts: 'shipping-address',
-      alertsTemplateName: 'shipping-address'
+    var userid = app.globalData.userInfo.id
+    var that = this
+    wx.request({
+      url: app.globalData.serverHost + '/address/getUserAddresses?userid=' + userid,
+      success:function(res){
+        var addresses = res.data.data
+        that.setData({
+          addresses:addresses
+        })
+      },
+      complete:function(){
+        that.setData({
+          alerts: 'shipping-address',
+          alertsTemplateName: 'shipping-address'
+        })
+      } 
     })
   },
+  /**
+   * 选择地址
+   */
+  selectAddress:function(event){
+    
+    var index = event.target.dataset.index
+    var address = this.data.addresses[index]
+    console.log("地址:" + address + "," + index + "," +  this.data.addresses)
+    this.setData({
+      alerts:'',
+      deliveryAddress: address,
+      checkAddressFlag:index
+    })
+  },
+
   //关闭弹出层 
   closeAlters: function(){
     this.setData({
@@ -137,7 +171,9 @@ Page({
     })
 
   },
-
+  /**
+   * 自减
+   */
   decrement:function(){
     var number = this.data.number;
     if(number <= 1){
@@ -147,7 +183,9 @@ Page({
       number:--number
     })
   },
-
+  /**
+   *  自增
+   */
   increment:function(){
     var number = this.data.number
     var stock = this.data.stock
@@ -161,6 +199,7 @@ Page({
       number: ++number
     })
   },
+
   /**
    * 登录购买
    */

@@ -42,13 +42,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 		/*QueryWrapper query = new QueryWrapper();
 		query.eq("openid", openid);
 		return super.getOne(query);*/
-		User user = mapper.selectByOpenid(openid);
+		User user = mapper.selectUserByopenid(openid);
 		return user;
 	}
 
 	@Override
 	public User selectUserByopenid(String openid) {
-		User user = mapper.selectByOpenid(openid);
+		User user = mapper.selectUserByopenid(openid);
 		return user;
 	}
 

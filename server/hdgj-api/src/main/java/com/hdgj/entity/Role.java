@@ -16,7 +16,7 @@ public class Role implements Serializable,GrantedAuthority {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String name;
+    private String rolename;
 
 
     public Long getId() {
@@ -26,25 +26,24 @@ public class Role implements Serializable,GrantedAuthority {
     public void setId(Long id) {
         this.id = id;
     }
+    
+   
 
-    public String getName() {
-        return name;
-    }
+	public String getRolename() {
+		return rolename;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
 
-    @Override
-    public String toString() {
-        return "Role{" +
-        "id=" + id +
-        ", name=" + name +
-        "}";
-    }
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", rolename=" + rolename + "]";
+	}
 
 	@Override
 	public String getAuthority() {
-		return name;
+		return rolename;
 	}
 }

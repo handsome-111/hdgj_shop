@@ -10,7 +10,6 @@
         <result column="openid" property="openid" />
         <result column="phone" property="phone" />
         <result column="username" property="username" />
-        <result column="roles" property="roles" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="birthday" property="birthday" />
@@ -26,7 +25,6 @@
         <result column="openid" property="openid" />
         <result column="phone" property="phone" />
         <result column="username" property="username" />
-        <result column="roles" property="roles" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="birthday" property="birthday" />
@@ -34,6 +32,28 @@
         <association property="defaultAddress" column="id" javaType="com.hdgj.entity.Address" select="selectDefaultAddress" />
     </resultMap>
     
+    <!-- 用户，用户地址，用户权限 -->
+    <resultMap id="userAndRoleAndDefaultAddress" type="com.hdgj.entity.User">
+        <id column="id" property="id" />
+        <result column="nickname" property="nickname" />
+        <result column="password" property="password" />
+        <result column="openid" property="openid" />
+        <result column="phone" property="phone" />
+        <result column="username" property="username" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="birthday" property="birthday" />
+        <result column="icon" property="icon" />
+        <association property="defaultAddress" column="id" javaType="com.hdgj.entity.Address" select="selectDefaultAddress" />
+        <association property="roles" column="userid" javaType="java.util.List"  resultMap="roleResult"/>
+    </resultMap>
+    
+    <!-- role -->
+    <resultMap id="roleResult" type="com.hdgj.entity.Role">
+    	<id column="id" property="id" />
+    	<id column="rolename" property="rolename" />
+    </resultMap>
+        
     <!-- Address返回结果 -->
     <resultMap id="addressResult" type="com.hdgj.entity.Address">
     	<id column="id" property="id" />
@@ -57,29 +77,25 @@
     </resultMap>
 
 	<!-- oFyDr4m6n1FwFUZJBwNztItuERfE -->
-	<select id="selectUserByopenid" parameterType="java.lang.String">
+	<select id="selectUserByopenid" parameterType="java.lang.String" resultMap="userAndRoleAndDefaultAddress">
+	<!-- 
 		SELECT 
-			u.id,u.nickname,u.password,u.openid,u.phone,u.username,u.roles,		
+			u.id,u.nickname,u.password,u.openid,u.phone,u.username,		
 			u.create_time,u.update_time,u.birthday,u.icon,			
-			addr.id			as 	addr_id,
-			addr.email		as 	addr_email,
-			addr.name		as 	addr_name,
-			addr.company	as 	addr_company,
-			addr.phone		as 	addr_phone,
-			addr.fax		as 	addr_fax,
-			addr.street1	as 	addr_street1,
-			addr.street2	as 	addr_street2,
-			addr.city		as 	addr_city,
-			addr.province	as 	addr_province,
-			addr.post		as 	addr_post,
-			addr.region		as 	addr_region,
-			addr.country	as 	addr_country,
-			addr.userid		as 	addr_userid,
-			addr.created_time	as 	addr_created_time,
-			addr.update_time	as 	addr_update_time,
-			addr.is_default		as 	addr_is_default,
-			addr.idCardNo  		as 	addr_idCardNo	
-		FROM user u LEFT JOIN address addr on addr.userid = u.id WHERE openid =  #{openid} 
+			r.rolename as rolename
+		FROM user u 
+		LEFT JOIN user_role ur ON ur.userid = u.id 
+		LEFT JOIN role r ON r.id = ur.roleid
+		WHERE openid =  #{openid} 
+	 -->
+	 	SELECT 
+			u.id,u.nickname,u.password,u.openid,u.phone,u.username,		
+			u.create_time,u.update_time,u.birthday,u.icon,			
+			r.rolename as rolename
+		FROM user_role ur 
+		LEFT JOIN user u ON ur.userid = u.id 
+		LEFT JOIN role r ON r.id = ur.roleid
+		WHERE openid =  #{openid} 
 	</select>
 
 	<select id ="selectByOpenid" parameterType="java.lang.String" resultMap="userAndDefaultAddress">
