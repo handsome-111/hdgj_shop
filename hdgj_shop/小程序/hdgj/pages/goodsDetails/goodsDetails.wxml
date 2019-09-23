@@ -121,7 +121,7 @@
       <view class="content">
         <radio-group>
           <p>配送至</p>
-          <block wx:for="{{addresses}}">
+          <block wx:for="{{addresses}}" wx:key='{{item.id}}'>
             <view class="address" catchtap="selectAddress" data-index="{{index}}">
               <radio value="{{item.id}}" color="#E71866" checked="{{checkAddressFlag == index ? true : false}}"/>
               <span>{{item.province}}{{item.street1}}</span>

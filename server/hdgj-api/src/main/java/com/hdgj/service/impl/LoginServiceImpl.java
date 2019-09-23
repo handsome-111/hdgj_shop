@@ -152,7 +152,6 @@ public class LoginServiceImpl implements LoginService{
 		response.put("userInfo", user);
 		response.put("session_key", sessionKey);
 		
-		System.out.println(user.getDefaultAddress());
 
 		
 		return response.toJSONString();

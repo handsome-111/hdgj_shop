@@ -23,7 +23,7 @@
   
 </view>
 
-<view class="hot_block">
+<!-- <view class="hot_block">
   <image src="/images/index/5.jpg" mode="widthFix"></image>
   <view>
     <p>广西北海红树林三洋烤海鸭蛋60g*20g非常好吃的那种哦</p>
@@ -35,7 +35,7 @@
       <span class="font-little color-gray "style="text-decoration:line-through;">￥70.00</span> 
     </p>
   </view>
-</view>
+</view> -->
 
 <view class='list'>
   <view class='title'>绿色土特产品</view>

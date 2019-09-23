@@ -6,14 +6,14 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs) 
     wx.showLoading({
-      title: '加载中',
+      title: '加载中', 
     })
     this.login(this.globalData.userInfo).then(() => {
-      console.log('APP准备完毕')
+      console.log('APP准备完毕') 
       console.log(this.globalData.userInfo)
     })
   }, 
-  globalData: {  
+  globalData: {   
     userInfo: null,             //用户信息
     serverHost:'http://localhost',     //服务器地址
     isLogin:false,              //是否登陆

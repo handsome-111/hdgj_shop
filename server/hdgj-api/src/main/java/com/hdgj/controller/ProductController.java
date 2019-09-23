@@ -22,7 +22,7 @@ public class ProductController {
 	@RequestMapping("{itemId}")
 	public ResponseData getProductByItemId(@PathVariable String itemId){
 		Optional<Product> product = productRepository.findById(itemId);
-		System.out.println("product:" + product);
+		//System.out.println("product:" + product);
 		return ResponseDataUtil.buildSuccess(product);
 	}
 }

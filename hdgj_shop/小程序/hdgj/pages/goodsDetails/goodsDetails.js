@@ -8,7 +8,7 @@ Page({
   data: {
     itemId:null,
     userInfo:null,
-    goods:'',
+    goods:'', 
     // goods:{
     //   images:[
     //     { src:'/images/index/1.jpg',url:'', id: 1 },
@@ -56,7 +56,7 @@ Page({
           currentPrice: goods.lowPrice,
           itemId: options.itemId,
           userInfo:app.globalData.userInfo,
-          deliveryAddress:app.globalData.userInfo.defaultAddress
+          deliveryAddress: app.globalData.userInfo == null ? null: app.globalData.userInfo.defaultAddress
         })
        // that.data.goods = goods
         console.log(that.data.goods)
@@ -121,7 +121,17 @@ Page({
   },
   /*切换到配送选项 */
   switchSkippingAddress: function(){
-    var userid = app.globalData.userInfo.id
+    var userInfo = app.globalData.userInfo
+
+    if(userInfo == null){
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      return ;
+    }
+
+    var userid = userInfo.id
     var that = this
     wx.request({
       url: app.globalData.serverHost + '/address/getUserAddresses?userid=' + userid,

@@ -8,7 +8,8 @@ Page({
   data: {
     address:null,
     checked:2,
-    region: []
+    region: ['广东省', '广州市', '海珠区'],
+    customItem: '其他'
   },
 
   /**
@@ -82,7 +83,36 @@ Page({
     })
   },
 
+  /**
+   * 表单提交
+   */
   formSubmit:function(e){
+    console.log(e.detail.value.region)
+    console.log(this.formatToAddress(e.detail.value))
     console.log(this.data.address)
-  }
+  },
+  /**
+   * 格式化
+   */
+  formatToAddress:function(object){
+    var region = object.region
+    if(object == null){
+      return null
+    }
+    console.log(region + "," +region[0] + "," + region.length)
+    var address = {
+      name: object.name,
+      phone: object.phone,
+      post: object.post,
+      province: region[0],   //省
+      city: region[1],       //城市
+      region: region[2],     //区
+      isDefault : object.isDefault.length == 0 ? 2 : 1    //是否为默认地址
+    }
+    return address
+  },
+
+  aaa:function(e){
+    console.log(e.detail + ","  +e.target)
+  } 
 })
