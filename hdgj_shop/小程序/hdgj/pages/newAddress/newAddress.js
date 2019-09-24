@@ -8,7 +8,7 @@ Page({
   data: {
     address:null,
     checked:2,
-    region: ['广东省', '广州市', '海珠区'],
+    region: [],
     customItem: '其他'
   },
 
@@ -87,19 +87,38 @@ Page({
    * 表单提交
    */
   formSubmit:function(e){
-    console.log(e.detail.value.region)
-    console.log(this.formatToAddress(e.detail.value))
-    console.log(this.data.address)
-  },
+    var address = this.formatToAddress(e.detail.value)
+    this.setData({
+      address : address
+    })
+
+    console.log(address)
+    wx.request({
+      url: app.globalData.serverHost + '/address/updateAddress', 
+      method:'post',
+       data:{
+         address:address
+       },
+      header: {
+        
+        //"Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
+      },
+      success:function(res){
+        console.log(res.data)
+      }  
+    })
+  },    
   /**
    * 格式化
    */
   formatToAddress:function(object){
-    var region = object.region
+    var region = object.region.toString()
     if(object == null){
       return null
     }
-    console.log(region + "," +region[0] + "," + region.length)
+    region = region.split('，')
+
     var address = {
       name: object.name,
       phone: object.phone,

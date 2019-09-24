@@ -28,6 +28,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	http.csrf().disable();
+    	
     	http
     		/**
     		 * 配置授权
@@ -44,6 +46,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    		.antMatchers("/test/*").permitAll()
 	    		.anyRequest().permitAll()		//其他请求都不需要认证
     		.and()
+    		
     		/**
     		 * 配置表单,如果调用以上需要权限的接口,则
     		 */

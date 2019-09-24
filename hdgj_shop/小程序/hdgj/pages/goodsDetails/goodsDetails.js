@@ -142,7 +142,7 @@ Page({
         })
       },
       complete:function(){
-        that.setData({
+        that.setData({ 
           alerts: 'shipping-address',
           alertsTemplateName: 'shipping-address'
         })
