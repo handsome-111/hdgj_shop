@@ -31,6 +31,11 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
 		query.eq("userid", userid);
 		return super.list(query);
 	}
+
+	@Override
+	public boolean updateAddress(Address address) {
+		return  super.saveOrUpdate(address);
+	}
 	
 	
 	

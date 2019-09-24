@@ -72,7 +72,30 @@ Page({
    */
   deleteAddress:function(){
     wx.request({
-      url: '',
+      url: app.globalData.serverHost + '/address/deleteAddress?id=' + 9,
+      success:function(res){
+        var status = res.data.data
+        if(status == 1){
+          wx.showToast({
+            title: '删除成功',
+            icon:'success',
+            duration: 1500,
+            success:function(){
+              wx.navigateBack()
+              return 
+            }
+          })
+        }
+
+        if(status == 0){
+          wx.showToast({
+            title: '操作失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+        
+      }
     })
   },
 
@@ -91,21 +114,21 @@ Page({
     this.setData({
       address : address
     })
-
     console.log(address)
     wx.request({
       url: app.globalData.serverHost + '/address/updateAddress', 
       method:'post',
-       data:{
-         address:address
-       },
-      header: {
-        
+      data:{
+        requestParam:{
+          address:address,
+        }
+      },
+      header: { 
         //"Content-Type": "application/x-www-form-urlencoded"
-        "Content-Type": "application/json"
+        "Content-Type": "application/json" 
       },
       success:function(res){
-        console.log(res.data)
+        console.log(res.data) 
       }  
     })
   },    
