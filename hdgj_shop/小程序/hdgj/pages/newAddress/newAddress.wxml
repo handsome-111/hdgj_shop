@@ -1,11 +1,11 @@
 <!--pages/newAddress/newAddress.wxml-->
 <form bindsubmit="formSubmit">
   <view class='main'>
-      <input placeholder="姓名" name='name' value='{{address.name}}' ></input>
-      <input placeholder="手机号码" name='phone' value='{{address.phone}}'></input>
-      <input placeholder="邮编" name='post' value='{{address.post}}'></input>
+      <input placeholder="姓名" name='name'></input>
+      <input placeholder="手机号码" name='phone' ></input>
+      <input placeholder="邮编" name='post'></input>
       <picker mode='region' bindchange='bindRegionChange' >
-        <input class='picker' name='region' placeholder="省份、城市、区县" value='{{region[0]}}，{{region[1]}}，{{region[2]}}' disabled="false"></input>
+        <input class='picker' name='region' placeholder="省份、城市、区县" value='{{region[0]}}，{{region[1]}}，{{region[2]}}' disabled="false" data-name='省份、城市、区县'></input>
       </picker>
       <input placeholder="详细地址，如楼道、楼盘号等" name='street1'></input>
       <p>

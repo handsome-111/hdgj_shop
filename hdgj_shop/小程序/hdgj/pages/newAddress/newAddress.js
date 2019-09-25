@@ -31,13 +31,13 @@ Page({
    */
   onShow: function () {
 
-  },
+  }, 
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+ 
   },
 
   /**
@@ -71,8 +71,19 @@ Page({
    * 删除
    */
   deleteAddress:function(){
+    var id = this.data.address.id
+    console.log(id == null)
+    if (id == null){
+      wx.showToast({
+        title: '操作失败,请选择指定地址删除',
+        icon: 'none',
+        duration: 1500,
+      })
+      return 
+    }
+
     wx.request({
-      url: app.globalData.serverHost + '/address/deleteAddress?id=' + 9,
+      url: app.globalData.serverHost + '/address/deleteAddress?id=' + id,
       success:function(res){
         var status = res.data.data
         if(status == 1){
@@ -114,7 +125,41 @@ Page({
     this.setData({
       address : address
     })
+
     console.log(address)
+
+    if (address.name == null || address.name == ''){
+      wx.showToast({
+        title: '请输入姓名',
+        icon:'none',
+      })
+      return 
+    }
+
+    if (address.phone == null || address.phone == '') {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+      })
+      return
+    }
+
+    if (address.street1 == null || address.street1 == '') {
+      wx.showToast({
+        title: '请输入详细地址',
+        icon: 'none',
+      })
+      return
+    }
+
+    if (address.city == null || address.city == '') {
+      wx.showToast({
+        title: '请选择城市',
+        icon: 'none',
+      })
+      return
+    }
+
     wx.request({
       url: app.globalData.serverHost + '/address/updateAddress', 
       method:'post',
@@ -149,12 +194,9 @@ Page({
       province: region[0],   //省
       city: region[1],       //城市
       region: region[2],     //区
+      street1:object.street1,
       isDefault : object.isDefault.length == 0 ? 2 : 1    //是否为默认地址
     }
     return address
   },
-
-  aaa:function(e){
-    console.log(e.detail + ","  +e.target)
-  } 
 })

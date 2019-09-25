@@ -1,5 +1,7 @@
 {
   "pages": [
+        "pages/newAddress/newAddress",
+        
         "components/index/index",
         
         "pages/init/init",
@@ -8,7 +10,6 @@
     "pages/userRegister/userRegister",
     "pages/login/phoneLogin/phoneLogin",
     "pages/login/otherLogin/otherLogin",
-    "pages/newAddress/newAddress",
     "pages/goodsDetails/goodsDetails",
     "pages/confirmOrders/confirmOrders",
     "pages/goodsOrderList/allOrders/allOrders",
