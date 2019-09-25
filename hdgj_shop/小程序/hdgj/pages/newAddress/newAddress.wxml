@@ -14,7 +14,7 @@
         </checkbox-group>
       </p>
   </view>
-
+ 
   <view class='fotter'> 
     <button formType="submit">保存</button>
     <button bindtap="deleteAddress">删除</button>

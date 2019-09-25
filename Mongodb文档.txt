@@ -149,6 +149,9 @@ Mysql:
 		  idCardNo		varchar(50) COMMENT '身份证号',
 		  PRIMARY KEY (id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+	ALTER TABLE address ADD INDEX is_default_index(is_default);
+
 
 	create table user(
 		id 			int(20) 		unsigned NOT NULL AUTO_INCREMENT,

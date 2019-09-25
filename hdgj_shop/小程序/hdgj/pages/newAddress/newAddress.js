@@ -160,6 +160,10 @@ Page({
       return
     }
 
+    /**
+     * 
+     * 
+     */ 
     wx.request({
       url: app.globalData.serverHost + '/address/updateAddress', 
       method:'post',
@@ -174,9 +178,11 @@ Page({
       },
       success:function(res){
         console.log(res.data) 
+        wx.navigateBack
       }  
     })
-  },    
+  },  
+
   /**
    * 格式化
    */

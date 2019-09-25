@@ -24,5 +24,12 @@
         <result column="idCardNo" property="idCardNo" />
     </resultMap>
 
-	
+	<select id="setDefaultAddress" resultType="com.hdgj.entity.Address">
+		1.如果有传来的旧默认地址的值（说明是将新地址或者旧地址设置为了默认地址）,说明之前有旧的默认地址,则就直接插入并且设置为默认地址,修改掉原来的默认地址就好了，然后再插入/更新
+		2.若没有传来的默认地址（说明是新增地址或者更新地址），则直接插入或更新
+		（插入或更新则使用：ON DUPLICATE KEY UPDATE）
+		<if test="isDefauilt == 2">
+			
+		</if>
+	</select>
 </mapper>
