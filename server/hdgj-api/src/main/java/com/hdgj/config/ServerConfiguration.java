@@ -1,16 +1,21 @@
 package com.hdgj.config;
  
+import javax.sql.DataSource;
+
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weidian.open.sdk.AbstractWeidianClient;
@@ -38,6 +43,17 @@ public class ServerConfiguration {
 		return new RestTemplate();
     }
 	
+	@Bean
+	public DataSourceTransactionManager transactionManager() {
+	  return new DataSourceTransactionManager(dataSource());
+	}
+	
+	@Bean
+	@ConfigurationProperties(prefix = "spring.datasource")
+	@Primary
+	public DataSource dataSource(){
+		return DataSourceBuilder.create().build();
+	}
 		
 	/**
 	 * 获取微店客户端

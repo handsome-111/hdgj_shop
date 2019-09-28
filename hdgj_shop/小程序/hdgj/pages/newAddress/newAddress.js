@@ -107,7 +107,7 @@ Page({
         }
         
       }
-    })
+    }) 
   },
 
   bindRegionChange:function(e){
@@ -159,28 +159,31 @@ Page({
       })
       return
     }
+    
+    var userId = app.globalData.userInfo.id
 
     /**
-     * 
-     * 
-     */ 
+     *  更新地址 
+     *    
+     */  
     wx.request({
       url: app.globalData.serverHost + '/address/updateAddress', 
-      method:'post',
-      data:{
+      method:'post',  
+      data:{ 
         requestParam:{
-          address:address,
-        }
-      },
+          address:address, 
+          userId: userId
+        } 
+      }, 
       header: { 
         //"Content-Type": "application/x-www-form-urlencoded"
         "Content-Type": "application/json" 
-      },
+      }, 
       success:function(res){
         console.log(res.data) 
         wx.navigateBack
       }  
-    })
+    })    
   },  
 
   /**

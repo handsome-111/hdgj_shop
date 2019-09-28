@@ -5,11 +5,12 @@ spring:
   application:
     name: oauth2-server
   datasource: 
+    name: hdgj
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3308/hdgj?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    jdbcUrl: jdbc:mysql://localhost:3306/hdgj?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
-    password: root
+    password: 123456
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
@@ -40,8 +41,8 @@ management:
 
 mybatis-plus: 
   mapper-locations: classpath:mapper/*Mapper.xml
-  #configuration:
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   ##显示SQL语句日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   ##显示SQL语句日志
 
     
 weidian: 

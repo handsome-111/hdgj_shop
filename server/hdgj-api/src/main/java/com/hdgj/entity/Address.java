@@ -86,7 +86,8 @@ public class Address implements Serializable {
     /**
      * 用户的id
      */
-    private Integer userid;
+    @TableField(value = "userid", el = "user.id")
+    private User user;
 
     /**
      * 创建时间
@@ -211,15 +212,17 @@ public class Address implements Serializable {
         this.country = country;
     }
 
-    public Integer getUserid() {
-        return userid;
-    }
+   
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+    public User getUser() {
+		return user;
+	}
 
-    public LocalDateTime getCreatedTime() {
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
@@ -267,7 +270,7 @@ public class Address implements Serializable {
         ", post=" + post +
         ", region=" + region +
         ", country=" + country +
-        ", userid=" + userid +
+        ", userid=" + user.getId() +
         ", createdTime=" + createdTime +
         ", updateTime=" + updateTime +
         ", isDefault=" + isDefault +

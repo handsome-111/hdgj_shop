@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.Address;
+import com.hdgj.entity.User;
 import com.hdgj.service.AddressService;
 import com.hdgj.utils.ResponseData;
 import com.hdgj.utils.ResponseDataUtil;
@@ -26,14 +27,19 @@ public class AddressController {
 	@GetMapping("/getUserAddresses")
 	public ResponseData getUserAddresses(@RequestParam String userid){
 		List<Address> addresses = addressService.selectByUserid(userid);
+		Address address = addresses.get(0);
+		User user = address.getUser();
 		return ResponseDataUtil.buildSuccess(addresses);
 	}
 	
 	@PostMapping("/updateAddress")
 	public ResponseData updateAddress(@RequestBody JSONObject jsonObject){
 		Address address = jsonObject.getJSONObject("requestParam").getJSONObject("address").toJavaObject(Address.class);
-		System.out.println(address);
-		System.out.println(addressService.updateAddress(address));
+		Integer userId = jsonObject.getJSONObject("requestParam").getInteger("userId");
+		
+		System.out.println("请求：" + jsonObject);
+		
+		System.out.println(addressService.updateAddress(address,userId));
 		return ResponseDataUtil.buildSuccess(address);
 	}
 	

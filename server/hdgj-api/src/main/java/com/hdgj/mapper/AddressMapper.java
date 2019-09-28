@@ -15,5 +15,5 @@ import com.hdgj.entity.Address;
  */
 @Mapper
 public interface AddressMapper extends BaseMapper<Address> {
-
+	int cancelDefaultAddress(int userId);
 }
