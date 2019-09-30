@@ -16,4 +16,10 @@ import com.hdgj.entity.Address;
 public interface AddressService extends IService<Address> {
 	List<Address> selectByUserid(String userid);
 	boolean updateAddress(Address address, int oldId);
+	/**
+	 * 寻找默认地址
+	 * @param userid
+	 * @return
+	 */
+	Address findDefaultAddress(String userid);		
 }

@@ -117,7 +117,7 @@
 <template name="shipping-address">
   <view class="outer" catchtap='closeAlters'>
     <view class="main" catchtap='xxx'>
-      <image src='/images/index/1.jpg'></image>
+      <image src='{{goods.imgHead}}'></image>
       <view class="content">
         <radio-group>
           <p>配送至</p>

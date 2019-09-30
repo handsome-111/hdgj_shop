@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hdgj.entity.Product;
 import com.hdgj.entity.repository.ProductRepository;
+import com.hdgj.service.AddressService;
 import com.hdgj.utils.ResponseData;
 import com.hdgj.utils.ResponseDataUtil;
 
@@ -18,6 +19,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private AddressService addressService;
 	
 	@RequestMapping("{itemId}")
 	public ResponseData getProductByItemId(@PathVariable String itemId){
