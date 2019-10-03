@@ -45,11 +45,11 @@
 <template name='login'>
   <view class="bottom">
     <p class="goods-price">￥{{currentPrice}}</p>
-    <p >加入购物车</p>
+    <p bindtap='addCart' >加入购物车</p>
     <p class="submit-button" style="font-size:0.8rem;">立即购买</p>
   </view>
 </template>
-<p class="back-index" url='/components/index/index' open-type="switchTab">去首页</p>
+<navigator class="back-index" url='/components/index/index' open-type="switchTab">去首页</navigator>
 
 <!-- 底部未登录购买模板 -->
 <template name='unLogin'>

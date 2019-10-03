@@ -154,9 +154,8 @@ Page({
    */
   selectAddress:function(event){
     
-    var index = event.target.dataset.index
+    var index = event.currentTarget.dataset.index
     var address = this.data.addresses[index]
-    console.log("地址:" + address + "," + index + "," +  this.data.addresses)
     this.setData({
       alerts:'',
       deliveryAddress: address,
@@ -222,6 +221,16 @@ Page({
     
     wx.navigateTo({
       url: url
+    })
+  },
+  /**
+   * 加入购物车
+   */
+  addCart:function(){
+    wx.showToast({
+      title: '加入购物车',
+      icon: 'success',
+      duration: 2000
     })
   }
 })

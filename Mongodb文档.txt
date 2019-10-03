@@ -11,8 +11,6 @@ MongoDB:
 		updated_time			String		更新时间
 		url_key 				String 		点击分类的链接
 
-	goods_detail:
-		item_id					String		item_id
 
 	Favorite:		产品收藏信息表
 		_id: 				ObjectId("5a31e3cabfb7ae29c040a042"),
@@ -78,6 +76,15 @@ MongoDB:
  		price					String 		价格
 		img 					String 		sku图URL
 
+
+	cart(购物车)：
+		id 						String 	 	购物车id
+		userid 					NUMBER 		用户id
+		pid 					String  	商品id
+		number 					NUMBER 		购物车数量
+		status 					NUMBER 		状态
+		create_time 			Date 		创建时间
+		update_time 			DATE 		更新时间
 
 Mysql:
 	customer(用户):
@@ -187,3 +194,11 @@ Mysql:
 
 	INSERT INTO role (id, name) VALUES (1, 'ROLE_USER');
 	INSERT INTO role (id, name) VALUES (2, 'ROLE_ADMIN');
+
+	//购物车
+	create table cart(
+		id 			int(20) 	unsigned NOT NULL AUTO_INCREMENT,
+		userid 		int(20) 	not null COMMENT '用户id',
+		goodsid  	int(20) 	not null COMMENT '商品id',
+		number 		int(20) 	DEFAULT 0 not null COMMENT '数量',
+	)

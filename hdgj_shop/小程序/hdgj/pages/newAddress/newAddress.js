@@ -10,7 +10,7 @@ Page({
     checked:2,
     region: [],
     customItem: '其他'
-  },
+  }, 
 
   /**
    * 生命周期函数--监听页面加载
