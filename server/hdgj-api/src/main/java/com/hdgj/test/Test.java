@@ -1,14 +1,15 @@
 package com.hdgj.test;
 
-import org.hyperic.sigar.Mem;
-import org.hyperic.sigar.Sigar;
 
-import com.alibaba.fastjson.JSONObject;
+
+import org.joda.time.DateTime;
+
 import com.hdgj.entity.Product;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-		
+		DateTime time = new DateTime();
+		System.out.println(time);
 	}
 	public static void aa(int a){
 		System.out.println("a:" + a);

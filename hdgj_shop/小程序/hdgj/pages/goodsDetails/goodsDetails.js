@@ -9,12 +9,7 @@ Page({
     itemId:null,
     userInfo:null,
     goods:'', 
-    // goods:{
-    //   images:[
-    //     { src:'/images/index/1.jpg',url:'', id: 1 },
-    //     { src: '/images/index/1.jpg', url:'', id: 2 },
-    //   ]
-    // },
+
     //是否弹窗
     alerts:'',
     //弹出层模板名称
@@ -28,7 +23,7 @@ Page({
     addresses:null,
     deliveryAddress:null,  //配送地址
     checkAddressFlag:0
-  },
+  }, 
  
 
   /**
@@ -156,11 +151,15 @@ Page({
     
     var index = event.currentTarget.dataset.index
     var address = this.data.addresses[index]
+    console.log(address + "," + index )
+    console.log(this.data.deliveryAddress)
     this.setData({
       alerts:'',
       deliveryAddress: address,
       checkAddressFlag:index
     })
+    console.log(this.data.deliveryAddress)
+
   },
 
   //关闭弹出层 
@@ -227,10 +226,29 @@ Page({
    * 加入购物车
    */
   addCart:function(){
-    wx.showToast({
-      title: '加入购物车',
-      icon: 'success',
-      duration: 2000
+    var cart = {
+      userid:this.data.userInfo.id,
+      product:{
+        id:this.data.goods.id
+      },
+      number:1
+    }
+
+    console.log(JSON.stringify(cart))
+
+    wx.request({
+      url: app.globalData.serverHost + '/cart/addCart',
+      data: {
+        cart:JSON.stringify(cart)
+      },
+      success:function(res){
+        wx.showToast({
+          title: '加入购物车',
+          icon: 'success',
+          duration: 2000
+        })
+      }
     })
-  }
+    
+  } 
 })

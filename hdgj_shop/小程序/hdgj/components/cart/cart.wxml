@@ -1,6 +1,6 @@
 <!--components/cart/cart.wxml-->
 
-<template is="cart"></template>
+<template is="cart" data="{{carts}}"></template>
 <view>
 
 </view>
@@ -13,27 +13,30 @@
       <form>
         <checkbox-group bindchange="checkboxChange" >
           <view id="list" >
-            <!-- 一个商品 -->
-            <view class="goods">
-              <view>
-                <checkbox value="" checked=""/>
-              </view>
+            <block wx:for="{{carts}}" >
+              <!-- 一个商品 -->
+              <view class="goods">
+                <view>
+                  <checkbox value="" checked=""/>
+                </view>
 
-              <image class="box-image" src="/images/index/1.jpg" mode='widthFix'></image>
+                <image class="box-image" src="/images/index/1.jpg" mode='widthFix'></image>
 
-              <view>
-                <p>小米CC9 6GB +64GB 白色恋人（白色）大苏打萨达我去</p>
-                <p class="font-little">售价:1999元</p>
+                <view>
+                  <p>{{item.id}}小米CC9 6GB +64GB 白色恋人（白色）大苏打萨达我去</p>
+                  <p class="font-little">售价:1999元</p>
 
-                <view class="goods-right">
-					        <template is="input-number"></template>
-                  <view> 
-                    <view style='vertical-align:middle;display:inline-block;width:1px;height:100%;'></view>
-                    <span class="cart-iconfont icon-shanchu"></span>       
+                  <view class="goods-right">
+                    <template is="input-number"></template>
+                    <view> 
+                      <view style='vertical-align:middle;display:inline-block;width:1px;height:100%;'></view>
+                      <span class="cart-iconfont icon-shanchu"></span>       
+                    </view>
                   </view>
                 </view>
               </view>
-            </view>
+
+            </block>
                     
           </view>
         </checkbox-group>

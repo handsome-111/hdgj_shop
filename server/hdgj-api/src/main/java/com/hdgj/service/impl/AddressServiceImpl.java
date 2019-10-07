@@ -60,6 +60,12 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
 		return true;
 	}
 
+	@Override
+	public Address findDefaultAddress(String userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	

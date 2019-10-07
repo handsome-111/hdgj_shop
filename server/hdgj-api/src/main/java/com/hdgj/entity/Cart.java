@@ -2,7 +2,9 @@ package com.hdgj.entity;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,17 +20,18 @@ public class Cart {
 
 	private int userid;
 
-	private String pid;
+	@DBRef
+	private Product product;
 
 	private int number;
 
 	private int status;
 
 	@Field("create_time")
-	private Date createTime;
+	private DateTime createTime;
 
 	@Field("update_time")
-	private Date updateTime;
+	private DateTime updateTime;
 
 	public String getId() {
 		return id;
@@ -46,12 +49,13 @@ public class Cart {
 		this.userid = userid;
 	}
 
-	public String getPid() {
-		return pid;
+	
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getNumber() {
@@ -70,27 +74,33 @@ public class Cart {
 		this.status = status;
 	}
 
-	public Date getCreateTime() {
+
+
+	public DateTime getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(DateTime createTime) {
 		this.createTime = createTime;
 	}
 
-	public Date getUpdateTime() {
+	public DateTime getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(DateTime updateTime) {
 		this.updateTime = updateTime;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", userid=" + userid + ", pid=" + pid + ", number=" + number + ", status=" + status
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+		return "Cart [id=" + id + ", userid=" + userid + ", product=" + product + ", number=" + number + ", status="
+				+ status + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
+
+	
+
+	
 
 	
 }

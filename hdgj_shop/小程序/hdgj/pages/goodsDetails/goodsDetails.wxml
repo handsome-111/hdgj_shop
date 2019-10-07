@@ -24,7 +24,7 @@
     </view> 
     <view class="clearfix" bindtap='switchSkippingAddress'>
       <p>配送至:</p>
-      <p>{{userInfo.defaultAddress == null ? '添加收获地址' : '' + deliveryAddress.province + deliveryAddress.street1}}</p> 
+      <p>{{deliveryAddress == null ? '添加收获地址' : '' + deliveryAddress.province + deliveryAddress.street1}}</p> 
     </view> 
   </view>   
   
