@@ -171,8 +171,13 @@ public class Product implements Serializable{
 	@Field("is_wzx_sup_item")
 	private Number isWzxSupItem;
 	
-
+	public Product(){}
 	
+	public Product(String id) {
+		super();
+		this.id = id;
+	}
+
 	public String getItemDesc() {
 		return itemDesc;
 	}

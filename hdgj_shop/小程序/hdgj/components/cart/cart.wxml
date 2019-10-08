@@ -8,7 +8,7 @@
   <import src="/templates/input-number/input-number.wxml"/>
 
   <view id="cart">
-    <p>购物车</p> 
+    <p>购物车</p>  
     <view>
       <form>
         <checkbox-group bindchange="checkboxChange" >
@@ -19,7 +19,7 @@
                 <view>
                   <checkbox value="" checked=""/>
                 </view>
-
+ 
                 <image src="{{item.product.imgHead}}" mode='aspectFit'></image>
 
                 <view>

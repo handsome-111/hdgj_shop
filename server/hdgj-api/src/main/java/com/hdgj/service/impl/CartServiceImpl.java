@@ -21,9 +21,9 @@ public class CartServiceImpl implements CartService{
 	private CartRepository cartRepository;
 
 	@Override
-	public int addCart(Cart cart) {
+	public Cart addCart(Cart cart) {
 		cartRepository.save(cart);
-		return 0;
+		return cart;
 	}
 	
 	@Override
@@ -32,9 +32,16 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public Cart getProductCartByUserid(Cart cart) {
+	public Cart getProductCartByUserid(Cart cart) {		
 		int userid = cart.getUserid();
 		String productId = cart.getProduct().getId();
 		return cartRepository.findByUseridAndProduct(userid, productId);
 	}
+
+	@Override
+	public Cart updateCart(Cart cart) {
+		cartRepository.save(cart);
+		return cart;
+	}
+	
 }

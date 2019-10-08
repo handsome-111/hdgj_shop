@@ -56,40 +56,54 @@ Component({
       var that = this
       var index = event.currentTarget.dataset.index
       var cart = this.data.carts[index]
-     
-      wx.request({
-        url: app.globalData.serverHost + '/cart/decrementCart',
-        data:{
-          cart:cart
-        },
-        success:fucntion(res){
-          that.setData({
+      cart.number = cart.number - 1
 
+      if (cart.number <= 0) {
+        return
+      }
+
+      wx.request({
+        url: app.globalData.serverHost + '/cart/updateCart',
+        data:{
+          cart:JSON.stringify(cart)
+        },
+        success:function(res){
+          var key = 'carts[' + index + ']'
+          var resCart = res.data.data
+          that.setData({
+            [key]: resCart
           })
         }
       })
-      var number = this.data.number;
-      if (number <= 1) {
-        return;
-      }
-      this.setData({
-        number: --number
-      })
+      
     },
     /**
      *  自增
      */
     increment: function (event) {
-      var number = this.data.number
-      var stock = this.data.stock
-      if (number >= stock) {
-        this.setData({
-          number: stock
-        })
-        return;
+      var that = this
+      var index = event.currentTarget.dataset.index
+      var cart = this.data.carts[index]
+      cart.number = cart.number + 1
+
+      var stock = cart.product.buyStock
+
+      if (cart.number > stock) {
+        return
       }
-      this.setData({
-        number: ++number
+
+      wx.request({
+        url: app.globalData.serverHost + '/cart/updateCart',
+        data: {
+          cart: JSON.stringify(cart)
+        },
+        success: function (res) {
+          var key = 'carts[' + index + ']'
+          var resCart = res.data.data
+          that.setData({
+            [key]: resCart
+          })
+        }
       })
     },
   },

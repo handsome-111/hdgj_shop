@@ -1,5 +1,6 @@
 package com.hdgj.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import org.joda.time.DateTime;
@@ -28,10 +29,10 @@ public class Cart {
 	private int status;
 
 	@Field("create_time")
-	private DateTime createTime;
+	private long createTime;
 
 	@Field("update_time")
-	private DateTime updateTime;
+	private long updateTime;
 
 	public String getId() {
 		return id;
@@ -74,21 +75,21 @@ public class Cart {
 		this.status = status;
 	}
 
+	
 
-
-	public DateTime getCreateTime() {
+	public long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(DateTime createTime) {
+	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
 	}
 
-	public DateTime getUpdateTime() {
+	public long getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(DateTime updateTime) {
+	public void setUpdateTime(long updateTime) {
 		this.updateTime = updateTime;
 	}
 

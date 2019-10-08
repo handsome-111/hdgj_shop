@@ -1,5 +1,7 @@
 package com.hdgj.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -26,10 +28,9 @@ public class CartController {
 	@GetMapping("/addCart")
 	public ResponseData addCart(@RequestParam("cart") String jsonStr){
 		Cart cart = JSONObject.parseObject(jsonStr, Cart.class);
-		System.out.println("cart:" + cart);
 
 		Cart findCart = cartService.getProductCartByUserid(cart);
-		DateTime now = new DateTime();
+		long now = new Date().getTime();
 
 		
 		if(findCart == null){
@@ -75,24 +76,18 @@ public class CartController {
 		return ResponseDataUtil.buildSuccess(carts);
 	}
 	/**
-	 * 购物车自减
+	 * 购物车更新
 	 * @return
 	 */
-	@GetMapping("/decrementCart")
-	public ResponseData decrementCart(@RequestParam("cart") String jsonStr){
-		return null;
-		
+	@GetMapping("/updateCart")
+	public ResponseData updateCart(@RequestParam("cart") String jsonStr){
+		Cart cart = JSONObject.parseObject(jsonStr, Cart.class);
+		cart.setUpdateTime(new Date().getTime());
+		cart = cartService.updateCart(cart);
+		return ResponseDataUtil.buildSuccess(cart);
 	}
 	
-	/**
-	 * 购物车自增
-	 * @return
-	 */
-	@GetMapping("/incrementCart")
-	public ResponseData incrementCart(@RequestParam("cart") String jsonStr){
-		return null;
-		
-	}
+
 }
 
 

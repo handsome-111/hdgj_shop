@@ -3,18 +3,20 @@ package com.hdgj.service;
 import java.util.List;
 
 import com.hdgj.entity.Cart;
+import com.hdgj.entity.repository.CartRepository;
 
-public interface CartService {
+public interface CartService{
 
 	/**
 	 * 添加购物车
 	 * @param cart
 	 * @return
 	 */
-	int addCart(Cart cart);
+	Cart addCart(Cart cart);
 	
 	List<Cart> getCarts(int userid);
 	
 	Cart getProductCartByUserid(Cart cart);
 	
+	Cart updateCart(Cart cart);
 }
