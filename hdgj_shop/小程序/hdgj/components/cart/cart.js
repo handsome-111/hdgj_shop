@@ -25,10 +25,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    carts:[
-      {id:12123123},{id:4111131}
-    ],
-    aa:[1,2]
+    carts:null,
+    number:1
   },
 
   /**
@@ -45,12 +43,55 @@ Component({
         },
         success:function(res){
           console.log(res.data.data)
-          // that.setData({
-          //   carts:res.data.data
-          // })
+          that.setData({
+            carts:res.data.data
+          })
         }
       })
-    }
+    },
+    /**
+   * 自减
+   */
+    decrement: function (event) {
+      var that = this
+      var index = event.currentTarget.dataset.index
+      var cart = this.data.carts[index]
+     
+      wx.request({
+        url: app.globalData.serverHost + '/cart/decrementCart',
+        data:{
+          cart:cart
+        },
+        success:fucntion(res){
+          that.setData({
+
+          })
+        }
+      })
+      var number = this.data.number;
+      if (number <= 1) {
+        return;
+      }
+      this.setData({
+        number: --number
+      })
+    },
+    /**
+     *  自增
+     */
+    increment: function (event) {
+      var number = this.data.number
+      var stock = this.data.stock
+      if (number >= stock) {
+        this.setData({
+          number: stock
+        })
+        return;
+      }
+      this.setData({
+        number: ++number
+      })
+    },
   },
  
 })

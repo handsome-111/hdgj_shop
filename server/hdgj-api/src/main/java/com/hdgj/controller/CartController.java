@@ -74,6 +74,25 @@ public class CartController {
 		List<Cart> carts = cartService.getCarts(userid);
 		return ResponseDataUtil.buildSuccess(carts);
 	}
+	/**
+	 * 购物车自减
+	 * @return
+	 */
+	@GetMapping("/decrementCart")
+	public ResponseData decrementCart(@RequestParam("cart") String jsonStr){
+		return null;
+		
+	}
+	
+	/**
+	 * 购物车自增
+	 * @return
+	 */
+	@GetMapping("/incrementCart")
+	public ResponseData incrementCart(@RequestParam("cart") String jsonStr){
+		return null;
+		
+	}
 }
 
 

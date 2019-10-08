@@ -1,6 +1,6 @@
 <!--components/cart/cart.wxml-->
 
-<template is="cart" data="{{carts}}"></template>
+<template is="cart" data="{{carts,number}}"></template>
 <view>
 
 </view>
@@ -8,26 +8,31 @@
   <import src="/templates/input-number/input-number.wxml"/>
 
   <view id="cart">
-    <p>购物车</p>
+    <p>购物车</p> 
     <view>
       <form>
         <checkbox-group bindchange="checkboxChange" >
           <view id="list" >
-            <block wx:for="{{carts}}" >
+            <block wx:for="{{carts}}" wx:key="{{item.id}}">
               <!-- 一个商品 -->
               <view class="goods">
                 <view>
                   <checkbox value="" checked=""/>
                 </view>
 
-                <image class="box-image" src="/images/index/1.jpg" mode='widthFix'></image>
+                <image src="{{item.product.imgHead}}" mode='aspectFit'></image>
 
                 <view>
-                  <p>{{item.id}}小米CC9 6GB +64GB 白色恋人（白色）大苏打萨达我去</p>
-                  <p class="font-little">售价:1999元</p>
+                  <p>{{item.product.itemName}}</p>
+                  <p class="font-little">售价:{{item.product.lowPrice}}元</p>
 
                   <view class="goods-right">
-                    <template is="input-number"></template>
+                    <view class="number">
+                      <span class="input-number-iconfont icon-jianhao" catchtap='decrement' data-index='{{index}}'></span>
+                      <span>{{item.number}}</span>
+                      <span class="input-number-iconfont icon-jiahao" catchtap='increment' data-index='{{index}}'></span>
+                    </view>
+
                     <view> 
                       <view style='vertical-align:middle;display:inline-block;width:1px;height:100%;'></view>
                       <span class="cart-iconfont icon-shanchu"></span>       
