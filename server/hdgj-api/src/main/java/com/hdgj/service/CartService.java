@@ -20,5 +20,5 @@ public interface CartService{
 	
 	Cart updateCart(Cart cart);
 	
-	int deleteCart(String id);
+	int deleteCart(List<Cart> carts);
 }

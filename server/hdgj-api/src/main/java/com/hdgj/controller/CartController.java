@@ -1,10 +1,10 @@
 package com.hdgj.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,9 +30,21 @@ public class CartController {
 	public ResponseData addCart(@RequestParam("cart") String jsonStr){
 		Cart cart = JSONObject.parseObject(jsonStr, Cart.class);
 
+		//获取库存
+		int stock = cart.getProduct().getStock().intValue();
+		
+		//库存不足,无法加入购物车
+		if(stock <= 0){
+			return ResponseDataUtil.buildError("库存不足");
+		}
+		
 		Cart findCart = cartService.getProductCartByUserid(cart);
 		long now = new Date().getTime();
 
+		//库存已达到最大值,无法继续添加
+		if(findCart != null && stock <= findCart.getNumber()){
+			return ResponseDataUtil.buildError("已达到库存最大值,无法继续添加");
+		}
 		
 		if(findCart == null){
 			cart.setNumber(1);
@@ -74,6 +86,14 @@ public class CartController {
 	@GetMapping("/getCarts")
 	public ResponseData getCarts(@RequestParam int userid){
 		List<Cart> carts = cartService.getCarts(userid);
+		/*Map<String,Cart> carts = new HashMap<String,Cart>();
+		
+		List<Cart> list = cartService.getCarts(userid);
+		for(int i = 0; i < list.size(); i++){
+			Cart cart = list.get(i);
+			carts.put(cart.getId(),cart);
+		}*/
+		
 		return ResponseDataUtil.buildSuccess(carts);
 	}
 	/**
@@ -91,9 +111,20 @@ public class CartController {
 	@GetMapping("/removeCart")
 	public ResponseData removeCart(@RequestParam("ids")String jsonStr){
 		JSONArray ids = JSON.parseArray(jsonStr);
-		System.out.println(ids);
-		//cartService.deleteCart(id);
-		return ResponseDataUtil.buildSuccess("1");
+		
+		/**
+		 * 装载所有的购物车
+		 */
+		List<Cart> carts = new ArrayList<Cart>();
+		Cart cart = new Cart();
+		for(int i = 0; i < ids.size(); i++){
+			cart.setId(ids.getString(i));
+			carts.add(cart);
+		}
+		
+		
+		cartService.deleteCart(carts);
+		return ResponseDataUtil.buildSuccess(ids);
 	}
 
 }

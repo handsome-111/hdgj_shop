@@ -226,15 +226,22 @@ Page({
    * 加入购物车
    */
   addCart:function(){
+    var stock = this.data.stock
+
+    if(stock <= 0){
+      wx.showToast({
+        title: '库存不足,无法加入购物车',
+        icon:'none'
+      })
+    }
+
     var cart = {
       userid:this.data.userInfo.id,
       product:{
-        id:this.data.goods.id
+        id:this.data.goods.id,
+        stock:this.data.goods.stock
       },
-      number:1
     }
-
-    console.log(JSON.stringify(cart))
 
     wx.request({
       url: app.globalData.serverHost + '/cart/addCart',
@@ -242,6 +249,20 @@ Page({
         cart:JSON.stringify(cart)
       },
       success:function(res){
+        var code = res.data.code
+        var msg = res.data.msg
+
+        //请求失败
+        if(code == '1111'){
+          wx.showToast({
+            title: msg,
+            icon: 'none',
+            duration: 2000
+          })
+          return 
+        }
+        
+        //请求成功
         wx.showToast({
           title: '加入购物车',
           icon: 'success',

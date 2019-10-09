@@ -1,6 +1,6 @@
 <!--components/cart/cart.wxml-->
 
-<template is="cart" data="{{carts,number}}"></template>
+<template is="cart" data="{{carts,number,selectedCarts,checkAll}}"></template>
 <view>
 
 </view>
@@ -17,7 +17,7 @@
               <!-- 一个商品 -->
               <view class="goods">
                 <view>
-                  <checkbox value="{{item.id}}" checked=""/>
+                  <checkbox value="{{item.id}}" checked="{{checkAll}}"/>
                 </view>
  
                 <image src="{{item.product.imgHead}}" mode='aspectFit'></image>
@@ -35,7 +35,7 @@
 
                     <view> 
                       <view style='vertical-align:middle;display:inline-block;width:1px;height:100%;'></view>
-                      <span class="cart-iconfont icon-shanchu"></span>       
+                      <span class="cart-iconfont icon-shanchu" bindtap='removeCart' data-id='{{item.id}}'></span>       
                     </view>
                   </view>
                 </view>
@@ -52,8 +52,10 @@
   <!-- 下单框 -->
   <view class="submit bottom-box-shadow">
     <view>
-      <checkbox  value="" checked=""/>
-      <span>已选(1)</span>
+      <checkbox-group bindchange="checkAll">
+        <checkbox  value="{{selectedCarts}}" checked="{{checkAll}}"/>
+      </checkbox-group>
+      <span>已选{{selectedCarts.length == 0 ? '' : "(" + selectedCarts.length +")"}}</span>
     </view>
     <span bindtap='removeCart'>删除</span>
     <span >￥0.00</span>
