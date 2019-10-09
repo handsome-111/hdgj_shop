@@ -26,7 +26,7 @@ Component({
    */
   data: {
     carts:null,
-    number:1
+    selectedCarts:null    //选中的购物车
   },
 
   /**
@@ -90,7 +90,7 @@ Component({
 
       if (cart.number > stock) {
         return
-      }
+      } 
 
       wx.request({
         url: app.globalData.serverHost + '/cart/updateCart',
@@ -106,6 +106,27 @@ Component({
         }
       })
     },
+    removeCart:function(){
+      console.log(111)
+      var ids = this.data.selectedCarts
+      if(ids == null){
+        return 
+      }
+      wx.request({
+        url: app.globalData.serverHost + '/cart/removeCart',
+        data:{
+          ids:JSON.stringify(ids)
+        },
+        success:function(res){
+          console.log("成功")
+        }
+      })
+    },
+    checkboxChange:function(e){
+      this.setData({
+        selectedCarts:e.detail.value
+      })
+    }
   },
  
 })

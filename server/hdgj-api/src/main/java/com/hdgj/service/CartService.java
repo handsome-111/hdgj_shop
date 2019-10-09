@@ -19,4 +19,6 @@ public interface CartService{
 	Cart getProductCartByUserid(Cart cart);
 	
 	Cart updateCart(Cart cart);
+	
+	int deleteCart(String id);
 }

@@ -1,16 +1,17 @@
 package com.hdgj.controller;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.Cart;
 import com.hdgj.entity.Product;
@@ -87,6 +88,13 @@ public class CartController {
 		return ResponseDataUtil.buildSuccess(cart);
 	}
 	
+	@GetMapping("/removeCart")
+	public ResponseData removeCart(@RequestParam("ids")String jsonStr){
+		JSONArray ids = JSON.parseArray(jsonStr);
+		System.out.println(ids);
+		//cartService.deleteCart(id);
+		return ResponseDataUtil.buildSuccess("1");
+	}
 
 }
 

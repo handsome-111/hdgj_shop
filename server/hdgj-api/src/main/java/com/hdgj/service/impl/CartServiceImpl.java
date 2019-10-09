@@ -43,5 +43,13 @@ public class CartServiceImpl implements CartService{
 		cartRepository.save(cart);
 		return cart;
 	}
+
+	@Override
+	public int deleteCart(String id) {
+		cartRepository.deleteById(id);
+		return 0;
+	}
+	
+	
 	
 }

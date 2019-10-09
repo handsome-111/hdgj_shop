@@ -17,7 +17,7 @@
               <!-- 一个商品 -->
               <view class="goods">
                 <view>
-                  <checkbox value="" checked=""/>
+                  <checkbox value="{{item.id}}" checked=""/>
                 </view>
  
                 <image src="{{item.product.imgHead}}" mode='aspectFit'></image>
@@ -55,7 +55,7 @@
       <checkbox  value="" checked=""/>
       <span>已选(1)</span>
     </view>
-    <span>删除</span>
+    <span bindtap='removeCart'>删除</span>
     <span >￥0.00</span>
     <navigator class="submit-button">结算</navigator>
   </view>
