@@ -3,6 +3,7 @@ package com.hdgj.entity;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
@@ -10,7 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @author Administrator
  *
  */
+@Document(collection = "cate")
 public class Cate implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Field("cate_id")
     private long cateId;

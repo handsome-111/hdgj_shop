@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.AttrValue;
+import com.hdgj.entity.Cate;
 import com.hdgj.entity.ModelAttr;
 import com.hdgj.entity.Product;
 import com.hdgj.entity.ProductDetail;
@@ -31,6 +32,7 @@ import com.hdgj.entity.repository.ShopProductRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductDetailService;
 import com.hdgj.other.vd.api.VDService;
+import com.hdgj.service.CateService;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -66,18 +68,37 @@ public class SyncVdService {
 	@Autowired
 	private ShopProductRepository shopProductRepository;
 	
+	@Autowired
+	private CateService cateService;
+	
 	/**
 	 * 同步店铺商品分类
 	 */
 	public void syncCarts(){
-		String response = null;
+		JSONObject response = null;
 		try {
-			response = vdService.weidianCateGetList(new Integer(1));
+			response = vdService.weidianCateGetList(new Integer(0));
+			int status = response.getJSONObject("status").getInteger("status_code");
+			
+			/**
+			 * 如果请求失败
+			 */
+			if (status != 0) {
+				System.out.println(response.getJSONObject("status").getString("status_reason"));
+				return ;
+			}
+			
+			List<Cate> cates = response.getJSONArray("result").toJavaList(Cate.class);
+			Iterable ite= cateService.saveAll(cates);
+			/*Iterator<Cate> iterator = ite.iterator();
+			while(iterator.hasNext()){
+				Cate cate = iterator.next();
+				System.out.println(cate);
+			}
+			System.out.println("cates:" + cates);*/
 		} catch (OpenException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("response:" + response);
 	}
 
 	/**
