@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.hdgj.other.vd.api.ProductService;
+import com.hdgj.other.vd.api.VDService;
 import com.hdgj.other.vd.service.SyncVdService;
 import com.mongodb.ClientSessionOptions;
 import com.mongodb.MongoClient;
@@ -21,7 +21,7 @@ import com.weidian.open.sdk.exception.OpenException;
 public class SyncVdScheduler {
 
 	@Autowired
-	private ProductService productService;
+	private VDService productService;
 	
 	@Autowired
 	private SyncVdService syncVdService;
@@ -45,9 +45,10 @@ public class SyncVdScheduler {
 
 			ClientSession session = client.startSession(sessionOptions);
 			System.out.println(session);*/
-		syncVdService.syncVdProduct();
+		syncVdService.syncCarts();
+		/*syncVdService.syncVdProduct();
 		syncVdService.syncVdProductDetail();
-		syncVdService.syncVdSkuAttr();
+		syncVdService.syncVdSkuAttr();*/
 
 		//syncVdService.test4();
 		//syncVdService.test3();

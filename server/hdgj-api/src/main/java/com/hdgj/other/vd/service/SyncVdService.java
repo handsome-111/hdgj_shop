@@ -30,7 +30,7 @@ import com.hdgj.entity.repository.ProductRepository;
 import com.hdgj.entity.repository.ShopProductRepository;
 import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductDetailService;
-import com.hdgj.other.vd.api.ProductService;
+import com.hdgj.other.vd.api.VDService;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -43,7 +43,7 @@ public class SyncVdService {
 	private MongoTemplate mongoTemplate;
 
 	@Autowired
-	private ProductService productService;
+	private VDService vdService;
 
 	@Autowired
 	private SkuAttrRepository skuAttrResponse;
@@ -65,6 +65,20 @@ public class SyncVdService {
 	
 	@Autowired
 	private ShopProductRepository shopProductRepository;
+	
+	/**
+	 * 同步店铺商品分类
+	 */
+	public void syncCarts(){
+		String response = null;
+		try {
+			response = vdService.weidianCateGetList(new Integer(1));
+		} catch (OpenException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("response:" + response);
+	}
 
 	/**
 	 * 同步商品的型号属性
@@ -72,7 +86,7 @@ public class SyncVdService {
 	public void syncVdSkuAttr() {
 		String response = "";
 		try {
-			response = productService.vdianSkuAttrsGet();
+			response = vdService.vdianSkuAttrsGet();
 		} catch (OpenException e) {
 			e.printStackTrace();
 		}
@@ -147,7 +161,7 @@ public class SyncVdService {
 			/**
 			 * 调用微店API获取所有的商品
 			 */
-			JSONArray items = productService.weidianGetItems(ids, "1").getJSONArray("result");
+			JSONArray items = vdService.weidianGetItems(ids, "1").getJSONArray("result");
 			//System.out.println("items:" + items);
 			
 			if(items == null){
@@ -205,12 +219,12 @@ public class SyncVdService {
 	 * 同步微店商品(document:shopProduct)
 	 */
 	public String syncVdProduct() throws Exception {
-		int countItem = productService.getCountByItemList();
+		int countItem = vdService.getCountByItemList();
 		int pageSize = 30;
 		long totalPage = this.getTotalPage(pageSize, countItem);
 
 		for (int i = 1; i <= totalPage; i++) {
-			String response = productService.vdianItemListGet(i, 1, pageSize, null, 1, null);
+			String response = vdService.vdianItemListGet(i, 1, pageSize, null, 1, null);
 			JSONObject res = JSONObject.parseObject(response);
 			int status = res.getJSONObject("status").getInteger("status_code");
 
@@ -258,7 +272,7 @@ public class SyncVdService {
 	public void test2() {
 		String response = "";
 		try {
-			response = productService.vdianSkuAttrsGet();
+			response = vdService.vdianSkuAttrsGet();
 		} catch (OpenException e) {
 			e.printStackTrace();
 		}
@@ -285,7 +299,7 @@ public class SyncVdService {
 	public void test4() {
 		String response = "";
 		try {
-			response = productService.vdianSkuAttrsGet();
+			response = vdService.vdianSkuAttrsGet();
 		} catch (OpenException e) {
 			e.printStackTrace();
 		}

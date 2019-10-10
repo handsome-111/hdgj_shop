@@ -29,4 +29,11 @@ public class ProductController {
 		//System.out.println("product:" + product);
 		return ResponseDataUtil.buildSuccess(product);
 	}
+	/**
+	 * 获取商品列表
+	 * @return
+	 */
+	public ResponseData getProducts(){
+		return ResponseDataUtil.buildSuccess();
+	}
 }
