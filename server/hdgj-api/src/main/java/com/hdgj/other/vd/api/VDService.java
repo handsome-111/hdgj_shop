@@ -116,9 +116,9 @@ public class VDService extends BaseService{
 	 * @throws OpenException
 	 * 请求示例：https://api.vdian.com/api?param={"showNoCate":"0"}&public={"method":"weidian.cate.get.list","access_token":"94b8b8dd81f757f8fc2e174bf45fb5f40004259179","version":"1.0"}
 	 */
-	public JSONObject weidianCateGetList(Number showNoCate) throws OpenException {
+	public JSONObject weidianCateGetList(/*Number showNoCate*/) throws OpenException {
 	    Map< String, Object> map = new HashMap< String, Object>();
-	    map.put("showNoCate", showNoCate);
+	    //map.put("showNoCate", showNoCate);
 	    super.removeNullValue(map);
 	    
 	    String res = vdClient.executePostForString(SystemConfig.API_URL_FOR_POST,

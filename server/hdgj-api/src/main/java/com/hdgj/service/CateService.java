@@ -8,5 +8,6 @@ public interface CateService {
 	
 	Cate save(Cate cate);
 	Iterable<Cate> saveAll(List<Cate> cates);
+	void upsertAll(List<Cate> cates);
 
 }

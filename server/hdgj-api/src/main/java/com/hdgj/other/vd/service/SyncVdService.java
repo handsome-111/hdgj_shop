@@ -73,11 +73,13 @@ public class SyncVdService {
 	
 	/**
 	 * 同步店铺商品分类
+	 * 1.从本地查出并获取所有的分类ID
+	 * 2.对比VD的分类ID和本地的分类ID,如果本地的ID不存在与VD的分类ID，则放在一起统一删除
 	 */
-	public void syncCarts(){
+	public void syncCates(){
 		JSONObject response = null;
 		try {
-			response = vdService.weidianCateGetList(new Integer(0));
+			response = vdService.weidianCateGetList();
 			int status = response.getJSONObject("status").getInteger("status_code");
 			
 			/**
@@ -89,13 +91,8 @@ public class SyncVdService {
 			}
 			
 			List<Cate> cates = response.getJSONArray("result").toJavaList(Cate.class);
-			Iterable ite= cateService.saveAll(cates);
-			/*Iterator<Cate> iterator = ite.iterator();
-			while(iterator.hasNext()){
-				Cate cate = iterator.next();
-				System.out.println(cate);
-			}
-			System.out.println("cates:" + cates);*/
+			//cateService.upsertAll(cates);
+			cateService.saveAll(cates);
 		} catch (OpenException e) {
 			e.printStackTrace();
 		}
@@ -238,6 +235,9 @@ public class SyncVdService {
 
 	/**
 	 * 同步微店商品(document:shopProduct)
+	 * 1.从本地查出并获取所有微店商品ID
+	 * 2.对比远程的商品ID和本地的ID，如果本地的ID不存在于远程的商品ID里，则统一到一起删除
+	 * 3.然后保存远程商品
 	 */
 	public String syncVdProduct() throws Exception {
 		int countItem = vdService.getCountByItemList();

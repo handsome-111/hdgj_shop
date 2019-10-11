@@ -45,7 +45,7 @@ public class SyncVdScheduler {
 
 			ClientSession session = client.startSession(sessionOptions);
 			System.out.println(session);*/
-		syncVdService.syncCarts();
+		syncVdService.syncCates();
 		/*syncVdService.syncVdProduct();
 		syncVdService.syncVdProductDetail();
 		syncVdService.syncVdSkuAttr();*/
