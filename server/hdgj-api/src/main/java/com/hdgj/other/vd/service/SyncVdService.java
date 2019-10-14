@@ -78,6 +78,7 @@ public class SyncVdService {
 	 */
 	public void syncCates(){
 		JSONObject response = null;
+		List<Long> QueryIds = cateService.getIdsAll();
 		try {
 			response = vdService.weidianCateGetList();
 			int status = response.getJSONObject("status").getInteger("status_code");
@@ -91,12 +92,26 @@ public class SyncVdService {
 			}
 			
 			List<Cate> cates = response.getJSONArray("result").toJavaList(Cate.class);
+			
+			/**
+			 * 讲分类ID和VD的ID对比，相等的则说明存在，存在则将本地的ID移除，移除后就剩下的就直接删除
+			 */
+			for(Cate cate : cates){
+				long cateId = cate.getCateId();
+				if(QueryIds.contains(cateId)){
+					QueryIds.remove(cateId);
+				}
+			}
+			//删除
+			cateService.removeIds(QueryIds);
+			
+			
 			//cateService.upsertAll(cates);
 			cateService.saveAll(cates);
 		} catch (OpenException e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	/**
 	 * 同步商品的型号属性
