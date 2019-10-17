@@ -26,8 +26,6 @@ public class SyncVdScheduler {
 	@Autowired
 	private SyncVdService syncVdService;
 	
-	@Autowired
-	private MongoClient client;
 	
 	private MongoTemplate template;
 	
@@ -45,8 +43,9 @@ public class SyncVdScheduler {
 
 			ClientSession session = client.startSession(sessionOptions);
 			System.out.println(session);*/
-		syncVdService.syncCates();
-		/*syncVdService.syncVdProduct();
+		//syncVdService.syncCates();
+		syncVdService.syncVdProduct();
+		/*
 		syncVdService.syncVdProductDetail();
 		syncVdService.syncVdSkuAttr();*/
 

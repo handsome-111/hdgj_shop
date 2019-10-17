@@ -32,18 +32,12 @@ public class ServerConfiguration {
 	@Value("${weidian.secret}")
 	private String secret;
 	
-	
-	@Bean
-    MongoTransactionManager transactionManager(MongoDbFactory dbFactory) {  
-        return new MongoTransactionManager(dbFactory);
-    }
-	
 	@Bean	
     public RestTemplate restTemplate() {
 		return new RestTemplate();
     }
 	
-	@Bean
+	@Bean(name="db1TransactionManager")
 	public DataSourceTransactionManager transactionManager() {
 	  return new DataSourceTransactionManager(dataSource());
 	}

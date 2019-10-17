@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * 店铺商品
@@ -21,20 +22,36 @@ public class ShopProduct {
 	private int istop;
 	private List<String> imgs;
 	private int status;
-	private String item_desc;
-	private String merchant_code;
+	@Field("item_desc")
+	private String itemDesc;
+	@Field("merchant_code")
+	private String merchantcode;
 	@DBRef
 	private List<Cate> cates;
 	private int stock;
 	private String price;
-	private Date update_time;
-	private String item_name;
-	private String fx_fee_rate;
-	private List<String> thumb_imgs;
-	private String seller_id;
+	@Field("update_time")
+	private Date updatetime;
+	@Field("item_name")
+	private String itemName;
+	@Field("fx_fee_rate")
+	private String fxFeeRate;
+	@Field("thumb_imgs")
+	private List<String> thumbImgs;
+	@Field("seller_id")
+	private String sellerId;
 	@DBRef
 	private List<Sku> skus;
-	private Date add_time;
+	@Field("add_time")
+	private Date addTime;
+	
+	public ShopProduct(){}
+	
+	public ShopProduct(String itemid) {
+		super();
+		this.itemid = itemid;
+	}
+	//销量
 	private int sold;
 	public String getItemid() {
 		return itemid;
@@ -60,18 +77,7 @@ public class ShopProduct {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getItem_desc() {
-		return item_desc;
-	}
-	public void setItem_desc(String item_desc) {
-		this.item_desc = item_desc;
-	}
-	public String getMerchant_code() {
-		return merchant_code;
-	}
-	public void setMerchant_code(String merchant_code) {
-		this.merchant_code = merchant_code;
-	}
+
 	public List<Cate> getCates() {
 		return cates;
 	}
@@ -90,35 +96,53 @@ public class ShopProduct {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public Date getUpdate_time() {
-		return update_time;
+	public int getSold() {
+		return sold;
 	}
-	public void setUpdate_time(Date update_time) {
-		this.update_time = update_time;
+	public void setSold(int sold) {
+		this.sold = sold;
 	}
-	public String getItem_name() {
-		return item_name;
+	public String getItemDesc() {
+		return itemDesc;
 	}
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
 	}
-	public String getFx_fee_rate() {
-		return fx_fee_rate;
+	public String getMerchantcode() {
+		return merchantcode;
 	}
-	public void setFx_fee_rate(String fx_fee_rate) {
-		this.fx_fee_rate = fx_fee_rate;
+	public void setMerchantcode(String merchantcode) {
+		this.merchantcode = merchantcode;
 	}
-	public List<String> getThumb_imgs() {
-		return thumb_imgs;
+	public Date getUpdatetime() {
+		return updatetime;
 	}
-	public void setThumb_imgs(List<String> thumb_imgs) {
-		this.thumb_imgs = thumb_imgs;
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
 	}
-	public String getSeller_id() {
-		return seller_id;
+	public String getItemName() {
+		return itemName;
 	}
-	public void setSeller_id(String seller_id) {
-		this.seller_id = seller_id;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getFxFeeRate() {
+		return fxFeeRate;
+	}
+	public void setFxFeeRate(String fxFeeRate) {
+		this.fxFeeRate = fxFeeRate;
+	}
+	public List<String> getThumbImgs() {
+		return thumbImgs;
+	}
+	public void setThumbImgs(List<String> thumbImgs) {
+		this.thumbImgs = thumbImgs;
+	}
+	public String getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
 	}
 	public List<Sku> getSkus() {
 		return skus;
@@ -126,17 +150,19 @@ public class ShopProduct {
 	public void setSkus(List<Sku> skus) {
 		this.skus = skus;
 	}
-	public Date getAdd_time() {
-		return add_time;
+	public Date getAddTime() {
+		return addTime;
 	}
-	public void setAdd_time(Date add_time) {
-		this.add_time = add_time;
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
 	}
-	public int getSold() {
-		return sold;
-	}
-	public void setSold(int sold) {
-		this.sold = sold;
+	@Override
+	public String toString() {
+		return "ShopProduct [itemid=" + itemid + ", istop=" + istop + ", imgs=" + imgs + ", status=" + status
+				+ ", itemDesc=" + itemDesc + ", merchantcode=" + merchantcode + ", cates=" + cates + ", stock=" + stock
+				+ ", price=" + price + ", updatetime=" + updatetime + ", itemName=" + itemName + ", fxFeeRate="
+				+ fxFeeRate + ", thumbImgs=" + thumbImgs + ", sellerId=" + sellerId + ", skus=" + skus + ", addTime="
+				+ addTime + ", sold=" + sold + "]";
 	}
 
 }

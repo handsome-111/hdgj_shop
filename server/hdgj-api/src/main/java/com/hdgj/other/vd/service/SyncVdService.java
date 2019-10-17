@@ -2,6 +2,7 @@ package com.hdgj.other.vd.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ import com.hdgj.entity.repository.SkuAttrRepository;
 import com.hdgj.other.vd.api.ProductDetailService;
 import com.hdgj.other.vd.api.VDService;
 import com.hdgj.service.CateService;
+import com.hdgj.service.ShopProductService;
 import com.weidian.open.sdk.exception.OpenException;
 
 @Service
@@ -67,6 +69,12 @@ public class SyncVdService {
 	
 	@Autowired
 	private ShopProductRepository shopProductRepository;
+	
+	@Autowired
+	private ShopProductService shopProductService;
+	
+	@Autowired
+	private com.hdgj.service.ProductService productService;
 	
 	@Autowired
 	private CateService cateService;
@@ -184,8 +192,9 @@ public class SyncVdService {
 		 */
 		for (int i = 0; i <= page; i++) {
 			// 读取所有的商品ID
-			List<JSONObject> itemIds = shopProductRepository.findAllBy(PageRequest.of(i, 30));
-
+			//List<JSONObject> itemIds = shopProductRepository.findAllBy(PageRequest.of(i, 30));
+			List<JSONObject> itemIds = productService.findAllBy(PageRequest.of(i, 30));
+			System.out.println("itemdIds:" + itemIds);
 			List<String> ids = new ArrayList<String>();
 			for (JSONObject id : itemIds) {
 				ids.add(id.getString("_id"));
@@ -256,11 +265,13 @@ public class SyncVdService {
 	 */
 	public String syncVdProduct() throws Exception {
 		int countItem = vdService.getCountByItemList();
-		int pageSize = 30;
+		int pageSize = 50;
 		long totalPage = this.getTotalPage(pageSize, countItem);
 
+		List<String> localIds = new LinkedList();
+
 		for (int i = 1; i <= totalPage; i++) {
-			String response = vdService.vdianItemListGet(i, 1, pageSize, null, 1, null);
+			String response = vdService.vdianItemListGet(i, 3, pageSize, null, 1, null);
 			JSONObject res = JSONObject.parseObject(response);
 			int status = res.getJSONObject("status").getInteger("status_code");
 
@@ -273,13 +284,26 @@ public class SyncVdService {
 			 */ 
 			//List<Product> items = res.getJSONObject("result").getJSONArray("items").toJavaList(Product.class);
 			List<ShopProduct> items = res.getJSONObject("result").getJSONArray("items").toJavaList(ShopProduct.class);
-			//System.out.println("微点商品shopProduct:" + res.getJSONObject("result").getJSONArray("items"));
-			shopProductRepository.saveAll(items);
-			//productRepository.saveAll(items);
+			
+			//添加本地Ids
+			localIds.addAll(shopProductService.getIdsOrderBySoldDesc(i - 1, pageSize));
+			/**
+			 * 查询本地VD商品,如果多余的则删除,接口获取的直接保存覆盖即可
+			 */
+			for(ShopProduct shopProduct : items){
+				String id = shopProduct.getItemid();
+				if(localIds.contains(id)){
+					localIds.remove(id);
+				}
+			}
+			shopProductService.saveAll(items);
+			//shopProductService.delAndSaveAll(localIds,items);
 		}
+		//删除所有不存在的本地VD商品
+		shopProductService.deleteAll(localIds);
 
 		return "商品同步完成";
-	}
+	} 
 
 	/**
 	 * 获取总页数

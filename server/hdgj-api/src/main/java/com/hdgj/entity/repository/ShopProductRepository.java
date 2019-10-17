@@ -10,6 +10,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.ShopProduct;
 
 public interface ShopProductRepository extends PagingAndSortingRepository<ShopProduct,String> {
+	/*@Query(fields="{'itemId':1}")
+	List<ShopProduct> getAllBy(Pageable page);*/
+	
 	@Query(fields="{'itemId':1}")
 	List<JSONObject> findAllBy(Pageable page);
+
 }
