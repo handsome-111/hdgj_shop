@@ -57,6 +57,7 @@ wx:
 jobs: 
   initialDelay: 1000      #开始1秒后
   fixedRate: 300000    #每5分钟执行一次
+
   
 
   

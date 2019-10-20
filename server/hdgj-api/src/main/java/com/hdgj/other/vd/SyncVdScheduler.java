@@ -43,11 +43,10 @@ public class SyncVdScheduler {
 
 			ClientSession session = client.startSession(sessionOptions);
 			System.out.println(session);*/
-		//syncVdService.syncCates();
+		syncVdService.syncCates();
 		syncVdService.syncVdProduct();
-		/*
 		syncVdService.syncVdProductDetail();
-		syncVdService.syncVdSkuAttr();*/
+		syncVdService.syncVdSkuAttr();
 
 		//syncVdService.test4();
 		//syncVdService.test3();

@@ -4,9 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,9 @@ import com.hdgj.service.ShopProductService;
 public class ShopProductServiceImpl implements ShopProductService {
 	@Autowired
 	private ShopProductRepository shopProductRespository;
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
 	
 	/*@Override
 	public List<ShopProduct> getShopProductsOrderBySoldDesc(int page,int size) {
@@ -68,6 +73,12 @@ public class ShopProductServiceImpl implements ShopProductService {
 			delShopProducts.add(sp);
 		}
 		shopProductRespository.deleteAll(delShopProducts); 		
+	}
+
+	@Override
+	public List<ShopProduct> getAll(int page, int size) {
+		Page<ShopProduct> p = shopProductRespository.findAll(PageRequest.of(page, size,Sort.by(Direction.DESC, "sold")));
+		return p.getContent();
 	}
 
 }

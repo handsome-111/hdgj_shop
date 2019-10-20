@@ -10,4 +10,5 @@ public interface ShopProductService {
 	void delAndSaveAll(List<String> ids,List<ShopProduct> shopProducts);
 	void saveAll(List<ShopProduct> shopProducts);
 	void deleteAll(List<String> ids);
+	public List<ShopProduct> getAll(int page,int size);
 }
