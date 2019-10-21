@@ -29,7 +29,7 @@ public class ShopProduct {
 	@DBRef
 	private List<Cate> cates;
 	private int stock;
-	private String price;
+	private double price;
 	@Field("update_time")
 	private Date updatetime;
 	@Field("item_name")
@@ -90,12 +90,15 @@ public class ShopProduct {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public String getPrice() {
+
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+
+	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public int getSold() {
 		return sold;
 	}

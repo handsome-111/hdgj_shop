@@ -112,6 +112,15 @@ Component({
       },function (res){
         return res.height;
       });
+    },
+    getShopProduct:function(page){
+      wx.request({
+        url: app.globalData.serverHost + '/shopProduct/getShopProducts',
+        data:{
+          page:page,
+          size:30
+        }
+      })
     }
   }
   
