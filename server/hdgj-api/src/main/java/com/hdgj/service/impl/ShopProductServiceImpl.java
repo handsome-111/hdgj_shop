@@ -9,6 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,8 +80,21 @@ public class ShopProductServiceImpl implements ShopProductService {
 
 	@Override
 	public List<ShopProduct> getAll(int page, int size) {
-		Page<ShopProduct> p = shopProductRespository.findAll(PageRequest.of(page, size,Sort.by(Direction.DESC, "sold")));
-		return p.getContent();
+		//Page<ShopProduct> p = shopProductRespository.findAll(PageRequest.of(page, size,Sort.by(Direction.DESC, "sold")));
+		Aggregation agg = Aggregation.newAggregation(
+				Aggregation.unwind("cates"),
+				Aggregation.lookup("cate", "cates", "_id", "cates")
+				);
+		AggregationResults result = mongoTemplate.aggregate(agg, "shop_product",ShopProduct.class);
+		System.out.println("结果集：");
+		System.out.println(result.getMappedResults());
+		return null;
 	}
+	
+	
 
 }
+
+
+
+
