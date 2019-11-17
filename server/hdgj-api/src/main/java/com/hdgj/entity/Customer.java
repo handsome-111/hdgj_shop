@@ -256,7 +256,8 @@ public class Customer implements UserDetails,Serializable{
 		List<Role> rls = new ArrayList<Role>();
 		String[] s = roles.split(",");
 		for(String str : s){
-			Role role = new Role(str);
+			Role role = new Role();
+			role.setRolename(str);
 			rls.add(role);
 		}
 		return rls;

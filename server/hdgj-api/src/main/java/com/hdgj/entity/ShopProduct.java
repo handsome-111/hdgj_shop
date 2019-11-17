@@ -47,10 +47,7 @@ public class ShopProduct {
 	
 	public ShopProduct(){}
 	
-	public ShopProduct(String itemid) {
-		super();
-		this.itemid = itemid;
-	}
+
 	//销量
 	private int sold;
 	public String getItemid() {

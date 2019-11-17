@@ -1,17 +1,17 @@
 package com.hdgj.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +19,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.ShopProduct;
 import com.hdgj.entity.repository.ShopProductRepository;
 import com.hdgj.service.ShopProductService;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoCursor;
 
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
@@ -81,13 +85,56 @@ public class ShopProductServiceImpl implements ShopProductService {
 	@Override
 	public List<ShopProduct> getAll(int page, int size) {
 		//Page<ShopProduct> p = shopProductRespository.findAll(PageRequest.of(page, size,Sort.by(Direction.DESC, "sold")));
-		Aggregation agg = Aggregation.newAggregation(
-				Aggregation.unwind("cates"),
-				Aggregation.lookup("cate", "cates", "_id", "cates")
-				);
-		AggregationResults result = mongoTemplate.aggregate(agg, "shop_product",ShopProduct.class);
-		System.out.println("结果集：");
-		System.out.println(result.getMappedResults());
+		/*Aggregation agg = Aggregation.newAggregation(
+				Aggregation.unwind("cates")
+				//Aggregation.project().andExpression("").m.as("B_fk"),
+				//Aggregation.lookup("cate", "cates", "_id", "cates")
+				);*/
+		Criteria criteria = new Criteria();
+		
+		DBObject input2 = new BasicDBObject("input","$cates");
+		
+		/**
+		 *  $arrayElemAt
+		 */
+		DBObject objectToArray =  new BasicDBObject("objectToArray","$$this");
+		List arrayElemAtList = new ArrayList();
+		arrayElemAtList.add(objectToArray);
+		arrayElemAtList.add(1);
+		DBObject arrayElemAt = new BasicDBObject("arrayElemAt",arrayElemAtList);
+		
+		//in2
+		//DBObject in2 = new BasicDBObject("in",arrayElemAt);
+		
+		Map<Object,Object> map2 = new HashMap();
+		map2.put("input", "$cates");
+		map2.put("in", arrayElemAt);
+
+		
+		Map<Object,Object> map1 = new HashMap();
+		map1.put("input", map2);
+		map1.put("in","$$this.v");
+		
+		DBObject map = new BasicDBObject("$map",map1);
+		
+		DBObject project=new BasicDBObject("$project", new BasicDBObject("B_fk",map));
+				
+		List<? extends Bson> list = (List<? extends Bson>) new ArrayList<DBObject>();
+		list.add(project);
+		
+		/*Aggregation agg = Aggregation.newAggregation(
+				Aggregation.
+				Aggregation.unwind("cates"), 
+				Aggregation.lookup("cate", "B_fk", "_id", "cate")
+				);*/
+		AggregateIterable ite = mongoTemplate.getCollection("shop_product").aggregate(list);
+		//MongoCursor m = ite.iterator();
+		/*while(m.hasNext()){
+			System.out.println(m.next());
+		}*/
+		System.out.println("agg:" + ite.first());
+		//AggregationResults result = mongoTemplate.aggregate(project,agg,"shop_product",ShopProduct.class);
+		//System.out.println(result.getMappedResults());
 		return null;
 	}
 	
