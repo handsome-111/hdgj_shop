@@ -6,11 +6,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.VariableOperators;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -120,21 +126,19 @@ public class ShopProductServiceImpl implements ShopProductService {
 		DBObject project=new BasicDBObject("$project", new BasicDBObject("B_fk",map));
 				
 		List<? extends Bson> list = (List<? extends Bson>) new ArrayList<DBObject>();
-		list.add(project);
+		//list.add(project);
 		
-		/*Aggregation agg = Aggregation.newAggregation(
-				Aggregation.
-				Aggregation.unwind("cates"), 
-				Aggregation.lookup("cate", "B_fk", "_id", "cate")
-				);*/
-		AggregateIterable ite = mongoTemplate.getCollection("shop_product").aggregate(list);
-		//MongoCursor m = ite.iterator();
-		/*while(m.hasNext()){
-			System.out.println(m.next());
-		}*/
-		System.out.println("agg:" + ite.first());
-		//AggregationResults result = mongoTemplate.aggregate(project,agg,"shop_product",ShopProduct.class);
-		//System.out.println(result.getMappedResults());
+		String str = "db.shop_product.aggregate([{$project:{B_fk:{$map:{input:{$map:{input:\"$cates\",in:{$arrayElemAt:[{$objectToArray:\"$$this\"},1]},}},in:\"$$this.v\"}},}},{$lookup:{from:\"cate\",localField:\"B_fk\",foreignField:\"_id\",as:\"cate\"}}])";
+		BasicDBObject bson = new BasicDBObject();
+		bson.put("$eval", str);
+		System.out.println("str:" + bson);
+		//Document document = mongoTemplate.getDb().runCommand(bson);
+		
+		BasicDBObject bson2 = new BasicDBObject();
+		bson2.put("$eval", "db.aa.insertOne({aa:99})");
+		Document document = mongoTemplate.getDb().runCommand(bson2);
+		
+		System.out.println(document.toJson());
 		return null;
 	}
 	
