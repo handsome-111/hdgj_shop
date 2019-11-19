@@ -132,13 +132,13 @@ public class ShopProductServiceImpl implements ShopProductService {
 		BasicDBObject bson = new BasicDBObject();
 		bson.put("$eval", str);
 		System.out.println("str:" + bson);
-		//Document document = mongoTemplate.getDb().runCommand(bson);
+		Document document = mongoTemplate.getDb().runCommand(bson);
 		
 		BasicDBObject bson2 = new BasicDBObject();
-		bson2.put("$eval", "db.aa.insertOne({aa:111})");
-		Document document = mongoTemplate.getDb().runCommand(bson2);
+		bson2.put("$eval", "db.aa.insertOne({aa:1211})");
+		//Document document = mongoTemplate.getDb().runCommand(bson2);
 		
-		System.out.println(document.toJson());
+		System.out.println("结果集：" + document.toJson());
 		return null;
 	}
 	
