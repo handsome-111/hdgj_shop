@@ -6,17 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.VariableOperators;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +25,7 @@ import com.hdgj.service.ShopProductService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.client.AggregateIterable;
-import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoCollection;
 
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
@@ -116,29 +113,35 @@ public class ShopProductServiceImpl implements ShopProductService {
 		map2.put("input", "$cates");
 		map2.put("in", arrayElemAt);
 
+		Map<Object,Object> input1 = new HashMap();
+		input1.put("$map", map2);
 		
 		Map<Object,Object> map1 = new HashMap();
-		map1.put("input", map2);
+		map1.put("input", input1);
 		map1.put("in","$$this.v");
 		
 		DBObject map = new BasicDBObject("$map",map1);
 		
-		DBObject project=new BasicDBObject("$project", new BasicDBObject("B_fk",map));
+		BSONObject project=new BasicDBObject("$project", new BasicDBObject("B_fk",map));
 				
-		List<? extends Bson> list = (List<? extends Bson>) new ArrayList<DBObject>();
-		//list.add(project);
+		List list = new ArrayList();
+		list.add(project);
 		
-		String str = "db.shop_product.aggregate([{$project:{B_fk:{$map:{input:{$map:{input:\"$cates\",in:{$arrayElemAt:[{$objectToArray:\"$$this\"},1]},}},in:\"$$this.v\"}},}},{$lookup:{from:\"cate\",localField:\"B_fk\",foreignField:\"_id\",as:\"cate\"}}])";
+		/*String str = "db.shop_product.aggregate([{$project:{B_fk:{$map:{input:{$map:{input:\"$cates\",in:{$arrayElemAt:[{$objectToArray:\"$$this\"},1]},}},in:\"$$this.v\"}},}},{$lookup:{from:\"cate\",localField:\"B_fk\",foreignField:\"_id\",as:\"cate\"}}])";
 		BasicDBObject bson = new BasicDBObject();
 		bson.put("$eval", str);
 		System.out.println("str:" + bson);
-		Document document = mongoTemplate.getDb().runCommand(bson);
+		Document document = mongoTemplate.getDb().runCommand(bson);*/
+		
+		System.out.println("project:" + project.toString());
+		System.out.println("list:" + list);
+		AggregateIterable result = mongoTemplate.getCollection("shop_product").aggregate(list);
 		
 		BasicDBObject bson2 = new BasicDBObject();
 		bson2.put("$eval", "db.aa.insertOne({aa:1211})");
 		//Document document = mongoTemplate.getDb().runCommand(bson2);
 		
-		System.out.println("结果集：" + document.toJson());
+		//System.out.println("结果集：" + document.toJson());
 		return null;
 	}
 	
