@@ -8,24 +8,27 @@ import java.util.Map;
 
 import org.bson.BSONObject;
 import org.bson.Document;
-import org.bson.conversions.Bson;
+import org.bson.json.JsonWriterSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.redis.connection.convert.StringToDataTypeConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.hdgj.entity.ShopProduct;
 import com.hdgj.entity.repository.ShopProductRepository;
 import com.hdgj.service.ShopProductService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.client.AggregateIterable;
-import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 
 @Service
 public class ShopProductServiceImpl implements ShopProductService {
@@ -100,11 +103,11 @@ public class ShopProductServiceImpl implements ShopProductService {
 		/**
 		 *  $arrayElemAt
 		 */
-		DBObject objectToArray =  new BasicDBObject("objectToArray","$$this");
+		DBObject objectToArray =  new BasicDBObject("$objectToArray","$$this");
 		List arrayElemAtList = new ArrayList();
 		arrayElemAtList.add(objectToArray);
 		arrayElemAtList.add(1);
-		DBObject arrayElemAt = new BasicDBObject("arrayElemAt",arrayElemAtList);
+		DBObject arrayElemAt = new BasicDBObject("$arrayElemAt",arrayElemAtList);
 		
 		//in2
 		//DBObject in2 = new BasicDBObject("in",arrayElemAt);
@@ -124,8 +127,20 @@ public class ShopProductServiceImpl implements ShopProductService {
 		
 		BSONObject project=new BasicDBObject("$project", new BasicDBObject("B_fk",map));
 				
-		List list = new ArrayList();
-		list.add(project);
+		
+		/**
+		 * look up
+		 */
+		Map lookupValue = new HashMap();
+		lookupValue.put("from", "cate");
+		lookupValue.put("localField", "B_fk");
+		lookupValue.put("foreignField", "_id");
+		lookupValue.put("as", "cate");
+
+		BSONObject lookup = new BasicDBObject("$lookup",lookupValue);
+		 
+		BSONObject project2=new BasicDBObject("$project", new BasicDBObject("B_fk",0));
+
 		
 		/*String str = "db.shop_product.aggregate([{$project:{B_fk:{$map:{input:{$map:{input:\"$cates\",in:{$arrayElemAt:[{$objectToArray:\"$$this\"},1]},}},in:\"$$this.v\"}},}},{$lookup:{from:\"cate\",localField:\"B_fk\",foreignField:\"_id\",as:\"cate\"}}])";
 		BasicDBObject bson = new BasicDBObject();
@@ -133,9 +148,21 @@ public class ShopProductServiceImpl implements ShopProductService {
 		System.out.println("str:" + bson);
 		Document document = mongoTemplate.getDb().runCommand(bson);*/
 		
-		System.out.println("project:" + project.toString());
+		List list = new ArrayList();
+		list.add(project);
+		list.add(lookup);
+		list.add(project2);
 		System.out.println("list:" + list);
-		AggregateIterable result = mongoTemplate.getCollection("shop_product").aggregate(list);
+		AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(list);
+		MongoCursor<Document> m = result.iterator();
+		StringToDataTypeConverter c = new StringToDataTypeConverter();
+		Gson gson = new Gson();
+		while(m.hasNext()){
+			Document shop = m.next();
+			String realJson = shop.toJson(JsonWriterSettings.builder().build());
+
+			System.out.println("shop:" + JSON.parseObject(realJson,ShopProduct.class);
+		}
 		
 		BasicDBObject bson2 = new BasicDBObject();
 		bson2.put("$eval", "db.aa.insertOne({aa:1211})");
