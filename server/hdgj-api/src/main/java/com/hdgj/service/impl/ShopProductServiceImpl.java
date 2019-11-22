@@ -161,7 +161,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 			Document shop = m.next();
 			String realJson = shop.toJson(JsonWriterSettings.builder().build());
 
-			System.out.println("shop:" + JSON.parseObject(realJson,ShopProduct.class);
+			System.out.println("shop:" + realJson);
 		}
 		
 		BasicDBObject bson2 = new BasicDBObject();
