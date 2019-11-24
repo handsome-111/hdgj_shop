@@ -2,21 +2,36 @@ package com.hdgj.test;
 
 
 
-import org.joda.time.DateTime;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
+import java.util.Map;
 
-import com.hdgj.entity.Product;
+import org.joda.time.chrono.AssembledChronology.Fields;
+import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.hdgj.entity.ShopProduct;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-		DateTime time = new DateTime();
-		System.out.println(time);
-	}
-	public static void aa(int a){
-		System.out.println("a:" + a);
-	}
+		//获取类上的注解
+		Annotation an = AnnotationUtils.findAnnotation(ShopProduct.class,Document.class);
 		
-		public static void bb(Object p){
-		Product pp = (Product) p;
-		pp.setId("1");
+		Field[] fields = ShopProduct.class.getDeclaredFields();
+		
+		for(Field field : fields){
+			System.out.println(field.getName());
+		}
+		
+		//AnnotatedElement element = AnnotationUtils
+		//获取注解所有的属性
+		Map<String,Object> attributes = AnnotationUtils.getAnnotationAttributes(an);
+		System.out.println(attributes);
+		
+		
 	}
+
 }

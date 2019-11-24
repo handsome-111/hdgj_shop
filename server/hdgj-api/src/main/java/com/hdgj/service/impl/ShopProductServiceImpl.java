@@ -13,13 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.config.MappingMongoConverterParser;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.redis.connection.convert.StringToDataTypeConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.hdgj.entity.ShopProduct;
@@ -160,6 +161,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 		while(m.hasNext()){
 			Document shop = m.next();
 			String realJson = shop.toJson(JsonWriterSettings.builder().build());
+			MappingMongoConverterParser mm = new MappingMongoConverterParser();
 
 			System.out.println("shop:" + realJson);
 		}
