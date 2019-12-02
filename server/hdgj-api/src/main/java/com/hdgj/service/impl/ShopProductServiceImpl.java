@@ -126,8 +126,28 @@ public class ShopProductServiceImpl implements ShopProductService {
 		
 		DBObject map = new BasicDBObject("$map",map1);
 		
-		BSONObject project=new BasicDBObject("$project", new BasicDBObject("B_fk",map));
-				
+		Map<String,Object> project = new HashMap<String,Object>();
+		project.put("B_fk",map);
+		project.put("imgs", 1);
+		project.put("istop", 1);
+		project.put("status", 1);
+		project.put("item_desc", 1);
+		project.put("merchant_code", 1);
+		project.put("stock", 1);
+		project.put("price", 1);
+		project.put("update_time", 1);
+		project.put("item_name", 1);
+		project.put("fx_fee_rate", 1);
+		project.put("thumb_imgs", 1);
+		project.put("seller_id", 1);
+		project.put("add_time", 1);
+		project.put("sold", 1);
+		project.put("_class", 1);
+		
+		BSONObject aggProject=new BasicDBObject("$project", project);
+		// imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,skus:1,add_time:1,sold:1,_class:1,
+		
+		
 		
 		/**
 		 * look up
@@ -150,7 +170,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 		Document document = mongoTemplate.getDb().runCommand(bson);*/
 		
 		List list = new ArrayList();
-		list.add(project);
+		list.add(aggProject);
 		list.add(lookup);
 		list.add(project2);
 		System.out.println("list:" + list);
