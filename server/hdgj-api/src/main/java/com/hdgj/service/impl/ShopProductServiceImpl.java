@@ -173,6 +173,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 		list.add(aggProject);
 		list.add(lookup);
 		list.add(project2);
+		
 		System.out.println("list:" + list);
 		AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(list);
 		MongoCursor<Document> m = result.iterator();

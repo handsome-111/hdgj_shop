@@ -5,55 +5,49 @@ package com.hdgj.test;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
+import org.bson.BSONObject;
 import org.joda.time.chrono.AssembledChronology.Fields;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hdgj.entity.ShopProduct;
+import com.mongodb.BasicDBObject;
 
 public class Test {
-	public static void main(String[] args) {
-		String str = "ShopProduct.xml";
-		String[] s = str.split("\\.");
-		System.out.println(s[0]);
-	}
-	
-	public static void t1(String[] args) throws Exception {
-		String json = "{ \"_id\" : \"2731676821\", \"cate\" : [{ \"_id\" : 130233853, \"cate_name\" : \"美国USANA子系列\\n葆婴/葆苾康系列\\n（会员可官网下单）\", \"sort_num\" : 150, \"cate_item_num\" : 9, \"listUrl\" : \"http://weidian.com/item_classes.html?userid=1287081375&c=130233853&des=%E7%BE%8E%E5%9B%BDUSANA%E5%AD%90%E7%B3%BB%E5%88%97%0A%E8%91%86%E5%A9%B4%2F%E8%91%86%E8%8B%BE%E5%BA%B7%E7%B3%BB%E5%88%97%0A%EF%BC%88%E4%BC%9A%E5%91%98%E5%8F%AF%E5%AE%98%E7%BD%91%E4%B8%8B%E5%8D%95%EF%BC%89\", \"shopLogo\" : \"https://si.geilicdn.com/weidian1287081375-255100000167cb0088680a217205_984_984.jpg?w=250&h=250&cp=1\", \"shopName\" : \"华典国际绿色商城\", \"description\" : \"向您推荐 美国USANA子系列\\n葆婴/葆苾康系列\\n（会员可官网下单）\", \"_class\" : \"com.hdgj.entity.Cate\" }] }";
+	public static void main(String[] args) throws Exception {
+		String json = "[{$project:{imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,add_time:1,sold:1,_class:1,B_fk:{$map:{input:{$map:{input:\"$cates\", 	                      in: { 	                           $arrayElemAt: [{$objectToArray: \"$$this\"}, 1] 	                      }, 	                  } 	             }, 	             in: \"$$this.v\"}},   	        }, 	        	    },  	     	    { 	   	 $lookup: { 		        from:\"cate\",  		        localField:\"B_fk\", 		        foreignField:\"_id\",  		        as:\"cate\" 	        }  	    },  	     	    { 	    	$unwind:{path:\"$cate\"} 	    }, 	     	    { 	    	$sort:{\"cate.sort_num\" : 1} 	   	} 	]";
+		JSONArray jsonArray = JSONArray.parseArray(json);
 		
-		System.out.println(json);
-		
-		//获取类上的注解
-		Annotation an = AnnotationUtils.findAnnotation(ShopProduct.class,Document.class);
-		
-		Field[] fields = ShopProduct.class.getDeclaredFields();
-		
-		
-		
-		for(Field field : fields){
-			Annotation id = field.getAnnotation(Id.class);
-			Annotation fieldAnnotation = field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class);
-			if(id != null){
-				System.out.println("字段名称：" + field.getName() + "," + AnnotationUtils.getValue(id));
-			}
-			
-			if(fieldAnnotation != null){
-				System.out.println("字段名称：" + field.getName() + "," + AnnotationUtils.getValue(fieldAnnotation));
-			}
-			
-			//System.out.println(field.getName());
+		List<JSONObject> list = jsonArray.toJavaList(JSONObject.class);
+
+		for(JSONObject jsonObject : list){
+			a(jsonObject);
 		}
 		
-		//AnnotatedElement element = AnnotationUtils
-		//获取注解所有的属性
-		Map<String,Object> attributes = AnnotationUtils.getAnnotationAttributes(an);
-		System.out.println(attributes);
+			
+	}
+	
+	public static void a(JSONObject jsonObject){
 		
-		
+		Map map = new HashMap();
+        Set<Entry<String,Object>> set = jsonObject.entrySet();
+        Iterator<Entry<String,Object>> ite = set.iterator();
+        while(ite.hasNext()){
+        	Entry<String,Object> entry = ite.next();
+        	System.out.println(entry.getValue());
+    		BSONObject lookup = new BasicDBObject("$lookup",lookupValue);
+        }
 	}
 
 }
