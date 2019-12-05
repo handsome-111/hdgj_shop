@@ -30,24 +30,54 @@ public class Test {
 		JSONArray jsonArray = JSONArray.parseArray(json);
 		
 		List<JSONObject> list = jsonArray.toJavaList(JSONObject.class);
-
+		Map map = new HashMap();
 		for(JSONObject jsonObject : list){
-			a(jsonObject);
+			map = jsonStrToMap(jsonObject.toJSONString());
+			System.out.println(map);
+
 		}
-		
 			
 	}
 	
-	public static void a(JSONObject jsonObject){
+	public static Map jsonStrToMap(String jsonStr){
+		JSONObject jsonObject = JSONObject.parseObject(jsonStr);
 		
-		Map map = new HashMap();
-        Set<Entry<String,Object>> set = jsonObject.entrySet();
+		Map<String,Object> map = new HashMap<String,Object>();
+        Set<Entry<String, Object>> set = jsonObject.entrySet();
         Iterator<Entry<String,Object>> ite = set.iterator();
         while(ite.hasNext()){
+        	
         	Entry<String,Object> entry = ite.next();
-        	System.out.println(entry.getValue());
-    		BSONObject lookup = new BasicDBObject("$lookup",lookupValue);
+        	Object value = entry.getValue();
+        	String key = entry.getKey();
+        	
+        	
+        	//System.out.println(entry.getKey() + "," + entry.getValue());
+        	
+        	try {
+            	String valueStr = ((JSONObject)entry.getValue()).toJSONString();
+            	BSONObject bson = new BasicDBObject(key, jsonStrToMap(valueStr));
+        		map.put(entry.getKey(), bson);
+        		
+			} catch (Exception e) {
+				
+				BSONObject bson = new BasicDBObject(key, value);
+        		map.put(entry.getKey(), bson);
+			}
+        	
+        	/*if (value.startsWith("{") && value.endsWith("}")) {
+        		
+        		BSONObject bson = new BasicDBObject(key, jsonStrToMap(value));
+        		map.put(entry.getKey(), bson);
+        		
+            } else {
+            	
+            	BSONObject bson = new BasicDBObject(key, value);
+        		map.put(entry.getKey(), bson);
+            }*/
         }
+       // System.out.println(map);
+		return map;
 	}
 
 }

@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.config.MappingMongoConverterParser;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.redis.connection.convert.StringToDataTypeConverter;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.hdgj.entity.ShopProduct;
 import com.hdgj.entity.repository.ShopProductRepository;
+import com.hdgj.mongoparse.MongoParsehandler;
 import com.hdgj.service.ShopProductService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -38,6 +38,9 @@ public class ShopProductServiceImpl implements ShopProductService {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
+	
+	@Autowired
+	private MongoParsehandler mongoParsehandler;
 	
 	/*@Override
 	public List<ShopProduct> getShopProductsOrderBySoldDesc(int page,int size) {
@@ -175,7 +178,11 @@ public class ShopProductServiceImpl implements ShopProductService {
 		list.add(project2);
 		
 		System.out.println("list:" + list);
-		AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(list);
+		//AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(list);
+		List l = mongoParsehandler.aggregate.get("sortShopProductList");
+		System.out.println("集合：" + l);
+		AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(l);
+
 		MongoCursor<Document> m = result.iterator();
 		StringToDataTypeConverter c = new StringToDataTypeConverter();
 		Gson gson = new Gson();
