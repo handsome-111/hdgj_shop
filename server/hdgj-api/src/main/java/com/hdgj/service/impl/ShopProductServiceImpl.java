@@ -148,7 +148,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 		project.put("_class", 1);
 		
 		BSONObject aggProject=new BasicDBObject("$project", project);
-		// imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,skus:1,add_time:1,sold:1,_class:1,
+ 		// imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,skus:1,add_time:1,sold:1,_class:1,
 		
 		
 		
@@ -177,7 +177,6 @@ public class ShopProductServiceImpl implements ShopProductService {
 		list.add(lookup);
 		list.add(project2);
 		
-		System.out.println("list:" + list);
 		//AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(list);
 		List l = mongoParsehandler.aggregate.get("sortShopProductList");
 		System.out.println("集合：" + l);

@@ -113,6 +113,11 @@
 	    <version>2.3</version>
 	    <classifier>jdk15</classifier>
 	</dependency>
+	<dependency>
+	    <groupId>me.welkinbai</groupId>
+	    <artifactId>BsonMapper</artifactId>
+	    <version>0.0.2</version>
+	</dependency>
 	
     
   </dependencies>
