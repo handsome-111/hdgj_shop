@@ -164,7 +164,8 @@ public class ShopProductServiceImpl implements ShopProductService {
 		BSONObject lookup = new BasicDBObject("$lookup",lookupValue);
 		 
 		BSONObject project2=new BasicDBObject("$project", new BasicDBObject("B_fk",0));
-
+		
+		//BSONObject unwind = new BasicDBObject("$")
 		
 		/*String str = "db.shop_product.aggregate([{$project:{B_fk:{$map:{input:{$map:{input:\"$cates\",in:{$arrayElemAt:[{$objectToArray:\"$$this\"},1]},}},in:\"$$this.v\"}},}},{$lookup:{from:\"cate\",localField:\"B_fk\",foreignField:\"_id\",as:\"cate\"}}])";
 		BasicDBObject bson = new BasicDBObject();
@@ -175,21 +176,17 @@ public class ShopProductServiceImpl implements ShopProductService {
 		List list = new ArrayList();
 		list.add(aggProject);
 		list.add(lookup);
-		list.add(project2);
 		
+		System.out.println("list:" + list);
 		//AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(list);
 		List l = mongoParsehandler.aggregate.get("sortShopProductList");
 		System.out.println("集合：" + l);
 		AggregateIterable<Document> result = mongoTemplate.getCollection("shop_product").aggregate(l);
 
 		MongoCursor<Document> m = result.iterator();
-		StringToDataTypeConverter c = new StringToDataTypeConverter();
-		Gson gson = new Gson();
 		while(m.hasNext()){
 			Document shop = m.next();
 			String realJson = shop.toJson(JsonWriterSettings.builder().build());
-			MappingMongoConverterParser mm = new MappingMongoConverterParser();
-
 			System.out.println("shop:" + realJson);
 		}
 		

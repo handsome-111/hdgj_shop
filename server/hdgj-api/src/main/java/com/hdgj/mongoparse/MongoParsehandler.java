@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.bson.BSONObject;
+import org.bson.BasicBSONObject;
 import org.bson.BsonString;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -100,82 +101,45 @@ public class MongoParsehandler{
 			//aggregate(e.getStringValue());
 			String key = e.attributeValue("id");
 			String value = e.getStringValue();
-			System.out.println(key + "," + value);
 			aggregate.put(key, aggregate(value));
 		}
 	}
+
 	
-	public List aggregate(String jsonString){
+	public static List<BSONObject> aggregate(String jsonString){
 		JSONArray jsonArray = JSONArray.parseArray(jsonString);
 		List<JSONObject> list = jsonArray.toJavaList(JSONObject.class);
 		
 		List<BSONObject> aggregateList = new ArrayList<BSONObject>();
 		
-		Map map = new HashMap();
+		//Map map = new HashMap();
 		for(JSONObject jsonObject : list){
-			
-			map = jsonStrToMap(jsonObject.toJSONString());
-			BSONObject aggProject = new BasicDBObject(map);
-			
-			aggregateList.add(aggProject);
+			BSONObject bsonObject = jsonToBson(jsonObject);
+			aggregateList.add(bsonObject);
 		}
+		
+		
 		
 		return aggregateList;
 		
 	} 
-	
 
-	//json字符串转换为MAP<key,BSONbasic>
-	public static Map jsonStrToMap(String jsonStr){
-		JSONObject jsonObject = JSONObject.parseObject(jsonStr);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-        Set<Entry<String, Object>> set = jsonObject.entrySet();
+	public static BSONObject jsonToBson(JSONObject jsonObject){
+		Set<Entry<String, Object>> set = jsonObject.entrySet();
         Iterator<Entry<String,Object>> ite = set.iterator();
-        
-        /**
-         * 开始解析
-         */
+		BSONObject bson = new BasicDBObject();
+
         out:
         while(ite.hasNext()){
-        	
         	Entry<String,Object> entry = ite.next();
         	String key = entry.getKey();		//key
         	Object value = entry.getValue();	//value
-
-        	/**
-        	 *  根据Value不同的情况来分类处理
-        	 */
-        	
-        	
-        	if(value instanceof JSONObject){
-        		BSONObject bson = new BasicDBObject(key, jsonStrToMap(value.toString()));
-        		map.put(key, bson);
-        		continue out;
-        	}
-        	
-        	if(value instanceof JSONArray){
-        		
-        		/**
-        		 * value : 数组里的所有JSON对象
-        		 */
-        		JSONArray jsonArray = (JSONArray) value;
-        		BsonString arrayString = new BsonString(jsonArray.toJSONString());      		
-        		//BsonArray bson = new BsonArray(list);
-        		
-        		map.put(key, arrayString);
-        		//System.out.println(arrayString);
-        		continue out;
-        	}
-        	
-        	/**
-        	 * 否则,如果不是数组，也不是JSON对象，则是基础数据类型
-        	 */
-    		map.put(key,value);
-        	
-    		
+  			BSONObject bsonObject = new BasicDBObject(key,value);
+			bson.putAll(bsonObject);
         }
-       // System.out.println(map);
-		return map;
+ 		return bson;
 	}
+	
+
+	
 }
