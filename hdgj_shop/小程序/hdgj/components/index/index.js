@@ -11,8 +11,8 @@ Component({
       //     selected: 0
       //   }) 
       // } 
-      getSwiperHeight();
-      getShopProduct(1);
+      this.getSwiperHeight();
+      this.getShopProduct(1);
     }
   },
   /**
@@ -60,7 +60,7 @@ Component({
             price: 90.5,
             sellNum: 54
           }
-        ]
+        ] 
       },
       
        {
