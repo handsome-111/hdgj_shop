@@ -11,6 +11,8 @@ Component({
       //     selected: 0
       //   }) 
       // } 
+      getSwiperHeight();
+      getShopProduct(1);
     }
   },
   /**
@@ -28,16 +30,7 @@ Component({
     images: {
       url: 'http://img1.imgtn.bdimg.com/it/u=735014917,976731480&fm=26&gp=0.jpg',
     },
-    menu:[
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' },
-      { src: '/images/index/1.jpg', title: '港视港饮' }
-    ],
+    
     swiper_block:[
       { imageSrc:'/images/index/1.jpg' , url:''},
       { imageSrc: '/images/index/1.jpg', url: '' }
@@ -105,6 +98,7 @@ Component({
   methods: {
     /*获取轮播图片高度*/ 
     getSwiperHeight: function (){
+      console.log(2222222)
       const query = wx.createSelectorQuery();
       var element = query.select('#the-id');
       element.fields({
@@ -119,6 +113,9 @@ Component({
         data:{
           page:page,
           size:30
+        },
+        complete:()=>{
+          console.log(data)
         }
       })
     }

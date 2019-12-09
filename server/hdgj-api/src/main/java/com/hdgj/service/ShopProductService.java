@@ -2,6 +2,7 @@ package com.hdgj.service;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSONArray;
 import com.hdgj.entity.ShopProduct;
 
 public interface ShopProductService {
@@ -10,5 +11,6 @@ public interface ShopProductService {
 	void delAndSaveAll(List<String> ids,List<ShopProduct> shopProducts);
 	void saveAll(List<ShopProduct> shopProducts);
 	void deleteAll(List<String> ids);
-	public List<ShopProduct> getAll(int page,int size);
+	
+	JSONArray sortShopProductList(int page,int size);
 }
