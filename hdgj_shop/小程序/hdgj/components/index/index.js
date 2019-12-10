@@ -22,7 +22,7 @@ Component({
 
   },
 
-  /**
+  /** 
    * 组件的初始数据
    */
   data: {
@@ -61,13 +61,13 @@ Component({
           size:30
         }, 
         success:function(data){
-          var array = data.data.data
-          
-          for(var i = 0; i < array.length; i++){
-            array[i] = JSON.parse(array[i])
-          }
+          var group = data.data.data
+          console.log(group)
 
-          console.log(array)
+          // for(var i = 0; i < array.length; i++){
+          //   array[i] = JSON.parse(array[i])
+          // }
+
           that.setData({
             list:data.data.data
           })

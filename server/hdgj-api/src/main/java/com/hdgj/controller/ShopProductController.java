@@ -1,6 +1,7 @@
 package com.hdgj.controller;
 
 import java.util.Iterator;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,9 @@ public class ShopProductController {
 		System.out.println(data.toJSONString());
 		
 		Iterator<Object> ite = data.listIterator();
+		JSONArray result = new JSONArray();
 		
-		JSONObject  group = new JSONObject();		//分组
-		JSONObject result = new JSONObject();		//每一组
+		JSONObject group = new JSONObject();		//分组
 		String key = null;
 		while(ite.hasNext()){
 			String value = (String) ite.next();
@@ -36,7 +37,6 @@ public class ShopProductController {
 			
 			JSONObject cate = (JSONObject) jsonObject.remove("cate"); 
 			key = ((Integer)cate.get("_id")).toString();
-			
 			cate.put("shopProducts", value);
 			
 			//每一组的集合
@@ -68,11 +68,21 @@ public class ShopProductController {
 				oneGroup.put("shopProducts", oneGroupList);
 			}
 			
-			group.put((String)key, oneGroup);
-
+			group.put((String)key, oneGroup); 
 		}
-		System.out.println(group);
-		System.out.println(group.size());
+		//System.out.println(group);
+		//System.out.println(group.size());
+		
+		
+		Set keys = group.keySet();
+		Iterator keysIterator = keys.iterator();
+		while(keysIterator.hasNext()){
+			JSONObject list = group.getJSONObject((String) keysIterator.next());
+			System.out.println(list);
+		}
 		return ResponseDataUtil.buildSuccess(group);
 	}
 }
+
+
+
