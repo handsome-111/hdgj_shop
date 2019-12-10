@@ -105,7 +105,7 @@ public class ShopProductServiceImpl implements ShopProductService {
 			String realJson = shop.toJson(JsonWriterSettings.builder().build());
 			jsonArray.add(realJson);
 		}
-		
+	
 		return jsonArray;
 	}
 	

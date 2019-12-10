@@ -26,7 +26,9 @@ import com.mongodb.BasicDBObject;
 public class Test {
 	public static void main(String[] args) throws Exception {
 		String json = "[{$project:{imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,add_time:1,sold:1,_class:1,B_fk:{$map:{input:{$map:{input:\"$cates\", 	                      in: { 	                           $arrayElemAt: [{$objectToArray: \"$$this\"}, 1] 	                      }, 	                  } 	             }, 	             in: \"$$this.v\"}},   	        }, 	        	    },  	     	    { 	   	 $lookup: { 		        from:\"cate\",  		        localField:\"B_fk\", 		        foreignField:\"_id\",  		        as:\"cate\" 	        }  	    },  	     	    { 	    	$unwind:{path:\"$cate\"} 	    }, 	     	    { 	    	$sort:{\"cate.sort_num\" : 1} 	   	} 	]";
-		JSONArray jsonArray = JSONArray.parseArray(json);
+		
+		/*JSONArray jsonArray = JSONArray.parseArray(json);
+		
 		
 		List<JSONObject> list = jsonArray.toJavaList(JSONObject.class);
 		
@@ -40,7 +42,7 @@ public class Test {
 			//System.out.println("第一个:" + jsonObject);
 			//System.out.println(map);
 			l.add(bsonObject);
-		}
+		}*/
 	}
 	
 	public static Map jsonStrToMap(String jsonStr){

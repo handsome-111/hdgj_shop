@@ -106,12 +106,13 @@
   padding: 0.5rem;
   box-sizing:  border-box;
   display: flex;
-  margin-bottom: 1rem;
+  align-items: space-between;
 }
 
 .goods_info > image {
   display: block;
   width: 6rem;
+  margin-right: 0.5rem;
 }
 
 .goods_info > view {
