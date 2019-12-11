@@ -24,7 +24,6 @@ public class ShopProductController {
 	@RequestMapping("/getShopProducts")
 	public ResponseData getShopProducts(@RequestParam("page") int page,@RequestParam("size") int size){
 		JSONArray data = shopProductService.sortShopProductList(page, size);
-		System.out.println(data.toJSONString());
 		
 		Iterator<Object> ite = data.listIterator();
 		JSONArray result = new JSONArray();
@@ -68,6 +67,7 @@ public class ShopProductController {
 				oneGroup.put("shopProducts", oneGroupList);
 			}
 			
+			oneGroup.put("cate",cate);
 			group.put((String)key, oneGroup); 
 		}
 		//System.out.println(group);
@@ -78,9 +78,9 @@ public class ShopProductController {
 		Iterator keysIterator = keys.iterator();
 		while(keysIterator.hasNext()){
 			JSONObject list = group.getJSONObject((String) keysIterator.next());
-			System.out.println(list);
+			result.add(list);
 		}
-		return ResponseDataUtil.buildSuccess(group);
+		return ResponseDataUtil.buildSuccess(result);
 	}
 }
 

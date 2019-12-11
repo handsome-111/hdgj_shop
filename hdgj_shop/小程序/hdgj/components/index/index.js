@@ -62,7 +62,7 @@ Component({
         }, 
         success:function(data){
           var group = data.data.data
-          console.log(group)
+          console.log(group) 
 
           // for(var i = 0; i < array.length; i++){
           //   array[i] = JSON.parse(array[i])

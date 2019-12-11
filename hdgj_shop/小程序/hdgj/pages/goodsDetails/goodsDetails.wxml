@@ -76,7 +76,7 @@
 
 <!-- 商品详情模板 -->
 <template name='1'>
-  <p>{{item.text}}</p>
+  <p class="template">{{item.text}}</p>
 </template>
 
 <template name='2'>

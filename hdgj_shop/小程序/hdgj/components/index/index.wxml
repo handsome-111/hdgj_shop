@@ -38,24 +38,26 @@
 </view> -->
 
 <view class='list' wx:for="{{list}}" wx:for-item="item">
-  <view class='title'>绿色土特产品</view>
-  <navigator class='goods_info' url="/pages/goodsDetails/goodsDetails?itemId=2938455289">
-    <image src='{{item.imgs}}' mode="widthFix"></image>
-    <view class='goods_info_content'>
-      <p>{{item.item_desc}}</p>
-      <view>
-        <p class='color-red'>
-          <span class='font-little'>￥</span>
-          <span>{{item.price}}</span>
-        </p>
-        <p style='line-height:1.5rem'>
-          <span class='font-little' style='color:rgb(136, 136, 136)'>销量 {{item.sold}}</span>
-          <!-- <image src='/images/index/2.png' mode="widthFix" style='width:1.5rem'></image> -->
-        </p>
+  <view class='title'>{{item.cate.cate_name}}</view>
+  <block wx:for="{{item.shopProducts}}" wx:for-item="product"> 
+    <navigator class='goods_info' url="/pages/goodsDetails/goodsDetails?itemId={{product._id}}">
+      <image src='{{product.imgs}}' mode="widthFix"></image>
+      <view class='goods_info_content'>
+        <p>{{product.item_desc}}</p>
+        <view>
+          <p class='color-red'>
+            <span class='font-little'>￥</span>
+            <span>{{product.price}}</span>
+          </p>
+          <p style='line-height:1.5rem'>
+            <span class='font-little' style='color:rgb(136, 136, 136)'>销量 {{product.sold}}</span>
+            <!-- <image src='/images/index/2.png' mode="widthFix" style='width:1.5rem'></image> -->
+          </p>
+        </view> 
+         
       </view>
-      
-    </view>
-  </navigator>
+    </navigator>
+  </block>
 </view>
 
 <view style="height:10vh;"></view>

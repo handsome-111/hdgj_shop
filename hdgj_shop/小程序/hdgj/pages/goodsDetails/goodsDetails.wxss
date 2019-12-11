@@ -86,6 +86,10 @@
   align-items: center;
 }
 
+.template{
+  text-align: left !important;
+}
+
 /*
 *底部
 */

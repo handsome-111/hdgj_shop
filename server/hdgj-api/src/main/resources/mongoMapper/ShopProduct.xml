@@ -2,39 +2,46 @@
 <mapper>
 	<aggregate id="sortShopProductList">
 			[{
-		    $project: {
-		        imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,add_time:1,sold:1,_class:1,
-		        B_fk: {
-		          $map: { 
-		             input: { 
-		                  $map: {
-		                  input:"$cates",
-		                      in: {
-		                           $arrayElemAt: [{$objectToArray: "$$this"}, 1]
-		                      },
-		                  }
-		             },
-		             in: "$$this.v"}},  
-		        },
-		       
-		    }, 
-		    
-		    {
-		   	 $lookup: {
-			        from:"cate", 
-			        localField:"B_fk",
-			        foreignField:"_id", 
-			        as:"cate"
-		        } 
-		    }, 
-		    
-		    {
-		    	$unwind:{path:"$cate"}
-		    },
-		    
-		    {
-		    	$sort:{"cate.sort_num" : 1}
-		   	}
-		]
+            $project: {
+                imgs:1,istop:1,status:1,item_desc:1,merchant_code:1,stock:1,price:1,update_time:1,item_name:1,fx_fee_rate:1,thumb_imgs:1,seller_id:1,add_time:1,sold:1,_class:1,
+                B_fk: {
+                  $map: { 
+                     input: { 
+                          $map: {
+                          input:"$cates",
+                              in: {
+                                   $arrayElemAt: [{$objectToArray: "$$this"}, 1]
+                              },
+                          }
+                     },
+                     in: "$$this.v"}},  
+                },
+               
+            }, 
+            
+            {
+             $lookup: {
+                    from:"cate", 
+                    localField:"B_fk",
+                    foreignField:"_id", 
+                    as:"cate"
+                } 
+            }, 
+            
+            {
+                $unwind:{path:"$cate"}
+            },
+            
+            {
+                $sort:{"cate.sort_num" : 1}
+            },
+            {
+                $project:{
+                    _id:1,imgs:1,item_desc:1,stock:1,price:1,item_name:1,sold:1,
+                    cate:{_id:1,cate_name:1,sort_num:1,listUrl:1}
+                }
+            }
+                
+        ]
 	</aggregate>
 </mapper>
