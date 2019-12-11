@@ -32,7 +32,11 @@
   <p class="title">商品详情</p>
   <view class='goodsDetails'>
     <block wx:for='{{goods.itemDetail}}' wx:key='{{item.id}}'>
-      <template is="{{item.type}}" data='{{item}}'></template>
+      <view class="template">
+        <view>
+          <template is="{{item.type}}" data='{{item}}'></template>
+        </view>
+      </view>
     </block>
 
   </view>
@@ -76,11 +80,11 @@
 
 <!-- 商品详情模板 -->
 <template name='1'>
-  <p class="template">{{item.text}}</p>
+    <p>{{item.text}}</p>
 </template>
 
 <template name='2'>
-  <image src="{{item.url}}" mode="widthFix"></image>
+    <image src="{{item.url}}" mode="widthFix" ></image>
 </template>
 
 <!-- 商品详情弹出层 -->
