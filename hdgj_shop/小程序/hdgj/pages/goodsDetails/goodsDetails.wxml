@@ -10,7 +10,7 @@
           </navigator>
         </swiper-item> 
       </block>
-  </swiper>
+  </swiper> 
  
   <view class="goods-title clearfix">
     <view>{{goods.itemName}}</view>

@@ -51,8 +51,8 @@ p{
 
 /*图片*/
 .goods image{
-  width: 12rem;
-  height: 12rem;
+  width: 6rem;
+  height: 6rem;
 }
 
 .goods > view:nth-child(3){

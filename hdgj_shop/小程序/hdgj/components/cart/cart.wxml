@@ -20,7 +20,7 @@
                   <checkbox value="{{item.id}}" checked="{{checkAll}}"/>
                 </view>
  
-                <image src="{{item.product.imgHead}}" mode='aspectFit'></image>
+                <image src="{{item.product.imgHead}}" ></image>
 
                 <view>
                   <p>{{item.product.itemName}}</p>

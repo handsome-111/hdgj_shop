@@ -1,11 +1,10 @@
 {
   "pages": [
-            "components/index/index",
-            
-        "pages/newAddress/newAddress",
+        "components/index/index",
         
-        
-        "pages/init/init",
+        "pages/searchPage/searchPage",
+    "pages/newAddress/newAddress",
+    "pages/init/init",
     "components/user/user",
     "pages/login/wxLogin/wxLogin",
     "pages/userRegister/userRegister",
