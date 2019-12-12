@@ -1,18 +1,18 @@
 .carousel{
   width: 100vw;
-  background-color: white;
+  background-color: yellow;
   margin-bottom: 1rem;
  }
 
 .carousel swiper-item{
   width: 70vw;
-}
+} 
 
 .swiper_image image{
   display: block;
-  border-radius: 0.5rem;
-  width: 50vw;
+  width: 60vw;
   margin:0 auto;
+
 } 
 
 .menu{

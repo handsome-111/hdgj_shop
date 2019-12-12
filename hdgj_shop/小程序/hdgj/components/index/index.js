@@ -27,9 +27,6 @@ Component({
    */
   data: {
     swiperHeight: 0,
-    images: {
-      url: 'http://img1.imgtn.bdimg.com/it/u=735014917,976731480&fm=26&gp=0.jpg',
-    },
     
     swiper_block:[
       { imageSrc:'/images/index/1.jpg' , url:''},

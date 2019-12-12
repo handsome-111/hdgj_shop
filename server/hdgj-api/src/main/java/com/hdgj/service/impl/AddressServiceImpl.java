@@ -22,7 +22,7 @@ import com.hdgj.service.AddressService;
  * @since 2019-09-19
  */
 @Service
-@Transactional
+@Transactional(value="db1TransactionManager")
 public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> implements AddressService {
 	
 	@Autowired

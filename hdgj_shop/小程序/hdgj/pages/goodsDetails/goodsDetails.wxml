@@ -8,10 +8,10 @@
           <navigator class="item" url="{{item.url}}" open-type="navigate"> 
               <image src="{{item}}" mode="widthFix"></image> 
           </navigator>
-        </swiper-item>
+        </swiper-item> 
       </block>
   </swiper>
-
+ 
   <view class="goods-title clearfix">
     <view>{{goods.itemName}}</view>
     <view class="goods-price" >￥{{goods.price}}</view>
