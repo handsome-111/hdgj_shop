@@ -1,8 +1,9 @@
 {
   "pages": [
+            "pages/searchPage/searchPage",
+            
         "components/index/index",
         
-        "pages/searchPage/searchPage",
     "pages/newAddress/newAddress",
     "pages/init/init",
     "components/user/user",

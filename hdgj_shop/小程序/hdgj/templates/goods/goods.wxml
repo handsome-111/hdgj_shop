@@ -1,4 +1,4 @@
-<template is="oneGoods" data="{{product}}">
+<template name="oneGoods">
   <navigator class='goods_info' url="/pages/goodsDetails/goodsDetails?itemId={{product._id}}">
       <image src='{{product.imgs}}' mode="widthFix"></image>
       <view class='goods_info_content'>

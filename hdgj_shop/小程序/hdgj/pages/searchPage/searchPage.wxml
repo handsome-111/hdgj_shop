@@ -1,2 +1,7 @@
 <!--pages/searchPage/searchPage.wxml-->
 <search></search>
+<import src="/templates/goods/goods.wxml"/>
+<block wx:for="{{item.shopProducts}}" wx:for-item="product">
+  <!-- 商品列表模板 -->
+  <template is="oneGoods" data="{{product}}"></template> 
+</block>
