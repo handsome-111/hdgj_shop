@@ -15,6 +15,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.NumericDocValues;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
@@ -33,11 +34,9 @@ public class FirstLucene {
 		fl.index(new ArrayList());
 	}
 	public void index(List<JSONObject> list) throws Exception {
-		
 		IndexWriter indexWriter = getIndexWriter();
 		
 		Document temp = new Document();
-		
 		for(JSONObject jsonObject: list){
 			Field fileNameField = new TextField("fileName", "给哈哈哈啊", Store.YES);
 			temp.add(fileNameField);
@@ -114,5 +113,8 @@ public class FirstLucene {
 	}
 	
 	//TermQuery,通过项查询，TermQuery不使用分析器所以建议匹配不分词的Field域查询，比如订单号，ID等
-	public void TermQuery(){}
+	public void TermQuery() throws Exception{
+		 IndexSearcher indexSearcher = getIndexSearcher();
+		 Query query = NumericDocValues.range(minDoc, maxDoc)
+	}
 }
