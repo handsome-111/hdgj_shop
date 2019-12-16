@@ -114,6 +114,12 @@
 	    <version>8.2.0</version>
 	</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/com.jianggujin/IKAnalyzer-lucene -->
+	<dependency>
+	    <groupId>com.jianggujin</groupId>
+	    <artifactId>IKAnalyzer-lucene</artifactId>
+	    <version>8.0.0</version>
+	</dependency>
 	
     
   </dependencies>
